@@ -11,7 +11,7 @@
         <ul>
           <li><router-link to='/findExpert'><img src="../assets/img/index_expert.png" alt=""><span>找专家</span></router-link></li>
           <li><router-link to='/ask-quickly'><img src="../assets/img/index_ask.png" alt=""><span>快问</span></router-link></li>
-          <li><router-link to='/talk'><img src="../assets/img/index_talk.png" alt=""><span>小讲</span></router-link></li>
+          <li><router-link to='/talk'><img src="../assets/img/index_talk.png" alt=""><span>一元提升</span></router-link></li>
         </ul>
       </div>
       <div class="topLine">
