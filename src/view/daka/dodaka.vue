@@ -29,14 +29,15 @@
 	 	</div>
 		<div class="content" id="box" ref="box">
 			<div class="text">
-				{{con.xiangqin}}
+			<p>{{con.xiangqin}}</p>
+				
 			</div>
 			<div class="xia" @click="xia" v-if="chu" style="
 			"> 
-				<p>显示更多<span></span></p>
+				<p>显示更多↓↓↓</p>
 			</div>
 			<div class="shang" @click="shang" v-if="shou"> 
-				<p>收起<span></span></p>
+				<p>收起↑↑↑</p>
 			</div>
 
 		</div>
@@ -54,10 +55,7 @@
 	
 	
 	</div>
- 	<!-- <h2>打卡列表</h2>
- 	<ul>
- 		<li v-for="info in daka_list">{{info.input}}<el-button type="success"><router-link :to="'/info/'+info._id">去打卡 {{info.daka_record}}</router-link></el-button></li>
- 	</ul> -->
+ 	
  	<div class="me">
  		<img v-if="con.head_img" :src="$gretUrl+con.head_img">
  		<div class="con">
@@ -208,40 +206,18 @@ export default {
 	    text-align: center;
 	    position: absolute;
 	    background: rgba(255,255,255,0.8);
-	    top: 63px;
+	    top: 67px;
 	    padding: 5px;
 	    width: 100%;
 	}
 	.text{
-		color: #666;
+		letter-spacing: 2px;
+		font-size: 0.5rem;
+		text-indent: 2rem;
+		color: #ccccc0;
 	}
-	/*.content .text{
-		height: 40px;
-		overflow: hidden;
-		text-overflow : ellipsis;
-		padding-bottom: 20px;
-		position: relative;
-		background: #fff;
-
-	}*/
-	.content .xia span{
-		width: 0px;
-		height: 0px;
-		border-left:8px solid transparent;
-		border-right:8px solid transparent;
-		border-bottom:16px solid #ccc;
-		position: relative;
-		top: -16px;
-	}
-	.content .shang span{
-		width: 0px;
-		height: 0px;
-		border-top:16px solid #ccc;
-		border-left:8px solid transparent;
-		border-right:8px solid transparent;
-		position: relative;
-		top: 16px;
-	}
+	
+	
 	.title{
 		display: flex;
 
@@ -257,6 +233,11 @@ export default {
 		flex: auto;
 		text-align: left;
 	}
+	.title .right p{
+		font-size: 14px;
+		padding-bottom: 10px;
+		color: #ccc;
+	}
 	.title .right .box{
 		width: 100%;
 	}
@@ -266,7 +247,7 @@ export default {
 		background: #ccc;
 	}
 	.title .right .box .bar .cur{
-		background: green;
+		background: #09bb05;
 		height: 100%;
 		width: 15%;
 	}
@@ -310,21 +291,21 @@ export default {
 		margin-left: -10px;
 	}
 	.conter {
-		margin: 10px auto;
+		margin: 30px auto;
 	}
 	
 	.conter .do{
-		width: 150px;
-		height: 150px;
-		background: yellowgreen;
+		width: 120px;
+		height: 120px;
+		background: #09bb05;
 		border-radius: 100%;
 		margin:  0px auto 10px;
-		box-shadow: 0px 0px 20px #32c503;
+		box-shadow: 0px 0px 10px #09bb05;
 
 	}
 	.conter .do h1{
-		line-height: 150px;
-		font-size: 32px;
+		line-height: 120px;
+		font-size: 20px;
 		color: #fff;
 	}
 	.conter .go{
@@ -332,7 +313,7 @@ export default {
 		margin: auto;
 	}
 	.conter .go h3{
-		color: #32c503;
+		color: #09bb05;
 	}
 	 h3{
 	 	padding: 10px 0px;
@@ -343,8 +324,8 @@ export default {
 		/*width: 93.33333333%;*/
 		display: flex;
 		padding: 5px 10px;
-		border-bottom: 3px solid #999;
-		border-top: 3px solid #999;
+		border-bottom: 1px solid #ccc;
+		border-top: 1px solid #ccc;
 		align-items: center;
 	}
 	.me img{

@@ -10,9 +10,7 @@
 						<h5>总排名</h5></li>
 					<li class="two"><img v-if="info_o.head_img" :src="$gretUrl+info_o.head_img" /></li>
 				</ul>
-				<div class="null">
-
-				</div>
+				
 			</div>
 			<div class="out">
 				<ul class="name">
@@ -95,22 +93,25 @@
 			}
 			
 			.head {
-				background: #fff4de;
+				
 				width: 100%;
 				height: 13rem;
 			}
 			
 			h4 {
 				text-align: center;
-				padding: 1rem;
+				padding-top: 20px;
 			}
 			
 			.head .button a {
-				border: 1px #c5b07b dotted;
+				padding: 5px 10px;
+				margin-right: 5%;
+				border: 1px #09bb05 dotted;
+				background: #09bb05;
 				border-radius: 10%;
-				color: #c5b07b;
+				color: #fff;
 				float: right;
-				margin-top: -60px;
+				
 			}
 			
 			.head ul {
@@ -135,7 +136,7 @@
 			.head ul .two {
 				width: 60px;
 				height: 60px;
-				border: #2C3E50 1px dotted;
+				border: #ccc 1px solid;
 				margin: auto;
 				border-radius: 50%;
 				overflow: hidden;
@@ -156,11 +157,11 @@
 			.out {
 				background: #ffffff;
 				width: 80%;
-				height: 6rem;
+				
 				margin: auto;
-				margin-top: -3rem;
+				margin-top: -2.5rem;
 				border: 1px solid #ccc;
-				box-shadow: 0px 0px 10px 5px #aaa;
+				box-shadow: 0px 0px 5px 1px #ccc;
 				overflow: hidden;
 			}
 			
@@ -181,7 +182,9 @@
 				justify-content: space-around;
 			}
 			.out .name .shang h5{
+				
 				width: 100%;
+				font-size: 1rem;
 				text-align: center;
 			}
 			
@@ -193,6 +196,7 @@
 			.out .name .xia h5{
 				width: 100%;
 				text-align: center;
+				font-size: 1rem;
 			}
 			/*.out .name .xia h5:nth-child(2){
 				margin-left: -8%; 
@@ -202,10 +206,15 @@
 			}*/
 			.main .list .yes ol li:nth-child(3){
 				flex: 0 0 30%;
+				overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
 			}
 			.main {
 				width: 100%;
-				height: 100px;
+				padding-top: 20px;
+				overflow: hidden;
+				margin-bottom: 150px;
 				/*position: absolute;*/
 				/*padding-bottom: 100px;*/
 			}
@@ -218,15 +227,19 @@
 			
 			
 			.main .list {
-				width: 100%;
-				height: 75%;
+				width: 92%;
+				height: 4.5rem;
+				border-bottom: 1px solid #ccc;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				margin: auto;
 			}
 			
 			.main .list .yes img{
 				width: 3rem;
 				height: 3rem;
-				border: 1px solid;
-				border-radius: 50%;
+				
+				border-radius: 100%;
 				overflow: hidden;
 			}
 			

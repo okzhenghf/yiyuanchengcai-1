@@ -67,8 +67,8 @@ export default {
  			console.log(rtnD.data);
  			this.daka_list = rtnD.data
  		})
- 		this.$http.get('/api/slidehdp',{params:{
- 			page_cate:'daka'
+ 		this.$http.get('/api/mobilehdp',{params:{
+ 			page_cate:'pic_path'
  		}})
  		.then((rtnD)=>{
  			// console.log(rtnD)
@@ -81,7 +81,7 @@ export default {
 
 	       this.$router.push('/daka/xiangqin/'+Id)
 	    },
-	    alldaka(){
+	    alldaka(Id){
 	    	this.$router.push('/daka/daka_rili/'+Id)
 	    }
  	}
@@ -97,6 +97,16 @@ h3{
 img{
 	width: 100%;
 	height: 100%;
+}
+.el-button--success {
+    color: #fff;
+    background-color: #199111;
+    border-color: #199111;
+    }
+    .docard .docard_list ul li .daka_info p[data-v-7e31936a] {
+    font-size: 12px;
+    color: #000;
+    margin: 4px 0 0 0;
 }
 .bgc{
 	background-color: #d3dce6
@@ -157,12 +167,12 @@ img{
 	text-overflow:ellipsis;
 }
 .docard .docard_list ul li .daka_info p{
-	font-size: 12px;
+	font-size: .8rem;
 	color: #ccc;
 	margin:4px 0 0 0;
 }
 .docard .docard_list ul li button{
-	font-size: 12px;
+	font-size: .8rem;
 	margin-top: 25px;
 	padding:0 2%;
 	height: 30px
