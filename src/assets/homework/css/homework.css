@@ -1,0 +1,99 @@
+li{
+		display: block;
+	}
+	.container{
+		
+		width: 100%;
+	}
+	.container .content{
+        width: 100%;
+	}
+	.container .content ul{
+		margin-top: 10px;
+		margin-bottom: 30%;
+		margin-left: 5%;
+		overflow: hidden;
+        width: 90%;
+        
+	}
+	.container .content ul li{
+        width: 100%;
+	}
+	.container .content ul li .box{
+		
+		width: 90%;
+		border: 1px solid #53b9fd;
+	}
+	.container .content ul li .box .ON{
+		width: 100%;
+		color: #fff;
+		background: #53b9fd;
+		display: flex;
+		justify-content: flex-start;
+		padding-top: 2px;
+		padding-bottom: 4px;
+	}
+	
+	.container .content ul li .box .ON .triangle {
+		margin-left: -10px;
+		display: block;
+		width: 0;
+	    height: 0;
+	    border-top: 10px solid transparent;
+	    border-right: 10px solid #53b9fd;
+	    border-bottom: 10px solid transparent;
+	} 
+	.container .content ul li .box .ON p{
+		font-size: 16px;
+		padding-left: 12px;
+	}
+	
+	.container .content ul li .box .ON p:nth-child(4){
+		flex: none;
+		margin-left:30%;
+	}
+	.container .content ul li .box{
+		height: 7rem;
+	}
+	.container .content ul li .box .Under p{
+		font-size: .6rem;
+		text-align: left;
+		margin-left: 10px;
+		line-height: 1.5rem;
+		width: 80%;
+	}
+	.container .content ul li .box .Under .data_time{
+		color: #53b9fd;
+	}
+	.container .content ul li .box .Under .jdt{
+		margin-left: 11rem;
+		margin-top: -4rem;
+		
+	}
+	.container .content ul li{
+		display: flex;
+		justify-content: space-around;
+	}
+
+	
+	.container .content ul li .left{
+		width: 10%;
+	}
+	.container .content ul li .left .dot{
+		margin-left: .47rem;
+		margin-top: .7rem;
+		width: .5rem;
+		height: .5rem;
+		background: #53b9fd;
+		border-radius: 100%;
+	}
+	.container .content ul li .left .line{
+		margin-top: -1.5rem;
+		margin-left: .6rem;
+		width: .2rem;
+		height: 9rem;
+		background: #53b9fd;
+	}
+
+
+	
