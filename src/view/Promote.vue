@@ -1,11 +1,32 @@
 <template>
 
   <div class="content">
+<b-modal v-model="hongbao_modal"
+    :hide-footer="true" :hide-header="true" class="hongbao_box">
+      
+      <div class="neirong">
+        <div class="bg"></div>
+      
+        <div class="popup">
+          <div class="po_top" :class="{'hide':tt_1}"  ></div>
+          <div class="po_bot"></div>
+          <div class="qiang"  @click="handleChange()"></div>
+          <div class="lq">
+            <div class="po_title">未领取</div>
+            <div class="img" v-show="tt_1"><img src="../assets/img/late.png" alt=""></div>
+          </div>
+        </div>
+      </div>
+
+
+      
+</b-modal>
+
     <!-- 固定的头 -->
     <div class="head">
       <div class="first">
         <mt-search
-          v-model="value"
+          :v-model="value"
           cancel-text="取消"
           placeholder="搜索">
         </mt-search>
@@ -432,18 +453,26 @@
 
 <script type="es6">
 import { Search } from 'mint-ui';
+import {mapState,mapMutations} from 'vuex'
+ import { Toast,MessageBox,Indicator } from 'mint-ui' 
 export default {
   data () {
     return {
-        value:0
+        value:0,
+        hongbao_modal:true,
+        tt:true,
+        tt_1:false,
+        
     }
   },
   components:{
 
   },
   methods:{
-       handleChange(index) {
-          
+       handleChange() {
+          this.tt_1=true
+          this.tt=false
+          console.log(this.tt)
         }
     }
       
@@ -453,7 +482,7 @@ export default {
 
 <style >
 
-
 @import '../assets/css/Promote.css';
+
 
 </style>
