@@ -15,38 +15,32 @@ Axios.defaults.withCredentials = true
 import Calendar from 'vue-calendar-component';
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css' 
+
 Vue.use(BootstrapVue);
 Vue.use(ElementUI);
 var captUrl = ''
 var sourceUrl = ''
 var gretUrl = '' 
 var jobApiURL=''
-
-
-
-
-
+ 
 
 if (process.env.NODE_ENV === 'development') {
 
-
-
   // development本地测试环境
-  gretUrl=Axios.defaults.baseURL = 'http://localhost/fenda/public/'
-  captUrl = 'http://localhost/fenda/public/api/capt/setCaptcha/'
-  sourceUrl = 'http://localhost/fenda/public/static/api/'
-  jobApiURL = 'http://localhost/zhixin/'   
-
-
-} else {
-  gretUrl=Axios.defaults.baseURL = 'http://192.168.0.150/fenda/public/index.php/'
-  captUrl = 'http://192.168.0.150/fenda/public/index.php/api/capt/setCaptcha/'
-  sourceUrl = 'http://192.168.0.150/fenda/public/static/api/'
+  // npm run dev
  
-
+  gretUrl=Axios.defaults.baseURL = 'http://localhost/yiyuanchengcai/fenda/public/'
+  captUrl = 'http://localhost/yiyuanchengcai/fenda/public/api/capt/setCaptcha'
+  sourceUrl = 'http://localhost/yiyuanchengcai/fenda/public/static/api'
+  jobApiURL = 'http://localhost/20180305/zhixin/'   
+} else {
+  // npm run build
+  gretUrl=Axios.defaults.baseURL = 'http://www.aoyuankj.com/fenda/public/'
+  captUrl = 'http://www.aoyuankj.com/fenda/public/api/capt/setCaptcha/'
+  sourceUrl = 'http://www.aoyuankj.com/fenda/public/static/api/'
+  jobApiURL = 'http://www.aoyuankj.com/zhixin/'   
   
-
 }
 
 // 跨域请求post会提交option,同时数据要变成json字符串www.aoyuankj.com
@@ -85,16 +79,12 @@ Vue.use(VueTimeago, {
     // you will need json-loader in webpack 1
     'zh-CN': require('vue-timeago/locales/zh-CN.json')
   }
-})
-
-
+}) 
 Vue.filter("getDate",function (time) {
    let date = new Date()
    let nTime = date.getTime()-time*1000
    return Math.floor(nTime/86400000)
-})
-
-
+}) 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

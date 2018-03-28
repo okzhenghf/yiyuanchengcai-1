@@ -55,7 +55,7 @@
                <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_one.png"></router-link>
              <router-link to="/Promote">
                <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_three.png"></router-link>
-             <router-link to="/yishangcheng">
+             <router-link to="/job/index">
                <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_two.png"></router-link>
              <router-link to="/yishangcheng">
                <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_four.png"></router-link></div>

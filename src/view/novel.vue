@@ -128,7 +128,7 @@ import {Toast} from 'mint-ui'
         img:null,
         imgUrl:'',
         content:'',
-        price:4.9,
+        price:1,
         cate_id:0,
         show_tips:false,
         tip:'',

@@ -10,9 +10,9 @@
                   <img src="../assets/img/listen-answer-avatar-right.jpg" class="avatar-true" v-if="item.is_real">
                 </div>
                 <div class="findExpert-content">
-                  <p class="username">{{item.real_name}}</p>
-                  <p class="description">{{item.identity}}</p>
-                  <p class="description" v-show="list_name == '新晋榜单'">{{item.introduce}}</p>
+                  <p class="username">姓名：{{item.real_name}}</p>
+                  <p class="description">类别：{{item.identity}}</p>
+                  <p class="description" v-show="list_name == '新晋榜单'">擅长领域：{{item.introduce}}</p>
                       <p class="description" v-show="list_name == '人气榜单'">
                         <span>{{item.answer_num}}</span>
                         <span>个回答，</span>

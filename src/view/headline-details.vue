@@ -33,7 +33,7 @@
   
     <div class="other-headline">
       <div class="headline-titleAndall">
-        <p class="other-headline-title">其他头条</p>
+        <p class="other-headline-title">其他资讯</p>
         <router-link to="/headline/all" class="to-allheadline"><span>查看全部 &gt;</span></router-link>
       </div>
       

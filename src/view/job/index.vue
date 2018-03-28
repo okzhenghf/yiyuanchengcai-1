@@ -1,5 +1,5 @@
 <template>
-<div class="box">
+<div class="job_box box">
 	<!-- 头部 -->
 	<div class="head">
 		<h1>一元招聘</h1>

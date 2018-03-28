@@ -11,7 +11,7 @@
               <div class="tutorDetails-wrap-followers-count">
                 <span>{{vip_details.listen_num}}</span>
                 <span>人关注</span>
-                <span>加入时长：{{vip_details.become_time|getDate}}</span>
+                <span>加入时长：{{vip_details.become_time|getDate}} 天</span>
               </div>
             </div>
             <div v-if="info.vip_id!=id">
@@ -81,7 +81,7 @@
             <div class="question-footer">
               <span><timeago :since="parseInt(vip_headline.create_time)*1000"></timeago></span>
               <span @click="toHeadline()">
-                Ta的头条
+                Ta的资讯
                 <i class="icon-arrow"></i>
               </span>
             </div>

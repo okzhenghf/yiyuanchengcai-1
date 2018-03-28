@@ -14,27 +14,9 @@
           <li><router-link to='/talk'><img src="../assets/img/index_talk.png" alt=""><span>一元提升</span></router-link></li>
         </ul>
       </div>
-      <div class="topLine">
+       <div class="smallTalk">
         <div class="container">
-          <h4 class="headline">一元资讯 | 免费</h4>
-          <ul class="topLine-list">
-            <li @click="toHeadlineDetails(item.id)" v-for="(item,key) in headline_list">
-
-              <img class="topLine-img" :src="$sourceUrl+'/img/'+item.heading_img" alt="" v-if="key == 0">
-              <img class="topLine-play" src="../assets/img/index_play.png" alt="" v-if="key != 0">
-              <div class="topLine-basicInfo">
-                <p class="topLine-title">{{item.title}}</p>
-                <span class="topLine-author" v-if="key == 0">{{item.real_name}} | {{item.identity}}</span> 
-              </div>
-            </li>
-          </ul>
-           <router-link to="/headline/all"><p class="unread">今日未读<span>{{nowday_headline_noreadnum}}</span></p></router-link>
-         
-        </div>
-      </div>
-      <div class="smallTalk">
-        <div class="container">
-          <h4 class="headline">提升 | 30分钟精品语音干货</h4>
+          <h4 class="headline">一元课程</h4>
           <div class="smallTalk-content">
             <mt-navbar v-model="selected" class="smallTalk-cate">
               <mt-tab-item :id="'tab_'+key"   v-for="(item,key) in cat_list">{{item.cate_name}}</mt-tab-item>
@@ -53,7 +35,7 @@
                         <span>{{item_class.real_name}}  {{item_class.identity}}</span>
                       </div>              
                       <div class="join_number">
-                        <span v-if="key == 0">{{item_class.cate_name}}</span>{{item_class.join_num}}人参加
+                        {{item_class.join_num}}人参加
                       </div>
                     </div>
                   </div>
@@ -66,6 +48,25 @@
 
         </div>
       </div>
+      <div class="topLine">
+        <div class="container">
+          <h4 class="headline">一元资讯 | 免费</h4>
+          <ul class="topLine-list">
+            <li @click="toHeadlineDetails(item.id)" v-for="(item,key) in headline_list">
+
+              <img class="topLine-img" :src="$gretUrl+item.heading_img" alt="" v-if="key == 0">
+              <img class="topLine-play" src="../assets/img/index_play.png" alt="" v-if="key != 0">
+              <div class="topLine-basicInfo">
+                <p class="topLine-title">{{item.title}}</p>
+                <span class="topLine-author" v-if="key == 0">{{item.real_name}} | {{item.identity}}</span> 
+              </div>
+            </li>
+          </ul>
+           <router-link to="/headline/all"><p class="unread">今日未读<span>{{nowday_headline_noreadnum}}</span></p></router-link>
+         
+        </div>
+      </div>
+     
 
     </div>
 
@@ -83,7 +84,7 @@
         headline_list:[],
         selected : 'tab_0',//当前是哪个导航
         cat_page : [],//各分类的页码
-        cat_list : [{cate_name:'推荐'}],
+        cat_list : [],
         class_list : [],//各分类下的课程列表
         lock : true, //异步锁
         allLoaded:false,
@@ -154,7 +155,7 @@
           .then(rtnData=>{
                //console.log(rtnData)
               for(let i=0;i<rtnData.data.length;i++){
-                this.$set(this.cat_list,i+1,rtnData.data[i])
+                this.$set(this.cat_list,i,rtnData.data[i])
               }
               for (var i=0;i<this.cat_list.length+1;i++) {
                 this.cat_page.push({page:1})
@@ -167,60 +168,60 @@
         var nowTime = new Date().getTime();
         if (typeof(this.class_list[index]) == 'undefined' || handType =='loadmore') {
           this.lock = false
-          if(index == 0){
-            Indicator.open();
-           this.$http
-            .get('/smalltalk',{params:{page:this.cat_page[index].page}})
-            .then(rtnData=>{
-              //console.log(rtnData.data.data)
-              //console.log(this.cat_page[index].page )
-              if (this.cat_page[index].page == 1) {
-                this.$set(this.class_list,index,rtnData.data.data)
-              }else{
-                this.class_list[index].push(...rtnData.data.data) 
-              }
+          // if(index == 0){
+          //   Indicator.open();
+          //  this.$http
+          //   .get('/smalltalk',{params:{page:this.cat_page[index].page}})
+          //   .then(rtnData=>{
+          //     //console.log(rtnData.data.data)
+          //     //console.log(this.cat_page[index].page )
+          //     if (this.cat_page[index].page == 1) {
+          //       this.$set(this.class_list,index,rtnData.data.data)
+          //     }else{
+          //       this.class_list[index].push(...rtnData.data.data) 
+          //     }
 
-              //获取每个提升是否是新的
-              for(var i=0;i<rtnData.data.data.length;i++){
-                // console.log(parseInt(nowTime/1000), rtnData.data.data[i].create_time)
-                var time = parseInt((nowTime- rtnData.data.data[i].create_time*1000)/1000/60/60/24);
-                //console.log(time)
+          //     //获取每个提升是否是新的
+          //     for(var i=0;i<rtnData.data.data.length;i++){
+          //       // console.log(parseInt(nowTime/1000), rtnData.data.data[i].create_time)
+          //       var time = parseInt((nowTime- rtnData.data.data[i].create_time*1000)/1000/60/60/24);
+          //       //console.log(time)
                
-                if (this.cat_page[index].page == 1) {
-                  if(typeof(this.isNew[index]) == 'undefined'){
-                    if(time<this.newDay){
-                      this.$set(this.isNew,index,[true])
-                    }else{
-                      this.$set(this.isNew,index,[false])
-                    }
-                  }else{
-                    if(time<this.newDay){
-                      this.isNew[index].push(true)
-                    }else{
-                      this.isNew[index].push(false)
-                    }
-                  }
-                }else{
-                  if(time<this.newDay){
-                    this.isNew[index].push(true)
-                  }else{
-                    this.isNew[index].push(false)
-                  }
-                }
-              }
+          //       if (this.cat_page[index].page == 1) {
+          //         if(typeof(this.isNew[index]) == 'undefined'){
+          //           if(time<this.newDay){
+          //             this.$set(this.isNew,index,[true])
+          //           }else{
+          //             this.$set(this.isNew,index,[false])
+          //           }
+          //         }else{
+          //           if(time<this.newDay){
+          //             this.isNew[index].push(true)
+          //           }else{
+          //             this.isNew[index].push(false)
+          //           }
+          //         }
+          //       }else{
+          //         if(time<this.newDay){
+          //           this.isNew[index].push(true)
+          //         }else{
+          //           this.isNew[index].push(false)
+          //         }
+          //       }
+          //     }
 
-              //console.log(this.class_list[index]);
-              ++this.cat_page[index].page;
+          //     //console.log(this.class_list[index]);
+          //     ++this.cat_page[index].page;
 
-              // 没有数据的时候，则无需loadmore
-              if (this.cat_page[index].page > rtnData.data.last_page) {
-                this.cat_page[index].page = -1
-              }
-              this.lock = true
-              //this.$set(this.class_list,index, rtnData.data)     
-              Indicator.close();
-            })  
-          }else{
+          //     // 没有数据的时候，则无需loadmore
+          //     if (this.cat_page[index].page > rtnData.data.last_page) {
+          //       this.cat_page[index].page = -1
+          //     }
+          //     this.lock = true
+          //     //this.$set(this.class_list,index, rtnData.data)     
+          //     Indicator.close();
+          //   })  
+          // }else{
             Indicator.open();
             let cat_id = this.cat_list[index]['id']
             //console.log(cat_id);
@@ -269,7 +270,7 @@
                 Indicator.close();
                 //this.$set(this.class_list,index, rtnData.data)     
               })
-          }
+          // }
         }
 
       },
