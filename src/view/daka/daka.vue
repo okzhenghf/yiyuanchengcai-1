@@ -30,10 +30,10 @@
 			</el-row>
 			<div class="docard_list">
 				<ul>
-					<li v-for="item in 2">
-						<!-- <img :src="$node_url+item.themb" alt="" > -->
+					<li v-for="item in daka_list">
+						<img src="../../assets/img/5.jpg" alt="" >
 						<div class="daka_info">
-							<h3>{{item}}</h3>
+							<h3>{{item.theme}}</h3>
 							<p>333人参与 已打卡7天</p>
 							<p>2018-02-05 至 2018-03-4</p>
 						</div>
@@ -45,18 +45,25 @@
 	</div>
 </template>
 <script>
-
+ import {mapState,mapMutations} from 'vuex'
 export default {
 	data () {
     	return {
-      		daka_list:[]
+      		daka_list:[],
    		}
  	},
- 	created(){
- 		// this.$https.get('/api/list_api')
- 		// .then((rtnD)=>{
- 		// 	this.daka_list = rtnD.data.manhuaData
- 		// })
+ 			computed:{
+		    ...mapState(['info'])
+		  },
+ 	mounted(){
+ 		this.$http.get('/api/dakatheme',{
+ 			params:{
+ 				uid:this.info.user_id
+ 			}})
+ 		.then((rtnD)=>{
+ 			// console.log(rtnD);
+ 			this.daka_list = rtnD.data
+ 		})
 
  	},
  	methods:{
@@ -67,9 +74,9 @@ export default {
  	}
  }
 </script>
-<style>
+<style scoped>
 .footer{
-	display: none;
+	height: 0px;
 }
 .bgc{
 	background-color: #d3dce6
@@ -82,14 +89,20 @@ export default {
 	margin-top: -10px;
 	text-indent:10px;
 }
+.el-row{
+	margin-right:0px !important; 
+}
 .docard .docard_title{
 	font-weight: bold;
 	font-size:20px;
 	text-align: left;
+	margin-top: 5%;
 }
 .docard .docard_add{
 	font-size: 14px;
 	text-align: right;
+	margin-right: 10%;
+	margin-top: 5%;
 }
 .docard .docard_list ul{
 	margin:0;
@@ -97,23 +110,31 @@ export default {
 	list-style: none;
 }
 .docard .docard_list ul li{
-	height:80px;
+	height:90px;
+	padding: 0px 3%;
+	margin: 3% 0px;
 	display:flex;
 	justify-content: space-between;
+	/*flex-wrap: nowrap;*/
+	align-items:center;
+	border-top: 1px solid #ccc;
+
 }
 .docard .docard_list ul li img{
-	margin-top: 10px;
-	margin-left:3%; 
+	margin-top: 10px;  
 	width:18%;
 	height:60px;
+	flex: 0 0 1;
 }
 .docard .docard_list ul li .daka_info{
-	width: 62%;
+	width: 65%;
 	text-align: left;
 }
 .docard .docard_list ul li .daka_info h3{
-	margin:10px 0 0 0;
-
+	
+	white-space:nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
 }
 .docard .docard_list ul li .daka_info p{
 	font-size: 12px;
@@ -149,7 +170,7 @@ body{
 
 	.el-row {
 	margin-top: 20px;
-    margin-bottom: 20px;
+  /*  margin-bottom: 20px;*/
     &:last-child {
       margin-bottom: 0;
     }

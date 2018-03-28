@@ -39,31 +39,56 @@
       </div>
       <!-- 日历 -->
     <Calendar
-      v-on:choseDay="clickDay" v-on:changeMonth="changeDate" v-on:isToday="clickToday" :markArray=[] isHideOtherday=false  >
+      v-on:choseDay="clickDay" v-on:changeMonth="changeDate" v-on:isToday="clickToday" :markArray=[] isHideOtherday=false   >
   </Calendar>
 
          
   </el-container>
 </template>
 <script type='text/javascript'>
-
+ import {mapState,mapMutations} from 'vuex'
 export default {
     data(){
         return {
           // daka_info:[],
           // msg:''
+          isToday:'',
+          con:''
         }
     },
+    computed:{
+        ...mapState(['info'])
+    },
+    mounted(){
+          this.$http.get("/api/dakatheme/xiangqin",{
+        params:{
+          id:1,
+          uid:this.info.user_id
+        }
+      })
+      .then((rtnD)=>{
+        // console.log(rtnD)
+        this.con = rtnD.data
+
+      })
+    },
     methods:{
-      clickDay(data) {
-          console.log(data); //选中某天
-        },
+
         changeDate(data) {
-          console.log(data); //左右点击切换月份
+          // console.log(data); //左右点击切换月份
         },
         clickToday(data) {
-          console.log(data); //跳到了本月
+          // console.log(data); //跳到了本月
+          this.isToday=data
+        },
+        clickDay(data) {
+          // console.log(data); //选中某天
+          // console.log(this.isToday)
+          if(data == this.isToday){
+            this.$router.push('/daka/daka_info')
+          }
           
+           
         }
             
         }
@@ -71,10 +96,10 @@ export default {
    
 </script>
 
-<style type='text/css'>
-.footer{
+<style type='text/css' scoped>
+/*.footer{
   display: none;
-}
+}*/
   .head_top{
     margin-top: 6px;
   }

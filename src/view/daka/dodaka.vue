@@ -6,8 +6,8 @@
 				<img src="../../assets/img/1_1.png">
 			</div>
 			<div class="right">
-				<h3>主题</h3>
-				<p>活动日期</p>
+				<h3>{{con.theme}}</h3>
+				<p>{{con.starTime}}至{{con.endTime}}</p>
 				<div class="box">
 					<div class="bar">
 						<div class="cur"></div>
@@ -29,15 +29,7 @@
 	 	</div>
 		<div class="content" id="box" ref="box">
 			<div class="text">
-				参于人数参于人数参于人数参于人数参于人数,,
-				参于人数参于人数参于人数参于人数参于人数
-				参于人数参于人数参于人数参于人数参于人数
-				参于人数参于人数参于人数参于人数参于人数
-				参于人数参于人数参于人数参于人数参于人数
-				参于人数参于人数参于人数参于人数参于人数
-				参于人数参于人数参于人数参于人数参于人数
-				参于人数参于人数参于人数参于人数参于人数
-				参于人数参于人数参于人数参于人数参于人数
+				{{con.xiangqin}}
 			</div>
 			<div class="xia" @click="xia" v-if="chu" style="
 			"> 
@@ -78,19 +70,19 @@
  	
  	<div class="actv">
  		<h3>全部动态</h3>
- 		<div class="data">
+ 	</div>
+ 	<div class="data" v-for="item in daka_list.allData">
  			<img src="../../assets/img/1_1.png">
  			<div class="data_list">
- 				<p class="name">ssss</p>
+ 				<p class="name">{{item.uid}}</p>
  				<p class="time">2018</p>
- 				<h4 class="text" style="word-wrap:break-word;">dsvsdsvscasafzfacscdsvscasafzfacscdsvscasafzfacsccasafzfacsc</h4>
+ 				<h4 class="text" style="word-wrap:break-word;">{{item.textarea3}}</h4>
  				<div class="icon">
 	 				<span><img src="../../assets/img/reward_detail4.png">111</span>
 	 				<span><img src="../../assets/img/shu.png">11</span>
  				</div>
  			</div>
  		</div>
- 	</div>
  </div>
 </template>
 
@@ -98,20 +90,39 @@
 
 <script type="text/javascript">
 import Axios from 'axios'
+ import {mapState,mapMutations} from 'vuex'
 export default {
 	data(){
 		return {
 			daka_list: [],
 			chu:true,
 			shou:false,
+			con:'',
 		}
 	},
-	created(){
-		// this.$https.get('/api/list_api')
-		// .then((rtnD)=>{
-		// 	// console.log(rtnD.data.listData)
-		// 	this.daka_list = rtnD.data.listData
-		// })
+	computed:{
+		    ...mapState(['info'])
+		  },
+	mounted(){
+		this.$http.post('/api/daka/allData',{
+ 			params:{
+ 				p:1
+ 			}})
+ 		.then((rtnD)=>{
+ 			// console.log(rtnD);
+ 			this.daka_list = rtnD.data
+ 		})
+ 		this.$http.get("/api/dakatheme/xiangqin",{
+				params:{
+					id:1,
+					uid:this.info.user_id
+				}
+			})
+			.then((rtnD)=>{
+				// console.log(rtnD)
+				this.con = rtnD.data
+
+			})
 	},
 	methods:{
 		shang(){
@@ -125,7 +136,7 @@ export default {
 			this.shou=true;
 			this.chu=false
 			// console.log(this.$refs.box)
-			this.$refs.box.style="height :300px;"
+			this.$refs.box.style="height :100%;"
 		},
 		daka_info(){
 	       this.$router.push('/daka/daka_info')
@@ -143,20 +154,20 @@ export default {
 </script>
 
 
-<style type="text/css">
-.footer{
+<style type="text/css" scoped>
+/*.footer{
 	display: none;
-}
+}*/
 	p{
 		padding: 0px;
-		margin: 5px;
+		/*margin: 5px;*/
 	}
 	a{
 		list-style: none;
 		text-decoration: none;
 	}
 	.contion{
-		margin: 5px auto;
+		margin: 5px auto 50px;
 		width: 97%;
 	}
 	.header_box{
@@ -264,8 +275,8 @@ export default {
 		right: 20px;
 	}
 	.ha ul li{
-		width: 20px;
-		height: 20px;
+		width: 30px;
+		height: 30px;
 		border-radius: 100%;
 		background: #ccc;
 		/*position: absolute;*/
@@ -283,7 +294,7 @@ export default {
 	}
 	.ha ul li+li{
 		position: relative;
-		margin-left: -5px;
+		margin-left: -10px;
 	}
 	.conter {
 		margin: 10px auto;
@@ -316,7 +327,7 @@ export default {
 		margin: 0px;
 	}
 	.me{
-		width: 93.33333333%;
+		/*width: 93.33333333%;*/
 		display: flex;
 		padding: 5px 10px;
 		border-bottom: 3px solid #999;
@@ -352,27 +363,37 @@ export default {
 		width: 50px;
 		height: 50px;
 		border-radius: 100%;
+		margin: 3% 4% 3% -4%;
 	}
-	.actv .data{
+	.data{
 		display: flex;
-		padding-bottom: 5px;
+		padding:3% 3% 0;
+		text-align: left;
+		border-top: 1px solid #ccc;
+
 	}
-	.actv .data .data_list{
+	.data img{
+			width: 50px;
+			height: 50px;
+			border-radius: 100%;
+			margin: 3% 3% 3% 0;
+	}
+	.data .data_list{
 		width: 80%;
 	}
-	.actv .data .data_list .time{
+	.data .data_list .time{
 		color: #999;
 		font-size: 16px;
 	}
-	.actv .data .data_list .icon{
+	.data .data_list .icon{
 		text-align: right;
-		margin-right: 20px;
+		/*margin-right: 20px;*/
 	}
-	.actv .data .data_list .icon img{
+	.data .data_list .icon img{
 		width: 16px;
 		height: 16px;
 	}
-	.actv .data .data_list .icon span{
-		margin-right: 20px;
+	.data .data_list .icon span{
+		margin-right: 10px;
 	}
 </style>

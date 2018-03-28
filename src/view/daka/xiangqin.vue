@@ -4,9 +4,9 @@
 		<div class="head">
 			<div class="left"><img src="http://p1.so.qhimgs1.com/t01bdc8e833aa80013d.jpg" alt=""></div>
 			<div class="right">
-				<h4 class="title">#一起坚持起早床#</h4>
+				<h4 class="title">#{{con.theme}}#</h4>
 				<div class="activity">
-					<p style="color:red">活动开始剩5天23小时33分</p>
+					<p style="color:red; padding-left: 6rem;">活动开始剩5天23小时33分</p>
 					<div class="bar-box" ><div class="bar" ref="input1" id="input1"></div></div>
 				</div>
 				<button class="yq">邀请好友</button>
@@ -17,7 +17,7 @@
 		<div class="up" @click="daka"
 			v-if ="hid" 
 			>展开更多 v</div>
-			<p>{{con}}</p>
+			<p style="margin-top: -3rem;">{{con.xiangqin}}</p>
 			
 			<div class="btn" 
 			@click="sq"
@@ -32,24 +32,38 @@
 </div>
 </template>
 <script>
+ import {mapState,mapMutations} from 'vuex'
 export default{
 		data(){
 			return{
 				content:'',
 				hid:false,
 				show:true,
-				con:'时间是最美的画笔，人生如梦，岁月无情，一盏灯，一个月明，此生不易，来世多少的容易，想起一段哭泣，温柔一段慈悲，只是一句话，一个人，一段沧桑。岁月无痕，人间冷漠，沧桑了孤独的自己，有一种冷漠，也有一种淡泊，藏着风花雪月，藏着无情等待，只是一种观望，一个人生的错觉。付出是一种观望，也是一种奇迹，爱情分明，人海孤独，只是苍老的世界，一个人的誓言，一个人的回忆，温柔的慈悲，伤感最后的熟悉，每一个憔悴，每一个冰冷，只是一种年华，一种谢幕。再见的爱情，人生的冷落，只是思念太短，人生太无期，回首往昔的天亮，一个人哭泣。　一段岁月，一份想起，人生的在意，梦里的眷恋，只是一种想起，一种再见，温柔的慈悲，伤感的憔悴，人生如此眷恋，爱意如此朦胧，只是一种不甘心，一种不在意，沧桑了自己的独白，人生一句话，也是一种温柔的锁甲。爱意分别，人海孤独，只是一首凌乱，一段烦躁，孤独的活着。爱情分明，人海孤独，只是苍老的世界，一个人的誓言，一个人的回忆，温柔的慈悲，伤感最后的熟悉，每一个憔悴，每一个冰冷，只是一种年华，一种谢幕。再见的爱情，人生的冷落，只是思念太短，人生太无期，回首往昔的天亮，一个人哭泣。，孤独的活着。爱情分明，人海孤独，只是苍老的世界，一个人的誓言，一个人的回忆，温柔的慈悲，伤感最后的熟悉，每一个憔悴，每一个冰冷，只是一种年华，一种谢幕。再见的爱情，人生的冷落，只是思念太短，人生太无期，回首往昔的天亮，一个人哭泣'
+				// con:'时间是最美的画笔，人生如梦，岁月无情，一盏灯，一个月明，此生不易，来世多少的容易，想起一段哭泣，温柔一段慈悲，只是一句话，一个人，一段沧桑。岁月无痕，人间冷漠，沧桑了孤独的自己，有一种冷漠，也有一种淡泊，藏着风花雪月，藏着无情等待，只是一种观望，一个人生的错觉。付出是一种观望，也是一种奇迹，爱情分明，人海孤独，只是苍老的世界，一个人的誓言，一个人的回忆，温柔的慈悲，伤感最后的熟悉，每一个憔悴，每一个冰冷，只是一种年华，一种谢幕。再见的爱情，人生的冷落，只是思念太短，人生太无期，回首往昔的天亮，一个人哭泣。　一段岁月，一份想起，人生的在意，梦里的眷恋，只是一种想起，一种再见，温柔的慈悲，伤感的憔悴，人生如此眷恋，爱意如此朦胧，只是一种不甘心，一种不在意，沧桑了自己的独白，人生一句话，也是一种温柔的锁甲。爱意分别，人海孤独，只是一首凌乱，一段烦躁，孤独的活着。爱情分明，人海孤独，只是苍老的世界，一个人的誓言，一个人的回忆，温柔的慈悲，伤感最后的熟悉，每一个憔悴，每一个冰冷，只是一种年华，一种谢幕。再见的爱情，人生的冷落，只是思念太短，人生太无期，回首往昔的天亮，一个人哭泣。，孤独的活着。爱情分明，人海孤独，只是苍老的世界，一个人的誓言，一个人的回忆，温柔的慈悲，伤感最后的熟悉，每一个憔悴，每一个冰冷，只是一种年华，一种谢幕。再见的爱情，人生的冷落，只是思念太短，人生太无期，回首往昔的天亮，一个人哭泣'
+				con:'',
 			}
 		},
-
-		created(){
+		computed:{
+		    ...mapState(['info'])
+		  },
+		mounted(){
 			setTimeout(function(){
 				var bar =document.querySelector('.bar')
-				console.log(bar)
+				// console.log(bar)
 				bar.style.width = 2/4 *100 +"%";  // 人数/总人数 * 100
 				
 			},0)//
+			this.$http.get("/api/dakatheme/xiangqin",{
+				params:{
+					id:1,
+					uid:this.info.user_id
+				}
+			})
+			.then((rtnD)=>{
+				// console.log(rtnD)
+				this.con = rtnD.data
 
+			})
 			
 		},
 		methods:{
@@ -57,12 +71,12 @@ export default{
 				this.hid=false,
                 this.show = true,
                 this.$refs.input.style = "overflow: hidden"
-
 			},
 			sq(){
                 this.hid=true,
                 this.show = false,
                 this.$refs.input.style = "height: 280px"
+
                //res只有触发后才生效
 			},
 			dodaka(){
@@ -72,14 +86,18 @@ export default{
 	}
 
 </script>
-<style>
-.footer{
+<style scoped>
+
+/*.footer{
 	display: none;
-}
+}*/
+/*.box{
+	margin-bottom:50px; 
+}*/
 .title{
 	margin: 10% 10% 10px;
-    font-size: 20px;
-    padding-left: 25px;
+    font-size: 1.5rem;
+    padding-left: 2rem;
 }
 .bar-box{
 
@@ -87,7 +105,7 @@ export default{
 	height: 4px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	margin-left: 30%;
+	margin-left: 35%;
 	margin-top:5px
 }
 .bar-box .bar{
@@ -97,7 +115,7 @@ export default{
 }
 .yq{
 	margin-left: 150px;
-	margin-top:5px;
+	margin-top:1rem;
 	background: #09bb05;
 	color: #fff;
 	border-radius: 4px;
@@ -108,11 +126,11 @@ export default{
     text-align: center;
 }
 p{
-	font-size: 5px;
+	font-size: 1rem;
 }
 .content .can{
 	position: relative;
-	top: -100px;
+	top: -7.5rem;;
 	left: -100px;
 	
 
@@ -132,7 +150,7 @@ p{
 
 .up{
 	position: relative;
-	top: 85px;
+	top: 0.5rem;
 	width: 100%;
 	height: 40px;
 	line-height: 40px;
@@ -158,7 +176,7 @@ p{
 	background: #09bb05;
 	color: #fff;
 	position: fixed;
-	bottom: 0px;
+	bottom: 50px;
 }
 .content{
 	margin: auto;
@@ -173,19 +191,19 @@ p{
 .content .head .left{
 	position: relative;
 	top: 10px;
-	left:-100px;
+	left: -6rem;
 
 }
 .content .head .right{
 	position: relative;
-	top: -90px;
+	top: -6rem;
 	right: -20px;
 }
 
 
 .content .head .left img{
-	width: 80px;
-	height: 80px;
+	width: 7rem;
+	height: 7rem;
 }
 
 </style>

@@ -3,11 +3,10 @@
 
   <div class="uhomedd">
     <b-alert :show="dismissCountDown" @dismissed="dismissCountDown=0">领取成功</b-alert>
-    <b-modal v-model="hongbao_modal"
-    :hide-footer="true" :hide-header="true" class="hongbao_box">
+    <b-modal v-model="hongbao_modal" :hide-footer="true" :hide-header="true" class="hongbao_box">
       <h3 class="title">新人专享-7天连登大礼包</h3>
       <ul class="hg_day">
-        <li v-for="n in 7" :class="{'cur_day':1==n}">
+        <li v-for="n in 7" :class="{'cur_day':people_day==n}">
           <b-row>
             <b-col class="hg_data" cols="8">第{{n}}天</b-col>
             <b-col class="hg_mv">0.88元</b-col>
@@ -91,8 +90,7 @@
             </li>
           </ul>
         </div>
-        {{total_num}} 
-        <i class="glyphicon glyphicon-ok"></i>
+        
       </div>
     </div>
   </div>
@@ -100,8 +98,9 @@
 
 <script type="es6">
  import {mapState,mapMutations} from 'vuex'
- import { Toast,MessageBox,Indicator } from 'mint-ui' 
-
+ import { Toast } from 'mint-ui' 
+ import { MessageBox } from 'mint-ui'
+ import { Indicator } from 'mint-ui'
 
 export default {
   data () {
@@ -115,17 +114,8 @@ export default {
       // hongbao_modal:'<?php echo $isShow; ?>',
       // people_day:'<?php echo $people_day; ?>'
     }
-  }, 
+  },
   computed:{
-    total_num:function () {
-      return 2
-    },
-    // 计算属性
-    // array数组结构
-    // map映射结构
-    // ... es6拓展运算符
-    // 招聘列表，下拉添加新内容，...new_a
-    // new_a for push
     ...mapState(['info','todaymoney'])
   },
   mounted(){
@@ -137,38 +127,31 @@ export default {
       this.user_info.head_img = this.$sourceUrl+'/img/'+this.user_info.head_img;
       Indicator.close();
       //this.imgUrl = this.info.head_img ? this.info.head_img : '/static/img/headbg.png';
-    })
-     this.init()
-
+    }),
+    this.init()
   },
   methods:{
     ...mapMutations(['setTodaymoney']),
     init(){
-      // axios
-      // 集中的状态管理
-      // 是今天有没有领红包状态
-      
-      console.log(this.todaymoney)
-      if (this.todaymoney == false) {
-        this.$http.post("/api/hongbao/hasRecord",{
-          uid:this.info.user_id
+      if(this.todaymoney == false){
+        this.$http.get('/api/hongbao/hasRecord',{
+          params:{uid:this.info.user_id}
         })
-          .then((rtnD)=>{
-            if (rtnD.data.status == 1) {
-              this.hongbao_modal=true
+        .then((rtnD) =>{
+          if(rtnD.data.status == 1 && rtnD.data.h_total < 7){
+            this.hongbao_modal=true
+            this.people_day=rtnD.data.h_total+1
+          }else{
+            this.setTodaymoney(true)
+          }
 
-            }else{
-              // 已经领取过了
-              this.setTodaymoney(true)
-            }
-          })
-       }else{
+        })
+      }else{
 
-       }
+      }
       
     },
     myhome:function(){
-      this.total_num
       this.$router.push('/tutorDetails/'+this.info.vip_id);
     },
     myanswer:function(){
@@ -209,21 +192,25 @@ export default {
     },
     go_money(){
 
-      this.$http.get('/api/hongbao',{params:{
-        people_day:this.people_day,
-        uid:this.info.user_id
-      }})
-      .then((rtnD)=>{
-        console.log(rtnD)
-        this.hongbao_modal=false
-        this.dismissCountDown=1
+        this.$http.get('/api/hongbao',{params:{
+          people_day:this.people_day,
+          uid:this.info.user_id
+        }})
+        .then((rtnD)=>{
+          console.log(rtnD)
+          this.hongbao_modal=false
+          this.dismissCountDown=1
 
-        let iconClass = rtnD.data.status==1?"icon-success":"icon-success"
-        Toast({
-          message:rtnD.data.msg,
-          iconClass:"glyphicon glyphicon-ok"
-        });
-      })
+          let iconClass = rtnD.data.status==1?"icon-success":"icon-success"
+          Toast({
+            message:rtnD.data.msg,
+            iconClass:"icon glyphicon glyphicon-ok"
+          });
+
+
+        })
+
+      
       
 
     }

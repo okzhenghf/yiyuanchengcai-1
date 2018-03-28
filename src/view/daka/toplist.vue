@@ -24,20 +24,20 @@
 					<li class="xia">
 						<h5>2188</h5>
 						<h5 >文雯</h5>
-						<h5>10</h5>
+						<h5>{{info_o.daka_count}}</h5>
 					</li>
 				</ul>
 			</div>
 			<div class="main">
-				<h5>打卡总人数：29816</h5>
-				<div class="list" v-for='info in 8'>
+				<h5>打卡总人数：{{info_a.allid}}</h5>
+				<div class="list" v-for='(info,index) in info_a.toplist'>
 					<ul>
 						<li class="yes">
 							<ol>
-								<li>{{info}}</li>
+								<li>{{index+1}}</li>
 								<li><img src="../../assets/img/5.jpg" /></li>
-								<li>Tiali</li>
-								<li>218次</li>
+								<li>{{info.uid}}</li>
+								<li>{{info.c}}</li>
 							</ol>
 						</li>
 
@@ -47,10 +47,42 @@
 		</div>
 
 </template>
-<style>
-.footer{
+
+<script>
+ import {mapState,mapMutations} from 'vuex'
+	export default{
+		data(){
+			return{
+				info_o:'',
+				info_a:''
+			}
+		},
+		computed:{
+		    ...mapState(['info'])
+		  },
+		mounted(){
+			this.$http.get('/api/daka/has',{
+					params:{uid:this.info.user_id}
+				})
+				.then((rtnD)=>{
+					this.info_o=rtnD.data
+				})
+			this.$http.post('/api/daka/toplist')
+				.then((rtnD)=>{
+					// console.log(rtnD)
+					this.info_a=rtnD.data
+				})
+			
+		},
+		methods:{
+
+		}
+	}
+</script>
+<style scoped>
+/*.footer{
 	display: none;
-}
+}*/
 			* {
 				list-style: none;
 				text-decoration: none;
@@ -170,7 +202,7 @@
 			.main {
 				width: 100%;
 				height: 100px;
-				position: absolute;
+				/*position: absolute;*/
 			}
 			
 			.main h5 {
