@@ -81,8 +81,13 @@ export default {
 
 	       this.$router.push('/daka/xiangqin/'+Id)
 	    },
+<<<<<<< HEAD
 	    alldaka(Id){
 	    	this.$router.push('/daka/daka_rili/'+Id)
+=======
+	    alldaka(){
+	    	this.$router.push('/daka/daka_rili/'+this.info.user_id)
+>>>>>>> 8c8603083e4b7431ebd639d2c0639f45234d5acf
 	    }
  	}
  }

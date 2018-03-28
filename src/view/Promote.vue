@@ -245,7 +245,7 @@
   </script>
 
 
-  <style >
+  <style  scoped>
 
   @import '../assets/css/Promote.css';
 

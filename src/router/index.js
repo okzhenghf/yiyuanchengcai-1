@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+import newindex from '@/view/new/newindex'
 import index from '@/view/index'
 const Headline = resolve => require(['@/view/headline'], resolve)
 const HeadlineDetails = resolve => require(['@/view/headline-details'], resolve)
@@ -47,13 +49,23 @@ const toplist = resolve => require(['@/view/daka/toplist'], resolve)
 const dodaka = resolve => require(['@/view/daka/dodaka'], resolve)
 const jiaoxue = resolve => require(['@/view/jiaoxue/index'], resolve)
 const Promote = resolve => require(['@/view/Promote'], resolve)
+const yishangpin = resolve => require(['@/view/yishangpin'], resolve)
+const yishangpin_add = resolve => require(['@/view/yishangpin_add'], resolve)
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
+      component: newindex,
+      meta: {
+        title: '一元成才',
+        oldfooter:true,
+      }
+    },
+    {
+      path: '/oldindex',
       component: index,
       meta: {
         title: '一元成才'
@@ -305,7 +317,8 @@ export default new Router({
       path: '/yishangcheng',
       component: yishangcheng,
       meta: {
-        title: '一元商城'
+        title: '一元商城',
+        oldfooter:true,
       }
     },
     {
@@ -361,8 +374,38 @@ export default new Router({
       path: '/Promote',
       component: Promote,
       meta: {
-        title: '一元提升'
+        title: '一元提升',
+        oldfooter:true,
       }
-    }
+    },
+    {
+      path: '/yishangpin/:id',
+      component: yishangpin,
+      meta: {
+        title: '一元提升',
+        oldfooter:true,
+      }
+    },
+    {
+      path: '/yishangcheng/add/:id',
+      component: yishangpin_add,
+      meta: {
+        title: '我要发布商品',
+        oldfooter:true,
+        // vip:true
+      }
+    },
   ]
 })
+
+// 钩子函数、守卫
+router.beforeEach((to,from,next)=>{
+  // if (to.meta.vip) {
+  //   // 判断用户有没有登录、是不是会员
+  // }
+    // 每一步都会执行这段代码
+    router.app.$options.store.commit("setFooterStatus",!to.meta.oldfooter)
+    next()
+})
+
+export default router

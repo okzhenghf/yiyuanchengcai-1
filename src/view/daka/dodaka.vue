@@ -7,7 +7,7 @@
 			</div>
 			<div class="right">
 				<h3>{{con.theme}}</h3>
-				<p>{{con.starTime}}至{{con.endTime}}</p>
+				<p>{{time_cont}}</p>
 				<div class="box">
 					<div class="bar">
 						<div class="cur"></div>
@@ -97,7 +97,8 @@ export default {
 			shou:false,
 			con:'',
 			page:1,
-			info_a:[]
+			info_a:[],
+			time_cont:''
 		}
 	},
 	computed:{
@@ -113,16 +114,57 @@ export default {
  			// console.log(rtnD);
  			this.daka_list = rtnD.data
  		})
- 		this.$http.get("/api/dakatheme/xiangqin",{
-				params:{
-					id:this.$route.params.id,
-					uid:this.info.user_id
-				}
+ 		new Promise((reslove,reject)=>{
+				this.$http.get("/api/dakatheme/xiangqin",{
+					params:{
+						id:this.$route.params.id,
+						uid:this.info.user_id
+					}
+				})
+				.then((rtnD)=>{
+					// console.log(rtnD)
+					// console.log(2)
+					this.con = rtnD.data
+					reslove(rtnD.data)
+				})
 			})
-			.then((rtnD)=>{
-				console.log(rtnD)
-				this.con = rtnD.data
+			.then((rtnDT)=>{
+				//开始时间
+				let sTime = rtnDT.starTime;
+				//结束时间
+				let eTime = rtnDT.endTime;
+				//活动总时长
+				let zt = eTime - sTime
+				let nowTime = setInterval(()=>{
+					//现在时间
+					let ntime =  new Date()
+					let nowTime= Date.parse(ntime)/1000;
+					//剩余时间
+					let st = Number(eTime) - nowTime;
+					let ct = Number(zt) - st
+					// console.log(st)
+					//时间戳转正常时间
+					// let nowdate = this.dataTime(nowTime*1000);
+					if(st > 0){
+						let edate = this.dataTime(eTime*1000)
 
+						let eDate = new Date(edate)
+						let alltime=parseInt((eDate-ntime)/1000);
+			            let ms=ntime.getMilliseconds()/1000
+			            let s=alltime % 60;
+			            let m=parseInt(alltime / 60 % 60);
+			            let h=parseInt(alltime / 60 / 60 % 24);
+			            let t=parseInt(alltime / 60 / 60 / 24);
+			            this.time_cont = "活动开始剩"+t+"天"+h+"小时"+m+"分";
+			            setTimeout(function(){
+							var bar =document.querySelector('.cur')
+							// console.log(bar)
+							bar.style.width = ct/zt*100 +"%";  // 人数/总人数 * 100
+							
+						},0)//
+					}
+					
+				},1000)
 			})
 			this.$http.get('/api/daka/themelist',{
 					params:{
@@ -157,7 +199,36 @@ export default {
 		},
 		mydaka(){
 			this.$router.push('/daka/daka_rili/'+this.$route.params.id)
-		}
+		},
+		dataTime(value) {
+				var date = new Date(value);
+				let Y = date.getFullYear();
+				let m = date.getMonth() + 1;
+				let d = date.getDate();
+				let H = date.getHours();
+				let i = date.getMinutes();
+				let s = date.getSeconds();
+				if (m < 10) {
+				m = '0' + m;
+				}
+				if (d < 10) {
+				d = '0' + d;
+				}
+				if (H < 10) {
+				H = '0' + H;
+				}
+				if (i < 10) {
+				i = '0' + i;
+				}
+				if (s < 10) {
+				s = '0' + s;
+				}
+				// 获取时间格式 2017-01-03 10:13:48 
+				var t = Y+'-'+m+'-'+d+' '+H+':'+i+':'+s;
+				// <!-- 获取时间格式 2017-01-03 -->
+				// var t = Y + '-' + m + '-' + d;
+				return t;
+				}
 	}
 
 }

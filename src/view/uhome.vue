@@ -37,7 +37,7 @@
             总收入￥{{user_info.total_income}}
             ，总收益￥{{user_info.total_profit}}
           </p>
-          <span class="price_distribut">收入90%归你，每夜自动领取，入库微信钱包</span>
+           
         </div>
       </div>
       <div class="uhome_two">
