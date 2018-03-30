@@ -18,7 +18,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue);
 var captUrl = ''
 var sourceUrl = ''
-var aaUrl='http://localhost/20180305/fan_da/fenda_wap/src/'
 var gretUrl = '' 
 if (process.env.NODE_ENV === 'development') {
   // development本地测试环境
@@ -46,8 +45,7 @@ Vue.prototype.$myInterceptor = myInterceptor
 Vue.prototype.$captUrl = captUrl
 Vue.prototype.$sourceUrl = sourceUrl
 Vue.prototype.$gretUrl = gretUrl
-Vue.prototype.$aaUrl = aaUrl
-aaUrl
+
 Vue.config.productionTip = false
 router.beforeEach(function (to, from, next) {
   if (to.meta.title) {
