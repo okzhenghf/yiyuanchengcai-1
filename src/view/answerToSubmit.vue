@@ -7,7 +7,7 @@
           <span>{{price}}</span>
         </div>
         <div class="type">
-          <span>分答提问</span>
+          <span>一元提问</span>
         </div>
       </div>
       <div class="pay-method">

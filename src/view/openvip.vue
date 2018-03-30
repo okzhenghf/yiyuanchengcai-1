@@ -53,7 +53,7 @@
           <label>元</label>
         </div>
       </div>
-      <button class="btn" @click="save()" :class="{'disabled':flag}" :disabled="disabled">开通我的「分答」</button>
+      <button class="btn" @click="save()" :class="{'disabled':flag}" :disabled="disabled">开通我的「一元」</button>
       <div class="tips">
         <mt-popup
           v-model="show"

@@ -69,7 +69,7 @@
       <div class="appdata">
         <div class="app_box">
           <div class="app_hint" style="color:#ccc;font-size:1.5rem;">
-            只有在分答APP才能开通答主哦
+            只有在一元APP才能开通答主哦
           </div>
           <div class="app_down" @click="hidevip()" style="color:red">
             去APP

@@ -16,7 +16,7 @@
       </div>
       <div class="topLine">
         <div class="container">
-          <h4 class="headline">分答头条12 | 免费</h4>
+          <h4 class="headline">一元头条12 | 免费</h4>
           <ul class="topLine-list">
             <li @click="toHeadlineDetails(item.id)" v-for="(item,key) in headline_list">
 

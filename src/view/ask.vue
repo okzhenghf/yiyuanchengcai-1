@@ -1,7 +1,7 @@
 <template>
   <div class="ask container">
     <div class="ask_box" v-if="step==1">
-      <mt-field  placeholder="请输入您的问题，分答将为你推荐合适的专家答主" type="textarea" rows="4" v-model="ask_content" class="textarea_con" style="font-size: 12px;"></mt-field>
+      <mt-field  placeholder="请输入您的问题，一元将为你推荐合适的专家答主" type="textarea" rows="4" v-model="ask_content" class="textarea_con" style="font-size: 12px;"></mt-field>
       <div class="mt-2 mb-2 check_btn clearfix">
         <mt-switch v-model="is_public" class="switch_btn floatLeft"></mt-switch>
         <span class="floatLeft">公开提问</span> 
