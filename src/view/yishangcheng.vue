@@ -72,7 +72,7 @@
       <hr/>
       <div class="a4_3">
         <div class="box" v-for="fuo in fuwu">
-          <img :src="$aaUrl+'assets/img/xiaotupian/'+fuo.img+'.svg'" alt="">
+          <img :src="'../static/img/xiaotupian/'+fuo.img+'.svg'" alt="">
           <p>{{fuo.title}}</p>
         </div>
       </div>

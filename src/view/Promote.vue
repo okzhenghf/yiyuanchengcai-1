@@ -2,11 +2,13 @@
 
   <div class="content">
   <b-modal v-model="hongbao_modal"
-    :hide-footer="true" :hide-header="true" class="hongbao_box">
+    :hide-footer="true" :hide-header="true" class="hongbao_box"
+    v-bind:class="{ motai: isclose}" @click="close()"
+    >
       
-      <div class="neirong">
-        <div class="bg"></div>
-      
+      <div class="neirong" >
+        <div class="bg"  @click="close()"></div>
+        <div class="close"  @click="close()" ></div>
         <div class="popup">
           <div class="po_top"
           v-bind:class="{ hide: isActive}"
@@ -219,6 +221,7 @@
         tt:true,
         tt_1:false,
         isActive: false,
+        isclose:false
         
         
     }
@@ -232,6 +235,9 @@
           // this.tt=false
           this.isActive=true
           console.log(this.tt)
+        },
+        close(){
+          this.isclose=true
         }
     }
       
