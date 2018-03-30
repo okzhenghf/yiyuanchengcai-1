@@ -26,8 +26,8 @@
       <hr> 
       <div class="a4_1" @click ="anclick(n)" v-bind:class="{active : cur_index ==n && isActive}" >
         <div class="left" >
-           <img :src="$aaUrl+'assets/img/xiaotupian/'+can.img1+'.svg'" v-show='cur_index != n || !isActive' alt="">
-           <img :src="$aaUrl+'assets/img/xiaotupian/'+can.img2+'.svg'"  v-show='cur_index ==n &&isActive'  alt=""> 
+           <img :src="'../static/img/xiaotupian/'+can.img1+'.svg'" v-show='cur_index != n || !isActive' alt="">
+           <img :src="'../static/img/xiaotupian/'+can.img2+'.svg'"  v-show='cur_index ==n &&isActive'  alt=""> 
            {{can.title}}
         </div>
         <div class="right">
