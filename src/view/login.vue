@@ -128,7 +128,7 @@ export default {
               this.changeCap();
               this.imgCap = '';
             }else{
-              this.phoneCap = this.rand
+              this.phoneCap = rtnData.data
               this.disabled = true;
               this.phone_dis = true;
               this.time = 60;
