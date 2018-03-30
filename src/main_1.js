@@ -19,17 +19,13 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue);
 var captUrl = ''
 var sourceUrl = ''
-var gretUrl = '' 
-
-
 if (process.env.NODE_ENV === 'development') {
   // development本地测试环境
-  
-  gretUrl=Axios.defaults.baseURL = 'http://localhost/201803/yiyuanchengcai/fenda/public'
+  Axios.defaults.baseURL = 'http://localhost/201803/yiyuanchengcai/fenda/public'
   captUrl = 'http://localhost/201803/yiyuanchengcai/fenda/public/api/capt/setCaptcha'
   sourceUrl = 'http://localhost/201803/yiyuanchengcai/fenda/public/static/api'
 } else {
-  gretUrl=Axios.defaults.baseURL = 'http://192.168.0.150/fenda/public/index.php'
+  Axios.defaults.baseURL = 'http://192.168.0.150/fenda/public/index.php'
   captUrl = 'http://192.168.0.150/fenda/public/index.php/api/capt/setCaptcha'
   sourceUrl = 'http://192.168.0.150/fenda/public/static/api'
 }
@@ -47,12 +43,11 @@ Vue.use(ElementUI)
 Vue.use(Calendar)
 Vue.use(BootstrapVue)
 
+
 Vue.prototype.$http = Axios
 Vue.prototype.$myInterceptor = myInterceptor
 Vue.prototype.$captUrl = captUrl
 Vue.prototype.$sourceUrl = sourceUrl
-Vue.prototype.$gretUrl = gretUrl
-
 Vue.config.productionTip = false
 router.beforeEach(function (to, from, next) {
   if (to.meta.title) {
