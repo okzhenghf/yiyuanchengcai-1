@@ -18,13 +18,16 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue);
 var captUrl = ''
 var sourceUrl = ''
+var aaUrl='http://localhost/20180305/fan_da/fenda_wap/src/'
+var gretUrl = '' 
 if (process.env.NODE_ENV === 'development') {
   // development本地测试环境
-  Axios.defaults.baseURL = 'http://localhost/yiyuanchengcai/fenda/public'
-  captUrl = 'http://localhost/yiyuanchengcai/fenda/public/api/capt/setCaptcha'
-  sourceUrl = 'http://localhost/yiyuanchengcai/fenda/public/static/api'
+  
+  gretUrl=Axios.defaults.baseURL = 'http://localhost/20180305/fan_da/fenda/public'
+  captUrl = 'http://localhost/20180305/fan_da/fenda/public/api/capt/setCaptcha'
+  sourceUrl = 'http://localhost/20180305/fan_da/fenda/public/static/api'
 } else {
-  Axios.defaults.baseURL = 'http://192.168.0.150/fenda/public/index.php'
+  gretUrl=Axios.defaults.baseURL = 'http://192.168.0.150/fenda/public/index.php'
   captUrl = 'http://192.168.0.150/fenda/public/index.php/api/capt/setCaptcha'
   sourceUrl = 'http://192.168.0.150/fenda/public/static/api'
 }
@@ -42,6 +45,9 @@ Vue.prototype.$http = Axios
 Vue.prototype.$myInterceptor = myInterceptor
 Vue.prototype.$captUrl = captUrl
 Vue.prototype.$sourceUrl = sourceUrl
+Vue.prototype.$gretUrl = gretUrl
+Vue.prototype.$aaUrl = aaUrl
+aaUrl
 Vue.config.productionTip = false
 router.beforeEach(function (to, from, next) {
   if (to.meta.title) {
