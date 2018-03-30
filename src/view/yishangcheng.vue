@@ -22,10 +22,14 @@
       <h3>我们的一元商品</h3>
     </div>
 
-    <div class="contain_1" v-for="n in 2">
+    <div class="contain_1" v-for="(can,n) in chanpin">
       <hr> 
-      <div class="a4_1" @click ="anclick(n)" v-bind:class="{active : cur_index ==n}" >
-        <div class="left">{{n}}计算</div>
+      <div class="a4_1" @click ="anclick(n)" v-bind:class="{active : cur_index ==n && isActive}" >
+        <div class="left" >
+           <img :src="$aaUrl+'assets/img/xiaotupian/'+can.img1+'.svg'" v-show='cur_index != n || !isActive' alt="">
+           <img :src="$aaUrl+'assets/img/xiaotupian/'+can.img2+'.svg'"  v-show='cur_index ==n &&isActive'  alt=""> 
+           {{can.title}}
+        </div>
         <div class="right">
           <!--   v-bind:class="{ zhuan: cur_index == n  }" -->
           <img src="../assets/img/answer1.png" alt="" v-show='cur_index != n || !isActive'  v-bind:class="{ zhuan: cur_index == n  }">
@@ -67,9 +71,9 @@
     <div class="contain_1">
       <hr/>
       <div class="a4_3">
-        <div class="box" v-for="m in 9">
-          <img src="../assets/img/uhome1.png" alt="">
-          <p>镜像服务{{m}}</p>
+        <div class="box" v-for="fuo in fuwu">
+          <img :src="$aaUrl+'assets/img/xiaotupian/'+fuo.img+'.svg'" alt="">
+          <p>{{fuo.title}}</p>
         </div>
       </div>
       <hr/>
@@ -190,7 +194,7 @@
   <div class="contain_1 bg_color " v-for="n in 2">
     <hr> 
     <div class="a4_1" @click ="anclick(n)"  >
-      <div class="left">{{n}}腾讯云计算</div>
+      <div class="left">腾讯云计算</div>
       <div class="right">
         <!--   v-bind:class="{ zhuan: cur_index == n  }" -->
         <img src="../assets/img/answer1.png" alt="" v-show='cur_index != n || !isActive'  v-bind:class="{ zhuan: cur_index == n  }">
@@ -253,7 +257,26 @@ export default {
   data () {
 
     return {
-
+      chanpin:[
+      {title:'计算',img1:"jisuan1",img2:"jisuan2"},
+      {title:'数据库',img1:"shujuku1",img2:"shujuku2"},
+      {title:'网络',img1:"wangluo1",img2:"wangluo2"},
+      {title:'互联网中间件',img1:"zhong1",img2:"zhong2"},
+      {title:'大数据库',img1:"shuju1",img2:"shuju2"},
+      {title:'域名于网',img1:"yuming1",img2:"yuming2"},
+      {title:'视频',img1:"shipin1",img2:"shipin2"},
+      {title:'开发工具',img1:"kaifa1",img2:"kaifa2"},
+      {title:'企业应用',img1:"qiye1",img2:"qiye2"},
+      {title:'数据处理',img1:"chuli1",img2:"chuli2"},
+      ],
+      fuwu:[
+      {title:"镜像服务",img:"jingxiang"},
+      {title:"运维服务",img:"yunwei"},
+      {title:"软件服务",img:"ruanjian"},
+      {title:"安全服务",img:"anquan"},
+      {title:"建站服务",img:"jianzhan"},
+      {title:"微信小程序",img:"weixin"},
+      ],
       cur_index:null,
       isActive: false,
       selected: "k_1",
@@ -392,15 +415,24 @@ export default {
   line-height: 17px;
   margin: 20px;
   height: 16px;
+  display: flex;
+  flex-wrap:wrap;
+  flex-direction:row;
+  align-items:center;
+
 }
 .a4 .contain_1 .a4_1 .left{
-  float: left;
+  flex: 1;
+  text-align: left;
+  line-height: 35px;
 }
+
 .a4 .contain_1 .a4_1 .left img{
-  width: 30px;
+  width: 35px;
+  margin-right:4px; 
 }
 .a4 .contain_1 .a4_1 .right{
-  float: right;
+  
   width: 25px;
 }
 .a4 .contain_1 .a4_1 .right img{
@@ -439,7 +471,7 @@ export default {
 }
 .a4 .contain_1 .a4_3 .box{
   width: 125px;
-  margin-top: 15px;
+  margin:30px 0;
   font-size: 15px;
 }
 .a4 .contain_1 .a4_3 img{
