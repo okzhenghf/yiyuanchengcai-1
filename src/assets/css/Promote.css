@@ -1,4 +1,8 @@
-
+*{
+	padding: 0;
+	margin: 0;
+	text-decoration: none;
+}
 .head{
 	width: 100%;
 	height: 45px;
@@ -34,86 +38,121 @@
   width: 100%;
 }
 
+/*中间部分*/
 .body .lb{
 	height: 300px;
-}
+}	
 
 .body{
     width: 100%;
-    height: 570px;
-    background: #ccc;
+    height: 510px;
+    
 }
 
-/*中间部分*/
 
-.fff{
-	background: #f3f5f7;
-}
-.body h1{
-	margin-left: 11px;
-	text-align: start;
-}
+.bbox{
+	width: 100%;
+	background: #fff;
+	padding:0 17px;
 
-.body .list div{
+}
+.icon{
+	display: inline-block;
+    width: .48rem;
+    height: .5rem;
+    background: url(../img/icon.png) no-repeat;
+    background-position-x: center;
+    background-size: .7rem;
+    
+    margin-right: .2rem;
+}
+.tit{
+	font-size: 18px;
+	text-align:start;
+	padding-top: 15px;
+}
+.list{
 	display: flex;
-	flex: 1;
-	width: 40%;
-	padding: 10px;
-	border-radius: 8px;
-	margin:8px;
+	width: 100%;
+	flex-wrap: wrap;
 
 }
-.body .new{
+.fff{
 	background: #fff;
 }
-.body .new4{
-	background: #ccc;
-}
-.body .list div{
-	float: left;
-}
-.body .list div:nth-child(1){
-	background: red;
-	color: white;
-
-}
-.body .list div:nth-child(2n){
-	background: skyblue;
+.ccc{
+	background: #F3F5F7;
 }
 
-.body .swiper{
-	width: 100%;
-	height: 310px;
-	margin-top: 145px;
+.sbox{
+	height: 95px;
+	box-sizing:border-box;
+	width:41%;
+	/*flex: 0 0 45%;*/
+	/*float:left;*/
+    margin: 20px 10px 5px 15px;
+    font-size: 11px;
+    color: rgba(255,255,255,.8);
+    border-radius: 5px;
+    background-size: 1.92rem!important;
+    box-shadow: 0 4px 16px 0 rgba(7,17,27,.15);
+    background-position-y: 75px !important;
+    margin: 20px 22px 5px 3px;
 }
-
-.body .swiper .zhuan{
-	width: 100%;
-	height: 33%;
-	display: flex;
+.one{
+	box-shadow: 0 4px 16px 0 #5096ff;
+    background: #4693DF url(../img/14.jpg) no-repeat right;
 }
-.body .swiper .zhuan img{
-	width: 56%;
-    padding: 10px;
-    margin-left: 10px;
+.two{
+	box-shadow: 0 4px 16px 0 #ff5fb7;
+    background: #ff5fb7 url(../img/js.jpg) no-repeat right
 }
-.body .swiper .zhuan div{
-	flex: 1;
+.sbox h2, .sbox p, .sbox div{
+	font-size: 10px;
 	text-align: start;
-	padding-top: 5px;
+	padding: 10px 0 5px 10px;
+	line-height: 10px;
 }
-.body .swiper .zhuan .txt{
-	margin-top: 13px;
-    margin-left: -60px;
+.sbox .span{
+	margin-left: 15px;
 }
-.body .new1{
-	height: 565px;
+.swiper{
+	width: 100%;
+	height: 360px;
+}
+.swiper .swipe{
+	width: 95%;
+    margin-bottom: .66666667rem;
+    margin-left: 0;
+}
+.swiper .zhuan{
+	width: 100%;
+
+}
+.swiper a{
+	display: flex;
+	margin-top: 1rem;
+}
+.swiper img{
+	width: 41%;
+    height: 50%;
+    border-radius: 5px;
+    margin-top: 11px;
+    margin-left: 4px;
+    margin-right: 10px;
+}
+.swiper .txt{
+	color: #2B333B;
+	font-size: .8rem;
+    text-align: start;
+	margin-top: 9px;
+}
+.zuixia{
+	width: 100%;
+	height: 4rem;
 }
 
-*{
-	padding: 0;
-	margin: 0;
-}
+/*下面是红包*/
 .box{
 	position: fixed;
 	width: 100%;
@@ -224,7 +263,9 @@
 }
 
 
-.popup .po_top.hide{webkit-animation: redpackOpen .5s 0s steps(3) 1,redpackOpened .5s .5s infinite;
+.popup .po_top.hide{webkit-animation: redpackOpen 1s 0s steps(3) 1,redpackOpened .5s .5s infinite;
     animation: redpackOpen .5s 0s steps(3) 1,redpackOpened .5s .5s infinite;}
 
 @-webkit-keyframes redpackOpen{0%{background-position:-.74rem 0}to{background-position:-.74rem 100%}}@keyframes redpackOpen{0%{background-position:-.74rem 0}to{background-position:-.74rem 100%}}@-webkit-keyframes redpackOpened{0%{-webkit-transform:scale(0);transform:scale(0)}to{-webkit-transform:scale(0);transform:scale(0)}}@keyframes redpackOpened{0%{-webkit-transform:scale(0);transform:scale(0)}to{-webkit-transform:scale(0);transform:scale(0)}}
+
+

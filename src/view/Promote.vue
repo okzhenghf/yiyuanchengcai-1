@@ -1,14 +1,16 @@
-<template>
+  <template>
 
   <div class="content">
-<b-modal v-model="hongbao_modal"
+  <b-modal v-model="hongbao_modal"
     :hide-footer="true" :hide-header="true" class="hongbao_box">
       
       <div class="neirong">
         <div class="bg"></div>
       
         <div class="popup">
-          <div class="po_top" :class="{'hide':tt_1}"  ></div>
+          <div class="po_top"
+          v-bind:class="{ hide: isActive}"
+           v-show="tt" @click="handleChange()" ></div>
           <div class="po_bot"></div>
           <div class="qiang"  @click="handleChange()"></div>
           <div class="lq">
@@ -20,9 +22,9 @@
 
 
       
-</b-modal>
+  </b-modal>
 
-    <!-- 固定的头 -->
+    
     <div class="head">
       <div class="first">
         <mt-search
@@ -57,7 +59,6 @@
 
     <!-- 主体部分 -->
     <div class="main">
-
       <!-- 自动轮播 -->
       <div class="neck">
        <mt-swipe :auto="4000" >
@@ -98,370 +99,127 @@
          </mt-swipe-item>
 
        </mt-swipe>
-     </div>
-
-     <!-- body部分 -->
-      <div class="body">
-          <div class="new">
-            <h1>新手入门</h1>
+     </div>    
+    </div>
+    <!-- body部分 -->
+    <div class="body fff" v-for="item in 4 ">
+          <div class="bbox">
+            <p class="tit">
+              <span class="icon"></span>
+              新上好课
+            </p> 
             <div class="list">
-              <div>
-                Java
-                Spring cloul微服务
-                实战
-                ￥366.00
+              <div class="sbox one">
+                <h2>Java</h2>
+                <p>Spring cloul微服务实战</p>
+                <div>￥366.00
+                  <span>353人</span>
+                </div>
               </div>
-              <div>
-                Java
-                Spring cloul微服务
-                实战
-                ￥366.00
+              <div class="sbox two">
+                <h2>Java</h2>
+                <p>Spring cloul微服务实战</p>
+                <div>￥366.00
+                  <span class="span">353人</span>
+                </div>
               </div>
               
-
             </div>
             <div class="swiper">
               <mt-swipe :auto="0">
-                <mt-swipe-item >
+                <mt-swipe-item class="swipe">
                   <div class="zhuan">
-                    <div>
+                    <a href="#">
                       <img src="../assets/img/7.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
+                      <div class="txt">
+                        <p class="name">js入门到实践
+                        开发 js都是你的必备技能</p>
+                        <div>高级·1631人在学</div>
+                        <div>￥455.00</div>
+                      </div>
+                    </a> 
                   </div>
                   <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/8.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
+                    <a href="#">
+                      <img src="../assets/img/7.jpg" alt="">
+                      <div class="txt">
+                        <p class="name">js入门到实践
+                        开发 js都是你的必备技能</p>
+                        <div>高级·1631人在学</div>
+                        <div>￥455.00</div>
+                      </div>
+                    </a> 
                   </div>
                   <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/9.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
+                    <a href="#">
+                      <img src="../assets/img/7.jpg" alt="" class="img">
+                      <div class="txt">
+                        <p class="name">js入门到实践
+                        开发 js都是你的必备技能</p>
+                        <div>高级·1631人在学</div>
+                        <div>￥455.00</div>
+                      </div>
+                    </a> 
                   </div>
                 </mt-swipe-item>
-                <mt-swipe-item>
+                <mt-swipe-item class="swipe">
                   <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/10.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
+                    <a href="#">
+                      <img src="../assets/img/7.jpg" alt="">
+                      <div class="txt">
+                        <p class="name">js入门到实践
+                        开发 js都是你的必备技能</p>
+                        <div>高级·1631人在学</div>
+                        <div>￥455.00</div>
+                      </div>
+                    </a> 
                   </div>
                   <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/11.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
+                    <a href="#">
+                      <img src="../assets/img/7.jpg" alt="">
+                      <div class="txt">
+                        <p class="name">js入门到实践
+                        开发 js都是你的必备技能</p>
+                        <div>高级·1631人在学</div>
+                        <div>￥455.00</div>
+                      </div>
+                    </a> 
                   </div>
                   <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/12.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
+                    <a href="#">
+                      <img src="../assets/img/7.jpg" alt="" class="img">
+                      <div class="txt">
+                        <p class="name">js入门到实践
+                        开发 js都是你的必备技能</p>
+                        <div>高级·1631人在学</div>
+                        <div>￥455.00</div>
+                      </div>
+                    </a> 
                   </div>
                 </mt-swipe-item>
               </mt-swipe>
             </div>
           </div>
-          <div class="new4">
-            <h1>新手入门</h1>
-            <div class="list">
-              <div>
-                Java
-                Spring cloul微服务
-                实战
-                ￥366.00
-              </div>
-              <div>
-                Java
-                Spring cloul微服务
-                实战
-                ￥366.00
-              </div>
-            </div>
-            <div class="swiper">
-              <mt-swipe :auto="0">
-                <mt-swipe-item >
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/7.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/8.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/9.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                </mt-swipe-item>
-                <mt-swipe-item>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/10.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/11.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/12.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                </mt-swipe-item>
-              </mt-swipe>
-            </div>
-          </div>
-          <div class="new">
-            <h1>新手入门</h1>
-            <div class="list">
-              <div>
-                Java
-                Spring cloul微服务
-                实战
-                ￥366.00
-              </div>
-              <div>
-                Java
-                Spring cloul微服务
-                实战
-                ￥366.00
-              </div>
-            </div>
-            <div class="swiper">
-              <mt-swipe :auto="0">
-                <mt-swipe-item >
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/7.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/8.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/9.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                </mt-swipe-item>
-                <mt-swipe-item>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/10.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/11.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/12.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                </mt-swipe-item>
-              </mt-swipe>
-            </div>
-          </div>
-          <div class="new4 new1">
-            <h1>新手入门</h1>
-            <div class="list">
-              <div>
-                Java
-                Spring cloul微服务
-                实战
-                ￥366.00
-              </div>
-              <div>
-                Java
-                Spring cloul微服务
-                实战
-                ￥366.00
-              </div>
-            </div>
-            <div class="swiper">
-              <mt-swipe :auto="0">
-                <mt-swipe-item >
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/7.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/8.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/9.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                </mt-swipe-item>
-                <mt-swipe-item>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/10.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/11.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                  <div class="zhuan">
-                    <div>
-                      <img src="../assets/img/12.jpg" alt="">
-                    </div>
-                    <div class="txt">
-                      <p>444</p>
-                      <p>111</p>
-                      <p>￥455.00</p>
-                    </div>
-                  </div>
-                </mt-swipe-item>
-              </mt-swipe>
-            </div>
-          </div>
-      </div>
-      
+       
     </div>
     
+    <div class="zuixia"></div>
   </div>
-</template>
+  </template>
 
-<script type="es6">
-import { Search } from 'mint-ui';
-import {mapState,mapMutations} from 'vuex'
- import { Toast,MessageBox,Indicator } from 'mint-ui' 
-export default {
+  <script type="es6">
+  import { Search } from 'mint-ui';
+  import {mapState,mapMutations} from 'vuex'
+  import { Toast,MessageBox,Indicator } from 'mint-ui' 
+  export default {
   data () {
     return {
         value:0,
         hongbao_modal:true,
         tt:true,
         tt_1:false,
+        isActive: false,
+        
         
     }
   },
@@ -471,18 +229,19 @@ export default {
   methods:{
        handleChange() {
           this.tt_1=true
-          this.tt=false
+          // this.tt=false
+          this.isActive=true
           console.log(this.tt)
         }
     }
       
   }
-</script>
+  </script>
 
 
-<style >
+  <style >
 
-@import '../assets/css/Promote.css';
+  @import '../assets/css/Promote.css';
 
 
-</style>
+  </style>
