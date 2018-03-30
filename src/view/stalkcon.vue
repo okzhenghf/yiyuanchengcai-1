@@ -7,7 +7,7 @@
         </div>
         <div class="foottitle">
           <h2>{{speech_list.title}}</h2>
-          <p>{{smalltalk_length}}期系列小讲·{{join_num}}次参加</p>
+          <p>{{smalltalk_length}}期系列提升·{{join_num}}次参加</p>
         </div>
       </div>
       <div class="container">
@@ -58,8 +58,8 @@
       return {
         conlineshow:false,
         speech_list:[],   //专题列表
-        smalltalk_list:[],   //当前小讲列表
-        smalltalk_length:'',   //专题小讲的期数
+        smalltalk_list:[],   //当前提升列表
+        smalltalk_length:'',   //专题提升的期数
         vip_list:[],    //答主信息列表
         join_num:0,
         price:0

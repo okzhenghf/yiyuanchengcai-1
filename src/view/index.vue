@@ -16,7 +16,7 @@
       </div>
       <div class="topLine">
         <div class="container">
-          <h4 class="headline">一元头条12 | 免费</h4>
+          <h4 class="headline">一元资讯 | 免费</h4>
           <ul class="topLine-list">
             <li @click="toHeadlineDetails(item.id)" v-for="(item,key) in headline_list">
 
@@ -34,7 +34,7 @@
       </div>
       <div class="smallTalk">
         <div class="container">
-          <h4 class="headline">小讲 | 30分钟精品语音干货</h4>
+          <h4 class="headline">提升 | 30分钟精品语音干货</h4>
           <div class="smallTalk-content">
             <mt-navbar v-model="selected" class="smallTalk-cate">
               <mt-tab-item :id="'tab_'+key"   v-for="(item,key) in cat_list">{{item.cate_name}}</mt-tab-item>
@@ -45,7 +45,7 @@
                 <mt-cell v-for="(item_class,index) in class_list[key]">
                   <div class="smallTalk-details" @click="toSmallTalkDetails(item_class.id)">
                     <div class="head-img">
-                      <img :src="$sourceUrl+'/img/'+item_class.head_img" alt="">
+                      <img :src="$gretUrl+'/'+item_class.smalltalk_img+'140_140.jpg'" alt="">
                     </div>
                     <div class="info">
                       <h5 class="title"><span class="new" v-if="isNew[key][index]">新</span>{{item_class.title}}</h5>
@@ -89,7 +89,7 @@
         allLoaded:false,
         nowday_headline_noreadnum:0,
         isNew:[],
-        newDay:3,//规定发表几天内的小讲是新的
+        newDay:3,//规定发表几天内的提升是新的
         isSearch:false,
         slider:[]
       }
@@ -180,7 +180,7 @@
                 this.class_list[index].push(...rtnData.data.data) 
               }
 
-              //获取每个小讲是否是新的
+              //获取每个提升是否是新的
               for(var i=0;i<rtnData.data.data.length;i++){
                 // console.log(parseInt(nowTime/1000), rtnData.data.data[i].create_time)
                 var time = parseInt((nowTime- rtnData.data.data[i].create_time*1000)/1000/60/60/24);
