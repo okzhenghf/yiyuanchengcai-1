@@ -9,8 +9,9 @@
 			 :interval="5000" 
 			 arrow="never"
 			 height=200px>
-			    <el-carousel-item v-for="item in 4" :key="item">
-			      <h3>{{ item }}</h3>
+			    <el-carousel-item v-for="item in dakaslidehdp_path">
+			    
+			     <img :src="$gretUrl+item.slidehdp_path" alt="">
 			    </el-carousel-item>
 			 </el-carousel>
 			 <div class="channel">
@@ -26,18 +27,19 @@
 		<div class="docard">
 			<el-row >
 		 	 	<el-col :span="12"><div class="grid-content bg-purple docard_title">打卡</div></el-col>
-		 		<el-col :span="12"><div class="grid-content bg-purple docard_add">全部打卡></div></el-col>
+		 		<el-col :span="12"><div class="grid-content bg-purple docard_add" @click="alldaka()">全部打卡></div></el-col>
 			</el-row>
 			<div class="docard_list">
 				<ul>
 					<li v-for="item in daka_list">
-						<img src="../../assets/img/5.jpg" alt="" >
+
+						<img :src="$gretUrl+item.imgpath" alt="" @click="dodaka(item.id)">
 						<div class="daka_info">
-							<h3>{{item.theme}}</h3>
+							<h3 @click="dodaka(item.id)">{{item.theme}}</h3>
 							<p>333人参与 已打卡7天</p>
 							<p>2018-02-05 至 2018-03-4</p>
 						</div>
-						  <el-button type="success" @click="dodaka()">去打卡</el-button>
+						  <el-button type="success" @click="dodaka(item.id)">去打卡</el-button>
 					</li>
 				</ul>
 			</div>
@@ -50,9 +52,10 @@ export default {
 	data () {
     	return {
       		daka_list:[],
+      		dakaslidehdp_path:[]
    		}
  	},
- 			computed:{
+ 	computed:{
 		    ...mapState(['info'])
 		  },
  	mounted(){
@@ -61,15 +64,25 @@ export default {
  				uid:this.info.user_id
  			}})
  		.then((rtnD)=>{
- 			// console.log(rtnD);
+ 			console.log(rtnD.data);
  			this.daka_list = rtnD.data
+ 		})
+ 		this.$http.get('/api/slidehdp',{params:{
+ 			page_cate:'daka'
+ 		}})
+ 		.then((rtnD)=>{
+ 			// console.log(rtnD)
+ 			this.dakaslidehdp_path = rtnD.data
  		})
 
  	},
  	methods:{
- 		dodaka:function() {
+ 		dodaka(Id) {
 
-	       this.$router.push('/daka/xiangqin')
+	       this.$router.push('/daka/xiangqin/'+Id)
+	    },
+	    alldaka(){
+	    	this.$router.push('/daka/daka_rili/'+Id)
 	    }
  	}
  }
@@ -77,6 +90,13 @@ export default {
 <style scoped>
 .footer{
 	height: 0px;
+}
+h3{
+	font-size:1.2rem;
+}
+img{
+	width: 100%;
+	height: 100%;
 }
 .bgc{
 	background-color: #d3dce6
@@ -131,9 +151,9 @@ export default {
 	text-align: left;
 }
 .docard .docard_list ul li .daka_info h3{
-	
-	white-space:nowrap;
 	overflow: hidden;
+	white-space:nowrap;
+	
 	text-overflow:ellipsis;
 }
 .docard .docard_list ul li .daka_info p{

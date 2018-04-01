@@ -8,7 +8,7 @@
 				<ul>
 					<li class="one">
 						<h5>总排名</h5></li>
-					<li class="two"><img src="../../assets/img/8.jpg" /></li>
+					<li class="two"><img v-if="info_o.head_img" :src="$gretUrl+info_o.head_img" /></li>
 				</ul>
 				<div class="null">
 
@@ -22,9 +22,9 @@
 						<h5 class="right">打卡次数</h5>
 					</li>
 					<li class="xia">
-						<h5>2188</h5>
-						<h5 >文雯</h5>
-						<h5>{{info_o.daka_count}}</h5>
+						<h5>{{}}</h5>
+						<h5 >{{info_o.user_name}}</h5>
+						<h5>{{info_o.num}}</h5>
 					</li>
 				</ul>
 			</div>
@@ -35,8 +35,8 @@
 						<li class="yes">
 							<ol>
 								<li>{{index+1}}</li>
-								<li><img src="../../assets/img/5.jpg" /></li>
-								<li>{{info.uid}}</li>
+								<li><img v-if="info.head_img" :src="$gretUrl+info.head_img" /></li>
+								<li>{{info.user_name}}</li>
 								<li>{{info.c}}</li>
 							</ol>
 						</li>
@@ -65,11 +65,12 @@
 					params:{uid:this.info.user_id}
 				})
 				.then((rtnD)=>{
-					this.info_o=rtnD.data
+					console.log(rtnD)
+					this.info_o=rtnD.data[0]
 				})
 			this.$http.post('/api/daka/toplist')
 				.then((rtnD)=>{
-					// console.log(rtnD)
+					console.log(rtnD)
 					this.info_a=rtnD.data
 				})
 			
@@ -88,9 +89,9 @@
 				text-decoration: none;
 			}
 			
-			body {
+			body,html{
 				margin: 0;
-				padding: 0;
+				padding: 0 0 50px;
 			}
 			
 			.head {
@@ -199,10 +200,14 @@
 			.out .name .xia h5:nth-child(3){
 				margin-left: -30%; 
 			}*/
+			.main .list .yes ol li:nth-child(3){
+				flex: 0 0 30%;
+			}
 			.main {
 				width: 100%;
 				height: 100px;
 				/*position: absolute;*/
+				/*padding-bottom: 100px;*/
 			}
 			
 			.main h5 {
