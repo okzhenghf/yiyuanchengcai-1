@@ -23,7 +23,7 @@
               <mt-cell v-for="(item_class,index) in class_list[key]">
                 <div class="smallTalk-details" @click="toSmallTalkDetails(item_class.id)">
                   <div class="head-img">
-                    <img :src="$sourceUrl+'/img/'+item_class.head_img" alt="">
+                    <img :src="$gretUrl+'/'+item_class.smalltalk_img+'140_140.jpg'" alt="">
                   </div>
                   <div class="info">
                     <h5 class="title"><span class="new" v-if="isNew[key][index]">新</span>{{item_class.title}}</h5>
@@ -73,7 +73,7 @@ export default {
       lock : true, //异步锁
       allLoaded:false,
       isNew:[],
-      newDay:3,//规定发表几天内的小讲是新的
+      newDay:3,//规定发表几天内的提升是新的
     }
   },
 
@@ -125,7 +125,7 @@ export default {
                 this.class_list[index].push(...rtnData.data.data) 
               }
 
-              //获取每个小讲是否是新的
+              //获取每个提升是否是新的
               for(var i=0;i<rtnData.data.data.length;i++){
                 // console.log(parseInt(nowTime/1000), rtnData.data.data[i].create_time)
                 var time = parseInt((nowTime- rtnData.data.data[i].create_time*1000)/1000/60/60/24);

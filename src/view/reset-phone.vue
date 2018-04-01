@@ -24,7 +24,7 @@
     <mt-button type="danger" @click.native="confirm()" size="large" v-if="done">
         确认更换
     </mt-button>
-    <p class="contact" v-if="!done">若原手机号码无法收取验证码，可<span>联系分答客服</span></p>
+    <p class="contact" v-if="!done">若原手机号码无法收取验证码，可<span>联系一元客服</span></p>
     <div class="tips">
       <mt-popup
         v-model="show"

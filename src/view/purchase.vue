@@ -2,7 +2,7 @@
   <div class="purchase" >
     <mt-navbar v-model="selected"  :fixed="true">
       <div class="container">
-        <mt-tab-item id="purchase-smalltalk">小讲</mt-tab-item>
+        <mt-tab-item id="purchase-smalltalk">提升</mt-tab-item>
         <mt-tab-item id="purchase-ask">我问</mt-tab-item>
         <mt-tab-item id="purchase-quickask">快问</mt-tab-item>
         <mt-tab-item id="purchase-listen">我听</mt-tab-item>
@@ -10,12 +10,12 @@
     </mt-navbar>
     <!-- tab-container -->
     <mt-tab-container v-model="selected">
-      <!-- 小讲 -->
+      <!-- 提升 -->
       <mt-tab-container-item id="purchase-smalltalk" class="purchase-smalltalk">
         <div class="tips" v-show="st_list.length == 0">
-          <p>你还没有参加过小讲哟～</p>
+          <p>你还没有参加过提升哟～</p>
           <router-link to='/talk' class="tip-btn">
-            去小讲页看看
+            去提升页看看
           </router-link>
         </div>
         <mt-cell v-for="(item_class,index) in st_list" class="st-list" >
@@ -261,7 +261,7 @@ import { Indicator } from 'mint-ui'
         sb_like:[],
         //listen_ask:[]           //是否显示听过和赞
         isNew:[],
-        newDay:3,//规定发表几天内的小讲是新的
+        newDay:3,//规定发表几天内的提升是新的
         isplay:-1,                    //-1：音频暂停
         yuyinSrc:'../../static/audio/8310.mp3',//语音路径
       }

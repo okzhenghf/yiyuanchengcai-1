@@ -249,35 +249,35 @@ export default new Router({
       path: '/talk',
       component: talk,
       meta: {
-        title: '一元成才小讲'
+        title: '一元成才提升'
       }
     },
     {
       path: '/stalkcon/:id',
       component: stalkcon,
       meta: {
-        title: '一元成才小讲'
+        title: '一元成才提升'
       }
     },
     {
       path: '/stalkteacher/:id',
       component: stalkteacher,
       meta: {
-        title: '一元成才小讲'
+        title: '一元成才提升'
       }
     },
     {
       path: '/shiting',
       component: shiting,
       meta: {
-        title: '一元成才小讲'
+        title: '一元成才提升'
       }
     },
     {
       path: '/allspeech',
       component: allspeech,
       meta: {
-        title: '一元成才小讲'
+        title: '一元成才提升'
       }
     },
     {
@@ -298,7 +298,7 @@ export default new Router({
       path: '/SmalltalkComments/:id',
       component: SmalltalkComments,
       meta: {
-        title: '一元成才小讲'
+        title: '一元成才提升'
       }
     },
     {

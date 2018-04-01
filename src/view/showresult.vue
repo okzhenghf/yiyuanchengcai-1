@@ -70,7 +70,7 @@
             </div>
             <div class="composed-wrap" v-if="nav_list[1].show">
               <div class="composed-item container">
-                <p class="wrap-title">小讲</p>
+                <p class="wrap-title">提升</p>
                 <mt-cell v-for="(it,id) in toshow['smalltalk_list']">
                   <div class="search-result" @click="toTalk(it.id)">
                     <div class="img">
@@ -91,7 +91,7 @@
                 </mt-cell>
                 <p class="more" @click="moreTalk()">
                   <span></span>
-                  <span>查看更多小讲</span>
+                  <span>查看更多提升</span>
                   <span></span>
                 </p>
               </div>
@@ -180,7 +180,7 @@ export default {
       selected : 'tab_0',
       nav_list:[
         {name:'综合',flag:1,show:true},
-        {name:'小讲',flag:2,show:false},
+        {name:'提升',flag:2,show:false},
         {name:'人物',flag:3,show:false},
         {name:'问题',flag:4,show:false}
       ],

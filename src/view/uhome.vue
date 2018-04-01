@@ -70,7 +70,7 @@
             </li>
             <li class="uhome_nav" @click="addnovel()" v-if="user_info.is_real==2">
               <span class="uhomebg bgpic_5"></span>
-              <span class="uhome_text">添加小讲</span>
+              <span class="uhome_text">添加提升</span>
               <span class="rignt_sub"></span>
             </li>
              <li class="uhome_nav" @click="uhomehelp()">

@@ -14,7 +14,7 @@
                 <router-link :to="'/tutorDetails/'+item.vip_id">
                   <img :src="$sourceUrl+'/img/'+item.head_img" class="listen-content-avatar">
                 </router-link>
-                <router-link :to="'/problemDetails/'+item.id"><span class="header-title">{{item.real_name}}推荐话题：分答精选</span></router-link>
+                <router-link :to="'/problemDetails/'+item.id"><span class="header-title">{{item.real_name}}推荐话题：一元精选</span></router-link>
               </div>
               <router-link :to="'/problemDetails/'+item.id"><p class="audio-question-content">{{item.ask_content}}</p></router-link>
 

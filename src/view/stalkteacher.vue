@@ -2,8 +2,8 @@
   <div class="stalkteacher" :class="{'overflow':inputText}">
       <div class="stalkhead" :style="'background-image:url('+smalltalk_list.smalltalk_img+')'">
         <div class="headback">
-          <span @click="backstalk()">&lt; 全部小讲</span>
-          <span>小讲指南？</span>
+          <span @click="backstalk()">&lt; 全部提升</span>
+          <span>提升指南？</span>
         </div>
         <div class="foottitle">
           <h2>{{smalltalk_list.title}} </h2>
@@ -17,7 +17,7 @@
           <div class="teachercar">
             <span>☑{{smalltalk_list.duration}}分钟语音</span>
             <span>☑主讲互动</span>
-            <span>☑小讲圈交流</span>
+            <span>☑提升圈交流</span>
           </div>
           <div class="tutorpro">
             <router-link  :to="'/tutorDetails/'+vip_list.id">
@@ -44,15 +44,15 @@
             </div>
           </div>
           <h2 class="nav_list_menu">
-            <span>讲单</span>
-            <a href="javascript:void(0)" class="app_download">
-              <i class="down_btn"></i><span>打开APP连播</span>
-            </a>
+            <span>课程目录</span>
+            
           </h2>
           <div class="class_list">
             <ul class="class_topic">
               <li v-for="(item,index) in smalltalkcontent_list" class="classcon_list">
-                <p class="caption">{{index+1}}. {{item.title}}</p>
+                <p class="caption" @click="showCaption(item.id)">{{index+1}}. {{item.title}}
+                   
+                </p>
                 <div class="content_on" v-for="(audio_item,key) in smalltalkaudio_list[index]" @click="shiting(smalltalkid,audio_item.id,audio_item.shiting)">
                   <div class="gre_title">
                     <span class="blue" v-if="audio_item.shiting>0&&!boughtstatus">试听</span>
@@ -69,7 +69,7 @@
           </div>
       </div>
       <div class="jaingring" v-if="comment_num>0">  
-       <span class="samllring">小讲圈</span><!-- <span class="reply">32次主讲回复</span> -->
+       <span class="samllring">提升圈</span><!-- <span class="reply">32次主讲回复</span> -->
        <ul class="ring_comment">
          <li v-for="(item,index) in comment_list">
            <div class="studenthead">
@@ -126,18 +126,18 @@
            </div>
          </li>
        </ul>
-       <p class="join_cue" v-if="showCommunity">参加后可查看全部<span class="red_num">{{comment_num}}</span>条小讲圈</p>
+       <p class="join_cue" v-if="showCommunity">参加后可查看全部<span class="red_num">{{comment_num}}</span>条提升圈</p>
        <router-link :to="'/SmalltalkComments/'+smalltalkid" v-if="!showCommunity">
-         <p class="smalltalk-comments">~ 查看所有小讲圈 ~</p>
+         <p class="smalltalk-comments">~ 查看所有提升圈 ~</p>
        </router-link>
       </div>
       <div class="jaingring" v-if="comment_num==0">
-        <span class="samllring">小讲圈</span>
-        <div class="no-comment">暂时还没有小讲圈</div>
+        <span class="samllring">提升圈</span>
+        <div class="no-comment">暂时还没有提升圈</div>
       </div>
       <!-- 专题 如果不是专题要隐藏-->
       <div class="subject_albums" v-if="talk_special_list.length!=0">
-        <h2>本小讲收录于专题</h2>
+        <h2>本提升收录于专题</h2>
         <div class="subhead_box" @click="toStalkcon(talk_special_list.id)">
           <img :src="$sourceUrl+'/img/'+talk_special_list.special_img" class="subhead_pic">
           <div class="subname">
@@ -160,7 +160,7 @@
               <img :src="vip_head_img" class="shead_pic">
               <img src="../assets/img/daV.jpg" v-if="vip_is_real==2" class="dav_pic">
             </div>
-            <span class="artname">{{vip_real_name}}的其他小讲{{smalltalk_special_id}}</span>
+            <span class="artname">{{vip_real_name}}的其他提升{{smalltalk_special_id}}</span>
           <!-- </div> -->
           <router-link :to="'/tutorDetails/'+vip_list.id"><span class="one_on">一对一提问></span></router-link>
         </div>
@@ -235,8 +235,8 @@
         class="boughtcalss">
         <div class="boughtjoin">
           <div class="boughtbox">
-            <p class="paytitle">支付 {{price}} 参加小讲</p>
-            <p class="paycontent">参加后您将获得本场小讲中的：</p>
+            <p class="paytitle">支付 {{price}} 参加提升</p>
+            <p class="paycontent">参加后您将获得本场提升中的：</p>
             <p class="paydetail">全部知识音频</p>
             <p class="paydetail">与主讲互动机会</p>
             <p class="paydetail">与高品质用户社群交流机会</p>
@@ -262,6 +262,14 @@
             v-model="textContentNull"
             popup-transition="popup-fade">评论不能为空哦!
       </mt-popup>
+      <mt-popup  style="width: 90%;"
+            v-model="smallContent"
+            popup-transition="popup-fade">
+            <div v-html="smallContent_desc" class="mtk_img_box">
+              
+            </div>
+            
+      </mt-popup>
   </div>
 </template>
 
@@ -275,6 +283,8 @@ import { Indicator } from 'mint-ui';
         id:1,
         conlineshow:false,
         shoutingstatus:0,
+        smallContent:false,
+        smallContent_desc:null,
         giftshow:false,
         number:1,
         price:0,
@@ -285,15 +295,15 @@ import { Indicator } from 'mint-ui';
         vip_identity:'',
         vip_introduce:'',
         vip_head_img:'',
-        smalltalk_special_id:'', //小讲专题id
+        smalltalk_special_id:'', //提升专题id
         promptpay:false,  //没支付、没试听的权限  提示用户需要购买才能听
         comment_list:[],  //评论列表
         vip_list:[],  //Vip个人信息列表
-        smalltalk_list:'',  //小讲内容
-        smalltalkcate:'', //小讲分类    
-        smalltalkcontent_list:[], //小讲导语部分
-        smalltalkaudio_list:[],   // 小讲语音部分
-        smalltalk_audio_listen:[], //小讲每个语音是否听完过
+        smalltalk_list:'',  //提升内容
+        smalltalkcate:'', //提升分类    
+        smalltalkcontent_list:[], //提升导语部分
+        smalltalkaudio_list:[],   // 提升语音部分
+        smalltalk_audio_listen:[], //提升每个语音是否听完过
         comment_num:'',  //评论数量
         reply_list:[],  //回复列表
         reply_cut_list:[],   //回复列表未展开前显示2条
@@ -301,10 +311,10 @@ import { Indicator } from 'mint-ui';
         replynum_status:'',  //回复数量状态
         reply_name:[],   //回复用户名
         comment_name:[],   //评论用户名
-        special_smalltalk_list:[],   //同专题小讲
-        talk_special_list:[],   //本小讲的专题所在
-        special_join_num:0,//本小讲的专题的参加人数
-        smalltalkid:'',   //小讲id
+        special_smalltalk_list:[],   //同专题提升
+        talk_special_list:[],   //本提升的专题所在
+        special_join_num:0,//本提升的专题的参加人数
+        smalltalkid:'',   //提升id
         reply_parent_name:[],   //回复评论用户的名
         reply_parent_list:[],  //回复评论用户的列表
         reply_parent_content:[],
@@ -313,7 +323,7 @@ import { Indicator } from 'mint-ui';
         inputText:false,//评论回复弹出框的显示隐藏控制
         textNum:0,//评论输入文字个数
         textContent:'',//评论内容
-        inputCommentId:-1,//根据用户点击的哪个弹出的评论框，如果是直接评论小讲就为0，如果是回复就是会回复评论的id
+        inputCommentId:-1,//根据用户点击的哪个弹出的评论框，如果是直接评论提升就为0，如果是回复就是会回复评论的id
         inputReplyId:0,  //如果是回复的回复，这里是回复父亲的id
         textContentNull:false,//如果提交时输入为空，弹出提示框
         comment_maxShowAllLength:50,//评论显示全文的最大长度
@@ -357,7 +367,7 @@ import { Indicator } from 'mint-ui';
         this.conlineshow = false;
         this.special_join_num = 0;
         this.smalltalkid=this.$route.params.id
-        //用户是否购买该小讲
+        //用户是否购买该提升
         if(this.isLogin){
             this.$http
            .get('/purchaseorder/'+this.smalltalkid,{params:{uid:this.info.user_id}})
@@ -386,9 +396,9 @@ import { Indicator } from 'mint-ui';
             .get('smalltalkAudio',{params:{'index':smalltalkcontent[i].id}})
             .then(rtnData=>{
               this.$set( this.smalltalkaudio_list,index,rtnData.data)
-              //先给小讲每个语音收听记录初始化
+              //先给提升每个语音收听记录初始化
               this.$set(this.smalltalk_audio_listen,index,[false])
-              //登录后根据小讲语音id访问语音收听表获取是否有听完过的id
+              //登录后根据提升语音id访问语音收听表获取是否有听完过的id
               if(this.isLogin){
                 for(var i=0;i<this.smalltalkaudio_list[index].length;i++){
                   let key = i;
@@ -408,13 +418,13 @@ import { Indicator } from 'mint-ui';
             })
           }
         }),
-        //小讲内容
+        //提升内容
         this.$http
         .get('smalltalk/'+this.smalltalkid,{params:{type:'smalltalk'}})
         .then(rtnData=>{
           this.smalltalk_list = rtnData.data;
           this.price = rtnData.data.price;
-          this.smalltalk_list.smalltalk_img = this.$sourceUrl+'/img/'+this.smalltalk_list.smalltalk_img;
+          this.smalltalk_list.smalltalk_img = this.$gretUrl+this.smalltalk_list.smalltalk_img;
         })
         .then(()=>{
           let vip_id=this.smalltalk_list.vip_id
@@ -472,12 +482,12 @@ import { Indicator } from 'mint-ui';
       },
       //获取评论数据
       commentInit:function(){
-        let smalltalk_id =this.$route.params.id  //小讲id
+        let smalltalk_id =this.$route.params.id  //提升id
         this.comment_show_status = [];
         this.comment_isLong = [];
         this.comment_list = [];
         this.comment_isLike = [];
-        // 小讲评论
+        // 提升评论
 
         this.$http
         .get('comment',{params:{smalltalk_id}})
@@ -691,6 +701,16 @@ import { Indicator } from 'mint-ui';
       toOtherStalk:function(n){
         this.$router.push('/stalkteacher/'+n)
       },
+      // 显示目录的预览内容
+      showCaption(caption_id){
+         this.$http
+            .get('smalltalkContent/'+caption_id)
+            .then(rtnData=>{
+              console.log(rtnData)
+              this.smallContent = true
+              this.smallContent_desc = rtnData.data[0].ke_content
+            })
+      },
       //展开所有讨论
       showart:function(index){
         this.$set(this.reply_cut_list,index,this.reply_list[index])
@@ -745,5 +765,5 @@ import { Indicator } from 'mint-ui';
 <style >
 
   @import '../assets/css/stalkteacher.css';
-  
+  .mtk_img_box img{width: 100%}
 </style>
