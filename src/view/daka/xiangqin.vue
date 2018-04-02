@@ -2,7 +2,9 @@
 <div class="box">
 	<div class="content" ref="input" id="input" >
 		<div class="head">
-			<div class="left"><img src="http://p1.so.qhimgs1.com/t01bdc8e833aa80013d.jpg" alt=""></div>
+			<div class="left">
+				<img v-if="con.imgpath" :src="$gretUrl+con.imgpath" alt="">
+			</div>
 			<div class="right">
 				<h4 class="title">#{{con.theme}}#</h4>
 				<div class="activity">
@@ -12,7 +14,7 @@
 				<button class="yq">邀请好友</button>
 			</div>
 		</div>
-		<p class="can" style="color:#ccc">已有0人参与</p>
+		<p class="can" style="color:#ccc">已有{{info_a}}人参与</p>
 		<div class="text">
 		<div class="up" @click="daka"
 			v-if ="hid" 
@@ -41,6 +43,7 @@ export default{
 				show:true,
 				// con:'时间是最美的画笔，人生如梦，岁月无情，一盏灯，一个月明，此生不易，来世多少的容易，想起一段哭泣，温柔一段慈悲，只是一句话，一个人，一段沧桑。岁月无痕，人间冷漠，沧桑了孤独的自己，有一种冷漠，也有一种淡泊，藏着风花雪月，藏着无情等待，只是一种观望，一个人生的错觉。付出是一种观望，也是一种奇迹，爱情分明，人海孤独，只是苍老的世界，一个人的誓言，一个人的回忆，温柔的慈悲，伤感最后的熟悉，每一个憔悴，每一个冰冷，只是一种年华，一种谢幕。再见的爱情，人生的冷落，只是思念太短，人生太无期，回首往昔的天亮，一个人哭泣。　一段岁月，一份想起，人生的在意，梦里的眷恋，只是一种想起，一种再见，温柔的慈悲，伤感的憔悴，人生如此眷恋，爱意如此朦胧，只是一种不甘心，一种不在意，沧桑了自己的独白，人生一句话，也是一种温柔的锁甲。爱意分别，人海孤独，只是一首凌乱，一段烦躁，孤独的活着。爱情分明，人海孤独，只是苍老的世界，一个人的誓言，一个人的回忆，温柔的慈悲，伤感最后的熟悉，每一个憔悴，每一个冰冷，只是一种年华，一种谢幕。再见的爱情，人生的冷落，只是思念太短，人生太无期，回首往昔的天亮，一个人哭泣。，孤独的活着。爱情分明，人海孤独，只是苍老的世界，一个人的誓言，一个人的回忆，温柔的慈悲，伤感最后的熟悉，每一个憔悴，每一个冰冷，只是一种年华，一种谢幕。再见的爱情，人生的冷落，只是思念太短，人生太无期，回首往昔的天亮，一个人哭泣'
 				con:'',
+				info_a:[],
 			}
 		},
 		computed:{
@@ -53,17 +56,31 @@ export default{
 				bar.style.width = 2/4 *100 +"%";  // 人数/总人数 * 100
 				
 			},0)//
-			this.$http.get("/api/dakatheme/xiangqin",{
-				params:{
-					id:1,
-					uid:this.info.user_id
-				}
-			})
-			.then((rtnD)=>{
-				// console.log(rtnD)
-				this.con = rtnD.data
 
-			})
+				this.$http.get("/api/dakatheme/xiangqin",{
+					params:{
+						id:this.$route.params.id,
+						uid:this.info.user_id
+					}
+				})
+				.then((rtnD)=>{
+					console.log(rtnD)
+					// console.log(2)
+					this.con = rtnD.data
+
+				})
+
+
+				this.$http.get('/api/daka/themelist',{
+					params:{
+						id:this.$route.params.id
+					}
+					
+				})
+				.then((rtnD)=>{
+					// console.log(rtnD)
+					this.info_a=rtnD.data
+				})		
 			
 		},
 		methods:{
@@ -80,7 +97,7 @@ export default{
                //res只有触发后才生效
 			},
 			dodaka(){
-				this.$router.push("/daka/dodaka")
+				this.$router.push("/daka/dodaka/"+this.$route.params.id)
 			}
 		}
 	}

@@ -3,7 +3,7 @@
  	<div class="header_box">
 	 	<div class="title">
 	 		<div class="left">
-				<img src="../../assets/img/1_1.png">
+				<img v-if="con.imgpath" :src="$gretUrl+con.imgpath">
 			</div>
 			<div class="right">
 				<h3>{{con.theme}}</h3>
@@ -17,10 +17,10 @@
 			
 	 	</div>
 	 	<div class="ha">
-	 		<span>参于人数参于人数</span>
+	 		<span>参于人数{{info_a}}</span>
 	 		<ul>
-	 			<li v-for="item in 5">
-	 			<img src="../../assets/img/1_1.png" alt=""></li>
+	 			<li v-for="item in info_a.toplist">
+	 			<img v-if="item.head_img" :src="$gretUrl+item.head_img" alt=""></li>
 	 			<!--<li><img src="../assets/logo.png" alt=""></li>
 	 			<li><img src="../assets/logo.png" alt=""></li>
 	 			<li><img src="../assets/logo.png" alt=""></li>
@@ -59,9 +59,9 @@
  		<li v-for="info in daka_list">{{info.input}}<el-button type="success"><router-link :to="'/info/'+info._id">去打卡 {{info.daka_record}}</router-link></el-button></li>
  	</ul> -->
  	<div class="me">
- 		<img src="../../assets/img/1_1.png">
+ 		<img v-if="con.head_img" :src="$gretUrl+con.head_img">
  		<div class="con">
- 			<h3>打卡</h3>
+ 			<h3>打卡{{con.num}}</h3>
  			<p>排行</p>
  		</div>
  		<div class="mydo" @click="mydaka()">我的打卡&nbsp;></div>
@@ -72,9 +72,9 @@
  		<h3>全部动态</h3>
  	</div>
  	<div class="data" v-for="item in daka_list.allData">
- 			<img src="../../assets/img/1_1.png">
+ 			<img v-if="item.head_img":src="$gretUrl+item.head_img">
  			<div class="data_list">
- 				<p class="name">{{item.uid}}</p>
+ 				<p class="name">{{item.user_name}}</p>
  				<p class="time">2018</p>
  				<h4 class="text" style="word-wrap:break-word;">{{item.textarea3}}</h4>
  				<div class="icon">
@@ -98,15 +98,18 @@ export default {
 			chu:true,
 			shou:false,
 			con:'',
+			page:1,
+			info_a:[]
 		}
 	},
 	computed:{
 		    ...mapState(['info'])
 		  },
 	mounted(){
-		this.$http.post('/api/daka/allData',{
+		this.$http.get('/api/daka/allData',{
  			params:{
- 				p:1
+ 				theme_id:this.$route.params.id,
+ 				p:this.page
  			}})
  		.then((rtnD)=>{
  			// console.log(rtnD);
@@ -114,15 +117,25 @@ export default {
  		})
  		this.$http.get("/api/dakatheme/xiangqin",{
 				params:{
-					id:1,
+					id:this.$route.params.id,
 					uid:this.info.user_id
 				}
 			})
 			.then((rtnD)=>{
-				// console.log(rtnD)
+				console.log(rtnD)
 				this.con = rtnD.data
 
 			})
+			this.$http.get('/api/daka/themelist',{
+					params:{
+						id:this.$route.params.id
+					}
+					
+				})
+				.then((rtnD)=>{
+					console.log(rtnD)
+					this.info_a=rtnD.data
+				})
 	},
 	methods:{
 		shang(){
@@ -139,13 +152,13 @@ export default {
 			this.$refs.box.style="height :100%;"
 		},
 		daka_info(){
-	       this.$router.push('/daka/daka_info')
+	       this.$router.push('/daka/daka_info/'+this.$route.params.id)
 		},
 		toplist(){
-			this.$router.push('/daka/toplist')
+			this.$router.push('/daka/toplist/'+this.$route.params.id)
 		},
 		mydaka(){
-			this.$router.push('/daka/daka_rili')
+			this.$router.push('/daka/daka_rili/'+this.$route.params.id)
 		}
 	}
 

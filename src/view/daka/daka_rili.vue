@@ -20,11 +20,11 @@
       <div class='bgimg'>
         <el-row class='min_head'>
           <el-col :span="8"><div class="grid-content bg-purple">
-            <img src="../../assets/img/ce175bcdd00f9a8d7ffda5e6530477e4.jpeg" class='img_1' alt="">
+            <img v-if="con.head_img" :src="$gretUrl+con.head_img" class='img_1' alt="">
           </div></el-col>
           <el-col :span="8"><div class="grid-content bg-purple-light"  align="left">
-            <p>雯雯</p>
-            <p>累积打卡6天</p>
+            <p>{{con.user_name}}</p>
+            <p>累积打卡{{con.num}}天</p>
           </div></el-col>
           <el-col :span="8"><div class="grid-content bg-purple"><el-button round style='background:0 0 repeat;'>分享</el-button></div></el-col>
         </el-row>
@@ -62,7 +62,7 @@ export default {
     mounted(){
           this.$http.get("/api/dakatheme/xiangqin",{
         params:{
-          id:1,
+          id:this.$route.params.id,
           uid:this.info.user_id
         }
       })
@@ -71,6 +71,8 @@ export default {
         this.con = rtnD.data
 
       })
+
+
     },
     methods:{
 
@@ -85,7 +87,7 @@ export default {
           // console.log(data); //选中某天
           // console.log(this.isToday)
           if(data == this.isToday){
-            this.$router.push('/daka/daka_info')
+            this.$router.push('/daka/daka_info/'+this.$route.params.id)
           }
           
            

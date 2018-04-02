@@ -3,7 +3,44 @@
 <div class="app">
   
   <h1>基本打卡</h1>
+    <b-modal v-if="question_cont.question" v-model="question_modal" :hide-footer="true" :hide-header="true" class="hongbao_box">
+
+      <ul class="as">{{question_cont.question}}<span>(必答题)</span>
+        <el-radio-group v-model="radio2">
+            <li>
+              <el-radio :label="1">
+              {{question_cont.option1}}
+              </el-radio>
+            </li>
+            <li>
+              <el-radio :label="2">
+              {{question_cont.option2}}
+              </el-radio>
+            </li>
+            <li>
+              <el-radio :label="3">
+              {{question_cont.option3}}
+              </el-radio>
+            </li>
+            <li>
+              <el-radio :label="4">
+              {{question_cont.option4}}
+              </el-radio>
+            </li>
+        <!--   <li><el-radio :label="1">备选项</el-radio></li>
+          <li><el-radio :label="2">备选项</el-radio></li>
+          <li><el-radio :label="3">备选项</el-radio></li> -->
+        </el-radio-group>
+        </ul>
+      <div class="footer">
+        <b-button variant="" class="qu" :block="true" @click="go_daka()">领取</b-button>
+      </div>
+      
+    </b-modal>
+
+
   <div class="form-group">
+    
     <label><strong>*</strong>&nbsp;&nbsp;&nbsp;打卡主题：</label>
     <el-input v-model="input" placeholder="请输入内容"></el-input>
   </div>
@@ -45,6 +82,7 @@
 <script>
 
  import {mapState,mapMutations} from 'vuex'
+ import { Toast } from 'mint-ui'
 	export default{
 		data(){
 			return{
@@ -52,7 +90,11 @@
 				msg:'',
 				input:'',
 				imageUrl:'',
-				textarea3:''
+				textarea3:'',
+        radio2:null,
+        question_cont:[],
+        answer_cont:[],
+        question_modal:false,
 			}
 		},
 		computed:{
@@ -78,24 +120,76 @@
 		 //            scrollX:true
 		 //          });
 		 //    })
+
+     // new Promise((reslove,reject)=>{
+        
+     // })
+     // .then((queRtnD)=>{
+     //  this.$http.get('api/question/answer',{
+     //    params:{
+     //      question_id:queRtnD
+     //    }})
+     //  .then((rtnD)=>{
+     //    // console.log(rtnD)
+     //    this.answer_cont=rtnD.data
+     //  })
+     // })
+
+     
 		},
 		methods:{
 			daka(){
-				this.$http.get('/api/daka',{params:{
-					uid:this.info.user_id,		
-					input:this.input,
-					textarea3:this.textarea3
-				}})
-			   .then((rtnD)=>{
-			   	this.$router.push('/daka/daka_rili');
-			   })
-			}
+        this.question_modal=true
+         this.$http.get('api/question',{params:{id:this.$route.params.id}})
+         .then((rtnD)=>{
+          console.log(rtnD)
+          this.question_cont=rtnD.data[0]
+          // reslove(rtnD.data[0].id)
+         })
+				
+			},
+      go_daka(){
+        this.question_modal=false
+
+        if(this.radio2 == this.question_cont.answer_id){
+          Toast("回答正确")
+          this.$http.get('/api/daka',{params:{
+            uid:this.info.user_id,    
+            input:this.input,
+            textarea3:this.textarea3
+            // question_id:this.question_cont.id
+            // answer:this.radio2
+
+          }})
+           .then((rtnD)=>{
+            this.$router.push('/daka/daka_rili/'+this.$route.params.id);
+           })
+        }
+        else if(this.radio2 == null){
+          Toast("请回答问题")
+        }
+        else{
+          Toast('回答错误')
+        }
+        this.question_cont=[]
+        this.radio2=null
+      }
+      
+
 		}
 	}
 </script>
 <style scoped>
+.el-radio-group{
+  display: block;
+}
+.as{
+  text-align: left;
+  margin-left:10%;
+}
 .app{
 	margin-bottom: 50px;
+  padding:3%;
 }
 .form-group{
 	display: flex;
