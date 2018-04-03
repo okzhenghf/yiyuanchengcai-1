@@ -2,12 +2,12 @@
   <div class="comments" :class="{'overflow':inputText}">
     
       <div class="headback">
-        <span @click="backstalk(smalltalk_id)">&lt; 返回小讲</span>
+        <span @click="backstalk(smalltalk_id)">&lt; 返回提升</span>
       </div>
 
 <!--     <div class="container"> -->
      <div class="jaingring">
-       <span class="samllring">小讲圈</span>
+       <span class="samllring">提升圈</span>
        <!-- <span class="reply">32次主讲回复</span> -->
        <ul class="ring_comment">
          <li v-for="(item,index) in comment_list">
@@ -68,8 +68,8 @@
         class="boughtcalss">
         <div class="boughtjoin">
           <div class="boughtbox">
-            <p class="paytitle">支付 {{smalltalk_list.price}} 参加小讲</p>
-            <p class="paycontent">参加后您将获得本场小讲中的：</p>
+            <p class="paytitle">支付 {{smalltalk_list.price}} 参加提升</p>
+            <p class="paycontent">参加后您将获得本场提升中的：</p>
             <p class="paydetail">全部知识音频</p>
             <p class="paydetail">与主讲互动机会</p>
             <p class="paydetail">与高品质用户社群交流机会</p>
@@ -107,8 +107,8 @@ import { Indicator } from 'mint-ui'
       return {
         boughtstatus:true,
         promptpay:false,
-        smalltalk_id:'',      //小讲id
-        smalltalk_list:'',   //小讲列表
+        smalltalk_id:'',      //提升id
+        smalltalk_list:'',   //提升列表
         comment_list:[],  //评论列表
         comment_num:'',  //评论数量
         comment_name:[],   //评论用户名
@@ -128,7 +128,7 @@ import { Indicator } from 'mint-ui'
         inputText:false,//评论回复弹出框的显示隐藏控制
         textNum:0,//评论输入文字个数
         textContent:'',//评论内容
-        inputCommentId:-1,//根据用户点击的哪个弹出的评论框，如果是直接评论小讲就为0，如果是回复就是会回复评论的id
+        inputCommentId:-1,//根据用户点击的哪个弹出的评论框，如果是直接评论提升就为0，如果是回复就是会回复评论的id
         inputReplyId:0,  //如果是回复的回复，这里是回复父亲的id
         textContentNull:false,//如果提交时输入为空，弹出提示框
         comment_maxShowAllLength:50,//评论显示全文的最大长度
@@ -150,7 +150,7 @@ import { Indicator } from 'mint-ui'
     methods:{  
       init:function(){
         Indicator.open();
-        this.smalltalk_id=this.$route.params.id   //小讲id
+        this.smalltalk_id=this.$route.params.id   //提升id
         this.$http
           .get('/smalltalk/'+this.smalltalk_id,{params:{type:'smalltalk'}})
           .then(rtnData=>{
@@ -163,14 +163,14 @@ import { Indicator } from 'mint-ui'
       },
       //获取评论数据
       commentInit:function(){
-        let smalltalk_id =this.$route.params.id  //小讲id
+        let smalltalk_id =this.$route.params.id  //提升id
         this.comment_show_status = [];
         this.comment_isLong = [];
         this.comment_list = [];
         //this.reply_cut_list = [];
         //this.reply_list = [];
         this.comment_isLike = [];
-        // 小讲评论
+        // 提升评论
         this.$http
         .get('Comment',{params:{smalltalk_id}})
         .then(rtnData=>{

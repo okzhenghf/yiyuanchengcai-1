@@ -80,6 +80,7 @@ li {
 .container {
   text-align: center;
   width: 18.05555556rem;
+  padding: 0;
   margin: 0 auto;
 }
 /* 头像 */

@@ -250,35 +250,35 @@ export default new Router({
       path: '/talk',
       component: talk,
       meta: {
-        title: '一元成才小讲'
+        title: '一元成才提升'
       }
     },
     {
       path: '/stalkcon/:id',
       component: stalkcon,
       meta: {
-        title: '一元成才小讲'
+        title: '一元成才提升'
       }
     },
     {
       path: '/stalkteacher/:id',
       component: stalkteacher,
       meta: {
-        title: '一元成才小讲'
+        title: '一元成才提升'
       }
     },
     {
       path: '/shiting',
       component: shiting,
       meta: {
-        title: '一元成才小讲'
+        title: '一元成才提升'
       }
     },
     {
       path: '/allspeech',
       component: allspeech,
       meta: {
-        title: '一元成才小讲'
+        title: '一元成才提升'
       }
     },
     {
@@ -299,7 +299,7 @@ export default new Router({
       path: '/SmalltalkComments/:id',
       component: SmalltalkComments,
       meta: {
-        title: '一元成才小讲'
+        title: '一元成才提升'
       }
     },
     {
@@ -317,35 +317,35 @@ export default new Router({
       }
     },
     {
-      path: '/daka/daka_info',
+      path: '/daka/daka_info/:id',
       component: daka_info,
       meta: {
         title: '打卡'
       }
     },
     {
-      path: '/daka/daka_rili',
+      path: '/daka/daka_rili/:id',
       component: daka_rili,
       meta: {
         title: '打卡日历'
       }
     },
     {
-      path: '/daka/toplist',
+      path: '/daka/toplist/:id',
       component: toplist,
       meta: {
         title: '打卡排行榜'
       }
     },
     {
-      path: '/daka/xiangqin',
+      path: '/daka/xiangqin/:id',
       component: xiangqin,
       meta: {
         title: '打卡详情'
       }
     },
     {
-      path: '/daka/dodaka',
+      path: '/daka/dodaka/:id',
       component: dodaka,
       meta: {
         title: '就打卡'

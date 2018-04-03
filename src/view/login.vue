@@ -11,7 +11,7 @@
         {{text}}
       </button>
     </mt-field>
-    <p>未注册过的手机号将自动注册为分答用户</p>
+    <p>未注册过的手机号将自动注册为一元用户</p>
     <mt-button type="danger" @click.native="doLogin()" size="large">
       登录
     </mt-button>

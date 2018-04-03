@@ -12,23 +12,28 @@ import Axios from 'axios'
 import qs from 'qs'
 import VueTimeago from 'vue-timeago'
 Axios.defaults.withCredentials = true
+import Calendar from 'vue-calendar-component';
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue);
+Vue.use(ElementUI);
 var captUrl = ''
 var sourceUrl = ''
 var gretUrl = '' 
+
+
 if (process.env.NODE_ENV === 'development') {
-  // development本地测试环境
+  // development本地测试环境s
   
   gretUrl=Axios.defaults.baseURL = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public'
   captUrl = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public/api/capt/setCaptcha'
   sourceUrl = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public/static/api'
+
 } else {
-  gretUrl=Axios.defaults.baseURL = 'http://192.168.0.150/fenda/public/index.php'
-  captUrl = 'http://192.168.0.150/fenda/public/index.php/api/capt/setCaptcha'
-  sourceUrl = 'http://192.168.0.150/fenda/public/static/api'
+  gretUrl=Axios.defaults.baseURL = 'http://192.168.0.150/fenda/public/index.php/'
+  captUrl = 'http://192.168.0.150/fenda/public/index.php/api/capt/setCaptcha/'
+  sourceUrl = 'http://192.168.0.150/fenda/public/static/api/'
 }
 
 // 跨域请求post会提交option,同时数据要变成json字符串www.aoyuankj.com
@@ -40,6 +45,10 @@ var myInterceptor = Axios.interceptors.request.use((config) => {
 })
 
 Vue.use(MintUi)
+Vue.use(ElementUI)
+Vue.use(Calendar)
+Vue.use(BootstrapVue)
+
 Vue.prototype.$http = Axios
 Vue.prototype.$myInterceptor = myInterceptor
 Vue.prototype.$captUrl = captUrl

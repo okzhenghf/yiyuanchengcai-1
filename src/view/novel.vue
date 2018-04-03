@@ -10,7 +10,7 @@
     <div class="novel-title">
       <div class="container">
         <label>标题</label>
-        <input type="text" v-model="title" placeholder="请输入小讲标题">
+        <input type="text" v-model="title" placeholder="请输入提升标题">
       </div>
     </div>
     <div class="novel-img">
@@ -37,7 +37,7 @@
     <div class="novel-content">
       <div class="container"> 
         <label>内容</label>
-        <textarea rows="10" placeholder="请介绍小讲内容" v-model="content"></textarea>
+        <textarea rows="10" placeholder="请介绍提升内容" v-model="content"></textarea>
       </div>
     </div>
 
@@ -216,7 +216,7 @@ import {Toast} from 'mint-ui'
           this.tip = '请输入内容';
         }else if(!(this.single_list!=[] && this.single_list.length>0)){
           this.show_tips = true;
-          this.tip = '请添加小讲';
+          this.tip = '请添加提升';
         }else{
           this.$http.interceptors.request.eject(this.$myInterceptor);
           let fd = new FormData();

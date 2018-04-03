@@ -29,7 +29,7 @@
           <div  v-if="info.vip_id!=id" class="tutorDetails-question" @click="toAsk()">¥ {{vip_details.price}}提问</div>
         </div>
         <ul class="tutorDetails-speeches" v-show="vip_smalltalk.length != 0">
-          <li class="tutorDetails-speeches-title">小讲</li>
+          <li class="tutorDetails-speeches-title">提升</li>
           <li class="tutorDetails-smalltalk" v-for="item in vip_smalltalk">
              <router-link :to="'/stalkteacher/'+item.id">
               <div class="speech-title">{{item.title}}</div>
