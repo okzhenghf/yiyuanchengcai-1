@@ -159,7 +159,6 @@
             textarea3:this.textarea3
             // question_id:this.question_cont.id
             // answer:this.radio2
-
           }})
            .then((rtnD)=>{
             this.$router.push('/daka/daka_rili/'+this.$route.params.id);
