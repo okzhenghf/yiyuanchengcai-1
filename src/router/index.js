@@ -50,6 +50,7 @@ const dodaka = resolve => require(['@/view/daka/dodaka'], resolve)
 const jiaoxue = resolve => require(['@/view/jiaoxue/index'], resolve)
 const Promote = resolve => require(['@/view/Promote'], resolve)
 const yishangpin = resolve => require(['@/view/yishangpin'], resolve)
+const yishangpin_add = resolve => require(['@/view/yishangpin_add'], resolve)
 
 Vue.use(Router)
 
@@ -380,6 +381,13 @@ export default new Router({
       meta: {
         title: '一元提升'
       }
-    }
+    },
+    {
+      path: '/yishangcheng/add/:id',
+      component: yishangpin_add,
+      meta: {
+        title: '我要发布商品'
+      }
+    },
   ]
 })

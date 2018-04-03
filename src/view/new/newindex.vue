@@ -14,7 +14,21 @@
           <div class="search">
             <input type="text" name="search_input" class="search_input" placeholder="搜索答主和相关问题"></div>
         </div>
-     
+        <div class="bs-example" data-example-id="simple-carousel">
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carousel-example-generic"   v-for="(slide,index) in slide_a" :data-slide-to="index" :class="{'active':index==0}"></li>
+               
+            </ol>
+            <div class="carousel-inner" role="listbox">
+              <div class="item" v-for="(slide,index) in slide_a" :class="{'active':index==0}">
+                <a :href="slide.link_url">
+                  <img  :src="baseURL+slide.pic_path" data-holder-rendered="true"></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
       <div class="menu">
         <div style="height:30px"></div>
@@ -341,6 +355,5 @@ export default {
 
 @import '../../assets/job/library/bootstrap3.3.7.min.css'
 @import '../../assets/job/css/home.css'
-@import '../../assets/job/css/element-ui.css'
 
 </style>

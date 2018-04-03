@@ -49,18 +49,9 @@
             
           </li>
           <li>
-            <h5>云服务器</h5>
-            <div class="tex"> 
-              <span>高密度计算服务器</span>
-            </div>
+            <el-button type="primary" @click="go_add(chan.id)">我要添加 </el-button>
           </li>
-          <li>
-            <h5>云服务器</h5>
-            <div class="tex"> 
-              <span>高密度计算服务器</span>
-            </div>
-          </li>
-
+          
         </ul>
       </div>  
     </div>
@@ -341,6 +332,9 @@ export default {
           this.isActive=false
         }
 
+      },
+      go_add(shop_cate_id){
+        this.$router.push("/yishangcheng/add/"+shop_cate_id)
       }
 
     }
