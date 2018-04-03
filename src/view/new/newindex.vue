@@ -23,7 +23,7 @@
             <div class="carousel-inner" role="listbox">
               <div class="item" v-for="(slide,index) in slide_a" :class="{'active':index==0}">
                 <a :href="slide.link_url">
-                  <img  :src="baseURL+slide.pic_path" data-holder-rendered="true"></a>
+                  <img  :src="$gretUrl+slide.pic_path" data-holder-rendered="true"></a>
               </div>
 
             </div>
@@ -43,16 +43,16 @@
               <p class="menu_title">一元教学</p>
             </div>
             <div class="col-xs-3 menu_img">
-              <a href="index.php?control=job&action=index">
+               <router-link to="/yishangcheng">
                 <img src="../../assets/job/images/jiaoxue.png">
                 <p class="menu_title">一元招聘</p>
-              </a>
+              </router-link>
             </div>
             <div class="col-xs-3 menu_img">
-              <a href="index.php?control=job&action=index">
+              <router-link to="/yishangcheng">
                 <img src="../../assets/job/images/mall.png">
                 <p class="menu_title">一元商城</p>
-              </a>
+              </router-link>
             </div>
           </div>
         </div>
@@ -188,6 +188,16 @@
 </template>
 
 <script type="es6">
+$(function(){
+    var myElement = document.getElementById('carousel-example-generic')
+    var hm = new Hammer(myElement);
+    hm.on("swipeleft",function(){
+      $('#carousel-example-generic').carousel('next')
+    })
+    hm.on("swiperight",function(){
+      $('#carousel-example-generic').carousel('prev')
+    })
+  }) 
  function setRand(length) {
   return Math.ceil(Math.random()*length);
 }
@@ -256,14 +266,14 @@ export default {
                  // 再获取课程的数据
                   this.$http.post("/api/kecheng",{'cateId':cateId})
                   .then( (rtnD)=> {
-                    this.kecheng_a = rtnD.data
+                    this.kecheng_a = rtnD.data.data
                   })
             })
 
            // 获取资讯
           this.$http.post("/api/news").then( (rtnD)=> {
             console.log(2)
-            this.news_lists = rtnD.data
+            this.news_lists = rtnD.data.data
           })
            
           // 获取人才
@@ -274,7 +284,8 @@ export default {
                 return this.vip_cate[0]['id']
             })
             .then((cateId)=>{
-                this.$http.post("/api/Viper/index",{cateId},(rtnD)=> {
+                this.$http.post("/api/Viper/index",{cateId})
+                .then((rtnD)=> {
                   this.vip_a = rtnD.data
                 })
             })
@@ -350,10 +361,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
-.fade-enter-active{transition: all 0.5s;}
-.fade-enter{transform: translate(-100%,0);}
-
-@import '../../assets/job/library/bootstrap3.3.7.min.css'
-@import '../../assets/job/css/home.css'
+/*多个样式用 @import url*/
+@import url('../../assets/job/css/home.css');
+@import url('../../assets/job/library/bootstrap3.3.7.min.css');
 
 </style>

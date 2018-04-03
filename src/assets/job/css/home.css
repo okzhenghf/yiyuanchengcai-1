@@ -1,3 +1,4 @@
+	.container{width:100% !important;}
 	/*公共样式*/
 	body,p,ul,li {
 	    padding: 0px;
@@ -41,7 +42,7 @@
 	.search_input {
 		padding-left: 50px;
 		border-radius: 30px;
-		background: #fff url(./public/images/icon_search.png) no-repeat;
+		background: #fff url(/static/images/icon_search.png) no-repeat;
 		background-size: 14px;
 		background-position: 10px 7px;
 		border: 1px solid #ccc;
@@ -157,11 +158,14 @@
 		margin: 0px;
 		color: #f70b56;
 		font-weight: bold;
-		background: url(./public/images/title_bg.png) no-repeat;
+		background: url(/static/images/title_bg.png) no-repeat;
 		background-size: 180px;
 		background-position: 97px 14px;
 		padding: 20px 0px;
 	}
+
+.fade-enter-active{transition: all 0.5s;}
+.fade-enter{transform: translate(-100%,0);}
 	.kc_main {
 		float: left;
 		width: 100%;
