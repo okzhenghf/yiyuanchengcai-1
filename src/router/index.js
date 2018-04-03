@@ -366,7 +366,7 @@ export default new Router({
       }
     },
     {
-      path: '/yishangpin',
+      path: '/yishangpin/:id',
       component: yishangpin,
       meta: {
         title: '一元提升'

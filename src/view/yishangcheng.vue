@@ -22,13 +22,13 @@
       <h3>我们的一元商品</h3>
     </div>
 
-    <div class="contain_1" v-for="(can,n) in chanpin">
+    <div class="contain_1" v-for="(chan,n) in shangpin">
       <hr> 
-      <div class="a4_1" @click ="anclick(n)" v-bind:class="{active : cur_index ==n && isActive}" >
+      <div class="a4_1" @click ="shangpin_click(n)" v-bind:class="{active : cur_index ==n && isActive}" >
         <div class="left" >
-           <img :src="'../static/img/xiaotupian/'+can.img1+'.svg'" v-show='cur_index != n || !isActive' alt="">
-           <img :src="'../static/img/xiaotupian/'+can.img2+'.svg'"  v-show='cur_index ==n &&isActive'  alt=""> 
-           {{can.title}}
+          <img :src="$gretUrl+chan.crea_img1" v-show='cur_index != n || !isActive' alt="">
+           <img :src="$gretUrl+chan.crea_img2"  v-show='cur_index ==n &&isActive'  alt="">  
+           {{chan.crea_name}}
         </div>
         <div class="right">
           <!--   v-bind:class="{ zhuan: cur_index == n  }" -->
@@ -38,12 +38,15 @@
       </div>
       <hr>
       <div class="a4_2 bg_color_1" v-show='cur_index ==n &&isActive'>  
-        <ul class="tex_ul">
-          <li>
-            <h5>云服务器</h5>
+        <ul class="tex_ul"  >
+          <li v-for="chanpin in chan.cp ">
+              <router-link :to="'yishangpin/'+chanpin.pid">
+                <h5>{{chanpin.chanpin_name}}</h5>
+              </router-link>
             <div class="tex"> 
-              <span>高密度计算服务器</span>
+              <span>{{chanpin.summary}}</span>
             </div>
+            
           </li>
           <li>
             <h5>云服务器</h5>
@@ -249,7 +252,7 @@
 </template>
 
 <script type="es6">
-import {mapMutations} from 'vuex'
+  import {mapMutations} from 'vuex'
 
 import { Navbar, TabItem } from 'mint-ui'
 
@@ -257,18 +260,21 @@ export default {
   data () {
 
     return {
-      chanpin:[
-      {title:'计算',img1:"jisuan1",img2:"jisuan2"},
-      {title:'数据库',img1:"shujuku1",img2:"shujuku2"},
-      {title:'网络',img1:"wangluo1",img2:"wangluo2"},
-      {title:'互联网中间件',img1:"zhong1",img2:"zhong2"},
-      {title:'大数据库',img1:"shuju1",img2:"shuju2"},
-      {title:'域名于网',img1:"yuming1",img2:"yuming2"},
-      {title:'视频',img1:"shipin1",img2:"shipin2"},
-      {title:'开发工具',img1:"kaifa1",img2:"kaifa2"},
-      {title:'企业应用',img1:"qiye1",img2:"qiye2"},
-      {title:'数据处理',img1:"chuli1",img2:"chuli2"},
-      ],
+      shangpin:[],
+      chanpin:[],
+      cread_id:null,
+      // chanpin:[
+      // {title:'计算',img1:"jisuan1",img2:"jisuan2"},
+      // {title:'数据库',img1:"shujuku1",img2:"shujuku2"},
+      // {title:'网络',img1:"wangluo1",img2:"wangluo2"},
+      // {title:'互联网中间件',img1:"zhong1",img2:"zhong2"},
+      // {title:'大数据库',img1:"shuju1",img2:"shuju2"},
+      // {title:'域名于网',img1:"yuming1",img2:"yuming2"},
+      // {title:'视频',img1:"shipin1",img2:"shipin2"},
+      // {title:'开发工具',img1:"kaifa1",img2:"kaifa2"},
+      // {title:'企业应用',img1:"qiye1",img2:"qiye2"},
+      // {title:'数据处理',img1:"chuli1",img2:"chuli2"},
+      // ],
       fuwu:[
       {title:"镜像服务",img:"jingxiang"},
       {title:"运维服务",img:"yunwei"},
@@ -281,11 +287,11 @@ export default {
       isActive: false,
       selected: "k_1",
       slide_a:[],
-      ber:null
+      ber:null,
     }
   },
   created(){
-    this.init();
+    this.init()
   },
   components:{
 
@@ -297,26 +303,56 @@ export default {
         this.slide_a = rntD.data
 
       })
+      this.$http.get("api/Shoppingmall")
+      .then((rntD)=>{
+        this.shangpin = rntD.data
+
+
+      })
     },
     anclick(n){
-      this.cur_index = n
-      if(this.ber != 1){
-        this.isActive=true
-        this.ber = 1;
-      }else{
-        this.ber = 2;
-        this.isActive=false
-      }
-          // console.log(this.ber)
+
+
+        this.cur_index = n
+        if(this.ber != 1){
+          this.isActive=true
+          this.ber = 1;
+        }else{
+          this.ber = 2;
+          this.isActive=false
+        }
+            // console.log(this.ber)
+      },
+      shangpin_click(n){
+/*       this.cread_id = n + 1;
+      
+        this.$http.post("api/Shoppingmall/read",{cread_id:this.cread_id})
+        .then((rntD)=>{
+          this.chanpin = rntD.data
+          console.log(this.chanpin)
+        })*/
+
+         this.cur_index = n
+        if(this.ber != 1){
+          this.isActive=true
+          this.ber = 1;
+        }else{
+          this.ber = 2;
+          this.isActive=false
         }
 
       }
 
     }
-    </script>
+
+  }
+
+
+
+</script>
 
     <!-- Add "scoped" attribute to limit CSS to this component only -->
-    <style >
+    <style scoped>
     /*@import '../assets/css/help.css';*/
     /* ------------------------公共样式----------------------------- */
     img{
@@ -485,7 +521,7 @@ export default {
   margin:20px;
 }
 .a4 .biaoqian .mint-tab-item-label{
-  font-size: 20px;
+  font-size:20px;
 }
 .a4 .mint-navbar .mint-tab-item.is-selected{
        color: #26a2ff;
