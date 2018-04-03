@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+import newindex from '@/view/new/newindex'
 import index from '@/view/index'
 const Headline = resolve => require(['@/view/headline'], resolve)
 const HeadlineDetails = resolve => require(['@/view/headline-details'], resolve)
@@ -54,6 +56,13 @@ export default new Router({
   routes: [
     {
       path: '/',
+      component: newindex,
+      meta: {
+        title: '一元成才'
+      }
+    },
+    {
+      path: '/oldindex',
       component: index,
       meta: {
         title: '一元成才'

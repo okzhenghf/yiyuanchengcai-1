@@ -79,7 +79,7 @@ export default {
       real_name:'',
       identity:'',
       introduce:'',
-      price:3.14,
+      price:1,
       vip_cate_id:0,
       show:false,
       tip:'',
