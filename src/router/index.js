@@ -49,6 +49,7 @@ const toplist = resolve => require(['@/view/daka/toplist'], resolve)
 const dodaka = resolve => require(['@/view/daka/dodaka'], resolve)
 const jiaoxue = resolve => require(['@/view/jiaoxue/index'], resolve)
 const Promote = resolve => require(['@/view/Promote'], resolve)
+const yishangpin = resolve => require(['@/view/yishangpin'], resolve)
 
 Vue.use(Router)
 
@@ -369,6 +370,13 @@ export default new Router({
     {
       path: '/Promote',
       component: Promote,
+      meta: {
+        title: '一元提升'
+      }
+    },
+    {
+      path: '/yishangpin/:id',
+      component: yishangpin,
       meta: {
         title: '一元提升'
       }
