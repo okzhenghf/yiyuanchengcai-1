@@ -59,6 +59,9 @@ export default {
 		    ...mapState(['info'])
 		  },
  	mounted(){
+ 		new Promise((reslove,reject)=>{
+
+ 		})
  		this.$http.get('/api/dakatheme',{
  			params:{
  				uid:this.info.user_id
@@ -67,7 +70,7 @@ export default {
  			console.log(rtnD.data);
  			this.daka_list = rtnD.data
  		})
- 		this.$http.get('/api/slidehdp',{params:{
+ 		this.$http.get('/api/mobilehdp',{params:{
  			page_cate:'daka'
  		}})
  		.then((rtnD)=>{
