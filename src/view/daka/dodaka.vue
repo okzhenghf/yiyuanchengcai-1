@@ -162,6 +162,8 @@ export default {
 							bar.style.width = ct/zt*100 +"%";  // 人数/总人数 * 100
 							
 						},0)//
+					}else{
+						 this.time_cont ="活动已结束"
 					}
 					
 				},1000)

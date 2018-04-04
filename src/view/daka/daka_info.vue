@@ -3,7 +3,7 @@
 <div class="app">
   
   <h1>基本打卡</h1>
-    <b-modal v-if="question_cont.question" v-model="question_modal" :hide-footer="true" :hide-header="true" class="hongbao_box">
+    <b-modal v-if="question_cont.question" v-model="question_modal" :hide-footer="true" :hide-header="true" class="question_box">
 
       <ul class="as">{{question_cont.question}}<span>(必答题)</span>
         <el-radio-group v-model="radio2">
@@ -33,7 +33,7 @@
         </el-radio-group>
         </ul>
       <div class="footer">
-        <b-button variant="" class="qu" :block="true" @click="go_daka()">领取</b-button>
+        <b-button variant="" class="qu" :block="true" @click="go_daka()">提交</b-button>
       </div>
       
     </b-modal>
@@ -233,5 +233,7 @@ h1{
     height: 178px;
     display: block;
   }
-
+  .el-radio__label{
+    font-size: 18px;
+  }
 </style>
