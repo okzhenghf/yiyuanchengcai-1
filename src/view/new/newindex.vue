@@ -4,7 +4,7 @@
       <div class="nav">
         <transition name="fade">
           <div class="message"  v-show="is_hot_status">
-            <a href="" style="color:#fff;">
+            <a href="" >
             <p >{{hot_msg}}</p>
             </a>
           </div>
@@ -175,16 +175,7 @@
 </template>
 
 <script type="es6">
-$(function(){
-    var myElement = document.getElementById('carousel-example-generic')
-    var hm = new Hammer(myElement);
-    hm.on("swipeleft",function(){
-      $('#carousel-example-generic').carousel('next')
-    })
-    hm.on("swiperight",function(){
-      $('#carousel-example-generic').carousel('prev')
-    })
-  }) 
+ 
  function setRand(length) {
   return Math.ceil(Math.random()*length);
 }
@@ -230,6 +221,16 @@ export default {
             this.is_hot_status = !this.is_hot_status
             },3000);
       },
+      mounted(){
+          var myElement = document.getElementById('carousel-example-generic')
+          var hm = new Hammer(myElement);
+          hm.on("swipeleft",function(){
+            $('#carousel-example-generic').carousel('next')
+          })
+          hm.on("swiperight",function(){
+            $('#carousel-example-generic').carousel('prev')
+          })
+        },
       methods: {
         init(){
 
@@ -308,5 +309,6 @@ export default {
 /*多个样式用 @import url*/
 @import url('../../assets/job/css/home.css');
 @import url('../../assets/job/library/bootstrap3.3.7.min.css');
-a{ color: #2c3e50;}
+.vue_html a{ color: #2c3e50 !important;}
+.message a{ color: #fff !important;}
 </style>

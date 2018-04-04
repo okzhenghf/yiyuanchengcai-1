@@ -93,7 +93,7 @@ export default {
 .footer{
 	height: 0px;
 }
-h3{
+.docard_list h3{
 	font-size:1.2rem;
 }
 img{

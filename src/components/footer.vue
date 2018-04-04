@@ -61,11 +61,15 @@
                <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_four.png"></router-link></div>
              <div class="footer_user">
                <div>
-                 <router-link to="/uhome">
+                 <router-link to="/uhome" v-if="isLogin==true">
                    <img src="../assets/job/images/user.png"> 
                    <p>我的</p>
                  </router-link>
-
+                 <router-link to="/login" v-if="isLogin==false">
+                   <img src="../assets/job/images/user.png"> 
+                   <p>登录</p>
+                 </router-link>
+                  
                </div>
              </div>
            </div>

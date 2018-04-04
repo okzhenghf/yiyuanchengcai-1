@@ -6,19 +6,11 @@
 				<img v-if="con.imgpath" :src="$gretUrl+con.imgpath">
 			</div>
 			<div class="right">
-<<<<<<< HEAD
-				<h3>{{con.theme}}</h3>
-				<p style="color:red;font-size:.8rem;">活动还剩5天6小时45分</p>
-				<div class="box">
-					<div class="bar">
-						<div class="cur"></div>
-					</div>
-=======
+ 
 				<h4 class="title">#{{con.theme}}#</h4>
 				<div class="activity">
 					<p style="color:red; padding-left: 6rem;">{{time_cont}}</p>
 					<div class="bar-box" ><div class="bar" ref="input1" id="input1"></div></div>
->>>>>>> 8c8603083e4b7431ebd639d2c0639f45234d5acf
 				</div>
 			</div>
 			
@@ -58,10 +50,7 @@
 	<div class="daka" @click="dodaka()">参与打卡</div>
  </div>
 </template>
-<<<<<<< HEAD
-
-
-=======
+ 
 <script>
  import {mapState,mapMutations} from 'vuex'
 export default{
@@ -140,38 +129,8 @@ export default{
 
 			})
 				
->>>>>>> 8c8603083e4b7431ebd639d2c0639f45234d5acf
 
-<script type="text/javascript">
-import Axios from 'axios'
- import {mapState,mapMutations} from 'vuex'
-export default {
-	data(){
-		return {
-			daka_list: [],
-			chu:true,
-			shou:false,
-			con:'',
-			page:1,
-			info_a:[]
-		}
-	},
-	computed:{
-		    ...mapState(['info'])
-		  },
-	mounted(){
-		
- 		this.$http.get("/api/dakatheme/xiangqin",{
-				params:{
-					id:this.$route.params.id,
-					uid:this.info.user_id
-				}
-			})
-			.then((rtnD)=>{
-				console.log(rtnD)
-				this.con = rtnD.data
 
-			})
 			this.$http.get('/api/daka/themelist',{
 					params:{
 						id:this.$route.params.id
@@ -202,11 +161,7 @@ export default {
 		},
 		dodaka(){
 				this.$router.push("/daka/dodaka/"+this.$route.params.id)
-<<<<<<< HEAD
-			}
-		
-		
-=======
+ 
 			},
 			dataTime(value) {
 				var date = new Date(value);
@@ -237,9 +192,7 @@ export default {
 				// var t = Y + '-' + m + '-' + d;
 				return t;
 				}
-		}
->>>>>>> 8c8603083e4b7431ebd639d2c0639f45234d5acf
-	}
+		} 
 
 }
 	
