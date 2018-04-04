@@ -26,7 +26,6 @@ var gretUrl = ''
 if (process.env.NODE_ENV === 'development') {
   // development本地测试环境s
  
-
   gretUrl=Axios.defaults.baseURL = 'http://localhost/yiyuanchengcai/fenda/public'
   captUrl = 'http://localhost/yiyuanchengcai/fenda/public/api/capt/setCaptcha'
   sourceUrl = 'http://localhost/yiyuanchengcai/fenda/public/static/api'
