@@ -11,7 +11,7 @@
 			 height=200px>
 			    <el-carousel-item v-for="item in dakaslidehdp_path">
 			    
-			     <img :src="$gretUrl+item.slidehdp_path" alt="">
+			     <img :src="$gretUrl+item.pic_path" alt="">
 			    </el-carousel-item>
 			 </el-carousel>
 			 <div class="channel">
@@ -84,10 +84,8 @@ export default {
 
 	       this.$router.push('/daka/xiangqin/'+Id)
 	    },
-
 	    alldaka(){
 	    	this.$router.push('/daka/daka_rili/'+this.info.user_id)
- 
 	    }
  	}
  }
@@ -96,22 +94,12 @@ export default {
 .footer{
 	height: 0px;
 }
-.docard_list h3{
+h3{
 	font-size:1.2rem;
 }
 img{
 	width: 100%;
 	height: 100%;
-}
-.el-button--success {
-    color: #fff;
-    background-color: #199111;
-    border-color: #199111;
-    }
-    .docard .docard_list ul li .daka_info p[data-v-7e31936a] {
-    font-size: 12px;
-    color: #000;
-    margin: 4px 0 0 0;
 }
 .bgc{
 	background-color: #d3dce6
@@ -172,12 +160,12 @@ img{
 	text-overflow:ellipsis;
 }
 .docard .docard_list ul li .daka_info p{
-	font-size: .8rem;
+	font-size: 12px;
 	color: #ccc;
 	margin:4px 0 0 0;
 }
 .docard .docard_list ul li button{
-	font-size: .8rem;
+	font-size: 12px;
 	margin-top: 25px;
 	padding:0 2%;
 	height: 30px

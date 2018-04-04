@@ -156,7 +156,8 @@
           this.$http.get('/api/daka',{params:{
             uid:this.info.user_id,    
             input:this.input,
-            textarea3:this.textarea3
+            textarea3:this.textarea3,
+            theme_id:this.$route.params.id
             // question_id:this.question_cont.id
             // answer:this.radio2
           }})
@@ -179,12 +180,6 @@
 	}
 </script>
 <style scoped>
-h1{
-  padding-bottom: 20px; 
-}
-.form-group label[data-v-0d6c15d2] {
-    width: 190px;
-}
 .el-radio-group{
   display: block;
 }
@@ -203,7 +198,9 @@ h1{
 .form-group label{
 	width: 180px;
 }  
-
+/*.form-group:nth-child(3) label{
+	width: 80px;
+} */ 
 .el-picker-panel__footer{
 	float: left;
 }
