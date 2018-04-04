@@ -23,7 +23,7 @@
             <div class="carousel-inner" role="listbox">
               <div class="item" v-for="(slide,index) in slide_a" :class="{'active':index==0}">
                 <a :href="slide.link_url">
-                  <img  :src="$gretUrl+slide.slidehdp_path" data-holder-rendered="true"></a>
+                  <img  :src="$gretUrl+slide.pic_path" data-holder-rendered="true"></a>
               </div>
 
             </div>
