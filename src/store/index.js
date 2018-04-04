@@ -8,14 +8,16 @@ const Store = new Vuex.Store({
     isLogin: false,
     info: JSON.parse(localStorage.getItem('info')) || {},
     todaymoney:false,
-    askContent: ''
+    askContent: '',
+    isFooter: true,
+    nFooter: true
   },
   mutations: {
     setInfo: function (state, info) {
       state.info = info
     },
-    setTodaymoney: function (state, status) {
-      state.todaymoney = status
+    setFooterStatus: function (state, status) {
+      state.nFooter = status
     },
     logOut: function (state) {
       state.info = {}
@@ -32,6 +34,13 @@ const Store = new Vuex.Store({
   getters: {
     isLogin: state => {
       if (state.info.user_id) {
+        return true
+      } else {
+        return false
+      }
+    },
+    isFooter: state => {
+      if (state.nFooter) {
         return true
       } else {
         return false

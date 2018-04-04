@@ -1,51 +1,11 @@
- <template >
-   <div class="footer">
-     <div v-if="isFooter">
-       <mt-tabbar v-model="selected" :fixed="true" >
-         <mt-tab-item class="footer-index">
-           <router-link to="/"> <i class="index-icon"></i>
-             首页
-           </router-link>
-         </mt-tab-item>
-         <mt-tab-item>
-           <router-link to="/listen"> <i class="listen-icon"></i>
-             收听
-           </router-link>
-         </mt-tab-item>
-         <mt-tab-item class="footer-ask">
-           <router-link to="/ask" class="ask">问</router-link>
-         </mt-tab-item>
-         <mt-tab-item>
-           <router-link to="/purchase">
-             <i class="purchase-icon"></i>
-             已购
-           </router-link>
-         </mt-tab-item>
-         <mt-tab-item v-if="isLogin==false">
-           <router-link to="/login">
-             <i class="uhome-icon"></i>
-             登录
-           </router-link>
-         </mt-tab-item>
-
-         <mt-tab-item v-if="isLogin==true">
-           <router-link to="/uhome">
-             <i class="uhome-icon"></i>
-             我的
-           </router-link>
-         </mt-tab-item>
-
-       </mt-tabbar>
-     </div>
-      <div v-if="!isFooter">
-         <footer>
+ <template>
+   <div>
+     <footer>
        <div class="footer_box">
          <div class="footer_home">
            <div>
-            <router-link to="/">
              <img src="../assets/job/images/home.png"> 
              <p>首页</p>
-           </router-link>
            </div>
          </div>
          <div class="footer_more" @click.stop="toggle">
@@ -63,31 +23,20 @@
          </div>
        </div>
      </footer>
-      </div>
    </div>
-
  </template>
 
- <script type="es6">
- import {mapState,mapGetters} from 'vuex'
-export default {
-  data(){
-    return {
-      selected:true, 
-    }
-  },
-  created(){
-    this.$http.get('/monitor').then(rtnData=>{})
-   
-  },
-  computed:{
-    ...mapGetters(['isLogin','isFooter']) 
-  }
-}
-</script>
- <style>@import '../assets/css/footer.css';
+ <script type="text/javascript">
+   export default {
+      data(){
+        return {
 
-  
+        }
+      }
+   }
+ </script>
+ <style type="text/css">
+   
 /*footer*/
   footer {
     width: 100%;
@@ -200,5 +149,5 @@ export default {
     font-size: 12px;
   }
   /*footer*/
-
+   
  </style>

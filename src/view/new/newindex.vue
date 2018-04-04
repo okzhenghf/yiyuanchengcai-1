@@ -35,12 +35,18 @@
         <div class="container">
           <div class="row">
             <div class="col-xs-3 menu_img">
-              <img src="../../assets/job/images/tisheng.png">
-              <p class="menu_title">一元提升</p>
+              <router-link to="/Promote">
+                <img src="../../assets/job/images/tisheng.png">
+                <p class="menu_title">一元提升</p>
+              </router-link>
+
             </div>
             <div class="col-xs-3 menu_img">
+              <router-link to="/oldindex">
               <img src="../../assets/job/images/zhaopin.png">
               <p class="menu_title">一元教学</p>
+              </router-link>
+
             </div>
             <div class="col-xs-3 menu_img">
                <router-link to="/yishangcheng">
@@ -161,29 +167,7 @@
       </div>
       <div style="height: 120px;text-align: center;color: #9f9f9f;line-height: 50px;font-size: 18px;">没 有 更 多 了</div>
     </main>
-    <footer>
-      <div class="footer_box">
-        <div class="footer_home">
-          <div>
-            <img src="../../assets/job/images/home.png">
-            <p>首页</p>
-          </div>
-        </div>
-        <div class="footer_more" @click.stop="toggle">
-          <img src="../../assets/job/images/foot_logo.png"></div>
-        <div class="footer_main test" ref="footerMain">
-          <img class="clear" src="../../assets/job/images/icon_one.png">
-          <img class="clear" src="../../assets/job/images/icon_two.png">
-          <img class="clear" src="../../assets/job/images/icon_three.png">
-          <img class="clear" src="../../assets/job/images/icon_four.png"></div>
-        <div class="footer_user">
-          <div>
-            <img src="../../assets/job/images/user.png">
-            <p>我的</p>
-          </div>
-        </div>
-      </div>
-    </footer>
+      <!--  -->
   </div>
 </template>
 
@@ -201,6 +185,9 @@ $(function(){
  function setRand(length) {
   return Math.ceil(Math.random()*length);
 }
+
+import {mapMutations} from 'vuex'
+
 export default {
     data(){
       return {
@@ -242,7 +229,6 @@ export default {
       },
       methods: {
         init(){
-        
 
           // es6 
           // 三种状态
