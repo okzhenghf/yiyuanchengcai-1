@@ -188,5 +188,8 @@
 
   @import '../assets/css/Promote.css';
 
-
+.hongbao_box .modal-content {
+    height: 0;
+    border: 0;
+}
   </style>

@@ -83,6 +83,7 @@
             <ul class="kc_list">
 
               <li v-for="ke_info in kecheng_a">
+                 <router-link :to="'/stalkteacher/'+ke_info.id">
                 <div class="list_left">
                   <img :src="$gretUrl+ke_info.smalltalk_img+'140_140.jpg'"></div>
                 <div class="list_right">
@@ -93,6 +94,7 @@
                     <span>{{ke_info.join_num}}人参加</span>
                   </div>
                 </div>
+                 </router-link>
               </li>
              
 
@@ -108,16 +110,16 @@
           <div class="kc_main">
             <ul class="kc_list">
               <li v-for="(news,index) in news_lists">
-                <a href="" v-if="index == 0">
+               <router-link :to="'/headline-details/'+news.id" v-if="index == 0">
                   <img src="../../assets/job/images/picture.png" class="img_title">
-                </a>
-                <a href="" v-if="index > 0">
+                </router-link>
+               <router-link :to="'/headline-details/'+news.id" v-if="index > 0">
                   <div class="list_left">
                     <p>{{news.title}}</p>
                   </div>
                   <div class="list_right">
                     <img src="../../assets/job/images/11.png"></div>
-                </a>
+                 </router-link>
               </li>
                
             </ul>
@@ -333,4 +335,7 @@ export default {
 @import url('../../assets/job/library/bootstrap3.3.7.min.css');
 .vue_html a{ color: #2c3e50 !important;}
 .message a{ color: #fff !important;} 
+.vue_html .h4,.vue_html h4 {
+    font-size: 18px !important;
+}
 </style>

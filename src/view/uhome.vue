@@ -45,7 +45,7 @@ t<template>
           <ul>
             <li class="uhome_nav" @click="myhome()" v-if="user_info.status==3">
               <span class="uhomebg bgpic_1"></span>
-              <span class="uhome_text">我的答主页</span>
+              <span class="uhome_text">我的一元页</span>
               <span class="rignt_sub"></span>
             </li>
             <li class="uhome_nav" @click="myanswer()" v-if="user_info.status==3">
@@ -55,12 +55,12 @@ t<template>
             </li>
             <li class="uhome_nav" @click="totrue()" v-if="user_info.is_real<2">
               <span class="uhomebg bgpic_5"></span>
-              <span class="uhome_text">申请答主认证</span>
+              <span class="uhome_text">申请一元认证</span>
               <span class="rignt_sub"></span>
             </li>
             <li class="uhome_nav" @click="openvip()" v-if="user_info.status<3">
               <span class="uhomebg bgpic_1"></span>
-              <span class="uhome_text">开通答主</span>
+              <span class="uhome_text">开通一元</span>
               <span class="rignt_sub"></span>
             </li>
             <li class="uhome_nav" @click="publish()" v-if="user_info.is_real==2">
