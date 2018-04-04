@@ -129,7 +129,6 @@
 <style >
 
 
-@import '../assets/css/headline.css';
-
+@import '../assets/css/headline.css'; 
 
 </style>
