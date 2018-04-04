@@ -179,6 +179,12 @@
 	}
 </script>
 <style scoped>
+h1{
+  padding-bottom: 20px; 
+}
+.form-group label[data-v-0d6c15d2] {
+    width: 190px;
+}
 .el-radio-group{
   display: block;
 }
@@ -197,9 +203,7 @@
 .form-group label{
 	width: 180px;
 }  
-/*.form-group:nth-child(3) label{
-	width: 80px;
-} */ 
+
 .el-picker-panel__footer{
 	float: left;
 }

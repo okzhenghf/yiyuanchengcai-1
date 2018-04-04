@@ -2,12 +2,12 @@
   <el-container>
     <el-header class='header' height='30px'>
       <el-row class='head_top'>
-        <el-col :span="4">   
+        <el-col :span="6">   
           <div class="grid-content bg-purple">
             <i class="el-icon-arrow-left">返回</i>
           </div>
         </el-col>
-          <el-col :span="17">
+          <el-col :span="15">
             <div class="grid-content bg-purple-light">我的打卡</div>
           </el-col>
           <el-col :span="3">
@@ -22,11 +22,11 @@
           <el-col :span="8"><div class="grid-content bg-purple">
             <img v-if="con.head_img" :src="$gretUrl+con.head_img" class='img_1' alt="">
           </div></el-col>
-          <el-col :span="8"><div class="grid-content bg-purple-light"  align="left">
+          <el-col :span="12"><div class="grid-content bg-purple-light"  align="left">
             <p>{{con.user_name}}</p>
             <p>累积打卡{{con.num}}天</p>
           </div></el-col>
-          <el-col :span="8"><div class="grid-content bg-purple"><el-button round style='background:0 0 repeat;'>分享</el-button></div></el-col>
+          <el-col :span="4"><div class="grid-content bg-purple"><el-button round style='background:0 0 repeat;'>分享</el-button></div></el-col>
         </el-row>
         <el-row>
           <el-col :span="18"><div class="grid-content bg-purple-dark">
@@ -39,7 +39,9 @@
       </div>
       <!-- 日历 -->
     <Calendar
-      v-on:choseDay="clickDay" v-on:changeMonth="changeDate" v-on:isToday="clickToday" :markArray=[] isHideOtherday=false   >
+      style="background-color: #199111;"
+      v-on:choseDay="clickDay" v-on:changeMonth="changeDate" v-on:isToday="clickToday" :markArray=[] isHideOtherday=false 
+     >
   </Calendar>
 
          
@@ -107,27 +109,43 @@ export default {
   }
 	.header{ 
 
-    background-color: #303133;
+    background-color: #199111;
     color: #ffff;
+    overflow: hidden;
   }
   img{
     width: 100%
   }
   .bgimg{
     color:#ffff;
-    height: 150px;
+    height: auto;
     width: 100%;
-    background:url("../../assets/img/9cf48d783f9e07230280d19fe8552577.jpg") repeat;
+    background:url("../../assets/img/123.jpg") repeat;
   }
+  .el-button.is-round {
+    border-radius: 15px;
+    padding: 10px 15px;
+}
+.el-button{
+  border: 2px solid #fff;
+color: #fff;
+margin-left: 175%;
+margin-bottom: 50%;
+}
   .min_head{
      margin-top: 50px;
   }
   .img_1{
     border-radius: 50px; 
-    width:70px;
-    height: 70px;
+    width:50px;
+    height: 50px;
+  }
+  .wh_content_all{
+        background-color: #199111;
+
   }
   .wh_container{
     margin:0px;
   }
+
 </style>

@@ -24,12 +24,24 @@ var gretUrl = ''
 
 
 if (process.env.NODE_ENV === 'development') {
+<<<<<<< HEAD
+  // development本地测试环境
+  gretUrl=Axios.defaults.baseURL = 'http://localhost/fenda/public/'
+  captUrl = 'http://localhost/fenda/public/api/capt/setCaptcha/'
+  sourceUrl = 'http://localhost/fenda/public/static/api/'
+// =======
+//   gretUrl=Axios.defaults.baseURL = 'http://localhost/yiyuanchengcai/fenda/public'
+//   captUrl = 'http://localhost/yiyuanchengcai/fenda/public/api/capt/setCaptcha'
+//   sourceUrl = 'http://localhost/yiyuanchengcai/fenda/public/static/api'
+// >>>>>>> 9f85c0abdcc25303dde1814a76216d919f18215f
+=======
   // development本地测试环境s
  
   gretUrl=Axios.defaults.baseURL = 'http://localhost/yiyuanchengcai/fenda/public'
   captUrl = 'http://localhost/yiyuanchengcai/fenda/public/api/capt/setCaptcha'
   sourceUrl = 'http://localhost/yiyuanchengcai/fenda/public/static/api'
  
+>>>>>>> 8c8603083e4b7431ebd639d2c0639f45234d5acf
 } else {
   gretUrl=Axios.defaults.baseURL = 'http://192.168.0.150/fenda/public/index.php/'
   captUrl = 'http://192.168.0.150/fenda/public/index.php/api/capt/setCaptcha/'

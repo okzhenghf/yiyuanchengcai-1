@@ -490,7 +490,7 @@ import { Indicator } from 'mint-ui';
         // 提升评论
 
         this.$http
-        .get('comment',{params:{smalltalk_id}})
+        .get('api/comment',{params:{smalltalk_id}})
         .then(rtnData=>{
           this.comment_list = rtnData.data
           this.comment_num=rtnData.data.length
