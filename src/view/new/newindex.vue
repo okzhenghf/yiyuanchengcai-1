@@ -81,20 +81,22 @@
             </div>
           </div>
           <!-- 列表 -->
-          <div class="kc_main" @touchstart="kc_touch_s(event)" @touchmove="kc_touch_m(event)" @touchend="kc_touch_e()">
+          <div class="kc_main" >
             <ul class="kc_list">
 
               <li v-for="ke_info in kecheng_a">
-                <div class="list_left">
-                  <img :src="$gretUrl+ke_info.smalltalk_img+'140_140.jpg'"></div>
-                <div class="list_right">
-                  <h4>{{ke_info.title}}</h4>
-                  <p>主讲人：{{ke_info.real_name}}</p>
-                  <div class="list_bottom">
-                    <p>{{ke_info.cate_name}}</p>
-                    <span>{{ke_info.join_num}}人参加</span>
+                <router-link :to="'/stalkteacher/'+ke_info.id">
+                  <div class="list_left">
+                    <img v-if="ke_info.smalltalk_img" :src="$gretUrl+ke_info.smalltalk_img+'140_140.jpg'"></div>
+                  <div class="list_right">
+                    <h4>{{ke_info.title}}</h4>
+                    <p>主讲人：{{ke_info.real_name}}</p>
+                    <div class="list_bottom">
+                      <p>{{ke_info.cate_name}}</p>
+                      <span>{{ke_info.join_num}}人参加</span>
+                    </div>
                   </div>
-                </div>
+                </router-link>
               </li>
              
 
@@ -110,16 +112,17 @@
           <div class="kc_main">
             <ul class="kc_list">
               <li v-for="(news,index) in news_lists">
-                <a href="" v-if="index == 0">
+                <router-link :to="'/headline-details/'+news.id" v-if="index == 0">
                   <img src="../../assets/job/images/picture.png" class="img_title">
-                </a>
-                <a href="" v-if="index > 0">
+                </router-link>
+                <router-link :to="'/headline-details/'+news.id" v-if="index > 0">
                   <div class="list_left">
                     <p>{{news.title}}</p>
                   </div>
                   <div class="list_right">
                     <img src="../../assets/job/images/11.png"></div>
-                </a>
+                </router-link>
+                
               </li>
                
             </ul>
@@ -280,66 +283,21 @@ export default {
           handleClick(tab, event) {
               console.log(tab, event);
           },
-          toggle() {
-            let footerMain = this.$refs.footerMain;
-            if (footerMain.classList.contains('test')) {
-              footerMain.classList.remove('test')
-              let imgs = footerMain.postElementsByTagName('img');
-              for (var i = imgs.length - 1; i >= 0; i--) {
-                imgs[i].classList.remove('clear')
-              }
-            } else {
-              footerMain.classList.add('test')
-              let imgs = footerMain.postElementsByTagName('img');
-              for (var i = imgs.length - 1; i >= 0; i--) {
-                imgs[i].classList.add('clear')
-              }
-            }
-          },
+         
           change_kecheng_cate(index,cateId){
             this.cur_kc_cate_index = index
              this.$http.post("/api/kecheng",{'cateId':cateId}).then( (rtnD)=> {
-              this.kecheng_a = rtnD.data
+              this.kecheng_a = rtnD.data.data
 
             })
           },
           change_viper_cate(index,cateID){
             this.cur_vip_cate_index = index
-              this.$http.post("/api/Viper/index",{cateID},(rtnD)=> {
-              this.vip_a = rtnD
-            })
+              this.$http.post("/api/Viper/index",{cateID})
+                .then((rtnD)=> {
+                  this.vip_a = rtnD
+                })
           },
-          kc_touch_s(event){
-            this.kc_touch_start_x = event.touches[0].pageX
-          },
-          kc_touch_m(event){
-            let move_x = event.touches[0].pageX
-            if (this.kc_touch_start_x > move_x) {
-              this.kc_touch_direction = 'left'
-              $('.kc_list').css('transform','translate(-'+move_x+'px,0)')
-            }else{
-              this.kc_touch_direction = 'right'
-              $('.kc_list').css('transform','translate('+move_x+'px,0)')
-              
-
-            }
-          },
-          kc_touch_e(){
-            if (this.kc_touch_direction == 'left') {
-              if (this.cur_kc_cate_index < this.kecheng_cate.length-1) {
-                ++this.cur_kc_cate_index 
-              }
-            }else{
-              if (this.cur_kc_cate_index > 0) {
-                --this.cur_kc_cate_index 
-              }
-
-            }
-            this.change_kecheng_cate(
-              this.cur_kc_cate_index,
-              this.kecheng_cate[this.cur_kc_cate_index].id)
-            $('.kc_list').css('transform','translate(0,0)')
-          }
           
       }
   }
@@ -350,5 +308,5 @@ export default {
 /*多个样式用 @import url*/
 @import url('../../assets/job/css/home.css');
 @import url('../../assets/job/library/bootstrap3.3.7.min.css');
-
+a{ color: #2c3e50;}
 </style>

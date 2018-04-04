@@ -37,38 +37,45 @@
 
        </mt-tabbar>
      </div>
-      <div v-if="!isFooter">
-         <footer>
-       <div class="footer_box">
-         <div class="footer_home">
-           <div>
-            <router-link to="/">
-             <img src="../assets/job/images/home.png"> 
-             <p>首页</p>
-           </router-link>
+     <div v-if="!isFooter">
+       <footer>
+         <div class="footer_box">
+           <div class="footer_home">
+             <div>
+               <router-link to="/">
+                 <img src="../assets/job/images/home.png"> 
+                 <p>首页</p>
+               </router-link>
+             </div>
            </div>
-         </div>
-         <div class="footer_more" @click.stop="toggle">
-           <img src="../assets/job/images/foot_logo.png"></div>
-         <div class="footer_main test" ref="footerMain">
-           <img class="clear" src="../assets/job/images/icon_one.png"> 
-           <img class="clear" src="../assets/job/images/icon_two.png"> 
-           <img class="clear" src="../assets/job/images/icon_three.png"> 
-           <img class="clear" src="../assets/job/images/icon_four.png"></div>
-         <div class="footer_user">
-           <div>
-             <img src="../assets/job/images/user.png"> 
-             <p>我的</p>
+           <div class="footer_more" @click.stop="toggle">
+             <img src="../assets/job/images/foot_logo.png"></div>
+           <div class="footer_main test" ref="footerMain">
+             <router-link to="/Promote">
+               <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_one.png"></router-link>
+             <router-link to="/oldindex">
+               <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_three.png"></router-link>
+             <router-link to="/yishangcheng">
+               <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_two.png"></router-link>
+             <router-link to="/yishangcheng">
+               <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_four.png"></router-link></div>
+             <div class="footer_user">
+               <div>
+                 <router-link to="/uhome">
+                   <img src="../assets/job/images/user.png"> 
+                   <p>我的</p>
+                 </router-link>
+
+               </div>
+             </div>
            </div>
-         </div>
+         </footer>
        </div>
-     </footer>
-      </div>
-   </div>
+     </div>
 
- </template>
+   </template>
 
- <script type="es6">
+   <script type="es6">
  import {mapState,mapGetters} from 'vuex'
 export default {
   data(){
@@ -82,10 +89,28 @@ export default {
   },
   computed:{
     ...mapGetters(['isLogin','isFooter']) 
+  },
+  methods:{
+     toggle() {
+            let footerMain = this.$refs.footerMain;
+            if (footerMain.classList.contains('test')) {
+              footerMain.classList.remove('test')
+              let imgs = footerMain.getElementsByTagName('img');
+              for (var i = imgs.length - 1; i >= 0; i--) {
+                imgs[i].classList.remove('clear')
+              }
+            } else {
+              footerMain.classList.add('test')
+              let imgs = footerMain.getElementsByTagName('img');
+              for (var i = imgs.length - 1; i >= 0; i--) {
+                imgs[i].classList.add('clear')
+              }
+            }
+          },
   }
 }
 </script>
- <style>@import '../assets/css/footer.css';
+   <style>@import '../assets/css/footer.css';
 
   
 /*footer*/
@@ -154,19 +179,19 @@ export default {
     width: 60px;
     height: 60px;
   }
-  .footer_main img:nth-child(1) {
+  .footer_main a:nth-child(1) img {
     transform: translate(-78px,-50px);
     opacity: 1;
   }
-  .footer_main img:nth-child(2) {
+  .footer_main a:nth-child(2) img {
     transform: translate(-30px,-88px);
     opacity: 1;
   }
-  .footer_main img:nth-child(3) {
+  .footer_main a:nth-child(3) img {
     transform: translate(30px,-88px);
     opacity: 1;
   }
-  .footer_main img:nth-child(4) {
+  .footer_main a:nth-child(4) img {
     transform: translate(80px,-50px);
     opacity: 1;
   }
@@ -198,6 +223,9 @@ export default {
     position: absolute;
     right: 35px;
     font-size: 12px;
+  }
+  .footer_user a{
+    color: #2c3e50;
   }
   /*footer*/
 
