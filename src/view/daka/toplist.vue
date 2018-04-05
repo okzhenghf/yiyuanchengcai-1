@@ -36,7 +36,7 @@
 							<ol>
 								<li>{{index+1}}</li>
 								<li><img v-if="info.head_img" :src="$gretUrl+info.head_img" /></li>
-								<li>{{info.user_name}}</li>
+								<li>{{info.uname}}</li>
 								<li>{{info.c}}</li>
 							</ol>
 						</li>
@@ -62,13 +62,18 @@
 		  },
 		mounted(){
 			this.$http.get('/api/daka/has',{
-					params:{uid:this.info.user_id}
+					params:{
+						uid:this.info.user_id,
+						theme_id:this.$route.params.id
+					}
 				})
 				.then((rtnD)=>{
 					console.log(rtnD)
 					this.info_o=rtnD.data[0]
 				})
-			this.$http.post('/api/daka/toplist')
+			this.$http.get('/api/daka/toplist',{
+				params:{theme_id:this.$route.params.id}
+			})
 				.then((rtnD)=>{
 					console.log(rtnD)
 					this.info_a=rtnD.data

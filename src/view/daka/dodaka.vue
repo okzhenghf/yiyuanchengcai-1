@@ -71,11 +71,12 @@
  	<div class="actv">
  		<h3>全部动态</h3>
  	</div>
- 	<div class="data" v-for="item in daka_list.allData">
+ 	<div class="loading_list" v-infinite-scroll="loadMore"  infinite-scroll-disabled="loading" infinite-scroll-distance="10">
+ 		<div class="data" v-for="item in daka_list">
  			<img v-if="item.head_img":src="$gretUrl+item.head_img">
  			<div class="data_list">
  				<p class="name">{{item.user_name}}</p>
- 				<p class="time">2018</p>
+ 				<p class="time">{{dataTime((item.dakaTime)*1000)}}</p>
  				<h4 class="text" style="word-wrap:break-word;">{{item.textarea3}}</h4>
  				<div class="icon">
 	 				<span><img src="../../assets/img/reward_detail4.png">111</span>
@@ -83,6 +84,10 @@
  				</div>
  			</div>
  		</div>
+ 		<p v-if="loading" style="text-align: center;">加载中...</p>
+		<p v-if="!has_more" style="text-align: center;">无更多内容了...</p>
+ 	</div>
+
  </div>
 </template>
 
@@ -100,22 +105,17 @@ export default {
 			con:'',
 			page:1,
 			info_a:[],
-			time_cont:''
+			time_cont:'',
+			loading:false,
+			has_more:true
+
 		}
 	},
 	computed:{
 		    ...mapState(['info'])
 		  },
 	mounted(){
-		this.$http.get('/api/daka/allData',{
- 			params:{
- 				theme_id:this.$route.params.id,
- 				p:this.page
- 			}})
- 		.then((rtnD)=>{
- 			// console.log(rtnD);
- 			this.daka_list = rtnD.data
- 		})
+		this.init()
  		new Promise((reslove,reject)=>{
 				this.$http.get("/api/dakatheme/xiangqin",{
 					params:{
@@ -177,11 +177,46 @@ export default {
 					
 				})
 				.then((rtnD)=>{
-					console.log(rtnD)
+					// console.log(rtnD)
 					this.info_a=rtnD.data
 				})
 	},
 	methods:{
+		loadMore(){
+			if (this.has_more) {
+				this.loading = true
+		    	++this.page
+				this.$http.get('/api/daka/allData',{
+		 			params:{
+		 				theme_id:this.$route.params.id,
+		 				p:this.page
+		 			}})
+		 		.then((rtnD)=>{
+		 			// console.log(rtnD);
+		 			if (rtnD.data.length>0) {
+	    					this.daka_list.push(...rtnD.data)
+
+	    				}else{
+	    					this.has_more = false
+	    				}
+	    				console.log(this)
+	    				this.loading = false
+		 		})
+			}else{}
+			
+		},
+		init(){
+			this.$http.get('/api/daka/allData',{
+	 			params:{
+	 				theme_id:this.$route.params.id,
+	 				p:this.page
+	 			}})
+	 		.then((rtnD)=>{
+	 			
+	 			this.daka_list=rtnD.data
+	 			console.log(this.daka_list);
+	 		})
+		},
 		shang(){
 			this.chu=true;
 			this.shou=false;
@@ -237,7 +272,7 @@ export default {
 
 }
 	
-</script>
+</script scoped>
 
 
 <style type="text/css" scoped>

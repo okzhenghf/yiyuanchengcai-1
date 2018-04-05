@@ -62,7 +62,7 @@ export default {
     mounted(){
           this.$http.get("/api/dakatheme/xiangqin",{
         params:{
-          id:this.$route.params.id,
+          // id:this.$route.params.id,
           uid:this.info.user_id
         }
       })

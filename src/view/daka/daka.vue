@@ -37,7 +37,7 @@
 						<div class="daka_info">
 							<h3 @click="dodaka(item.id)">{{item.theme}}</h3>
 							<p>333人参与 已打卡7天</p>
-							<p>2018-02-05 至 2018-03-4</p>
+							<p>{{dataTime(Number(item.starTime)*1000)}}至 {{dataTime(Number(item.endTime)*1000)}}</p>
 						</div>
 						  <el-button type="success" @click="dodaka(item.id)">去打卡</el-button>
 					</li>
@@ -52,7 +52,9 @@ export default {
 	data () {
     	return {
       		daka_list:[],
-      		dakaslidehdp_path:[]
+      		dakaslidehdp_path:[],
+      		stime:'',
+      		etime:''
    		}
  	},
  	computed:{
@@ -60,16 +62,21 @@ export default {
 		  },
  	mounted(){
  		new Promise((reslove,reject)=>{
-
+			this.$http.post('/api/dakatheme')
+	 		.then((rtnD)=>{
+	 			console.log(rtnD.data);
+	 			this.daka_list = rtnD.data
+	 			reslove(rtnD.data)
+	 		})
  		})
- 		this.$http.get('/api/dakatheme',{
- 			params:{
- 				uid:this.info.user_id
- 			}})
- 		.then((rtnD)=>{
- 			console.log(rtnD.data);
- 			this.daka_list = rtnD.data
+ 		.then((rtnDT)=>{
+ 			for(var i in rtnDT){
+ 				let starTime = Number(rtnDT[i].starTime)
+ 				let endTime = Number(rtnDT[i].endTime)
+ 				console.log(starTime)
+ 			}
  		})
+ 		
  		this.$http.get('/api/mobilehdp',{params:{
  			page_cate:'daka'
  		}})
@@ -86,7 +93,36 @@ export default {
 	    },
 	    alldaka(){
 	    	this.$router.push('/daka/daka_rili/'+this.info.user_id)
-	    }
+	    },
+	    dataTime(value) {
+				var date = new Date(value);
+				let Y = date.getFullYear();
+				let m = date.getMonth() + 1;
+				let d = date.getDate();
+				let H = date.getHours();
+				let i = date.getMinutes();
+				let s = date.getSeconds();
+				if (m < 10) {
+				m = '0' + m;
+				}
+				if (d < 10) {
+				d = '0' + d;
+				}
+				if (H < 10) {
+				H = '0' + H;
+				}
+				if (i < 10) {
+				i = '0' + i;
+				}
+				if (s < 10) {
+				s = '0' + s;
+				}
+				// 获取时间格式 2017-01-03 10:13:48 
+				var t = Y+'-'+m+'-'+d;
+				// <!-- 获取时间格式 2017-01-03 -->
+				// var t = Y + '-' + m + '-' + d;
+				return t;
+				}
  	}
  }
 </script>
