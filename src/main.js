@@ -25,21 +25,7 @@ var jobApiURL=''
 
 
 if (process.env.NODE_ENV === 'development') {
-<<<<<<< HEAD
 
-  // development本地测试环境
-  gretUrl=Axios.defaults.baseURL = 'http://localhost/fenda/public/'
-  captUrl = 'http://localhost/fenda/public/api/capt/setCaptcha/'
-  sourceUrl = 'http://localhost/fenda/public/static/api/'
-  jobApiURL = 'http://localhost/zhixin/'   
-
-
-} else {
-  gretUrl=Axios.defaults.baseURL = 'http://192.168.0.150/fenda/public/index.php/'
-  captUrl = 'http://192.168.0.150/fenda/public/index.php/api/capt/setCaptcha/'
-  sourceUrl = 'http://192.168.0.150/fenda/public/static/api/'
- 
-=======
   // development本地测试环境
   // npm run dev
 
@@ -53,7 +39,7 @@ if (process.env.NODE_ENV === 'development') {
   gretUrl=Axios.defaults.baseURL = 'http://www.aoyuankj.com/fenda/public/'
   captUrl = 'http://www.aoyuankj.com/fenda/public/api/capt/setCaptcha/'
   sourceUrl = 'http://www.aoyuankj.com/fenda/public/static/api/'
->>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
+
 }
 
 // 跨域请求post会提交option,同时数据要变成json字符串www.aoyuankj.com
