@@ -1,9 +1,9 @@
 <template>
-<div>
+<div class="box">
 	<!-- 头部 -->
 	<div class="head">
-		<h1>找工作要跟老板谈</h1>
-		<h2>BOSS直聘</h2>
+		<h1>一元招聘</h1>
+		
 		<div class="search">
 			<input type="text" placeholder="搜索职位/公司" class="search-input">
 			<a href="www.baidu.com">搜索</a>
@@ -26,16 +26,7 @@
 	</div>
 
 
-	<!-- 脚部 -->
-	<div class="foot">
-		<a href="">
-			<span class="btn">立即注册</span>
-			<div class="text">
-				<img src="../../assets/job/img/8.png" alt="">
-				<p>找工作要跟<br>老板谈</p>
-			</div>
-		</a>
-	</div>
+	
 </div>
 </template>
 <script type="es6">
