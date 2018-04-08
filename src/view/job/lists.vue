@@ -38,7 +38,37 @@
 				</ul>
 			</div>
 		</div>
+<<<<<<< HEAD
+		
+		<div class="loading" ref="job_list_box">
+ 	
+	
+			<ul class="loading_list" v-infinite-scroll="loadMore"  		infinite-scroll-disabled="loading" infinite-scroll-distance="10"	 	infinite-scroll-immediate-check="true">
+				<li v-for="info in job_list" >
+				    <router-link :to="'/job/info/'+info_id">
+					
+						<img src="https://www.zhipin.com/v2/chat_v2/images/	v2/defaultlogov2.jpg" alt="">
+						<div class="text" >
+							<div class="title"><h4>{{info.job_name}}</h4><span>6K-8K</span></div>
+					    <div class="name">{{info.company_name}}</div>
+					    <div class="msg">
+					      <em>广州</em>
+					      <em>1年以内</em>
+					      <em>本科</em>
+					    </div>
+					</div>
+				</router-link>	
+				
+			</li>
+			<li v-if="loading" style="text-align: center;">加载中...</li>
+			<li v-if="!has_more" style="text-align: center;">无更多内容了...</li>
+			</ul>
+		</div>
+    </div>
+</div>
+=======
 	</div>
+>>>>>>> 7b81273da0f7c7a7ff0b32f37b9bd35058ca76e8
 </template>
 <script type="es6">
 	export default{
@@ -51,6 +81,7 @@
 				has_more:true,//数据还有没有更多
 				keyword:null,//搜索关键词
 				action_step:null,//up上拉，down下拉
+				info_id:this.$route.params.id,
 			}
 		},
 		created(){
@@ -66,7 +97,11 @@
 	    				
 	    				params:{
 	    					p:this.page,
+<<<<<<< HEAD
+	    					cateID:this.info_id
+=======
 	    					cateID:this.$route.params.id
+>>>>>>> 7b81273da0f7c7a7ff0b32f37b9bd35058ca76e8
 	    				}
 	    			})
 	    			.then((rtnD)=>{
@@ -87,7 +122,11 @@
     			this.$http.get(this.$jobApiURL+"/api/job/lists",{
     				params:{
     					p:this.page,
+<<<<<<< HEAD
+    					cateID:this.info_id 
+=======
     					cateID:this.$route.params.id
+>>>>>>> 7b81273da0f7c7a7ff0b32f37b9bd35058ca76e8
     				}
     			})
     			.then((rtnD)=>{

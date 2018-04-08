@@ -87,9 +87,12 @@
 	.d1 .text{ 
 		padding-top: 11px;
 		color: #7e8793;
-		font-size: 15px;}
+		font-size: 15px;
+		text-align: left;
+	}
 	.details {
 		overflow: hidden;
+		margin-bottom: 120px;
 	}
 	.details p{
 		color: #7e8793;
@@ -111,6 +114,7 @@
 		border: none;
 		width: 100%;
 		background: #fff;
+		color: #000;
 		border-top: 1px solid #ccc;
 	}
 	.details .content button span:after {

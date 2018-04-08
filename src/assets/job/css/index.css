@@ -16,9 +16,12 @@
 			margin: 0 auto !important;
 			text-align: center;
 		}
-		h1{
+		.head h1{
 			padding-top: 30px;
+			color: #fff ;
+			padding-bottom: 10px;
 			font-size: 33px;
+			margin:auto 0;
 		}
 		h2{
 			padding-top: 5px;
@@ -26,7 +29,7 @@
 			font-size: 27px;
 		}
 		
-		.search{
+		.head .search{
 			width: 80%;
 			height: 20%;
 			background: #fff;
@@ -35,14 +38,14 @@
 			margin: auto;
 			overflow: hidden;
 		}
-		.search-input{
+		.head .search-input{
 			width: 80%;
 			height: 120%;
 			margin-top:-3px;
 			color: #ccc;
 			border: none;
 		}
-		.search a{
+		.head .search a{
 			padding:5px;
 			color: #5BD4C7;
 		}
@@ -50,26 +53,30 @@
 		/*内容*/
 		.main{
 			padding: 18px 15px 0px 15px;
+			margin-bottom: 100px;
 		}
-		.neirong{
+		.main .neirong{
 			width: 100%;
 			border-bottom: 1px #F5F8F9 solid;
+			padding-bottom: 20px;
+
 			
 		}
-		.neirong h4{
+		.main .neirong h4{
 			margin-top: 20px;
 		    text-align: start;
-		    margin-left: 65px;
+		    
 		    padding-top: 15px;
 		}
 		.main .neirong img{
-			margin-top: -37px;
+			margin-left: -240px;
+			padding-bottom: 10px;
 		}
-		.neirong .some{
+		.main .neirong .some{
 			width: 100%;
 			padding-bottom: 28px;
 		}
-		.neirong .some a{
+		.main .neirong .some a{
 			padding: 8px 16px;
 		    font-size: 13px;
 		    color: #7e8793;
@@ -78,56 +85,7 @@
 		    border-radius: 100px;
 		    margin: 0 8px 8px 0;
 		    display: inline-block;
+		    float: left;
 		}
-		.neirong .last{
-			padding-bottom: 80px;
-		}
-
-
-		/*脚部*/
-		.foot{
-			width: 100%;
-		    height: 56px;
-		    background: #22dccf;
-		    position: fixed;
-		    bottom: 0;
-		    left: 0;
-		}
-		.foot a{
-			
-		    display: block;
-		    text-decoration: none;
-		    color: #414a60;
-
-		}
-		.foot .btn{
-			float: right;
-		    margin-right: 18px;
-		    width: 81px;
-		    height: 32px;
-		    background-color: #fff;
-		    color: #5dd5ca;
-		    font-size: 14px;
-		    border-radius: 30px;
-		    text-align: center;
-		    line-height: 32px;
-		    margin-top: 12px;
-		}
-		.foot .text{
-		    margin-left: 18px;
-		    margin-right: 105px;
-		    color: #fff;
-		    font-size: 14px;
-		}
-
-		.foot img{
-		    width: 42px;
-		    height: 42px;
-		    margin-top: 7px;
-		    margin-right: 10px;
-		}
-		.foot .text p {
-		    display: inline-block;
-		    line-height: 23px;
-		    vertical-align: 5px;
-		}
+		
+		

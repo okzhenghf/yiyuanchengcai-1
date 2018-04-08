@@ -24,7 +24,12 @@ var gretUrl = ''
 var jobApiURL=''
 
 
+
+
+
+
 if (process.env.NODE_ENV === 'development') {
+
 
   // development本地测试环境
   // npm run dev
@@ -81,12 +86,15 @@ Vue.use(VueTimeago, {
   }
 })
 
+<<<<<<< HEAD
+=======
 Vue.filter("getDate",function (time) {
    let date = new Date()
    let nTime = date.getTime()-time*1000
    return Math.floor(nTime/86400000)
 })
 
+>>>>>>> 7b81273da0f7c7a7ff0b32f37b9bd35058ca76e8
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
