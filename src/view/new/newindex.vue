@@ -155,7 +155,8 @@
                     </li>
                     <li class="list_right_bottom">
                       <p>{{vip_cate[cur_vip_cate_index]['cate_name']}}</p>
-                      <span>加入时长：{{vip.become_time|getDate}}</span>
+                      <span>加入时长：{{vip.become_time|getDate}} 天</span>
+
                     </li>
 
                   </ul>

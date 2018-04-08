@@ -11,7 +11,7 @@
               <div class="tutorDetails-wrap-followers-count">
                 <span>{{vip_details.listen_num}}</span>
                 <span>人关注</span>
-                <span>加入时长：{{vip_details.become_time|getDate}}</span>
+                <span>加入时长：{{vip_details.become_time|getDate}} 天</span>
               </div>
             </div>
             <div v-if="info.vip_id!=id">

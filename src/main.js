@@ -39,7 +39,8 @@ if (process.env.NODE_ENV === 'development') {
   gretUrl=Axios.defaults.baseURL = 'http://www.aoyuankj.com/fenda/public/'
   captUrl = 'http://www.aoyuankj.com/fenda/public/api/capt/setCaptcha/'
   sourceUrl = 'http://www.aoyuankj.com/fenda/public/static/api/'
-
+  jobApiURL = 'http://www.aoyuankj.com/zhixin/'   
+  
 }
 
 // 跨域请求post会提交option,同时数据要变成json字符串www.aoyuankj.com
