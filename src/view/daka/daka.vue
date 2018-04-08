@@ -11,7 +11,7 @@
 			 height=200px>
 			    <el-carousel-item v-for="item in dakaslidehdp_path">
 			    
-			     <img :src="$gretUrl+item.slidehdp_path" alt="">
+			     <img :src="$gretUrl+item.pic_path" alt="">
 			    </el-carousel-item>
 			 </el-carousel>
 			 <div class="channel">
@@ -37,7 +37,7 @@
 						<div class="daka_info">
 							<h3 @click="dodaka(item.id)">{{item.theme}}</h3>
 							<p>333人参与 已打卡7天</p>
-							<p>2018-02-05 至 2018-03-4</p>
+							<p>{{dataTime(Number(item.starTime)*1000)}}至 {{dataTime(Number(item.endTime)*1000)}}</p>
 						</div>
 						  <el-button type="success" @click="dodaka(item.id)">去打卡</el-button>
 					</li>
@@ -52,23 +52,33 @@ export default {
 	data () {
     	return {
       		daka_list:[],
-      		dakaslidehdp_path:[]
+      		dakaslidehdp_path:[],
+      		stime:'',
+      		etime:''
    		}
  	},
  	computed:{
 		    ...mapState(['info'])
 		  },
  	mounted(){
- 		this.$http.get('/api/dakatheme',{
- 			params:{
- 				uid:this.info.user_id
- 			}})
- 		.then((rtnD)=>{
- 			console.log(rtnD.data);
- 			this.daka_list = rtnD.data
+ 		new Promise((reslove,reject)=>{
+			this.$http.post('/api/dakatheme')
+	 		.then((rtnD)=>{
+	 			console.log(rtnD.data);
+	 			this.daka_list = rtnD.data
+	 			reslove(rtnD.data)
+	 		})
  		})
+ 		.then((rtnDT)=>{
+ 			for(var i in rtnDT){
+ 				let starTime = Number(rtnDT[i].starTime)
+ 				let endTime = Number(rtnDT[i].endTime)
+ 				console.log(starTime)
+ 			}
+ 		})
+ 		
  		this.$http.get('/api/mobilehdp',{params:{
- 			page_cate:'pic_path'
+ 			page_cate:'daka'
  		}})
  		.then((rtnD)=>{
  			// console.log(rtnD)
@@ -81,11 +91,38 @@ export default {
 
 	       this.$router.push('/daka/xiangqin/'+Id)
 	    },
-
 	    alldaka(){
 	    	this.$router.push('/daka/daka_rili/'+this.info.user_id)
- 
-	    }
+	    },
+	    dataTime(value) {
+				var date = new Date(value);
+				let Y = date.getFullYear();
+				let m = date.getMonth() + 1;
+				let d = date.getDate();
+				let H = date.getHours();
+				let i = date.getMinutes();
+				let s = date.getSeconds();
+				if (m < 10) {
+				m = '0' + m;
+				}
+				if (d < 10) {
+				d = '0' + d;
+				}
+				if (H < 10) {
+				H = '0' + H;
+				}
+				if (i < 10) {
+				i = '0' + i;
+				}
+				if (s < 10) {
+				s = '0' + s;
+				}
+				// 获取时间格式 2017-01-03 10:13:48 
+				var t = Y+'-'+m+'-'+d;
+				// <!-- 获取时间格式 2017-01-03 -->
+				// var t = Y + '-' + m + '-' + d;
+				return t;
+				}
  	}
  }
 </script>
@@ -99,16 +136,6 @@ h3{
 img{
 	width: 100%;
 	height: 100%;
-}
-.el-button--success {
-    color: #fff;
-    background-color: #199111;
-    border-color: #199111;
-    }
-    .docard .docard_list ul li .daka_info p[data-v-7e31936a] {
-    font-size: 12px;
-    color: #000;
-    margin: 4px 0 0 0;
 }
 .bgc{
 	background-color: #d3dce6
@@ -169,12 +196,12 @@ img{
 	text-overflow:ellipsis;
 }
 .docard .docard_list ul li .daka_info p{
-	font-size: .8rem;
+	font-size: 12px;
 	color: #ccc;
 	margin:4px 0 0 0;
 }
 .docard .docard_list ul li button{
-	font-size: .8rem;
+	font-size: 12px;
 	margin-top: 25px;
 	padding:0 2%;
 	height: 30px

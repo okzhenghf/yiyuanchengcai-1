@@ -25,9 +25,14 @@
 .face ul li {
 	padding-bottom: 10px;
 }
-.face ul li:nth-child(1){
+/*.face ul li:nth-child(1){
 	border-bottom: 1px red solid;
+}*/
+.face .is-active{
+  border-bottom: 1px red solid;
 }
+
+
 
 .neck{
   height: 200px;
@@ -49,10 +54,16 @@
 
 .body{
     width: 100%;
-    height: 510px;
-    
 }
 
+.body .tit{
+  /*background: #42a4f0;*/
+  margin-top: 20px;
+    box-shadow: 6px 10px 14px #888888;
+    border-radius: 7px;
+     padding: 5px;
+
+}
 
 .bbox{
 	width: 100%;
@@ -121,8 +132,9 @@
 	margin-left: 15px;
 }
 .swiper{
+  margin-top: 15px;
 	width: 100%;
-	height: 360px;
+	/*height: 360px;*/
 }
 .swiper .swipe{
 	width: 95%;
@@ -135,7 +147,7 @@
 }
 .swiper a{
 	display: flex;
-	margin-top: 1rem;
+	margin-top: .4rem;
 }
 .swiper img{
 	width: 41%;
@@ -202,9 +214,9 @@
     background: url(../img/cha.png) no-repeat;
     background-size: contain;
 }
-.motai{
+/*.motai{
 	display: none;
-}
+}*/
 .popup{
 	width: 12rem;
     height: 14rem;
@@ -271,6 +283,7 @@
    	white-space: nowrap;
    	text-overflow: ellipsis;
 }
+
 .lq .img{ 
     width: 10.775rem;
    	height: 5.025rem;

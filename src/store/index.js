@@ -19,6 +19,9 @@ const Store = new Vuex.Store({
     setFooterStatus: function (state, status) {
       state.nFooter = status
     },
+    setTodaymoney: function (state, status) {
+      state.todaymoney = status
+    },
     logOut: function (state) {
       state.info = {}
       localStorage.removeItem('info')

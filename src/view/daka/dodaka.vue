@@ -29,15 +29,14 @@
 	 	</div>
 		<div class="content" id="box" ref="box">
 			<div class="text">
-			<p>{{con.xiangqin}}</p>
-				
+				{{con.xiangqin}}
 			</div>
 			<div class="xia" @click="xia" v-if="chu" style="
 			"> 
-				<p>显示更多↓↓↓</p>
+				<p>显示更多<span></span></p>
 			</div>
 			<div class="shang" @click="shang" v-if="shou"> 
-				<p>收起↑↑↑</p>
+				<p>收起<span></span></p>
 			</div>
 
 		</div>
@@ -55,7 +54,10 @@
 	
 	
 	</div>
- 	
+ 	<!-- <h2>打卡列表</h2>
+ 	<ul>
+ 		<li v-for="info in daka_list">{{info.input}}<el-button type="success"><router-link :to="'/info/'+info._id">去打卡 {{info.daka_record}}</router-link></el-button></li>
+ 	</ul> -->
  	<div class="me">
  		<img v-if="con.head_img" :src="$gretUrl+con.head_img">
  		<div class="con">
@@ -69,11 +71,12 @@
  	<div class="actv">
  		<h3>全部动态</h3>
  	</div>
- 	<div class="data" v-for="item in daka_list.allData">
+ 	<div class="loading_list" v-infinite-scroll="loadMore"  infinite-scroll-disabled="loading" infinite-scroll-distance="10">
+ 		<div class="data" v-for="item in daka_list">
  			<img v-if="item.head_img":src="$gretUrl+item.head_img">
  			<div class="data_list">
  				<p class="name">{{item.user_name}}</p>
- 				<p class="time">2018</p>
+ 				<p class="time">{{dataTime((item.dakaTime)*1000)}}</p>
  				<h4 class="text" style="word-wrap:break-word;">{{item.textarea3}}</h4>
  				<div class="icon">
 	 				<span><img src="../../assets/img/reward_detail4.png">111</span>
@@ -81,6 +84,10 @@
  				</div>
  			</div>
  		</div>
+ 		<p v-if="loading" style="text-align: center;">加载中...</p>
+		<p v-if="!has_more" style="text-align: center;">无更多内容了...</p>
+ 	</div>
+
  </div>
 </template>
 
@@ -98,22 +105,17 @@ export default {
 			con:'',
 			page:1,
 			info_a:[],
-			time_cont:''
+			time_cont:'',
+			loading:false,
+			has_more:true
+
 		}
 	},
 	computed:{
 		    ...mapState(['info'])
 		  },
 	mounted(){
-		this.$http.get('/api/daka/allData',{
- 			params:{
- 				theme_id:this.$route.params.id,
- 				p:this.page
- 			}})
- 		.then((rtnD)=>{
- 			// console.log(rtnD);
- 			this.daka_list = rtnD.data
- 		})
+		this.init()
  		new Promise((reslove,reject)=>{
 				this.$http.get("/api/dakatheme/xiangqin",{
 					params:{
@@ -162,6 +164,8 @@ export default {
 							bar.style.width = ct/zt*100 +"%";  // 人数/总人数 * 100
 							
 						},0)//
+					}else{
+						 this.time_cont ="活动已结束"
 					}
 					
 				},1000)
@@ -173,11 +177,46 @@ export default {
 					
 				})
 				.then((rtnD)=>{
-					console.log(rtnD)
+					// console.log(rtnD)
 					this.info_a=rtnD.data
 				})
 	},
 	methods:{
+		loadMore(){
+			if (this.has_more) {
+				this.loading = true
+		    	++this.page
+				this.$http.get('/api/daka/allData',{
+		 			params:{
+		 				theme_id:this.$route.params.id,
+		 				p:this.page
+		 			}})
+		 		.then((rtnD)=>{
+		 			// console.log(rtnD);
+		 			if (rtnD.data.length>0) {
+	    					this.daka_list.push(...rtnD.data)
+
+	    				}else{
+	    					this.has_more = false
+	    				}
+	    				console.log(this)
+	    				this.loading = false
+		 		})
+			}else{}
+			
+		},
+		init(){
+			this.$http.get('/api/daka/allData',{
+	 			params:{
+	 				theme_id:this.$route.params.id,
+	 				p:this.page
+	 			}})
+	 		.then((rtnD)=>{
+	 			
+	 			this.daka_list=rtnD.data
+	 			console.log(this.daka_list);
+	 		})
+		},
 		shang(){
 			this.chu=true;
 			this.shou=false;
@@ -233,7 +272,7 @@ export default {
 
 }
 	
-</script>
+</script scoped>
 
 
 <style type="text/css" scoped>
@@ -277,18 +316,40 @@ export default {
 	    text-align: center;
 	    position: absolute;
 	    background: rgba(255,255,255,0.8);
-	    top: 67px;
+	    top: 63px;
 	    padding: 5px;
 	    width: 100%;
 	}
 	.text{
-		letter-spacing: 2px;
-		font-size: 0.5rem;
-		text-indent: 2rem;
-		color: #ccccc0;
+		color: #666;
 	}
-	
-	
+	/*.content .text{
+		height: 40px;
+		overflow: hidden;
+		text-overflow : ellipsis;
+		padding-bottom: 20px;
+		position: relative;
+		background: #fff;
+
+	}*/
+	.content .xia span{
+		width: 0px;
+		height: 0px;
+		border-left:8px solid transparent;
+		border-right:8px solid transparent;
+		border-bottom:16px solid #ccc;
+		position: relative;
+		top: -16px;
+	}
+	.content .shang span{
+		width: 0px;
+		height: 0px;
+		border-top:16px solid #ccc;
+		border-left:8px solid transparent;
+		border-right:8px solid transparent;
+		position: relative;
+		top: 16px;
+	}
 	.title{
 		display: flex;
 
@@ -304,11 +365,6 @@ export default {
 		flex: auto;
 		text-align: left;
 	}
-	.title .right p{
-		font-size: 14px;
-		padding-bottom: 10px;
-		color: #ccc;
-	}
 	.title .right .box{
 		width: 100%;
 	}
@@ -318,7 +374,7 @@ export default {
 		background: #ccc;
 	}
 	.title .right .box .bar .cur{
-		background: #09bb05;
+		background: green;
 		height: 100%;
 		width: 15%;
 	}
@@ -362,21 +418,21 @@ export default {
 		margin-left: -10px;
 	}
 	.conter {
-		margin: 30px auto;
+		margin: 10px auto;
 	}
 	
 	.conter .do{
-		width: 120px;
-		height: 120px;
-		background: #09bb05;
+		width: 150px;
+		height: 150px;
+		background: yellowgreen;
 		border-radius: 100%;
 		margin:  0px auto 10px;
-		box-shadow: 0px 0px 10px #09bb05;
+		box-shadow: 0px 0px 20px #32c503;
 
 	}
 	.conter .do h1{
-		line-height: 120px;
-		font-size: 20px;
+		line-height: 150px;
+		font-size: 32px;
 		color: #fff;
 	}
 	.conter .go{
@@ -384,7 +440,7 @@ export default {
 		margin: auto;
 	}
 	.conter .go h3{
-		color: #09bb05;
+		color: #32c503;
 	}
 	 h3{
 	 	padding: 10px 0px;
@@ -395,8 +451,8 @@ export default {
 		/*width: 93.33333333%;*/
 		display: flex;
 		padding: 5px 10px;
-		border-bottom: 1px solid #ccc;
-		border-top: 1px solid #ccc;
+		border-bottom: 3px solid #999;
+		border-top: 3px solid #999;
 		align-items: center;
 	}
 	.me img{

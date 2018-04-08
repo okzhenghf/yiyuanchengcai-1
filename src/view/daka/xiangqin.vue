@@ -1,55 +1,46 @@
 <template>
- <div class="contion">
- 	<div class="header_box">
-	 	<div class="title">
-	 		<div class="left">
-				<img v-if="con.imgpath" :src="$gretUrl+con.imgpath">
+<div class="box">
+	<div class="content" ref="input" id="input" >
+		<div class="head">
+			<div class="left">
+				<img v-if="con.imgpath" :src="$gretUrl+con.imgpath" alt="">
 			</div>
 			<div class="right">
+<<<<<<< HEAD
 
 				<h4 class="title">{{con.theme}}</h4>
 				<div class="activity">
 					<p style="color:red; padding-left: 6rem;">{{time_cont}}</p>
 					<div class="bar-box" ><div class="bar" ref="input1" id="input1"></div></div>
 
+=======
+				<h4 class="title">#{{con.theme}}#</h4>
+				<div class="activity">
+					<p style="color:red; padding-left: 6rem;">{{time_cont}}</p>
+					<div class="bar-box" ><div class="bar" ref="input1" id="input1"></div></div>
+>>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
 				</div>
+				<button class="yq">邀请好友</button>
 			</div>
-			
-	 	</div>
-	 	<div class="ha">
-	 		<span style="font-size:0.8rem">参于人数{{info_a}}</span>
-	 		<ul>
-	 			<li v-for="item in info_a.toplist">
-	 			<img v-if="item.head_img" :src="$gretUrl+item.head_img" alt=""></li>
-	 			<!--<li><img src="../assets/logo.png" alt=""></li>
-	 			<li><img src="../assets/logo.png" alt=""></li>
-	 			<li><img src="../assets/logo.png" alt=""></li>
-	 			<li><img src="../assets/logo.png" alt=""></li>-->
-	 		</ul>
-	 	</div>
-		<div class="content" id="box" ref="box">
-			<div class="text">
-			<p>{{con.xiangqin}}</p>
-				
-			</div>
-			<div class="xia" @click="xia" v-if="chu" style="
-			"> 
-				<p>显示更多↓↓↓</p>
-			</div>
-			<div class="shang" @click="shang" v-if="shou"> 
-				<p>收起↑↑↑</p>
-			</div>
-
 		</div>
-
+		<p class="can" style="color:#ccc">已有{{info_a}}人参与</p>
+		<div class="text">
+		<div class="up" @click="daka"
+			v-if ="hid" 
+			>展开更多 v</div>
+			<p style="margin-top: -3rem;">{{con.xiangqin}}</p>
+			
+			<div class="btn" 
+			@click="sq"
+			v-if ="show"
+			>收起 ^</div>
+		</div>
 		
 	</div>
- 	<div class="actv">
- 		<h3>全部动态</h3>
- 	</div>
- 	<ul class="NR">暂时没有动态</ul>
+	<div class="DT">全部动态</div>
+	<ul class="NR">暂时没有动态</ul>
 	<div class="daka" @click="dodaka()">参与打卡</div>
- </div>
+</div>
 </template>
 <script>
  import {mapState,mapMutations} from 'vuex'
@@ -128,16 +119,23 @@ export default{
 
 			})
 				
+<<<<<<< HEAD
 
 			this.$http.get('/api/daka/themelist',{
+=======
+
+
+				this.$http.get('/api/daka/themelist',{
+>>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
 					params:{
 						id:this.$route.params.id
 					}
 					
 				})
 				.then((rtnD)=>{
-					console.log(rtnD)
+					// console.log(rtnD)
 					this.info_a=rtnD.data
+<<<<<<< HEAD
 				})
 		},
 		methods:{
@@ -156,6 +154,26 @@ export default{
 			},
 			daka_info(){
 		       this.$router.push('/daka/daka_info/'+this.$route.params.id)
+=======
+				})		
+			
+		},
+		methods:{
+			daka(){
+				this.hid=false,
+                this.show = true,
+                this.$refs.input.style = "overflow: hidden"
+			},
+			sq(){
+                this.hid=true,
+                this.show = false,
+                this.$refs.input.style = "height: 280px"
+
+               //res只有触发后才生效
+			},
+			dodaka(){
+				this.$router.push("/daka/dodaka/"+this.$route.params.id)
+>>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
 			},
 			dodaka(){
 					this.$router.push("/daka/dodaka/"+this.$route.params.id)
@@ -191,162 +209,96 @@ export default{
 				}
 			
 		}
+<<<<<<< HEAD
+=======
+	}
+>>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
+
+</script>
+<style scoped>
+
+/*.footer{
+	display: none;
+}*/
+/*.box{
+	margin-bottom:50px; 
+}*/
+.title{
+	margin: 10% 10% 10px;
+    font-size: 1.5rem;
+    padding-left: 2rem;
+}
+.bar-box{
+
+	width:190px;
+	height: 4px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	margin-left: 35%;
+	margin-top:5px
+}
+.bar-box .bar{
+	width: 20%;
+	height: 100%;
+	background: #09bb05;
+}
+.yq{
+	margin-left: 150px;
+	margin-top:1rem;
+	background: #09bb05;
+	color: #fff;
+	border-radius: 4px;
+	border: 1px solid  #09bb05;
+}
+.up,.btn{
+	width: 100%;
+    text-align: center;
+}
+p{
+	font-size: 1rem;
+}
+.content .can{
+	position: relative;
+	top: -7.5rem;;
+	left: -100px;
+	
 
 }
-	
-</script>
+.text{
+	margin-top: 30px;
+	padding: 10px;
+}
+.content .text{
 
+	position: relative;
+	/*transition: height 3s;*/
+	top: -120px;
+	text-align: left;
 
-<style type="text/css" scoped>
-	p{
-		padding: 0px;
-		
-	}
-	a{
-		list-style: none;
-		text-decoration: none;
-	}
-	.contion{
-		margin: 5px auto 50px;
-		width: 97%;
-	}
-	.header_box{
-		width: 100%;
-		background: #fff;
-		padding: 10px;
-		 
-		box-sizing: border-box;
-		box-shadow: 0px 0px 30px rgba(0,0,0,.2);
-	}
-	.header_box .content{
-		text-align: left;
-		overflow: hidden;
-		position: relative;
-		height :100px;
-	}
+}
 
-	.shang{
-		text-align: center;
-	}
-	.xia{
-	    text-align: center;
-	    position: absolute;
-	    background: rgba(255,255,255,0.8);
-	    top: 67px;
-	    padding: 5px;
-	    width: 100%;
-	}
-	.text{
-		letter-spacing: 2px;
-		font-size: 0.5rem;
-		text-indent: 2rem;
-		color: #ccccc0;
-	}
-	
-	.title{
-		display: flex;
+.up{
+	position: relative;
+	top: 0.5rem;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
 
-	}
-	.title .left{
-		margin-right: 10px; 
-	}
-	.title .left img{
-	  width: 100px;
-	  height: 100px;
-	}
-	.title .right{
-		flex: auto;
-		text-align: left;
-	}
-	.title .right .box{
-		width: 100%;
-	}
-	.title .right .box .bar{
-		width: 100%;
-		height: 5px;
-		background: #ccc;
-	}
-	.title .right .box .bar .cur{
-		background: #09bb05;
-		height: 100%;
-		width: 15%;
-	}
-	.ha{
-	
-		display: flex;
-		padding: 10px;
-		color: #ccc;
-	}
-	/*.ha span{
-		display: inline;
-	}*/
-	.ha ul{
-		flex: 1;
-		display: flex;
-		list-style: none;
-		margin: 0px;
-		position: absolute;
-		right: 20px;
-	}
-	.ha ul li{
-		width: 30px;
-		height: 30px;
-		border-radius: 100%;
-		background: #ccc;
-		/*position: absolute;*/
-		/*position: relative;*/
-		line-height:20px;
-		overflow: hidden;
-		border: 3px solid #fff;
-		box-sizing: border-box;
-
-	}
-	.ha ul li img{
-		width: 100%;
-		height: 100%;
-
-	}
-	.ha ul li+li{
-		position: relative;
-		margin-left: -10px;
-	}
-	.conter {
-		margin: 10px auto;
-	}
-	
-	.conter .do{
-		width: 150px;
-		height: 150px;
-		background: yellowgreen;
-		border-radius: 100%;
-		margin:  0px auto 10px;
-		box-shadow: 0px 0px 20px #32c503;
-
-	}
-	.conter .do h1{
-		line-height: 150px;
-		font-size: 32px;
-		color: #fff;
-	}
-	.conter .go{
-		width: 30%;
-		margin: auto;
-	}
-	.conter .go h3{
-		color: #32c503;
-	}
-	 h3{
-	 	padding: 10px 0px;
-		font-size: 20px;
-		margin: 0px;
-	}
-	
-	.actv{
-		text-align: left;
-		padding-left: 20px;
-	}
-	
-  .daka{
+	/*transition: height 3s;*/
+	background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0.9))
+}
+/*.up:hover{
+	height: 300px;
+}*/
+.DT{
+	position: relative;
+	top: 20px;
+	left: -110px;
+}
+.NR{
+	margin-top: 300px;
+}
+.daka{
 	width: 100%;
 	height: 40px;
 	line-height: 40px;
@@ -355,5 +307,32 @@ export default{
 	position: fixed;
 	bottom: 50px;
 }
-	
+.content{
+	margin: auto;
+	transition: height 3s;
+	overflow: hidden;
+	width: 97%;
+	border:1px solid #fbf8f8;
+	box-sizing: border-box;
+    border-radius:3px;
+    box-shadow:0px 0px 30px rgba(0,0,0,.2);   
+}
+.content .head .left{
+	position: relative;
+	top: 10px;
+	left: -6rem;
+
+}
+.content .head .right{
+	position: relative;
+	top: -6rem;
+	right: -20px;
+}
+
+
+.content .head .left img{
+	width: 7rem;
+	height: 7rem;
+}
+
 </style>

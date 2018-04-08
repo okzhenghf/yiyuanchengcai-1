@@ -4,7 +4,7 @@
       <div class="nav">
         <transition name="fade">
           <div class="message"  v-show="is_hot_status">
-            <a href="" style="color:#fff;">
+            <a href="" >
             <p >{{hot_msg}}</p>
             </a>
           </div>
@@ -39,14 +39,12 @@
                 <img src="../../assets/job/images/tisheng.png">
                 <p class="menu_title">一元提升</p>
               </router-link>
-
             </div>
             <div class="col-xs-3 menu_img">
               <router-link to="/oldindex">
-              <img src="../../assets/job/images/zhaopin.png">
-              <p class="menu_title">一元教学</p>
+                <img src="../../assets/job/images/zhaopin.png">
+                <p class="menu_title">一元教学</p>
               </router-link>
-
             </div>
             <div class="col-xs-3 menu_img">
                <router-link to="/job/index">
@@ -81,22 +79,22 @@
             </div>
           </div>
           <!-- 列表 -->
-          <div class="kc_main" >
+          <div class="kc_main" @touchstart="kc_touch_s(event)" @touchmove="kc_touch_m(event)" @touchend="kc_touch_e()">
             <ul class="kc_list">
 
               <li v-for="ke_info in kecheng_a">
-                <router-link :to="'/stalkteacher/'+ke_info.id">
-                  <div class="list_left">
-                    <img v-if="ke_info.smalltalk_img" :src="$gretUrl+ke_info.smalltalk_img+'140_140.jpg'"></div>
-                  <div class="list_right">
-                    <h4>{{ke_info.title}}</h4>
-                    <p>主讲人：{{ke_info.real_name}}</p>
-                    <div class="list_bottom">
-                      <p>{{ke_info.cate_name}}</p>
-                      <span>{{ke_info.join_num}}人参加</span>
-                    </div>
+                 <router-link :to="'/stalkteacher/'+ke_info.id">
+                <div class="list_left">
+                  <img :src="$gretUrl+ke_info.smalltalk_img+'140_140.jpg'"></div>
+                <div class="list_right">
+                  <h4>{{ke_info.title}}</h4>
+                  <p>主讲人：{{ke_info.real_name}}</p>
+                  <div class="list_bottom">
+                    <p>{{ke_info.cate_name}}</p>
+                    <span>{{ke_info.join_num}}人参加</span>
                   </div>
-                </router-link>
+                </div>
+                 </router-link>
               </li>
              
 
@@ -112,17 +110,16 @@
           <div class="kc_main">
             <ul class="kc_list">
               <li v-for="(news,index) in news_lists">
-                <router-link :to="'/headline-details/'+news.id" v-if="index == 0">
+               <router-link :to="'/headline-details/'+news.id" v-if="index == 0">
                   <img src="../../assets/job/images/picture.png" class="img_title">
                 </router-link>
-                <router-link :to="'/headline-details/'+news.id" v-if="index > 0">
+               <router-link :to="'/headline-details/'+news.id" v-if="index > 0">
                   <div class="list_left">
                     <p>{{news.title}}</p>
                   </div>
                   <div class="list_right">
                     <img src="../../assets/job/images/11.png"></div>
-                </router-link>
-                
+                 </router-link>
               </li>
                
             </ul>
@@ -170,27 +167,14 @@
       </div>
       <div style="height: 120px;text-align: center;color: #9f9f9f;line-height: 50px;font-size: 18px;">没 有 更 多 了</div>
     </main>
-      <!--  -->
   </div>
 </template>
 
 <script type="es6">
-$(function(){
-    var myElement = document.getElementById('carousel-example-generic')
-    var hm = new Hammer(myElement);
-    hm.on("swipeleft",function(){
-      $('#carousel-example-generic').carousel('next')
-    })
-    hm.on("swiperight",function(){
-      $('#carousel-example-generic').carousel('prev')
-    })
-  }) 
+ 
  function setRand(length) {
   return Math.ceil(Math.random()*length);
 }
-
-import {mapMutations} from 'vuex'
-
 export default {
     data(){
       return {
@@ -230,8 +214,19 @@ export default {
             this.is_hot_status = !this.is_hot_status
             },3000);
       },
+      mounted(){
+          var myElement = document.getElementById('carousel-example-generic')
+          var hm = new Hammer(myElement);
+          hm.on("swipeleft",function(){
+            $('#carousel-example-generic').carousel('next')
+          })
+          hm.on("swiperight",function(){
+            $('#carousel-example-generic').carousel('prev')
+          })
+        },
       methods: {
         init(){
+        
 
           // es6 
           // 三种状态
@@ -283,21 +278,51 @@ export default {
           handleClick(tab, event) {
               console.log(tab, event);
           },
-         
+          
           change_kecheng_cate(index,cateId){
             this.cur_kc_cate_index = index
              this.$http.post("/api/kecheng",{'cateId':cateId}).then( (rtnD)=> {
-              this.kecheng_a = rtnD.data.data
+              this.kecheng_a = rtnD.data
 
             })
           },
           change_viper_cate(index,cateID){
             this.cur_vip_cate_index = index
-              this.$http.post("/api/Viper/index",{cateID})
-                .then((rtnD)=> {
-                  this.vip_a = rtnD
-                })
+              this.$http.post("/api/Viper/index",{cateID},(rtnD)=> {
+              this.vip_a = rtnD
+            })
           },
+          kc_touch_s(event){
+            this.kc_touch_start_x = event.touches[0].pageX
+          },
+          kc_touch_m(event){
+            let move_x = event.touches[0].pageX
+            if (this.kc_touch_start_x > move_x) {
+              this.kc_touch_direction = 'left'
+              $('.kc_list').css('transform','translate(-'+move_x+'px,0)')
+            }else{
+              this.kc_touch_direction = 'right'
+              $('.kc_list').css('transform','translate('+move_x+'px,0)')
+              
+
+            }
+          },
+          kc_touch_e(){
+            if (this.kc_touch_direction == 'left') {
+              if (this.cur_kc_cate_index < this.kecheng_cate.length-1) {
+                ++this.cur_kc_cate_index 
+              }
+            }else{
+              if (this.cur_kc_cate_index > 0) {
+                --this.cur_kc_cate_index 
+              }
+
+            }
+            this.change_kecheng_cate(
+              this.cur_kc_cate_index,
+              this.kecheng_cate[this.cur_kc_cate_index].id)
+            $('.kc_list').css('transform','translate(0,0)')
+          }
           
       }
   }
@@ -308,5 +333,9 @@ export default {
 /*多个样式用 @import url*/
 @import url('../../assets/job/css/home.css');
 @import url('../../assets/job/library/bootstrap3.3.7.min.css');
-a{ color: #2c3e50;}
+.vue_html a{ color: #2c3e50 !important;}
+.message a{ color: #fff !important;} 
+.vue_html .h4,.vue_html h4 {
+    font-size: 18px !important;
+}
 </style>
