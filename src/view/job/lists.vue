@@ -114,7 +114,7 @@
 <style>
 body{
 		height: 100%;
-	},
+	}
 	@import url('../../assets/job/css/lists.css');
 	@import url('https://unpkg.com/mint-ui/lib/style.css');
 </style>

@@ -114,14 +114,7 @@ export default{
 
 			})
 				
-<<<<<<< HEAD
-
 			this.$http.get('/api/daka/themelist',{
-=======
-
-
-				this.$http.get('/api/daka/themelist',{
->>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
 					params:{
 						id:this.$route.params.id
 					}
@@ -130,26 +123,7 @@ export default{
 				.then((rtnD)=>{
 					// console.log(rtnD)
 					this.info_a=rtnD.data
-<<<<<<< HEAD
-				})
-		},
-		methods:{
-			shang(){
-				this.chu=true;
-				this.shou=false;
-				//console.log(this)
-				//console.log(this.$refs.box)
-				this.$refs.box.style="overflow: hidden;"
-			},
-			xia(){
-				this.shou=true;
-				this.chu=false
-				// console.log(this.$refs.box)
-				this.$refs.box.style="height :100%;"
-			},
-			daka_info(){
-		       this.$router.push('/daka/daka_info/'+this.$route.params.id)
-=======
+
 				})		
 			
 		},
@@ -168,7 +142,6 @@ export default{
 			},
 			dodaka(){
 				this.$router.push("/daka/dodaka/"+this.$route.params.id)
->>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
 			},
 			dodaka(){
 					this.$router.push("/daka/dodaka/"+this.$route.params.id)
@@ -203,11 +176,8 @@ export default{
 					return t;
 				}
 			
-		}
-<<<<<<< HEAD
-=======
-	}
->>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
+		} 
+	} 
 
 </script>
 <style scoped>
