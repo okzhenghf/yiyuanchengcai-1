@@ -6,19 +6,14 @@
 				<img v-if="con.imgpath" :src="$gretUrl+con.imgpath" alt="">
 			</div>
 			<div class="right">
-<<<<<<< HEAD
+
 
 				<h4 class="title">{{con.theme}}</h4>
 				<div class="activity">
 					<p style="color:red; padding-left: 6rem;">{{time_cont}}</p>
 					<div class="bar-box" ><div class="bar" ref="input1" id="input1"></div></div>
 
-=======
-				<h4 class="title">#{{con.theme}}#</h4>
-				<div class="activity">
-					<p style="color:red; padding-left: 6rem;">{{time_cont}}</p>
-					<div class="bar-box" ><div class="bar" ref="input1" id="input1"></div></div>
->>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
+
 				</div>
 				<button class="yq">邀请好友</button>
 			</div>
