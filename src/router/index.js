@@ -51,7 +51,8 @@ const jiaoxue = resolve => require(['@/view/jiaoxue/index'], resolve)
 const Promote = resolve => require(['@/view/Promote'], resolve)
 const yishangpin = resolve => require(['@/view/yishangpin'], resolve)
 const yishangpin_add = resolve => require(['@/view/yishangpin_add'], resolve)
-
+const job_index = resolve=>require(['@/view/job/index'],resolve)
+const job_lists = resolve=>require(['@/view/job/lists'],resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -391,6 +392,24 @@ const router = new Router({
       component: yishangpin_add,
       meta: {
         title: '我要发布商品',
+        oldfooter:true,
+        // vip:true
+      }
+    },
+    {
+      path: '/job/index',
+      component: job_index,
+      meta: {
+        title: '一元招聘',
+        oldfooter:true,
+        // vip:true
+      }
+    },
+    {
+      path: '/job/lists/:id',
+      component: job_lists,
+      meta: {
+        title: '招聘列表',
         oldfooter:true,
         // vip:true
       }
