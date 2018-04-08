@@ -69,7 +69,7 @@ const router = new Router({
       path: '/oldindex',
       component: index,
       meta: {
-        title: '一元成才'
+        title: '一元提升'
       }
     },
     {
@@ -262,35 +262,35 @@ const router = new Router({
       path: '/talk',
       component: talk,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/stalkcon/:id',
       component: stalkcon,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/stalkteacher/:id',
       component: stalkteacher,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/shiting',
       component: shiting,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/allspeech',
       component: allspeech,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
@@ -311,7 +311,7 @@ const router = new Router({
       path: '/SmalltalkComments/:id',
       component: SmalltalkComments,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
@@ -375,7 +375,7 @@ const router = new Router({
       path: '/Promote',
       component: Promote,
       meta: {
-        title: '一元提升',
+        title: '一元教学',
         oldfooter:true,
       }
     },
@@ -383,7 +383,7 @@ const router = new Router({
       path: '/yishangpin/:id',
       component: yishangpin,
       meta: {
-        title: '一元提升',
+        title: '一元教学',
         oldfooter:true,
       }
     },

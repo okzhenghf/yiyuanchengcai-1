@@ -35,13 +35,13 @@
         <div class="container">
           <div class="row">
             <div class="col-xs-3 menu_img">
-              <router-link to="/Promote">
+              <router-link to="/oldindex">
                 <img src="../../assets/job/images/tisheng.png">
                 <p class="menu_title">一元提升</p>
               </router-link>
             </div>
             <div class="col-xs-3 menu_img">
-              <router-link to="/oldindex">
+              <router-link to="/Promote">
                 <img src="../../assets/job/images/zhaopin.png">
                 <p class="menu_title">一元教学</p>
               </router-link>
