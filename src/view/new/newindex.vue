@@ -47,7 +47,7 @@
               </router-link>
             </div>
             <div class="col-xs-3 menu_img">
-               <router-link to="/yishangcheng">
+               <router-link to="/job/index">
                 <img src="../../assets/job/images/jiaoxue.png">
                 <p class="menu_title">一元招聘</p>
               </router-link>
