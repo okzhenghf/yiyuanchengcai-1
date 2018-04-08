@@ -35,13 +35,22 @@
 
     <div class="face">
         <ul >
-          <li v-for="(item,n) in ke_cheng"> 
+
+          <li v-for="(item,n) in ke_cheng" > 
             <!-- (item,n) n是下标 -->
-            <a href="" >{{ke_cheng[n].cate_name}}</a>
+
+            <div :class="{'is-active':n == cur_kc_cate_index}" @click="change_ke_cheng_cate(n,item.id)">{{item.cate_name}}</div>
+            
           </li>
           
         </ul>
     </div>
+    
+
+                
+ 
+
+             
 
     <!-- 主体部分 -->
     <div class="main">
@@ -69,7 +78,7 @@
                 <span class="icon"></span>
                 {{item.cate_type}}
               </p> 
-              <div class="list">
+              <!-- <div class="list">
                 <div class="sbox one">
                   <h2>111</h2>
                   <p>Spring cloul微服务实战</p>
@@ -85,10 +94,11 @@
                   </div>
                 </div>
                 
-              </div>
+              </div> -->
               <div class="swiper">
-                <mt-swipe :auto="0">
-                  <mt-swipe-item class="swipe" v-for="item1 in 2 ">
+                <!-- <mt-swipe :auto="0">
+                  <mt-swipe-item class="swipe" v-for="item1 in 2 "> -->
+                    <!-- {{item}} -->
                     <div class="zhuan" v-for="item2 in item.s " @click="go(item.id)">
 
                       <a href="#">
@@ -103,8 +113,8 @@
                       </a>
                     </div>
                     
-                  </mt-swipe-item>
-                </mt-swipe>
+                 <!--  </mt-swipe-item>
+                </mt-swipe> -->
               </div>
             </div>
     </div>
@@ -127,7 +137,11 @@
         isActive: false,
         isclose:false,
         slide_a:[],
-        kc_a:[]
+        kc_a:[],
+        cur_kc_cate_index:0,
+        type_id:[],
+        ke_cheng:[],
+        cate:[]
     }
   },
   components:{
@@ -144,13 +158,13 @@
             this.slide_a = rtnD.data
             // console.log(rtnD)
           })
-          this.$http.post("/api/promote",{params:{page_cate:'promote'}})
-          //用post获取是要用params
-          .then((rtnD)=> {
+          // this.$http.post("/api/promote",{params:{page_cate:'promote'}})
+          // //用post获取是要用params
+          // .then((rtnD)=> {
 
-            this.kc_a = rtnD.data.data
-            // console.log(this.kc_a)
-          })
+          //   this.kc_a = rtnD.data.data
+          //   // console.log(this.kc_a)
+          // })
           this.$http.post("/api/type")
           .then((rtnD)=> {
 
@@ -158,13 +172,30 @@
             // console.log(this.type_id[1].s)
 
             })
-          this.$http.post("/api/Kecheng")
-          .then((rtnD)=> {
+          // new Promise((resolve,reject)=>{
+              this.$http.post("/api/Feilei/getFeilei")
+              .then((rtnCateD)=> {
 
-            this.ke_cheng = rtnD.data.data
-            console.log(this.ke_cheng.cate_name)
-
+              this.ke_cheng_cate = rtnCateD.data
+              // console.log(this.ke_cheng_cate)
+              // resolve(rtnCateD[0]['id'])
             })
+          // }).then((cateId)=>{
+            this.$http.post("/api/Feilei")
+            .then((rtnD)=> {
+
+              this.ke_cheng = rtnD.data.data
+              // console.log(this.ke_cheng)
+              })
+          // })
+            this.$http.post("/api/Cate")
+            .then((rtnD)=> {
+
+              this.cate_a = rtnD.data
+              // console.log(rtnD)
+            }) 
+          
+
        },
        handleChange() {
           this.tt_1=true
@@ -177,19 +208,26 @@
         },
         go(id){
             this.$router.push('/stalkteacher/'+id)
-        }
+        },
+        change_ke_cheng_cate(index,cateID){
+          this.cur_kc_cate_index = index
+          console.log(cateID)
+          this.$http.get("/api/Cate",{params:{cateId:cateID}})
+            .then((rtnD)=> {
+
+              // this.type_id[this.cur_kc_cate_index ].s = rtnD.data.data
+              console.log(rtnD)
+              })
+        },
     }
       
   }
   </script>
 
 
-  <style  scoped>
+  <style >
 
   @import '../assets/css/Promote.css';
 
-.hongbao_box .modal-content {
-    height: 0;
-    border: 0;
-}
+
   </style>
