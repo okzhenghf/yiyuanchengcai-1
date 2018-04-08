@@ -27,9 +27,9 @@ if (process.env.NODE_ENV === 'development') {
   // development本地测试环境s
  
 
-  gretUrl=Axios.defaults.baseURL = 'http://localhost/yiyuanchengcai/fenda/public'
-  captUrl = 'http://localhost/yiyuanchengcai/fenda/public/api/capt/setCaptcha'
-  sourceUrl = 'http://localhost/yiyuanchengcai/fenda/public/static/api'
+  gretUrl=Axios.defaults.baseURL = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public'
+  captUrl = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public/api/capt/setCaptcha'
+  sourceUrl = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public/static/api'
  
 } else {
   gretUrl=Axios.defaults.baseURL = 'http://192.168.0.150/fenda/public/index.php/'

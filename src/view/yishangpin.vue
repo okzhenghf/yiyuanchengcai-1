@@ -12,7 +12,7 @@
     </div>
     <div class="plate">
       <div class="plate_left">
-        <h2>云服务器CVM</h2>
+        <h2>{{fuwu_info.chanpin_name}}</h2>
         <p>稳定、安全、弹性、高性能的云端计算服务，实时满足您的多样性业务需求</p>
       </div>
       <div class="plate_right">
@@ -102,7 +102,7 @@ export default {
   methods:{
       init(){
         this.chanpin_id = this.$route.params.id
-        this.$http.post('api/Shoppingmall/chanpin_read',{chanpin_id:this.chanpin_id})
+        this.$http.post('api/shoppingmall/chanpin_read',{chanpin_id:this.chanpin_id})
         .then((rntD)=>{
           this.fuwu_info = rntD.data
           console.log(this.fuwu_info)
@@ -123,6 +123,7 @@ export default {
   .action{
     color:#fff;
     font-size: 14px;
+    padding-bottom: 30px;
   }
   img{
     width: 100%;
