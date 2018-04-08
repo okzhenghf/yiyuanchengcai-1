@@ -79,6 +79,13 @@ Vue.use(VueTimeago, {
     'zh-CN': require('vue-timeago/locales/zh-CN.json')
   }
 })
+
+Vue.filter("getDate",function (time) {
+   let date = new Date()
+   let nTime = date.getTime()-time*1000
+   return Math.floor(nTime/86400000)
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

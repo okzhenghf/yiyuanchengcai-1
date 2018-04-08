@@ -10,7 +10,8 @@
               <div class="tutorDetails-wrap-nickname">{{vip_details.real_name}}</div>
               <div class="tutorDetails-wrap-followers-count">
                 <span>{{vip_details.listen_num}}</span>
-                <span>人收听</span>
+                <span>人关注</span>
+                <span>加入时长：{{vip_details.become_time|getDate}}</span>
               </div>
             </div>
             <div v-if="info.vip_id!=id">
@@ -29,7 +30,7 @@
           <div  v-if="info.vip_id!=id" class="tutorDetails-question" @click="toAsk()">¥ {{vip_details.price}}提问</div>
         </div>
         <ul class="tutorDetails-speeches" v-show="vip_smalltalk.length != 0">
-          <li class="tutorDetails-speeches-title">提升</li>
+          <li class="tutorDetails-speeches-title">教学</li>
           <li class="tutorDetails-smalltalk" v-for="item in vip_smalltalk">
              <router-link :to="'/stalkteacher/'+item.id">
               <div class="speech-title">{{item.title}}</div>

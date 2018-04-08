@@ -11,6 +11,8 @@
 
 <script type="es6">
 import Vue from 'vue'
+
+
 import {selfAdaption,menu} from '@/assets/js/common.js';
 import mhfooter from '@/components/footer' 
 export default {
