@@ -185,11 +185,11 @@
 
 
   <style  scoped>
-
-  @import '../assets/css/Promote.css';
-
-.hongbao_box .modal-content {
+.modal-content {
     height: 0;
     border: 0;
 }
+  @import '../assets/css/Promote.css';
+
+
   </style>
