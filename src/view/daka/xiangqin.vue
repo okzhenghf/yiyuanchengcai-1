@@ -6,19 +6,14 @@
 				<img v-if="con.imgpath" :src="$gretUrl+con.imgpath" alt="">
 			</div>
 			<div class="right">
-<<<<<<< HEAD
+
 
 				<h4 class="title">{{con.theme}}</h4>
 				<div class="activity">
 					<p style="color:red; padding-left: 6rem;">{{time_cont}}</p>
 					<div class="bar-box" ><div class="bar" ref="input1" id="input1"></div></div>
 
-=======
-				<h4 class="title">#{{con.theme}}#</h4>
-				<div class="activity">
-					<p style="color:red; padding-left: 6rem;">{{time_cont}}</p>
-					<div class="bar-box" ><div class="bar" ref="input1" id="input1"></div></div>
->>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
+
 				</div>
 				<button class="yq">邀请好友</button>
 			</div>
@@ -119,14 +114,10 @@ export default{
 
 			})
 				
-<<<<<<< HEAD
+
 
 			this.$http.get('/api/daka/themelist',{
-=======
 
-
-				this.$http.get('/api/daka/themelist',{
->>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
 					params:{
 						id:this.$route.params.id
 					}
@@ -135,7 +126,7 @@ export default{
 				.then((rtnD)=>{
 					// console.log(rtnD)
 					this.info_a=rtnD.data
-<<<<<<< HEAD
+
 				})
 		},
 		methods:{
@@ -154,26 +145,7 @@ export default{
 			},
 			daka_info(){
 		       this.$router.push('/daka/daka_info/'+this.$route.params.id)
-=======
-				})		
-			
-		},
-		methods:{
-			daka(){
-				this.hid=false,
-                this.show = true,
-                this.$refs.input.style = "overflow: hidden"
-			},
-			sq(){
-                this.hid=true,
-                this.show = false,
-                this.$refs.input.style = "height: 280px"
 
-               //res只有触发后才生效
-			},
-			dodaka(){
-				this.$router.push("/daka/dodaka/"+this.$route.params.id)
->>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
 			},
 			dodaka(){
 					this.$router.push("/daka/dodaka/"+this.$route.params.id)
@@ -209,10 +181,9 @@ export default{
 				}
 			
 		}
-<<<<<<< HEAD
-=======
+
 	}
->>>>>>> 36986cbe5e371b8b5466a60dc0bedaa3abf5ae94
+
 
 </script>
 <style scoped>
