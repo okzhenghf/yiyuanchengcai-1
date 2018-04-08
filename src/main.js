@@ -29,6 +29,7 @@ var jobApiURL=''
 
 
 if (process.env.NODE_ENV === 'development') {
+<<<<<<< HEAD
 
 
   // development本地测试环境
@@ -45,6 +46,23 @@ if (process.env.NODE_ENV === 'development') {
  
 
   
+=======
+
+  // development本地测试环境
+  // npm run dev
+
+ 
+  gretUrl=Axios.defaults.baseURL = 'http://localhost/yiyuanchengcai/fenda/public'
+  captUrl = 'http://localhost/yiyuanchengcai/fenda/public/api/capt/setCaptcha'
+  sourceUrl = 'http://localhost/yiyuanchengcai/fenda/public/static/api'
+  jobApiURL = 'http://localhost/20180305/zhixin/'   
+} else {
+  // npm run build
+  gretUrl=Axios.defaults.baseURL = 'http://www.aoyuankj.com/fenda/public/'
+  captUrl = 'http://www.aoyuankj.com/fenda/public/api/capt/setCaptcha/'
+  sourceUrl = 'http://www.aoyuankj.com/fenda/public/static/api/'
+
+>>>>>>> 7b81273da0f7c7a7ff0b32f37b9bd35058ca76e8
 }
 
 // 跨域请求post会提交option,同时数据要变成json字符串www.aoyuankj.com
@@ -85,6 +103,15 @@ Vue.use(VueTimeago, {
   }
 })
 
+<<<<<<< HEAD
+=======
+Vue.filter("getDate",function (time) {
+   let date = new Date()
+   let nTime = date.getTime()-time*1000
+   return Math.floor(nTime/86400000)
+})
+
+>>>>>>> 7b81273da0f7c7a7ff0b32f37b9bd35058ca76e8
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

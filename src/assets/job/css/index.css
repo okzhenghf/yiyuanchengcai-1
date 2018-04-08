@@ -12,8 +12,8 @@
 			background: #5DD5C8;
 		}
 		h1,h2{
-			color: #fff;
-
+			color: #fff !important;
+			margin: 0 auto !important;
 			text-align: center;
 		}
 		.head h1{

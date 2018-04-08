@@ -1,11 +1,11 @@
 <template>
-   <div class="vue_html">
+  <div class="vue_html">
     <header>
       <div class="nav">
         <transition name="fade">
           <div class="message"  v-show="is_hot_status">
             <a href="" >
-            <p >{{hot_msg}}</p>
+              <p >{{hot_msg}}</p>
             </a>
           </div>
         </transition>
@@ -18,7 +18,7 @@
           <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
               <li data-target="#carousel-example-generic"   v-for="(slide,index) in slide_a" :data-slide-to="index" :class="{'active':index==0}"></li>
-               
+
             </ol>
             <div class="carousel-inner" role="listbox">
               <div class="item" v-for="(slide,index) in slide_a" :class="{'active':index==0}">
@@ -35,19 +35,19 @@
         <div class="container">
           <div class="row">
             <div class="col-xs-3 menu_img">
-              <router-link to="/Promote">
+              <router-link to="/oldindex">
                 <img src="../../assets/job/images/tisheng.png">
                 <p class="menu_title">一元提升</p>
               </router-link>
             </div>
             <div class="col-xs-3 menu_img">
-              <router-link to="/oldindex">
+              <router-link to="/Promote">
                 <img src="../../assets/job/images/zhaopin.png">
                 <p class="menu_title">一元教学</p>
               </router-link>
             </div>
             <div class="col-xs-3 menu_img">
-               <router-link to="/job/index">
+              <router-link to="/job/index">
                 <img src="../../assets/job/images/jiaoxue.png">
                 <p class="menu_title">一元招聘</p>
               </router-link>
@@ -73,30 +73,28 @@
               <div role="tablist" class="el-tabs__nav" style="transform: translateX(0px);">
 
                 <div class="el-tabs__item is-top "   v-for="(cate,cate_index) in kecheng_cate" :class="{'is-active':cate_index == cur_kc_cate_index}" @click="change_kecheng_cate(cate_index,cate.id)">{{cate.cate_name}}</div>
- 
 
               </div>
             </div>
           </div>
           <!-- 列表 -->
-          <div class="kc_main" @touchstart="kc_touch_s(event)" @touchmove="kc_touch_m(event)" @touchend="kc_touch_e()">
+          <div class="kc_main">
             <ul class="kc_list">
 
               <li v-for="ke_info in kecheng_a">
-                 <router-link :to="'/stalkteacher/'+ke_info.id">
-                <div class="list_left">
-                  <img :src="$gretUrl+ke_info.smalltalk_img+'140_140.jpg'"></div>
-                <div class="list_right">
-                  <h4>{{ke_info.title}}</h4>
-                  <p>主讲人：{{ke_info.real_name}}</p>
-                  <div class="list_bottom">
-                    <p>{{ke_info.cate_name}}</p>
-                    <span>{{ke_info.join_num}}人参加</span>
+                <router-link :to="'/stalkteacher/'+ke_info.id">
+                  <div class="list_left">
+                    <img :src="$gretUrl+'/'+ke_info.smalltalk_img+'140_140.jpg'"></div>
+                  <div class="list_right">
+                    <h4>{{ke_info.title}}</h4>
+                    <p>主讲人：{{ke_info.real_name}}</p>
+                    <div class="list_bottom">
+                      <p>{{ke_info.cate_name}}</p>
+                      <span>{{ke_info.join_num}}人参加</span>
+                    </div>
                   </div>
-                </div>
-                 </router-link>
+                </router-link>
               </li>
-             
 
             </ul>
 
@@ -110,18 +108,18 @@
           <div class="kc_main">
             <ul class="kc_list">
               <li v-for="(news,index) in news_lists">
-               <router-link :to="'/headline-details/'+news.id" v-if="index == 0">
-                  <img src="../../assets/job/images/picture.png" class="img_title">
-                </router-link>
-               <router-link :to="'/headline-details/'+news.id" v-if="index > 0">
+                <router-link :to="'/headline-details/'+news.id" v-if="index == 0">
+                  <img src="../../assets/job/images/picture.png" class="img_title"></router-link>
+                <router-link :to="'/headline-details/'+news.id" v-if="index >
+                  0">
                   <div class="list_left">
                     <p>{{news.title}}</p>
                   </div>
                   <div class="list_right">
                     <img src="../../assets/job/images/11.png"></div>
-                 </router-link>
+                </router-link>
               </li>
-               
+
             </ul>
           </div>
         </div>
@@ -141,33 +139,36 @@
           <div class="kc_main">
             <ul class="kc_list">
               <li class="underline" v-for="vip in vip_a">
-                <div class="list_left">
-                  <img src="../../assets/job/images/women.jpg"></div>
+                <router-link :to="'tutorDetails/'+vip.id">
+                  <div class="list_left">
+                    <img :src="$sourceUrl+'/img/'+vip.head_img">
+                </div>
                 <div class="list_right">
                   <ul>
                     <li class="list_right_top">
                       <p>{{vip.real_name}}</p>
-                      <span>电商视觉设计学员</span>
+                      <span>{{vip_cate[cur_vip_cate_index]['cate_name']}}人才</span>
                     </li>
                     <li class="list_right_center">
-                      <p>人气指数：</p>
+                      <p>才能指数：</p>
                       <span>{{vip.listen_num}}</span>
                     </li>
                     <li class="list_right_bottom">
-                      <p>设计分类</p>
-                      <span>学习时长：100小时</span>
+                      <p>{{vip_cate[cur_vip_cate_index]['cate_name']}}</p>
+                      <span>加入时长：{{vip.become_time|getDate}}</span>
                     </li>
+
                   </ul>
                 </div>
-              </li>
-               
-            </ul>
-          </div>
+              </router-link>
+            </li>
+          </ul>
         </div>
       </div>
-      <div style="height: 120px;text-align: center;color: #9f9f9f;line-height: 50px;font-size: 18px;">没 有 更 多 了</div>
-    </main>
-  </div>
+    </div>
+    <div style="height: 120px;text-align: center;color: #9f9f9f;line-height: 50px;font-size: 18px;">没 有 更 多 了</div>
+  </main>
+</div>
 </template>
 
 <script type="es6">
@@ -224,6 +225,14 @@ export default {
             $('#carousel-example-generic').carousel('prev')
           })
         },
+      filters:{
+        // 组件内的过滤器
+        // getDate(time){
+        //    let date = new Date()
+        //    let nTime = date.getTime()-time*1000
+        //    return Math.floor(nTime/86400000)
+        // }
+      },  
       methods: {
         init(){
         
@@ -282,47 +291,17 @@ export default {
           change_kecheng_cate(index,cateId){
             this.cur_kc_cate_index = index
              this.$http.post("/api/kecheng",{'cateId':cateId}).then( (rtnD)=> {
-              this.kecheng_a = rtnD.data
+              this.kecheng_a = rtnD.data.data
 
             })
           },
-          change_viper_cate(index,cateID){
+          change_viper_cate(index,cateId){
             this.cur_vip_cate_index = index
-              this.$http.post("/api/Viper/index",{cateID},(rtnD)=> {
-              this.vip_a = rtnD
-            })
+              this.$http.post("/api/Viper/index",{cateId}).then((rtnD)=> {
+                 this.vip_a = rtnD.data
+               })
           },
-          kc_touch_s(event){
-            this.kc_touch_start_x = event.touches[0].pageX
-          },
-          kc_touch_m(event){
-            let move_x = event.touches[0].pageX
-            if (this.kc_touch_start_x > move_x) {
-              this.kc_touch_direction = 'left'
-              $('.kc_list').css('transform','translate(-'+move_x+'px,0)')
-            }else{
-              this.kc_touch_direction = 'right'
-              $('.kc_list').css('transform','translate('+move_x+'px,0)')
-              
-
-            }
-          },
-          kc_touch_e(){
-            if (this.kc_touch_direction == 'left') {
-              if (this.cur_kc_cate_index < this.kecheng_cate.length-1) {
-                ++this.cur_kc_cate_index 
-              }
-            }else{
-              if (this.cur_kc_cate_index > 0) {
-                --this.cur_kc_cate_index 
-              }
-
-            }
-            this.change_kecheng_cate(
-              this.cur_kc_cate_index,
-              this.kecheng_cate[this.cur_kc_cate_index].id)
-            $('.kc_list').css('transform','translate(0,0)')
-          }
+       
           
       }
   }

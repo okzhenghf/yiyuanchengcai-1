@@ -2,47 +2,32 @@
   <div class="shiting" :class="{'overflow':inputText || sheetVisible}">
     
       <div class="headback">
-        <span @click="backstalk(smalltalk_id)">&lt; 返回提升</span>
+        <span @click="backstalk(smalltalk_id)">&lt; 返回教学</span>
       </div>
     <div class="container">
         <div class="playaudio">
           <p class="player">{{smalltalk_list.real_name}}</p>
           <h3 class="audio_name">{{audio_list_first.audio_name}}</h3>
-          <!-- <audio class="shiting-music" @ended="audioEnd()" controls="controls"
-          src="/static/audio/yjm.mp3"></audio> -->
-          <audio class="shiting-music" @ended="audioEnd()" controls="controls"
-          :src="$sourceUrl+'/audio/'+audio_list_first.audio"></audio>
-         <!--  <div class="playcontrol">
-            <div class="time">
-              <span class="start">
-                 00:00
-              </span>
-              <span class="end">
-                {{audio_list_first.duration}}
-              </span>
-            </div>
-             <input type="range" name="" class="barinput" step="any" value="0" min="0" max="100"> -->
-            <!-- <p class="barbox">
-            <span class="bar"></span>
-            <span class="barcri"></span>
-            </p> -->
-         <!--  </div> -->
+        
+          <audio v-if="audio_list_first.is_video == -1" class="shiting-music" @ended="audioEnd()" controls="controls"
+          :src="$gretUrl+audio_list_first.audio"></audio>
+         <video width="100%" :src="$gretUrl+audio_list_first.audio" controls="controls" v-if="audio_list_first.is_video > 0"></video>
           <div class="controler">
             <span class="audio_menu" @click="audiomenu()">
               
             </span>
-          <!--   <div class="play_control">
+            <!-- <div class="play_control">
               <span :class="thefirst?'play_pre':'play_pring'" @lick="preaudio()"></span>
               <span :class="playing?'play_open':'play_stop'" @click="playmp()"></span>
               <span class="play_next" @click="nextaudio()"></span>
             </div> -->
-            <!-- <a :class="lovebtn?'loveing':'loved'" @click="addlove()">
+            <a :class="lovebtn?'loveing':'loved'" @click="addlove()">
               <span class="assist_love"></span>
               <i class="love_num">{{lovenum}}</i>
-            </a> -->
+            </a>
             <span></span>
           </div>
-          <button class="open_app">打开APP连播</button>
+          <button class="open_app">一元成才中...</button>
         </div>
       </div>
       <div class="supple_con" v-if="supplementary_notes">
@@ -286,6 +271,7 @@ import { Indicator } from 'mint-ui'
         .then(rtnData=>{
           // console.log(rtnData.data)
           this.audio_list_first=rtnData.data
+          this.$set(this.audio_list_first,'is_video',rtnData.data.audio.indexOf('mp4'))
           // this.audio_smalltalkcon_id=rtnData.data.smalltalk_content_id
           this.lovenum=rtnData.data.like_num
         }),      

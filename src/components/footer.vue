@@ -51,9 +51,9 @@
            <div class="footer_more" @click.stop="toggle">
              <img src="../assets/job/images/foot_logo.png"></div>
            <div class="footer_main test" ref="footerMain">
-             <router-link to="/Promote">
-               <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_one.png"></router-link>
              <router-link to="/oldindex">
+               <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_one.png"></router-link>
+             <router-link to="/Promote">
                <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_three.png"></router-link>
              <router-link to="/yishangcheng">
                <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_two.png"></router-link>
