@@ -4,22 +4,24 @@
     <router-view></router-view>
     
     <!-- 这里相当于mvc的入口文件，劲量不要加布局。放到组件目录components  -->
-
-      <mhfooter> </mhfooter>
+ 
+      <mhfooter > </mhfooter>
   </div>
 </template>
 
 <script type="es6">
 import Vue from 'vue'
+
+
 import {selfAdaption,menu} from '@/assets/js/common.js';
-import mhfooter from '@/components/footer'
+import mhfooter from '@/components/footer' 
 export default {
   data(){
     return {
-    
+      
     }
   },
-  created(){
+  created(){ 
     selfAdaption(),
     menu()
   },

@@ -51,23 +51,27 @@ const jiaoxue = resolve => require(['@/view/jiaoxue/index'], resolve)
 const Promote = resolve => require(['@/view/Promote'], resolve)
 const yishangpin = resolve => require(['@/view/yishangpin'], resolve)
 const yishangpin_add = resolve => require(['@/view/yishangpin_add'], resolve)
-
+const job_index = resolve=>require(['@/view/job/index'],resolve)
+const job_lists = resolve=>require(['@/view/job/lists'],resolve)
+const job_info =resolve=>require(['@/view/job/info'],resolve)
+const job_company =resolve=>require(['@/view/job/company'],resolve)
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
       component: newindex,
       meta: {
-        title: '一元成才'
+        title: '一元成才',
+        oldfooter:true,
       }
     },
     {
       path: '/oldindex',
       component: index,
       meta: {
-        title: '一元成才'
+        title: '一元提升'
       }
     },
     {
@@ -260,35 +264,35 @@ export default new Router({
       path: '/talk',
       component: talk,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/stalkcon/:id',
       component: stalkcon,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/stalkteacher/:id',
       component: stalkteacher,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/shiting',
       component: shiting,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/allspeech',
       component: allspeech,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
@@ -309,14 +313,15 @@ export default new Router({
       path: '/SmalltalkComments/:id',
       component: SmalltalkComments,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/yishangcheng',
       component: yishangcheng,
       meta: {
-        title: '一元商城'
+        title: '一元商城',
+        oldfooter:true,
       }
     },
     {
@@ -372,22 +377,74 @@ export default new Router({
       path: '/Promote',
       component: Promote,
       meta: {
-        title: '一元提升'
+        title: '一元教学',
+        oldfooter:true,
       }
     },
     {
       path: '/yishangpin/:id',
       component: yishangpin,
       meta: {
-        title: '一元提升'
+        title: '一元教学',
+        oldfooter:true,
       }
     },
     {
       path: '/yishangcheng/add/:id',
       component: yishangpin_add,
       meta: {
-        title: '我要发布商品'
+        title: '我要发布商品',
+        oldfooter:true,
+        // vip:true
+      }
+    },
+    {
+      path: '/job/index',
+      component: job_index,
+      meta: {
+        title: '一元招聘',
+        oldfooter:true,
+        // vip:true
+      }
+    },
+    {
+      path: '/job/lists/:id',
+      component: job_lists,
+      meta: {
+        title: '招聘列表',
+        oldfooter:true,
+        // vip:true
+      }
+    },
+    {
+      path: '/job/info/:id',
+      component: job_info,
+      meta: {
+        title: '招聘详情',
+        oldfooter:true,
+        // vip:true
+      }
+    },
+    {
+      path: '/job/company/:id',
+      component: job_company,
+      meta: {
+        title: '公司详情',
+        oldfooter:true,
+        // vip:true
       }
     },
   ]
 })
+
+// 钩子函数、守卫
+router.beforeEach((to,from,next)=>{
+  // if (to.meta.vip) {
+  //   // 判断用户有没有登录、是不是会员
+  // }
+    // 每一步都会执行这段代码
+    router.app.$options.store.commit("setFooterStatus",!to.meta.oldfooter)
+    next()
+})
+
+export default router

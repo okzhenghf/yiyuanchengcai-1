@@ -1,0 +1,97 @@
+<template>
+	<div class="tain">	
+		<div class="a1"> 
+			    <b-row class='a1_1'> 
+			        <b-col class='zhi'>boss直播</b-col > 
+			        <b-col class='wei'> <div class="kang">搜索职位</div> </b-col > 
+			    </b-row > 
+		</div>
+		<div class="b1">
+				<b-row class='text-center b1_1'> 
+			        <b-col cols = “6”  class='qian'> {{job_info.job_name}} </b-col > 
+			        <b-col > </b-col > 
+			        <b-col >  7K-13K </b-col > 
+			   </b-row>
+			   <b-row class='text-center b2_1'> 
+			        <b-col cols = “6”  class='qian'>广州|3-5年|本科|</b-col > 
+			        <b-col > </b-col > 
+			        <b-col >  发布于昨天 </b-col > 
+			   </b-row>
+				<b-row class=' b2_2'> 
+			        <b-col cols = “8”  class='qian'><div class="box">anguar</div><div class="box">Nodejs</div><div class="box">Vue</div></b-col > 
+			        <b-col > </b-col > 
+			   </b-row>
+		</div>
+		<div class="c1">
+            <b-row class='c2_2'> 
+            		<b-col class="figure"><img src="https://img2.bosszhipin.com/boss/avatar/avatar_2.png" alt="" /></b-col >
+			        <b-col class='qian'>姚小姐 <p class="gray">广州明动软件<em class="vdot">·</em>招聘专员</p></b-col > 
+			        <b-col ><a class="btn btn-chat">立即沟通</a></b-col >
+			</b-row>
+		</div>
+		<div class="container">	
+			<div class="d1">
+				<h3>职位描述</h3>
+				<div class="text">
+	                        岗位职责：<br>1、负责公司网站平台各产品线Web前端研发；<br>2、解决不同浏览器及不同版本的兼容性问题；<br>3、根据要求，用Javascript、Jquery编写出各种特殊交互效果；<br>4、与后台开发人员进行沟通以完成前后台的对接工作；<br><br>任职要求：<br>1、本科学历，计算机相关专业，1年以上web前端开发工作经验，精通HTML/XHTML、DIV+CSS，能够真实还原视觉设计；<br>2、熟悉网站页面架构和布局；熟悉W3C标准，对HTML5、CSS3以及响应式交互有一定了解的优先；<br>3、精通Html,css,javascript,jquery等前端技术，有Vue.js、Angular.Js等前端框架使用经验优先。<br>4、熟练使用gulp、webpack等前端工程构建工具，有nodejs开发经验者优先；<br>5、熟悉网页跨浏览器和跨平台的兼容性问题，了解高性能网站优化方法；<br>6、熟悉响应式页面布局，能处理不同的终端屏幕；<br>7、熟悉git代码管理；
+	            </div>
+	            <h3>公司简介</h3>
+	            <p class='text'>明动软件（股票代码：835840）成立于2005年4月，并于2016年2月新三板挂牌上市，于2017年5月进入新三板创新层。<br>     总部位于广州市，并设有广西子公司和云南分公司。目前已有员工400多名，其中研发及技术服务人员占比约73%，拥有63项自主知识产权的软件产品，具备高新技术企</p>
+				<h3>工商信息</h3>	
+				<div class="details">
+					<p>阿里巴巴</p>
+					<div class="content">
+						<table>
+							<tr>
+								<th>法人代表：马云</th>
+								<th>经营状态：上市</th>
+							</tr>
+							<tr>
+								<td>成立时间：1990-06-07</td>
+								<td>注册资本：1000亿</td>
+							</tr>
+						</table>
+						<router-link :to="'/job/company/'+company_id">
+							<button ><span>展开</span></button>
+						</router-link>
+					</div>
+				</div>	
+
+			</div>
+		</div>
+	</div>            
+</template>
+<script type="es6">
+
+    export default{
+    	data(){
+    		return{
+    			job_info:[],
+    			company_id:this.$route.params.id
+    		}
+    	},
+    	created(){
+		    this.init()
+		},
+		methods:{
+			init(){
+				console.log(this.company_id)
+				this.$http.get(this.$jobApiURL+'/api/job/info',
+					{
+						params:{
+							id:this.company_id
+						}
+					})
+				.then( (rtnD)=>{
+					this.job_info = rtnD.data
+				})
+			}
+		}		
+    }
+	
+</script>
+<style>
+	@import url('../../assets/job/css/info.css');
+	@import url('../../assets/job/library/bootstrap-vue.min.css');
+	@import url('../../assets/job/library/bootstrap.min.css');
+</style>

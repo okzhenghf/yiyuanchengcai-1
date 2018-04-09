@@ -1,215 +1,120 @@
-  <template>
+<template>
 
   <div class="content">
-  <b-modal v-model="hongbao_modal"
-    :hide-footer="true" :hide-header="true" class="hongbao_box"
-    v-bind:class="{ motai: isclose}" @click="close()"
-    >
-      
+    <b-modal v-model="hongbao_modal"
+      :hide-footer="true" :hide-header="true" class="hongbao_box"
+      v-bind:class="{ motai: isclose}" @click="close()"
+      >
+
       <div class="neirong" >
         <div class="bg"  @click="close()"></div>
         <div class="close"  @click="close()" ></div>
         <div class="popup">
           <div class="po_top"
-          v-bind:class="{ hide: isActive}"
-           v-show="tt" @click="handleChange()" ></div>
+            v-bind:class="{ hide: isActive}"
+             v-show="tt" @click="handleChange()" ></div>
           <div class="po_bot"></div>
           <div class="qiang"  @click="handleChange()"></div>
           <div class="lq">
             <div class="po_title">未领取</div>
-            <div class="img" v-show="tt_1"><img src="../assets/img/late.png" alt=""></div>
+            <div class="img" v-show="tt_1">
+              <img src="../assets/img/late.png" alt=""></div>
           </div>
         </div>
       </div>
+    </b-modal>
 
-
-      
-  </b-modal>
-
-    
     <div class="head">
       <div class="first">
         <mt-search
-          :v-model="value"
-          cancel-text="取消"
-          placeholder="搜索">
-        </mt-search>
+            :v-model="value"
+            cancel-text="取消"
+            placeholder="搜索"></mt-search>
       </div>
     </div>
+
     <div class="face">
-      <ul>
-        <li>
-          <a href="" style="color: #FF2D50;">首页</a>
+      <ul >
+        <li @click="is_cate=false" :class="{'is-active':!is_cate}">首页</li>
+        <li v-for="(item,n) in ke_cheng_cate" >
+          <!-- (item,n) n是下标 -->
+
+          <div :class="{'is-active':n == cur_kc_cate_index && is_cate}" @click="change_ke_cheng_cate(n,item.id)">{{item.cate_name}}</div>
+
         </li>
-        <li>
-          <a href="">课程</a>
-        </li>
-        <li>
-          <a href="">路径</a>
-        </li>
-        <li>
-          <a href="">上课</a>
-        </li>
-        <li>
-          <a href="">手记</a>
-        </li>
-        <li>
-          <a href="">猿问</a>
-        </li>
+
       </ul>
     </div>
 
-    <!-- 主体部分 -->
-    <div class="main">
-      <!-- 自动轮播 -->
-      <div class="neck">
-       <mt-swipe :auto="4000" >
-         <mt-swipe-item>
-           <a href="">
-             <img src="../assets/img/1.jpg" alt="">
-           </a>
-         </mt-swipe-item>
+    <div v-show="!is_cate">
+      <!-- 主体部分 -->
+      <div class="main">
+        <!-- 自动轮播 -->
+        <div class="neck" >
+          <mt-swipe :auto="4000" >
+            <mt-swipe-item v-for="item in slide_a">
+              <!--$gretUrl在main.js 那里看路径 -->
+              <a :href="$gretUrl+item.link_url" >
+                <img :src="$gretUrl+item.pic_path" data-holder-rendered="true"></a>
 
-         <mt-swipe-item>
-           <a href="">
-             <img src="../assets/img/2.jpg" alt="">
-           </a>
-         </mt-swipe-item>
+            </mt-swipe-item>
 
-         <mt-swipe-item>
-           <a href="">
-             <img src="../assets/img/3.jpg" alt="">
-           </a>
-         </mt-swipe-item>
+          </mt-swipe>
+        </div>
+      </div>
+      <!-- body部分 -->
+      <div class="body fff" v-for="item in type_id " >
+        <div class="bbox">
+          <p class="tit">
+            <span class="icon"></span>
+            {{item.cate_type}}
+          </p>
 
-         <mt-swipe-item>
-           <a href="">
-             <img src="../assets/img/4.jpg" alt="">
-           </a>
-         </mt-swipe-item>
+          <div class="swiper">
 
-         <mt-swipe-item>
-           <a href="">
-             <img src="../assets/img/5.jpg" alt="">
-           </a>
-         </mt-swipe-item>
+            <div class="zhuan" v-for="item2 in item.s " @click="go(item.id)">
 
-         <mt-swipe-item>
-           <a href="">
-             <img src="../assets/img/6.jpg" alt="">
-           </a>
-         </mt-swipe-item>
+              <a href="#">
+                <img v-if="item2.smalltalk_img" :src="$gretUrl+item2.smalltalk_img" alt="">
+                <div class="txt">
+                  <p class="name">{{item2.title}}</p>
+                  <p>主讲人：{{item2.real_name}}</p>
 
-       </mt-swipe>
-     </div>    
-    </div>
-    <!-- body部分 -->
-    <div class="body fff" v-for="item in 4 ">
-          <div class="bbox">
-            <p class="tit">
-              <span class="icon"></span>
-              新上好课
-            </p> 
-            <div class="list">
-              <div class="sbox one">
-                <h2>Java</h2>
-                <p>Spring cloul微服务实战</p>
-                <div>￥366.00
-                  <span>353人</span>
+                  <div>有{{item2.join_num}}人在学</div>
+                  <div>￥：{{item2.price}}元</div>
                 </div>
-              </div>
-              <div class="sbox two">
-                <h2>Java</h2>
-                <p>Spring cloul微服务实战</p>
-                <div>￥366.00
-                  <span class="span">353人</span>
-                </div>
-              </div>
-              
+              </a>
             </div>
-            <div class="swiper">
-              <mt-swipe :auto="0">
-                <mt-swipe-item class="swipe">
-                  <div class="zhuan">
-                    <a href="#">
-                      <img src="../assets/img/7.jpg" alt="">
-                      <div class="txt">
-                        <p class="name">js入门到实践
-                        开发 js都是你的必备技能</p>
-                        <div>高级·1631人在学</div>
-                        <div>￥455.00</div>
-                      </div>
-                    </a> 
-                  </div>
-                  <div class="zhuan">
-                    <a href="#">
-                      <img src="../assets/img/7.jpg" alt="">
-                      <div class="txt">
-                        <p class="name">js入门到实践
-                        开发 js都是你的必备技能</p>
-                        <div>高级·1631人在学</div>
-                        <div>￥455.00</div>
-                      </div>
-                    </a> 
-                  </div>
-                  <div class="zhuan">
-                    <a href="#">
-                      <img src="../assets/img/7.jpg" alt="" class="img">
-                      <div class="txt">
-                        <p class="name">js入门到实践
-                        开发 js都是你的必备技能</p>
-                        <div>高级·1631人在学</div>
-                        <div>￥455.00</div>
-                      </div>
-                    </a> 
-                  </div>
-                </mt-swipe-item>
-                <mt-swipe-item class="swipe">
-                  <div class="zhuan">
-                    <a href="#">
-                      <img src="../assets/img/7.jpg" alt="">
-                      <div class="txt">
-                        <p class="name">js入门到实践
-                        开发 js都是你的必备技能</p>
-                        <div>高级·1631人在学</div>
-                        <div>￥455.00</div>
-                      </div>
-                    </a> 
-                  </div>
-                  <div class="zhuan">
-                    <a href="#">
-                      <img src="../assets/img/7.jpg" alt="">
-                      <div class="txt">
-                        <p class="name">js入门到实践
-                        开发 js都是你的必备技能</p>
-                        <div>高级·1631人在学</div>
-                        <div>￥455.00</div>
-                      </div>
-                    </a> 
-                  </div>
-                  <div class="zhuan">
-                    <a href="#">
-                      <img src="../assets/img/7.jpg" alt="" class="img">
-                      <div class="txt">
-                        <p class="name">js入门到实践
-                        开发 js都是你的必备技能</p>
-                        <div>高级·1631人在学</div>
-                        <div>￥455.00</div>
-                      </div>
-                    </a> 
-                  </div>
-                </mt-swipe-item>
-              </mt-swipe>
-            </div>
-          </div>
-       
+
+            <!--  </mt-swipe-item> </mt-swipe>
+          -->
+        </div>
+      </div>
     </div>
-    
-    <div class="zuixia"></div>
+
   </div>
-  </template>
+  <div v-show="is_cate">
+    <div class="swiper">
+      <div class="zhuan" v-for="item2 in change_cate_data " @click="go(item2.id)">
 
-  <script type="es6">
+        <a href="#">
+          <img v-if="item2.smalltalk_img" :src="$gretUrl+item2.smalltalk_img" alt="">
+          <div class="txt">
+            <p class="name">{{item2.title}}</p>
+            <p>主讲人：{{item2.real_name}}</p>
+
+            <div>有{{item2.join_num}}人在学</div>
+            <div>￥：{{item2.price}}元</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="zuixia"></div>
+</div>
+</template>
+
+<script type="es6">
   import { Search } from 'mint-ui';
   import {mapState,mapMutations} from 'vuex'
   import { Toast,MessageBox,Indicator } from 'mint-ui' 
@@ -221,32 +126,95 @@
         tt:true,
         tt_1:false,
         isActive: false,
-        isclose:false
-        
-        
+        isclose:false,
+        slide_a:[],
+        kc_a:[],
+        cur_kc_cate_index:0,
+        type_id:[],
+        ke_cheng:[],
+        cate:[],
+        ke_cheng_cate:[],
+        is_cate:false,//默认显示首页
+        change_cate_data:[],//切换的分类数据
     }
   },
   components:{
 
   },
+  created(){
+    this.init()
+  },
   methods:{
+       init(){
+          this.$http.get("/api/Mobilehdp",{params:{page_cate:'promote'}})
+          .then((rtnD)=> {
+
+            this.slide_a = rtnD.data
+            // console.log(rtnD)
+          })
+         
+          this.$http.post("/api/type")
+          .then((rtnD)=> {
+
+            this.type_id = rtnD.data
+            // console.log(this.type_id[1].s)
+
+            })
+          
+              this.$http.post("/api/Feilei/getFeilei")
+              .then((rtnCateD)=> {
+
+              this.ke_cheng_cate = rtnCateD.data
+              // console.log(this.ke_cheng_cate)
+              // resolve(rtnCateD[0]['id'])
+            })
+        
+            this.$http.post("/api/Feilei")
+            .then((rtnD)=> {
+
+              this.ke_cheng = rtnD.data.data
+              })
+            this.$http.post("/api/Cate")
+            .then((rtnD)=> {
+
+              this.cate_a = rtnD.data
+              // console.log(rtnD)
+            }) 
+          
+
+       },
        handleChange() {
           this.tt_1=true
           // this.tt=false
           this.isActive=true
-          console.log(this.tt)
+          // console.log(this.tt)
         },
         close(){
           this.isclose=true
-        }
+        },
+        go(id){
+            this.$router.push('/stalkteacher/'+id)
+        },
+        change_ke_cheng_cate(index,cateID){
+          this.cur_kc_cate_index = index
+          this.is_cate = true
+          console.log(cateID)
+          this.$http.get("/api/Cate/cate_lists",{params:{cateId:cateID}})
+            .then((rtnD)=> {
+              this.change_cate_data = rtnD.data.data
+              console.log(rtnD)
+              })
+        },
     }
       
   }
   </script>
 
-
-  <style >
-
+<style  scoped>
+.modal-content {
+    height: 0;
+    border: 0;
+}
   @import '../assets/css/Promote.css';
 
 

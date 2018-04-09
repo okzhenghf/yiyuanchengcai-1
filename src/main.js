@@ -25,20 +25,39 @@ Vue.use(ElementUI);
 var captUrl = ''
 var sourceUrl = ''
 var gretUrl = '' 
+var jobApiURL=''
+
+
+
+
 
 
 if (process.env.NODE_ENV === 'development') {
-  // development本地测试环境s
- 
 
+<<<<<<< HEAD
   gretUrl=Axios.defaults.baseURL = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public'
   captUrl = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public/api/capt/setCaptcha'
   sourceUrl = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public/static/api'
  
+=======
+
+
+  // development本地测试环境
+  gretUrl=Axios.defaults.baseURL = 'http://localhost/fenda/public/'
+  captUrl = 'http://localhost/fenda/public/api/capt/setCaptcha/'
+  sourceUrl = 'http://localhost/fenda/public/static/api/'
+  jobApiURL = 'http://localhost/zhixin/'   
+
+
+>>>>>>> 5bd0fb98b19e19afc3c8d00e88a5cdb53a535689
 } else {
   gretUrl=Axios.defaults.baseURL = 'http://192.168.0.150/fenda/public/index.php/'
   captUrl = 'http://192.168.0.150/fenda/public/index.php/api/capt/setCaptcha/'
   sourceUrl = 'http://192.168.0.150/fenda/public/static/api/'
+ 
+
+  
+
 }
 
 // 跨域请求post会提交option,同时数据要变成json字符串www.aoyuankj.com
@@ -59,6 +78,8 @@ Vue.prototype.$myInterceptor = myInterceptor
 Vue.prototype.$captUrl = captUrl
 Vue.prototype.$sourceUrl = sourceUrl
 Vue.prototype.$gretUrl = gretUrl
+Vue.prototype.$jobApiURL = jobApiURL
+
 
 Vue.config.productionTip = false
 router.beforeEach(function (to, from, next) {
@@ -76,6 +97,15 @@ Vue.use(VueTimeago, {
     'zh-CN': require('vue-timeago/locales/zh-CN.json')
   }
 })
+
+
+Vue.filter("getDate",function (time) {
+   let date = new Date()
+   let nTime = date.getTime()-time*1000
+   return Math.floor(nTime/86400000)
+})
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -3,7 +3,7 @@
 <div class="app">
   
   <h1>基本打卡</h1>
-    <b-modal v-if="question_cont.question" v-model="question_modal" :hide-footer="true" :hide-header="true" class="hongbao_box">
+    <b-modal v-if="question_cont.question" v-model="question_modal" :hide-footer="true" :hide-header="true" class="question_box">
 
       <ul class="as">{{question_cont.question}}<span>(必答题)</span>
         <el-radio-group v-model="radio2">
@@ -33,7 +33,7 @@
         </el-radio-group>
         </ul>
       <div class="footer">
-        <b-button variant="" class="qu" :block="true" @click="go_daka()">领取</b-button>
+        <b-button variant="" class="qu" :block="true" @click="go_daka()">提交</b-button>
       </div>
       
     </b-modal>
@@ -156,10 +156,10 @@
           this.$http.get('/api/daka',{params:{
             uid:this.info.user_id,    
             input:this.input,
-            textarea3:this.textarea3
+            textarea3:this.textarea3,
+            theme_id:this.$route.params.id
             // question_id:this.question_cont.id
             // answer:this.radio2
-
           }})
            .then((rtnD)=>{
             this.$router.push('/daka/daka_rili/'+this.$route.params.id);
@@ -230,5 +230,7 @@
     height: 178px;
     display: block;
   }
-
+  .el-radio__label{
+    font-size: 18px;
+  }
 </style>
