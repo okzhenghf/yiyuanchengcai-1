@@ -125,7 +125,7 @@
         </div>
       </div>
       <div class="kc_list_third">
-        <h4 class="kc_title">一 / 元 / 人 / 才</h4>
+        <h4 class="kc_title">一 / 元 / 招/ 聘</h4>
         <div class="container">
           <div class="kc_nav">
             <div class="el-tabs__nav-scroll">
@@ -136,7 +136,7 @@
               </div>
             </div>
           </div>
-          <div class="kc_main">
+         <!--  <div class="kc_main">
             <ul class="kc_list">
               <li class="underline" v-for="vip in vip_a">
                 <router-link :to="'tutorDetails/'+vip.id">
@@ -164,7 +164,29 @@
               </router-link>
             </li>
           </ul>
-        </div>
+        </div> -->
+        <div class="loading">
+          <ul class="loading_list" >
+          
+            <li>
+            <a href="">
+            <img src="https://www.zhipin.com/v2/chat_v2/images/ v2/defaultlogov2.jpg" alt="">
+            <div class="text" >
+              <div class="title"><h4>fdfdfd</h4><span>6K-8K</span></div>
+              <div class="name">dfdfdfd</div>
+              <div class="msg">
+                <em>广州</em>
+                <em>1年以内</em>
+                <em>本科</em>
+              </div>
+              </div>
+           
+            </a>
+            </li>
+            
+          </ul>
+      </div>
+        
       </div>
     </div>
     <div style="height: 120px;text-align: center;color: #9f9f9f;line-height: 50px;font-size: 18px;">没 有 更 多 了</div>

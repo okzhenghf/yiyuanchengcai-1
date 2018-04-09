@@ -37,7 +37,7 @@
         </div>
       </div>
       <hr>
-      <div class="a4_2 bg_color_1" v-show='cur_index ==n &&isActive'>  
+      <div class="a4_2 bg_color_1" v-show='cur_index ==n && isActive'>  
         <ul class="tex_ul"  >
           <li v-for="chanpin in chan.cp ">
               <router-link :to="'yishangpin/'+chanpin.pid">
@@ -289,21 +289,19 @@ export default {
   },
   methods:{
     init(){
+      //获取幻灯图片
       this.$http.post("api/Mobilehdp",{page_cate:'shop'})
       .then((rntD)=>{
         this.slide_a = rntD.data
 
       })
+      //获取信息
       this.$http.get("api/Shoppingmall")
       .then((rntD)=>{
         this.shangpin = rntD.data
-
-
       })
     },
     anclick(n){
-
-
         this.cur_index = n
         if(this.ber != 1){
           this.isActive=true
@@ -315,14 +313,6 @@ export default {
             // console.log(this.ber)
       },
       shangpin_click(n){
-/*       this.cread_id = n + 1;
-      
-        this.$http.post("api/Shoppingmall/read",{cread_id:this.cread_id})
-        .then((rntD)=>{
-          this.chanpin = rntD.data
-          console.log(this.chanpin)
-        })*/
-
          this.cur_index = n
         if(this.ber != 1){
           this.isActive=true

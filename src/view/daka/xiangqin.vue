@@ -114,7 +114,13 @@ export default{
 
 			})
 				
+ 
+
+
+
 			this.$http.get('/api/daka/themelist',{
+
+ 
 					params:{
 						id:this.$route.params.id
 					}
@@ -142,6 +148,7 @@ export default{
 			},
 			dodaka(){
 				this.$router.push("/daka/dodaka/"+this.$route.params.id)
+
 			},
 			dodaka(){
 					this.$router.push("/daka/dodaka/"+this.$route.params.id)
@@ -175,10 +182,13 @@ export default{
 					// var t = Y + '-' + m + '-' + d;
 					return t;
 				}
-			
 
-		} 
-	} 
+
+		}
+
+	}
+
+
 
 </script>
 <style scoped>

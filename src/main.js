@@ -16,6 +16,10 @@ import Calendar from 'vue-calendar-component';
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+//引入vue-html5-editor
+import VueHtml5Editor from 'vue-html5-editor'
+Vue.use(VueHtml5Editor);
+
 Vue.use(BootstrapVue);
 Vue.use(ElementUI);
 var captUrl = ''
@@ -30,10 +34,8 @@ var jobApiURL=''
 
 if (process.env.NODE_ENV === 'development') {
 
-
   // development本地测试环境
   // npm run dev
-
  
   gretUrl=Axios.defaults.baseURL = 'http://localhost/yiyuanchengcai/fenda/public'
   captUrl = 'http://localhost/yiyuanchengcai/fenda/public/api/capt/setCaptcha'
@@ -84,14 +86,12 @@ Vue.use(VueTimeago, {
     // you will need json-loader in webpack 1
     'zh-CN': require('vue-timeago/locales/zh-CN.json')
   }
-})
-
+}) 
 Vue.filter("getDate",function (time) {
    let date = new Date()
    let nTime = date.getTime()-time*1000
    return Math.floor(nTime/86400000)
-})
-
+}) 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
