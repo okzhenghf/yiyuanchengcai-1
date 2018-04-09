@@ -313,14 +313,16 @@ export default {
             // console.log(this.ber)
       },
       shangpin_click(n){
+         this.isActive = this.cur_index != n ? true: false
          this.cur_index = n
-        if(this.ber != 1){
-          this.isActive=true
-          this.ber = 1;
-        }else{
-          this.ber = 2;
-          this.isActive=false
-        }
+
+        // if(this.ber != 1){
+        //   this.isActive=true
+        //   this.ber = 1;
+        // }else{
+        //   this.ber = 2;
+        //   this.isActive=false
+        // }
 
       },
       go_add(shop_cate_id){

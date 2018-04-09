@@ -26,6 +26,9 @@
 <script type="es6"> 
 import Vue from 'vue'
 import VueHtml5Editor from 'vue-html5-editor'
+ import 'font-awesome/css/font-awesome.css'
+Vue.use(fontAwesome)
+
 Vue.use(VueHtml5Editor, {
     // 全局组件名称，使用new VueHtml5Editor(options)时该选项无效  
     // global component name 
