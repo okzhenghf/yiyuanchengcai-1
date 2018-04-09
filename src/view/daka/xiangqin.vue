@@ -6,10 +6,14 @@
 				<img v-if="con.imgpath" :src="$gretUrl+con.imgpath" alt="">
 			</div>
 			<div class="right">
-				<h4 class="title">#{{con.theme}}#</h4>
+
+
+				<h4 class="title">{{con.theme}}</h4>
 				<div class="activity">
 					<p style="color:red; padding-left: 6rem;">{{time_cont}}</p>
 					<div class="bar-box" ><div class="bar" ref="input1" id="input1"></div></div>
+
+
 				</div>
 				<button class="yq">邀请好友</button>
 			</div>
@@ -41,7 +45,6 @@ export default{
 				content:'',
 				hid:false,
 				show:true,
-				// con:'时间是最美的画笔，人生如梦，岁月无情，一盏灯，一个月明，此生不易，来世多少的容易，想起一段哭泣，温柔一段慈悲，只是一句话，一个人，一段沧桑。岁月无痕，人间冷漠，沧桑了孤独的自己，有一种冷漠，也有一种淡泊，藏着风花雪月，藏着无情等待，只是一种观望，一个人生的错觉。付出是一种观望，也是一种奇迹，爱情分明，人海孤独，只是苍老的世界，一个人的誓言，一个人的回忆，温柔的慈悲，伤感最后的熟悉，每一个憔悴，每一个冰冷，只是一种年华，一种谢幕。再见的爱情，人生的冷落，只是思念太短，人生太无期，回首往昔的天亮，一个人哭泣。　一段岁月，一份想起，人生的在意，梦里的眷恋，只是一种想起，一种再见，温柔的慈悲，伤感的憔悴，人生如此眷恋，爱意如此朦胧，只是一种不甘心，一种不在意，沧桑了自己的独白，人生一句话，也是一种温柔的锁甲。爱意分别，人海孤独，只是一首凌乱，一段烦躁，孤独的活着。爱情分明，人海孤独，只是苍老的世界，一个人的誓言，一个人的回忆，温柔的慈悲，伤感最后的熟悉，每一个憔悴，每一个冰冷，只是一种年华，一种谢幕。再见的爱情，人生的冷落，只是思念太短，人生太无期，回首往昔的天亮，一个人哭泣。，孤独的活着。爱情分明，人海孤独，只是苍老的世界，一个人的誓言，一个人的回忆，温柔的慈悲，伤感最后的熟悉，每一个憔悴，每一个冰冷，只是一种年华，一种谢幕。再见的爱情，人生的冷落，只是思念太短，人生太无期，回首往昔的天亮，一个人哭泣'
 				con:'',
 				info_a:[],
 				time_cont:''
@@ -111,9 +114,13 @@ export default{
 
 			})
 				
+ 
 
 
-				this.$http.get('/api/daka/themelist',{
+
+			this.$http.get('/api/daka/themelist',{
+
+ 
 					params:{
 						id:this.$route.params.id
 					}
@@ -122,6 +129,7 @@ export default{
 				.then((rtnD)=>{
 					// console.log(rtnD)
 					this.info_a=rtnD.data
+
 				})		
 			
 		},
@@ -140,38 +148,47 @@ export default{
 			},
 			dodaka(){
 				this.$router.push("/daka/dodaka/"+this.$route.params.id)
+
 			},
+			dodaka(){
+					this.$router.push("/daka/dodaka/"+this.$route.params.id)
+				},
 			dataTime(value) {
-				var date = new Date(value);
-				let Y = date.getFullYear();
-				let m = date.getMonth() + 1;
-				let d = date.getDate();
-				let H = date.getHours();
-				let i = date.getMinutes();
-				let s = date.getSeconds();
-				if (m < 10) {
-				m = '0' + m;
+					var date = new Date(value);
+					let Y = date.getFullYear();
+					let m = date.getMonth() + 1;
+					let d = date.getDate();
+					let H = date.getHours();
+					let i = date.getMinutes();
+					let s = date.getSeconds();
+					if (m < 10) {
+					m = '0' + m;
+					}
+					if (d < 10) {
+					d = '0' + d;
+					}
+					if (H < 10) {
+					H = '0' + H;
+					}
+					if (i < 10) {
+					i = '0' + i;
+					}
+					if (s < 10) {
+					s = '0' + s;
+					}
+					// 获取时间格式 2017-01-03 10:13:48 
+					var t = Y+'-'+m+'-'+d+' '+H+':'+i+':'+s;
+					// <!-- 获取时间格式 2017-01-03 -->
+					// var t = Y + '-' + m + '-' + d;
+					return t;
 				}
-				if (d < 10) {
-				d = '0' + d;
-				}
-				if (H < 10) {
-				H = '0' + H;
-				}
-				if (i < 10) {
-				i = '0' + i;
-				}
-				if (s < 10) {
-				s = '0' + s;
-				}
-				// 获取时间格式 2017-01-03 10:13:48 
-				var t = Y+'-'+m+'-'+d+' '+H+':'+i+':'+s;
-				// <!-- 获取时间格式 2017-01-03 -->
-				// var t = Y + '-' + m + '-' + d;
-				return t;
-				}
+
+
 		}
+
 	}
+
+
 
 </script>
 <style scoped>

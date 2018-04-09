@@ -1,5 +1,5 @@
 <template>
-  <div class="ask-quickly">
+  <div class="ask-quickly" v-if="ask_quickly_cate">
     <div class="reward-tags">
       <ul class="reword-tags-content">
           <li v-for="(item,index) in ask_quickly_cate">
@@ -79,10 +79,10 @@ import { Indicator } from 'mint-ui'
       }
     },
     created(){
-      this.$http.get("quickaskCate").then(rtnData=>{
-          this.nTime=parseInt(new Date().getTime()/1000);
-          this.ask_quickly_cate=rtnData.data;
-      })
+      // this.$http.get("quickaskCate").then(rtnData=>{
+      //     this.nTime=parseInt(new Date().getTime()/1000);
+      //     this.ask_quickly_cate=rtnData.data;
+      // })
       this.getAskQuickly();
     },
     filters: {

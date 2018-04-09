@@ -14,14 +14,7 @@
 			     <img :src="$gretUrl+item.pic_path" alt="">
 			    </el-carousel-item>
 			 </el-carousel>
-			 <div class="channel">
-			 	<el-row :gutter="20">
-				  <el-col :span="6"><div class="grid-content bg-purple">风景</div></el-col>
-				  <el-col :span="6"><div class="grid-content bg-purple">风景</div></el-col>
-				  <el-col :span="6"><div class="grid-content bg-purple">风景</div></el-col>
-				  <el-col :span="6"><div class="grid-content bg-purple">风景</div></el-col>
-				</el-row>
-			 </div>
+			
 		</div>
 
 		<div class="docard">

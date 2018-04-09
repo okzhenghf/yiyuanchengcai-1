@@ -28,6 +28,7 @@ t<template>
               <img src="../assets/img/listen-answer-avatar-right.jpg" class="avatar-true" v-if="user_info.is_real==2">
             </div>
             <div class="p">
+
               <p>{{user_info.user_name}}</p>
               <p class="check">查看并编辑个人资料</p> 
             </div>
@@ -65,12 +66,12 @@ t<template>
             </li>
             <li class="uhome_nav" @click="publish()" v-if="user_info.is_real==2">
               <span class="uhomebg bgpic_5"></span>
-              <span class="uhome_text">添加头条</span>
+              <span class="uhome_text">添加资讯</span>
               <span class="rignt_sub"></span>
             </li>
             <li class="uhome_nav" @click="addnovel()" v-if="user_info.is_real==2">
               <span class="uhomebg bgpic_5"></span>
-              <span class="uhome_text">添加提升</span>
+              <span class="uhome_text">添加课程</span>
               <span class="rignt_sub"></span>
             </li>
              <li class="uhome_nav" @click="uhomehelp()">
@@ -152,6 +153,7 @@ export default {
       
     },
     myhome:function(){
+      this.info.vip_id = this.info.vip_id>0?this.info.vip_id:this.user_info.id
       this.$router.push('/tutorDetails/'+this.info.vip_id);
     },
     myanswer:function(){

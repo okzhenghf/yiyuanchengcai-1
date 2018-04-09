@@ -62,6 +62,15 @@
         </div>
       </div>
     </header>
+    {{say}}
+     <paihangb title="打卡排行榜" :data="['小丽','xli']" v-model="say">
+          这个是打卡一览表
+
+      </paihangb>
+     <paihangb title="作业排行榜" :data="['李同学','王同学']" v-model="say"> 
+          这个是作业一览表
+
+     </paihangb>
     <main>
       <div class="kc_list_first">
         <h4 class="kc_title">一 / 元 / 课 / 程</h4>
@@ -107,19 +116,16 @@
         <div class="container">
           <div class="kc_main">
             <ul class="kc_list">
-               <li >
-               
-                  <img src="../../assets/job/images/picture.png" class="img_title">
-              </li>
-
               <li v-for="(news,index) in news_lists">
-                 
-                <router-link :to="'/headline-details/'+news.id">
+                <router-link :to="'/headline-details/'+news.id" v-if="index == 0">
+                  <img src="../../assets/job/images/picture.png" class="img_title"></router-link>
+                <router-link :to="'/headline-details/'+news.id" v-if="index >
+                  0">
                   <div class="list_left">
                     <p>{{news.title}}</p>
                   </div>
                   <div class="list_right">
-                    <img :src="$gretUrl+news.heading_img"></div>
+                    <img src="../../assets/job/images/11.png"></div>
                 </router-link>
               </li>
 
@@ -142,6 +148,10 @@
         
         <div class="loading">
           <ul class="loading_list" >
+            <!-- vue自定义组件
+              
+             -->
+            <el-button> </el-button>
 
             <li v-for="job in vip_a">
               <router-link :to="'/job/info/'+job.id">
@@ -177,6 +187,7 @@
  function setRand(length) {
   return Math.ceil(Math.random()*length);
 }
+import paihangb from "@/components/paihangb"
 export default {
     data(){
       return {
@@ -195,7 +206,11 @@ export default {
               kc_touch_direction:null,//课程触屏方向
               is_hot_status : false,
               hot_msg : null,
+              say:"",
         }
+    },
+    components:{
+      paihangb
     },
       created(){
 

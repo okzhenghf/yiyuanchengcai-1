@@ -3,12 +3,13 @@
       <div class="findExpert">
         <mysearch></mysearch>
           <div class="findExpert-top">
-            <router-link to="/category/1" class="findExpert-top-right">
-                <span>职场</span>
-            </router-link>
             <router-link to="/category/2" class="findExpert-top-left">
-                <span>互联网</span>
+                <span>技术专家</span>
             </router-link>
+            <router-link to="/category/1" class="findExpert-top-right">
+                <span>职场专家</span>
+            </router-link>
+            
           </div>
 
             <div class="findExpert-rank" v-for="(rankItem,key) in list">
@@ -21,9 +22,9 @@
                       <img src="../assets/img/listen-answer-avatar-right.jpg" class="avatar-true" v-if="item.is_real==2">
                     </div>
                     <div class="findExpert-content">
-                      <p class="username">{{item.real_name}}</p>
-                      <p class="description">{{item.identity}}</p>
-                      <p class="description" v-show="rankItem.listType == 'newList'">{{item.introduce}}</p>
+                      <p class="username">姓名：{{item.real_name}}</p>
+                      <p class="description">类别：{{item.identity}}</p>
+                      <p class="description" v-show="rankItem.listType == 'newList'">擅长领域：{{item.introduce}}</p>
                       <p class="description" v-show="rankItem.listType == 'hotList'">
                         <span>{{item.answer_num}}</span>
                         <span>个回答，</span>

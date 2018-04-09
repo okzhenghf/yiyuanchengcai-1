@@ -51,7 +51,10 @@ const jiaoxue = resolve => require(['@/view/jiaoxue/index'], resolve)
 const Promote = resolve => require(['@/view/Promote'], resolve)
 const yishangpin = resolve => require(['@/view/yishangpin'], resolve)
 const yishangpin_add = resolve => require(['@/view/yishangpin_add'], resolve)
-
+const job_index = resolve=>require(['@/view/job/index'],resolve)
+const job_lists = resolve=>require(['@/view/job/lists'],resolve)
+const job_info =resolve=>require(['@/view/job/info'],resolve)
+const job_company =resolve=>require(['@/view/job/company'],resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -68,21 +71,21 @@ const router = new Router({
       path: '/oldindex',
       component: index,
       meta: {
-        title: '一元成才'
+        title: '一元提升'
       }
     },
     {
       path: '/headline/:id',
       component: Headline,
       meta: {
-        title: '一元成才头条'
+        title: '一元成才资讯'
       }
     },
     {
       path: '/headline-details/:id',
       component: HeadlineDetails,
       meta: {
-        title: '一元成才头条'
+        title: '一元成才资讯'
       }
     },
     {
@@ -261,35 +264,35 @@ const router = new Router({
       path: '/talk',
       component: talk,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/stalkcon/:id',
       component: stalkcon,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/stalkteacher/:id',
       component: stalkteacher,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/shiting',
       component: shiting,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
       path: '/allspeech',
       component: allspeech,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
@@ -310,7 +313,7 @@ const router = new Router({
       path: '/SmalltalkComments/:id',
       component: SmalltalkComments,
       meta: {
-        title: '一元成才提升'
+        title: '一元成才教学'
       }
     },
     {
@@ -374,7 +377,7 @@ const router = new Router({
       path: '/Promote',
       component: Promote,
       meta: {
-        title: '一元提升',
+        title: '一元教学',
         oldfooter:true,
       }
     },
@@ -382,7 +385,7 @@ const router = new Router({
       path: '/yishangpin/:id',
       component: yishangpin,
       meta: {
-        title: '一元提升',
+        title: '一元教学',
         oldfooter:true,
       }
     },
@@ -391,6 +394,42 @@ const router = new Router({
       component: yishangpin_add,
       meta: {
         title: '我要发布商品',
+        oldfooter:true,
+        // vip:true
+      }
+    },
+    {
+      path: '/job/index',
+      component: job_index,
+      meta: {
+        title: '一元招聘',
+        oldfooter:true,
+        // vip:true
+      }
+    },
+    {
+      path: '/job/lists/:id',
+      component: job_lists,
+      meta: {
+        title: '招聘列表',
+        oldfooter:true,
+        // vip:true
+      }
+    },
+    {
+      path: '/job/info/:id',
+      component: job_info,
+      meta: {
+        title: '招聘详情',
+        oldfooter:true,
+        // vip:true
+      }
+    },
+    {
+      path: '/job/company/:id',
+      component: job_company,
+      meta: {
+        title: '公司详情',
         oldfooter:true,
         // vip:true
       }
