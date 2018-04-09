@@ -114,14 +114,12 @@ export default{
 
 			})
 				
-<<<<<<< HEAD
+
 
 
 			this.$http.get('/api/daka/themelist',{
 
-=======
-			this.$http.get('/api/daka/themelist',{
->>>>>>> 7b81273da0f7c7a7ff0b32f37b9bd35058ca76e8
+
 					params:{
 						id:this.$route.params.id
 					}
@@ -131,7 +129,7 @@ export default{
 					// console.log(rtnD)
 					this.info_a=rtnD.data
 
-<<<<<<< HEAD
+
 				})
 		},
 		methods:{
@@ -151,26 +149,7 @@ export default{
 			daka_info(){
 		       this.$router.push('/daka/daka_info/'+this.$route.params.id)
 
-=======
-				})		
-			
-		},
-		methods:{
-			daka(){
-				this.hid=false,
-                this.show = true,
-                this.$refs.input.style = "overflow: hidden"
-			},
-			sq(){
-                this.hid=true,
-                this.show = false,
-                this.$refs.input.style = "height: 280px"
 
-               //res只有触发后才生效
-			},
-			dodaka(){
-				this.$router.push("/daka/dodaka/"+this.$route.params.id)
->>>>>>> 7b81273da0f7c7a7ff0b32f37b9bd35058ca76e8
 			},
 			dodaka(){
 					this.$router.push("/daka/dodaka/"+this.$route.params.id)
@@ -205,15 +184,12 @@ export default{
 					return t;
 				}
 			
-<<<<<<< HEAD
+
 		}
 
 	}
 
-=======
-		} 
-	} 
->>>>>>> 7b81273da0f7c7a7ff0b32f37b9bd35058ca76e8
+
 
 </script>
 <style scoped>
