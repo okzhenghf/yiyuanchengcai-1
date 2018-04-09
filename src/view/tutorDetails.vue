@@ -81,7 +81,7 @@
             <div class="question-footer">
               <span><timeago :since="parseInt(vip_headline.create_time)*1000"></timeago></span>
               <span @click="toHeadline()">
-                Ta的头条
+                Ta的资讯
                 <i class="icon-arrow"></i>
               </span>
             </div>

@@ -15,9 +15,9 @@
       </div>
       <div class="container">
           <div class="teachercar">
-            <span>☑{{smalltalk_list.duration}}分钟语音</span>
+            <span>☑免费试听</span>
             <span>☑主讲互动</span>
-            <span>☑提升圈交流</span>
+            <span>☑在线交流</span>
           </div>
           <div class="tutorpro">
             <router-link  :to="'/tutorDetails/'+vip_list.id">

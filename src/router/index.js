@@ -78,14 +78,14 @@ const router = new Router({
       path: '/headline/:id',
       component: Headline,
       meta: {
-        title: '一元成才头条'
+        title: '一元成才资讯'
       }
     },
     {
       path: '/headline-details/:id',
       component: HeadlineDetails,
       meta: {
-        title: '一元成才头条'
+        title: '一元成才资讯'
       }
     },
     {

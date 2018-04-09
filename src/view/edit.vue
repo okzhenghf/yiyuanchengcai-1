@@ -15,7 +15,35 @@
           <input type="text" v-if="user_info.flag!=1" v-model="user_info.real_name" placeholder="请填写昵称">
         </div>
       </div>
-      <div class="field" v-if="user_info.flag!=1">
+
+      <div class="nickname" v-if="user_info.flag==1">
+        <div class="container">
+          <label>姓名</label>
+          <input type="text"   v-model="user_info.xingming" > 
+        </div>
+      </div>
+
+      <div class="nickname" v-if="user_info.flag==1">
+        <div class="container">
+          <label>学校</label>
+          <input type="text"   v-model="user_info.school"> 
+        </div>
+      </div>
+
+      <div class="nickname" v-if="user_info.flag==1">
+        <div class="container">
+          <label>年级</label>
+          <input type="text"  v-model="user_info.grade"> 
+        </div>
+      </div>
+
+      <div class="nickname" v-if="user_info.flag==1">
+        <div class="container">
+          <label>专业</label>
+          <input type="text"  v-model="user_info.zhuanye"> 
+        </div>
+      </div>
+      <div class="field" v-if="user_info.flag==1">
         <div class="container"> 
           <label>领域</label>
           <select v-model="user_info.vip_cate_id">
@@ -58,6 +86,7 @@
           popup-transition="popup-fade">{{tip}}
         </mt-popup>
       </div>
+      br
   </div>
 </template>
 
