@@ -16,6 +16,10 @@ import Calendar from 'vue-calendar-component';
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+//引入vue-html5-editor
+import VueHtml5Editor from 'vue-html5-editor'
+Vue.use(VueHtml5Editor);
+
 Vue.use(BootstrapVue);
 Vue.use(ElementUI);
 var captUrl = ''
