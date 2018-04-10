@@ -1,6 +1,7 @@
 <template>
   <div class="stalkteacher" :class="{'overflow':inputText}">
       <div class="stalkhead" :style="'background-image:url('+smalltalk_list.smalltalk_img+')'">
+
         <div class="headback">
           <span @click="backstalk()">&lt; 全部提升</span>
           <span>提升指南？</span>
@@ -13,6 +14,7 @@
           </div>
         </div>
       </div>
+       <video controls="" width="100%" :src="smalltalk_list.preview_video" v-if="smalltalk_list.preview_video"></video>
       <div class="container">
           <div class="teachercar">
             <span>☑免费试听</span>
