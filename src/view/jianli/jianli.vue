@@ -26,8 +26,11 @@
 		        <b-col class="figure">
 		        	<!-- <img src="https://img2.bosszhipin.com/boss/avatar/avatar_2.png" alt="" />
 		        	<b-button class="btn" variant="success">编辑</b-button> -->
-		        	<img :src="imgUrl" title="＋点击请添加导图">
+		        	<!-- <img v-if="showImg" :src="user_xinxi.nick_img"> v-if="!user_xinxi.nick_img || !showImg"v-if="!user_xinxi.nick_img" -->
+
+		        	<img :src="imgUrl" title="点击添加头像">
         			<input type="file" @change='onUploadImg'>
+        			<!-- <input type="file" @change='onUploadImg'> -->
         			<b-button class="btn" variant="success" @click='saveImg()'>确定</b-button>
 		        </b-col >
 		    </b-row>
@@ -262,6 +265,7 @@ export default {
 			jingli:[],
 			img:null,
 			imgUrl:'',
+			showImg:true,//头像
 		}
 	
 	},
@@ -274,6 +278,7 @@ export default {
 			// console.log(rtnD.data.user_xinxi)
 			this.user_xinxi=rtnD.data.user_xinxi
 			this.jingli = rtnD.data.nick_jingli
+			this.imgUrl = this.$jobUrl+this.user_xinxi.nick_img;
 
 		})
 	},
@@ -377,18 +382,42 @@ export default {
 			this.inputIsShow3 = false
 		},
 		onUploadImg(e){
+			this.showImg=false
 	        this.img = e.target.files[0];
 	        this.imgUrl = window.URL.createObjectURL(this.img);
       	},
       	saveImg(){
-      		this.$http.get(this.$jobUrl+'/api/job/saveimg/',{
-      			params:{
-      				uid:this.$route.params.id,
-      				nick_img:this.imgUrl
-      			}
-      		}).then((rtnD)=>{
-      			console.log(rtnD)
-      		})
+      		// if(this.imgUrl == ''){
+      		// 	this.imgUrl = this.user_xinxi.nick_img
+      		// }
+      		// this.$http.get(this.$jobUrl+'/api/job/saveimg/',{
+      		// 	params:{
+      		// 		uid:this.$route.params.id,
+      		// 	}
+      		// }).then((rtnD)=>{
+      		// 	console.log(rtnD)
+      		// })
+
+
+
+      		this.$http.interceptors.request.eject(this.$myInterceptor);
+      		let jianli = new FormData(); 
+	      	if(this.img){
+	      	  jianli.append('file', this.img);
+	      	}
+	      	// jianli.append('type', 'edit');
+	      	jianli.append('info', JSON.stringify(this.user_xinxi));
+
+	      	// console.log(jianli.get('info'))
+	      	this.$http({
+	      	  method: "post",
+	      	  url:this.$jobUrl+'/api/job/saveimg/',
+	      	  data: jianli,
+	      	  processData: false
+	      	})
+	      	.then(()=>{
+	      		console.log(111)
+	      	})
       	}
 	},
 	directives:{
@@ -444,6 +473,11 @@ export default {
 		opacity: 0;
 	    height: 8rem;
 	    width: 100%;
+	}
+	.figure.col input+input{
+		opacity: 1;
+		height: 2rem;
+		width: 75%;
 	}
 	.figure.col img{
 		 position: absolute; 
