@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-       <video controls="" width="100%" :src="smalltalk_list.preview_video" v-if="smalltalk_list.preview_video"></video>
+       
       <div class="container">
           <div class="teachercar">
             <span>☑免费试听</span>
@@ -36,7 +36,9 @@
 
           <div class="nav_list_box">
             <h2 class="nav_list">简介</h2>
+            <video controls="" width="100%" :src="smalltalk_list.preview_video" v-if="smalltalk_list.preview_video"></video>
             <div class="content_line" :style="conlineshow?'max-height:100%;':''">
+
               <p class="show_all" v-if="!conlineshow" @click="showalline()">
                 <span>...查看全部</span> 
               </p>

@@ -10,10 +10,10 @@
 				<b-row class='text-center b1_1'> 
 			        <b-col cols = “6”  class='qian'> {{job_info.job_name}} </b-col > 
 			        <b-col > </b-col > 
-			        <b-col >  7K-13K </b-col > 
+			        <b-col >  {{job_info.salary_low}}-{{job_info.salary_hig}} </b-col > 
 			   </b-row>
 			   <b-row class='text-center b2_1'> 
-			        <b-col cols = “6”  class='qian'>广州|3-5年|本科|</b-col > 
+			        <b-col cols = “6”  class='qian'>{{job_info.city}}|{{job_info.work_time}}|{{job_info.education}}|</b-col > 
 			        <b-col > </b-col > 
 			        <b-col >  发布于昨天 </b-col > 
 			   </b-row>
