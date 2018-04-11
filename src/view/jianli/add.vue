@@ -191,6 +191,13 @@
 					<input type="text" v-model="job_title" >
 				</b-col>
 			</b-row>
+			<b-row>
+				<b-col>工作证明&nbsp;:</b-col>
+				<b-col cols="8">
+					<img :src="imgUrl" title="点击添加头像">
+        			<input type="file" class="zhengshu" @change='onUploadImg'>
+				</b-col>
+			</b-row>
 		</div>
 		<div class="youshi" v-if="type == 'youshi' " >
 			<b-row>
@@ -245,6 +252,9 @@ export default{
 			job_description:'',//工作行业
 			job_title:'',//工作岗位
 
+			imgUrl:'',
+			img:null,
+
 
 		}
 	},
@@ -252,6 +262,12 @@ export default{
 		console.log(this.$route.params.type)
 	},
 	methods:{
+		onUploadImg(e){
+			// this.showImg=false
+	        this.img = e.target.files[0];
+	        this.imgUrl = window.URL.createObjectURL(this.img);
+	        // console.log(window.URL.createObjectURL(this.img))
+      	},
 
 		add(){
 			if(this.type == 'jiben'){
@@ -260,7 +276,7 @@ export default{
 				}else{
 					this.sex ="女"
 				}
-				this.$http.get(this.$jobUrl+'/api/job/nickinfo/',{params:{
+				this.$http.get(this.$jobUrl+'/api/jianli/nickinfo/',{params:{
 					id:this.$route.params.id,
 					nickname:this.uname,
 					sex:this.sex,
@@ -284,7 +300,7 @@ export default{
 					// this.$router.push('/jianli/jianli/'+this.$route.params.id)
 				})
 			}else if(this.type == 'qiuzhi'){
-				this.$http.get(this.$jobUrl+'/api/job/nickinfo/',{params:{
+				this.$http.get(this.$jobUrl+'/api/jianli/nickinfo/',{params:{
 					id:this.$route.params.id,
 					type:this.type,
 					job_type:this.job_type,
@@ -297,18 +313,41 @@ export default{
 				})
 			}else if(this.type == 'jingli'){
 			// 	console.log('jingli')
-				this.$http.get(this.$jobUrl+'/api/job/nickinfo',{
-					params:{
-						id:this.$route.params.id,
-						type:this.type,
-						working_time:this.working_time,
-						company_name:this.company_name,
-						job_description:this.job_description,
-						job_title:this.job_title,
-					}})
-				.then((rtnD)=>{
-					console.log(rtnD)
-				})
+				// this.$http.get(this.$jobUrl+'/api/job/nickinfo',{
+				// 	params:{
+				// 		id:this.$route.params.id,
+				// 		type:this.type,
+				// 		working_time:this.working_time,
+				// 		company_name:this.company_name,
+				// 		job_description:this.job_description,
+				// 		job_title:this.job_title,
+				// 	}})
+				// .then((rtnD)=>{
+				// 	console.log(rtnD)
+				// })
+
+				this.$http.interceptors.request.eject(this.$myInterceptor);
+	      		let jianli = new FormData(); 
+		      	if(this.img){
+		      	  jianli.append('file', this.img);
+		      	}
+		      	jianli.append('type', this.type);
+		      	jianli.append('uid', this.$route.params.id);
+		      	jianli.append('job_title', this.job_title);
+		      	jianli.append('working_time', this.working_time);
+		      	jianli.append('company_name', this.company_name);
+		      	jianli.append('job_description', this.job_description);
+
+		      	console.log(jianli.get('uid'))
+		      	this.$http({
+		      	  method: "post",
+		      	  url:this.$jobUrl+'/api/jianli/addjingli/',
+		      	  data: jianli,
+		      	  processData: false
+		      	})
+		      	.then(()=>{
+		      		console.log(111)
+		      	})
 			}
 			this.$router.push('/jianli/jianli/'+this.$route.params.id)
 			
@@ -327,5 +366,15 @@ export default{
 	}
 	.jladd{
 		margin-bottom: 6rem;
+	}
+	.shixi img{
+		position: absolute;
+	    line-height: 8rem;
+    	width: 80%;
+	}
+	.shixi .zhengshu{
+	    opacity: 0;
+	    height: 8rem;
+	    width: 100%;
 	}
 </style>
