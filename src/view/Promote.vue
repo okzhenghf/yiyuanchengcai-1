@@ -9,7 +9,6 @@
       <div class="neirong" >
         <div class="bg"  @click="close()" ></div>
         <div class="close"  @click="close()" v-show="isclose"></div>
- 
         <div class="popup">
           <div class="po_top"
             v-bind:class="{ hide: isActive}"
@@ -70,13 +69,15 @@
             <span class="icon"></span>
             {{item.cate_type}}
           </p>
- 
-          <div class="swiper">
+
+          <div class="swiper" >
 
             <div class="zhuan" v-for="item2 in item.s " @click="go(item.id)">
 
               <a href="#">
-                <img v-if="item2.smalltalk_img" :src="$gretUrl+item2.smalltalk_img" alt="">
+                <div class="img">
+                  <img v-if="item2.smalltalk_img" :src="$gretUrl+item2.smalltalk_img" alt="">
+                </div>
                 <div class="txt">
                   <p class="name">{{item2.title}}</p>
                   <p>主讲人：{{item2.real_name}}</p>
@@ -95,11 +96,13 @@
 
   </div>
   <div v-show="is_cate">
-    <div class="swiper" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10" infinite-scroll-immediate-check="true"> 
+    <div class="swiper" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10" infinite-scroll-immediate-check="true">
       <div class="zhuan" v-for="item2 in change_cate_data " @click="go(item2.id)">
 
         <a href="#">
-          <img v-if="item2.smalltalk_img" :src="$gretUrl+item2.smalltalk_img" alt="">
+          <div class="img">
+            <img v-if="item2.smalltalk_img" :src="$gretUrl+item2.smalltalk_img" alt="">
+          </div>
           <div class="txt">
             <p class="name">{{item2.title}}</p>
             <p>主讲人：{{item2.real_name}}</p>
@@ -110,7 +113,7 @@
         </a>
       </div>
       <p v-if="loading" style="text-align: center;">加载中...</p>
-      <p v-if="!has_more" style="text-align: center;">无更多内容了...</p> 
+      <p v-if="!has_more" style="text-align: center;">无更多内容了...</p>
     </div>
   </div>
   <div class="zuixia"></div>
@@ -231,7 +234,6 @@
             .then((rtnD)=> {
               this.change_cate_data = rtnD.data
               // console.log(rtnD.data)
- 
               })
         },
        
