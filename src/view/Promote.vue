@@ -1,6 +1,6 @@
 <template>
 
-  <div class="content">
+  <div class="content promote">
     <b-modal v-model="hongbao_modal"
       :hide-footer="true" :hide-header="true" class="hongbao_box"
       v-bind:class="{ motai: isclose}" @click="close()" v-show="!isclose"

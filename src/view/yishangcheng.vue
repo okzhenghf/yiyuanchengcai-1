@@ -3,7 +3,7 @@
     <div class="a1">
       <mt-header title="一元商城">
         <router-link to="/yishangcheng" slot="left">
-          <mt-button>logo</mt-button>
+          <mt-button></mt-button>
         </router-link>
         <mt-button  slot="right" class="login"><img src="../assets/img/headbg.png" alt=""></mt-button>
         <mt-button icon="more" slot="right"></mt-button> 

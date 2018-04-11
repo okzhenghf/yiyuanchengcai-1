@@ -76,7 +76,7 @@ t<template>
             </li>
              <li class="uhome_nav" @click="uhomehelp()">
               <span class="uhomebg bgpic_2"></span>
-              <span class="uhome_text">帮助</span>
+              <span class="uhome_text">我的作业</span>
               <span class="rignt_sub"></span>
             </li>
              <li class="uhome_nav" @click="uhomeset()">
@@ -184,7 +184,7 @@ export default {
       console.log(1)
     },
     uhomehelp:function(){
-      //this.$router.push('/help')
+      this.$router.push('/homework/homework')
     },
     uhomeset:function(){
       this.$router.push('/set')
