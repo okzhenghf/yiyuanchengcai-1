@@ -1,6 +1,8 @@
 <template>
   <div class="stalkteacher" :class="{'overflow':inputText}">
-      <div class="stalkhead" :style="'background-image:url('+smalltalk_list.smalltalk_img+')'">
+      <div class="stalkhead" :style="'background-image:url('+smalltalk_list.smalltalk_img+')'" 
+      v-show="bo">
+        <div class="bofan_btn" @click="play" v-if="bo"><img src="../assets/img/auto.png" alt=""></div>
         <div class="headback">
           <span @click="backstalk()">&lt; 全部提升</span>
           <span>提升指南？</span>
@@ -33,7 +35,11 @@
           </div>
 
           <div class="nav_list_box">
+
             <h2 class="nav_list">简介</h2>
+            <video controls="controls" :autoplay="autoplay" width="100%" src="http://7xkx5a.com1.z0.glb.clouddn.com/jshdpqh.mp4" @click="play"></video>
+
+            
             <div class="content_line" :style="conlineshow?'max-height:100%;':''">
               <p class="show_all" v-if="!conlineshow" @click="showalline()">
                 <span>...查看全部</span> 
@@ -280,6 +286,8 @@ import { Indicator } from 'mint-ui';
   export default {
     data () {
       return {
+        bo:true,
+        autoplay:false,
         id:1,
         conlineshow:false,
         shoutingstatus:0,
@@ -425,6 +433,7 @@ import { Indicator } from 'mint-ui';
           this.smalltalk_list = rtnData.data;
           this.price = rtnData.data.price;
           this.smalltalk_list.smalltalk_img = this.$gretUrl+this.smalltalk_list.smalltalk_img;
+          console.log(this.smalltalk_list.smalltalk_img)
         })
         .then(()=>{
           let vip_id=this.smalltalk_list.vip_id
@@ -573,6 +582,11 @@ import { Indicator } from 'mint-ui';
                 }
             })
           }
+      },
+      play(){
+        this.bo=false;
+        this.autoplay=true;
+
       },
       showalline:function(){
         this.conlineshow=true;
@@ -765,5 +779,6 @@ import { Indicator } from 'mint-ui';
 <style >
 
   @import '../assets/css/stalkteacher.css';
+  
   .mtk_img_box img{width: 100%}
 </style>

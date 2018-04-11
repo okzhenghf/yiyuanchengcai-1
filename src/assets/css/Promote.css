@@ -152,9 +152,12 @@
   padding-bottom: 8px;
 
 }
+.swiper .img{
+  width: 40%;
+  height: 50%;
+}
 .swiper img{
-	width: 41%;
-    height: 50%;
+	width: 90%;
     border-radius: 5px;
     margin-top: 11px;
     margin-left: 4px;
