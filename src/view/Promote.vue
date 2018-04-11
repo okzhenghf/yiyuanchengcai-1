@@ -3,12 +3,13 @@
   <div class="content">
     <b-modal v-model="hongbao_modal"
       :hide-footer="true" :hide-header="true" class="hongbao_box"
-      v-bind:class="{ motai: isclose}" @click="close()"
+      v-bind:class="{ motai: isclose}" @click="close()" v-show="!isclose"
       >
 
       <div class="neirong" >
-        <div class="bg"  @click="close()"></div>
-        <div class="close"  @click="close()" ></div>
+        <div class="bg"  @click="close()" ></div>
+        <div class="close"  @click="close()" v-show="isclose"></div>
+ 
         <div class="popup">
           <div class="po_top"
             v-bind:class="{ hide: isActive}"
@@ -69,7 +70,7 @@
             <span class="icon"></span>
             {{item.cate_type}}
           </p>
-
+ 
           <div class="swiper">
 
             <div class="zhuan" v-for="item2 in item.s " @click="go(item.id)">
@@ -94,7 +95,7 @@
 
   </div>
   <div v-show="is_cate">
-    <div class="swiper">
+    <div class="swiper" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10" infinite-scroll-immediate-check="true"> 
       <div class="zhuan" v-for="item2 in change_cate_data " @click="go(item2.id)">
 
         <a href="#">
@@ -108,6 +109,8 @@
           </div>
         </a>
       </div>
+      <p v-if="loading" style="text-align: center;">加载中...</p>
+      <p v-if="!has_more" style="text-align: center;">无更多内容了...</p> 
     </div>
   </div>
   <div class="zuixia"></div>
@@ -118,6 +121,9 @@
   import { Search } from 'mint-ui';
   import {mapState,mapMutations} from 'vuex'
   import { Toast,MessageBox,Indicator } from 'mint-ui' 
+  import { InfiniteScroll } from 'mint-ui';
+  import { Loadmore } from 'mint-ui';
+
   export default {
   data () {
     return {
@@ -136,6 +142,10 @@
         ke_cheng_cate:[],
         is_cate:false,//默认显示首页
         change_cate_data:[],//切换的分类数据
+        loading:false,
+        has_more:true,
+        page:1,
+        cateID:1,
     }
   },
   components:{
@@ -144,6 +154,7 @@
   created(){
     this.init()
   },
+
   methods:{
        init(){
           this.$http.get("/api/Mobilehdp",{params:{page_cate:'promote'}})
@@ -179,9 +190,24 @@
 
               this.cate_a = rtnD.data
               // console.log(rtnD)
-            }) 
+            })
+            this.$http.get("/api/cate",{
+              params:{
+                page:1
+              }
+            })
+            .then((rtnD)=>{
+              this.job_list = rtnD.data
+            })
           
-
+          this.$http.get("/api/cate/cate_lists",{
+              params:{
+                theme_id:this.$route.params.id,
+                page:this.page
+              }})
+          .then((rtnD)=>{
+             this.daka_list=rtnD.data
+          })
        },
        handleChange() {
           this.tt_1=true
@@ -198,13 +224,48 @@
         change_ke_cheng_cate(index,cateID){
           this.cur_kc_cate_index = index
           this.is_cate = true
-          console.log(cateID)
-          this.$http.get("/api/Cate/cate_lists",{params:{cateId:cateID}})
+          this.page = 1 
+          this.has_more = true 
+          // console.log(cateID)
+          this.$http.get("/api/Cate/cate_lists",{params:{cateId:cateID,page:this.page}})
             .then((rtnD)=> {
-              this.change_cate_data = rtnD.data.data
-              console.log(rtnD)
+              this.change_cate_data = rtnD.data
+              // console.log(rtnD.data)
+ 
               })
         },
+       
+        loadMore(){
+          if (this.has_more) {
+            this.loading = true
+            
+            ++this.page
+console.log(this.page)
+            this.$http.get("/api/cate/cate_lists",{
+              params:{
+                page:this.page,
+                cateId:this.ke_cheng_cate[0].id,
+
+                
+              }})
+            
+            .then((rtnD)=>{
+              // console.log(rtnD.data)
+
+               if (rtnD.data.length>0) {
+                    this.change_cate_data.push(...rtnD.data)
+
+                  }else{
+                    this.has_more = false
+                  }
+                
+                  this.loading = false
+            })
+          }else{}
+          
+        },
+        
+        
     }
       
   }

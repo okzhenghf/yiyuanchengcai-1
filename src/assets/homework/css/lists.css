@@ -1,0 +1,49 @@
+.container{
+	width: 100%;
+	margin-bottom: 5rem;
+
+}
+.container .title{
+	text-align: left;
+	color: #ccc;
+	padding: 5px 10px;
+}
+.container .a{
+	height:10px;
+	width:100%;
+	background-color: #f2f2f2; 
+	border: 1px solid #ccc;
+}
+.container .content{
+	width: 100%;
+	height: 4rem;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border-bottom: 1px solid #ccc;
+	padding: .5rem 0px;
+
+}
+.container .content .img{
+  width: 20%;
+  height: 95%;
+  border-radius: 50%;
+  background: blue;
+}
+.container .content .img p{
+   width: 30%;
+   height: 40%;
+   background: red;
+   color: #fff;
+   text-align: center;
+}
+.container .content .name_time{
+	width: 40%;
+	text-align: left;
+}
+.container .content .jdt{
+    width: 10%;
+}
+.container .content .zan{
+	width: 10%;
+}
