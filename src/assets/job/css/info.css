@@ -53,7 +53,6 @@
 	.c1 {
 		width: 100%;
 		 overflow: hidden;
-		 float: left;
 		 background-color: #eefbf9;
 		 padding: 17px 18px;}
 	.c1 img{
@@ -79,7 +78,7 @@
 		background-color: #5dd5c8;
 		margin-top: 10px;}
 	.d1	h3{
-		color: #414a60;
+		color: #414a60;text-align: left;
 		font-weight: 700;
 		position: relative;
 		line-height: 44px;
@@ -115,7 +114,6 @@
 		width: 100%;
 		background: #fff;
 		color: #000;
-		border-top: 1px solid #ccc;
 	}
 	.details .content button span:after {
     	content: "";

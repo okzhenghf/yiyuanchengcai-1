@@ -421,6 +421,15 @@ const router = new Router({
       }
     },
     {
+      path: '/job/lists/kd/:keyword',
+      component: job_lists,
+      meta: {
+        title: '招聘列表',
+        oldfooter:true,
+        // vip:true
+      }
+    },
+    {
       path: '/job/info/:id',
       component: job_info,
       meta: {
