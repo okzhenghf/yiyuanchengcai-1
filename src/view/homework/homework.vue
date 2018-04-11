@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container hwk_box">
 		
 		<div class="content">
 		    <mt-header title="一元教学">

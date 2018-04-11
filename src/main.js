@@ -36,10 +36,10 @@ if (process.env.NODE_ENV === 'development') {
   jobApiURL = 'http://localhost/20180305/zhixin/'   
 } else {
   // npm run build
-  gretUrl=Axios.defaults.baseURL = 'http://www.aoyuankj.com/fenda/public/'
-  captUrl = 'http://www.aoyuankj.com/fenda/public/api/capt/setCaptcha/'
-  sourceUrl = 'http://www.aoyuankj.com/fenda/public/static/api/'
-  jobApiURL = 'http://www.aoyuankj.com/zhixin/'   
+  gretUrl=Axios.defaults.baseURL = 'https://www.aoyuankj.com/fenda/public/'
+  captUrl = 'https://www.aoyuankj.com/fenda/public/api/capt/setCaptcha/'
+  sourceUrl = 'https://www.aoyuankj.com/fenda/public/static/api/'
+  jobApiURL = 'https://www.aoyuankj.com/zhixin/'   
   
 }
 

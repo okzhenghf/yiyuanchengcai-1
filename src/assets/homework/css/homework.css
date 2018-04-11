@@ -1,14 +1,15 @@
 li{
 		display: block;
 	}
-	.container{
-		
+
+	.hwk_box.container{
+		padding: 0 !important;
 		width: 100%;
 	}
-	.container .content{
+	.hwk_box.container .content{
         width: 100%;
 	}
-	.container .content ul{
+	.hwk_box.container .content ul{
 		margin-top: 10px;
 		margin-bottom: 30%;
 		margin-left: 5%;
@@ -16,15 +17,15 @@ li{
         width: 90%;
         
 	}
-	.container .content ul li{
+	.hwk_box.container .content ul li{
         width: 100%;
 	}
-	.container .content ul li .box{
+	.hwk_box.container .content ul li .box{
 		
 		width: 90%;
 		border: 1px solid #53b9fd;
 	}
-	.container .content ul li .box .ON{
+	.hwk_box.container .content ul li .box .ON{
 		width: 100%;
 		color: #fff;
 		background: #53b9fd;
@@ -34,7 +35,7 @@ li{
 		padding-bottom: 4px;
 	}
 	
-	.container .content ul li .box .ON .triangle {
+	.hwk_box.container .content ul li .box .ON .triangle {
 		margin-left: -10px;
 		display: block;
 		width: 0;
@@ -43,43 +44,43 @@ li{
 	    border-right: 10px solid #53b9fd;
 	    border-bottom: 10px solid transparent;
 	} 
-	.container .content ul li .box .ON p{
+	.hwk_box.container .content ul li .box .ON p{
 		font-size: 16px;
 		padding-left: 12px;
 	}
 	
-	.container .content ul li .box .ON p:nth-child(4){
+	.hwk_box.container .content ul li .box .ON p:nth-child(4){
 		flex: none;
 		margin-left:30%;
 	}
-	.container .content ul li .box{
+	.hwk_box.container .content ul li .box{
 		height: 7rem;
 	}
-	.container .content ul li .box .Under p{
+	.hwk_box.container .content ul li .box .Under p{
 		font-size: .6rem;
 		text-align: left;
 		margin-left: 10px;
-		line-height: 1.5rem;
+		line-height: 1.5rem;margin-bottom: 0;
 		width: 80%;
 	}
-	.container .content ul li .box .Under .data_time{
+	.hwk_box.container .content ul li .box .Under .data_time{
 		color: #53b9fd;
 	}
-	.container .content ul li .box .Under .jdt{
+	.hwk_box.container .content ul li .box .Under .jdt{
 		margin-left: 11rem;
 		margin-top: -4rem;
 		
 	}
-	.container .content ul li{
+	.hwk_box.container .content ul li{
 		display: flex;
 		justify-content: space-around;
 	}
 
 	
-	.container .content ul li .left{
+	.hwk_box.container .content ul li .left{
 		width: 10%;
 	}
-	.container .content ul li .left .dot{
+	.hwk_box.container .content ul li .left .dot{
 		margin-left: .47rem;
 		margin-top: .7rem;
 		width: .5rem;
@@ -87,7 +88,7 @@ li{
 		background: #53b9fd;
 		border-radius: 100%;
 	}
-	.container .content ul li .left .line{
+	.hwk_box.container .content ul li .left .line{
 		margin-top: -1.5rem;
 		margin-left: .6rem;
 		width: .2rem;

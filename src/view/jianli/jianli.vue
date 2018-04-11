@@ -221,8 +221,8 @@
 					<b-row >
 		    			<b-col cols="5">工作证明：</b-col>
 		    			<b-col>
-		    				<img :src="$jobUrl+item.work_know" v-if="!inputIsShow2 || cur_tr_index != n">
-		    				<img :src="imgUrl2 || $jobUrl+item.work_know" v-if="inputIsShow2 && cur_tr_index == n" alt="">
+		    				<img :src="$jobApiURL+item.work_know" v-if="!inputIsShow2 || cur_tr_index != n">
+		    				<img :src="imgUrl2 || $jobApiURL+item.work_know" v-if="inputIsShow2 && cur_tr_index == n" alt="">
 							<input type="file" v-if="inputIsShow2 && cur_tr_index == n" @change='onUploadImg2'>
 		    			</b-col>
 	    				
@@ -299,14 +299,14 @@ export default {
 	},
 	methods:{
 		init(){
-			this.$http.get(this.$jobUrl+'/api/jianli/',{
+			this.$http.get(this.$jobApiURL+'/api/jianli/',{
 				params:{uid:this.$route.params.id}
 			})
 			.then((rtnD)=>{
 				// console.log(rtnD.data.user_xinxi)
 				this.user_xinxi=rtnD.data.user_xinxi
 				this.jingli = rtnD.data.nick_jingli
-				this.imgUrl = this.$jobUrl+this.user_xinxi.nick_img ;
+				this.imgUrl = this.$jobApiURL+this.user_xinxi.nick_img ;
 				this.has=true
 				this.uptime= rtnD.data.uptime
 
@@ -333,7 +333,7 @@ export default {
 		},
 		update(){
 			this.inputIsShow = false
-			this.$http.get(this.$jobUrl+'/api/jianli/updatenick/',{
+			this.$http.get(this.$jobApiURL+'/api/jianli/updatenick/',{
 				params:{
 					uid:this.$route.params.id,
 					nickname:this.user_xinxi.nickname,
@@ -362,7 +362,7 @@ export default {
 		},
 		update1(){
 			this.inputIsShow1 = false
-			this.$http.get(this.$jobUrl+'/api/jianli/updateqiuzhi/',{
+			this.$http.get(this.$jobApiURL+'/api/jianli/updateqiuzhi/',{
 				params:{
 					uid:this.$route.params.id,
 					job_type:this.user_xinxi.job_type,
@@ -386,7 +386,7 @@ export default {
 			// this.cur_tr_index=n
 			this.inputIsShow2 = false
 			// console.log(n)
-			// this.$http.get(this.$jobUrl+'/api/job/updatejingli/',{
+			// this.$http.get(this.$jobApiURL+'/api/job/updatejingli/',{
 			// 	params:{
 			// 		uid:this.$route.params.id,
 			// 		experience_id:this.jingli[n].experience_id,
@@ -415,7 +415,7 @@ export default {
 	      	// console.log(zhengming.get('jingli'))
 	      	this.$http({
 	      	  method: "post",
-	      	  url:this.$jobUrl+'/api/jianli/updatejingli/',
+	      	  url:this.$jobApiURL+'/api/jianli/updatejingli/',
 	      	  data: zhengming,
 	      	  processData: false
 	      	})
@@ -452,7 +452,7 @@ export default {
       		// if(this.imgUrl == ''){
       		// 	this.imgUrl = this.user_xinxi.nick_img
       		// }
-      		// this.$http.get(this.$jobUrl+'/api/job/saveimg/',{
+      		// this.$http.get(this.$jobApiURL+'/api/job/saveimg/',{
       		// 	params:{
       		// 		uid:this.$route.params.id,
       		// 	}
@@ -473,7 +473,7 @@ export default {
 	      	// console.log(jianli.get('info'))
 	      	this.$http({
 	      	  method: "post",
-	      	  url:this.$jobUrl+'/api/jianli/saveimg/',
+	      	  url:this.$jobApiURL+'/api/jianli/saveimg/',
 	      	  data: jianli,
 	      	  processData: false
 	      	})

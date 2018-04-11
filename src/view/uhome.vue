@@ -49,16 +49,17 @@ t<template>
               <span class="uhome_text">我的一元页</span>
               <span class="rignt_sub"></span>
             </li>
-            <li class="uhome_nav" @click="myanswer()" v-if="user_info.status==3">
-              <span class="uhomebg bgpic_4"></span>
-              <span class="uhome_text">我答</span>
-              <span class="rignt_sub"></span>
-            </li>
-            <li class="uhome_nav" @click="totrue()" v-if="user_info.is_real<2">
+              <li class="uhome_nav" @click="totrue()" v-if="user_info.is_real<2">
               <span class="uhomebg bgpic_5"></span>
               <span class="uhome_text">申请一元认证</span>
               <span class="rignt_sub"></span>
             </li>
+            <li class="uhome_nav" @click="myanswer()" v-if="user_info.status==3">
+              <span class="uhomebg bgpic_4"></span>
+              <span class="uhome_text">我的问答</span>
+              <span class="rignt_sub"></span>
+            </li>
+          
             <li class="uhome_nav" @click="openvip()" v-if="user_info.status<3">
               <span class="uhomebg bgpic_1"></span>
               <span class="uhome_text">开通一元</span>
@@ -79,19 +80,20 @@ t<template>
               <span class="uhome_text">我的作业</span>
               <span class="rignt_sub"></span>
             </li>
-             <li class="uhome_nav" @click="uhomeset()">
-              <span class="uhomebg bgpic_3"></span>
-              <span class="uhome_text">设置</span>
-              <span class="rignt_sub"></span>
-            </li>
+           
             <li class="uhome_nav" @click="uhomedaka()">
               <span class="uhomebg bgpic_4"></span>
-              <span class="uhome_text">打卡</span>
+              <span class="uhome_text">我的打卡</span>
               <span class="rignt_sub"></span>
             </li>
              <li class="uhome_nav" @click="ujianli()">
               <span class="uhomebg bgpic_5"></span>
-              <span class="uhome_text">简历</span>
+              <span class="uhome_text">我的简历</span>
+              <span class="rignt_sub"></span>
+            </li>
+              <li class="uhome_nav" @click="uhomeset()">
+              <span class="uhomebg bgpic_3"></span>
+              <span class="uhome_text">设置</span>
               <span class="rignt_sub"></span>
             </li>
           </ul>
