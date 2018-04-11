@@ -276,7 +276,7 @@ export default{
 				}else{
 					this.sex ="女"
 				}
-				this.$http.get(this.$jobUrl+'/api/jianli/nickinfo/',{params:{
+				this.$http.get(this.$jobApiURL+'/api/jianli/nickinfo/',{params:{
 					id:this.$route.params.id,
 					nickname:this.uname,
 					sex:this.sex,
@@ -300,7 +300,7 @@ export default{
 					// this.$router.push('/jianli/jianli/'+this.$route.params.id)
 				})
 			}else if(this.type == 'qiuzhi'){
-				this.$http.get(this.$jobUrl+'/api/jianli/nickinfo/',{params:{
+				this.$http.get(this.$jobApiURL+'/api/jianli/nickinfo/',{params:{
 					id:this.$route.params.id,
 					type:this.type,
 					job_type:this.job_type,
@@ -313,7 +313,7 @@ export default{
 				})
 			}else if(this.type == 'jingli'){
 			// 	console.log('jingli')
-				// this.$http.get(this.$jobUrl+'/api/job/nickinfo',{
+				// this.$http.get(this.$jobApiURL+'/api/job/nickinfo',{
 				// 	params:{
 				// 		id:this.$route.params.id,
 				// 		type:this.type,
@@ -341,7 +341,7 @@ export default{
 		      	console.log(jianli.get('uid'))
 		      	this.$http({
 		      	  method: "post",
-		      	  url:this.$jobUrl+'/api/jianli/addjingli/',
+		      	  url:this.$jobApiURL+'/api/jianli/addjingli/',
 		      	  data: jianli,
 		      	  processData: false
 		      	})
