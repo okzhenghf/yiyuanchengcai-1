@@ -89,6 +89,11 @@ t<template>
               <span class="uhome_text">打卡</span>
               <span class="rignt_sub"></span>
             </li>
+             <li class="uhome_nav" @click="ujianli()">
+              <span class="uhomebg bgpic_5"></span>
+              <span class="uhome_text">简历</span>
+              <span class="rignt_sub"></span>
+            </li>
           </ul>
         </div>
         
@@ -191,6 +196,9 @@ export default {
     },
     uhomedaka:function() {
        this.$router.push('/daka/daka')
+    },
+    ujianli(){
+      this.$router.push('/jianli/jianli/'+this.info.user_id)
     },
     go_money(){
 
