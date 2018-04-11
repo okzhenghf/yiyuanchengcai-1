@@ -406,7 +406,9 @@ export default {
 			this.$http.interceptors.request.eject(this.$myInterceptor)
 			let zhengming = new FormData(); 
 	      	if(this.img2){
-	      	  zhengming.append('file', this.img2);
+	      	  	zhengming.append('file', this.img2);
+	      	}else{
+	      		zhengming.append('file', this.jingli[n].work_know);
 	      	}
 	      	// console.log(zhengming.get('file'))
 	      	zhengming.append('jingli', JSON.stringify(this.jingli[n]));
