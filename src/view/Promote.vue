@@ -1,6 +1,6 @@
 <template>
 
-  <div class="content promote">
+  <div class="content">
     <b-modal v-model="hongbao_modal"
       :hide-footer="true" :hide-header="true" class="hongbao_box"
       v-bind:class="{ motai: isclose}" @click="close()" v-show="!isclose"
@@ -71,6 +71,21 @@
           </p>
 
           <div class="swiper" >
+            <div class="promote_bigbox" >
+              <div class="small_box" v-for="item2 in item.s " @click="go(item.id)">
+                <a>
+                  <h2>{{item2.title}}</h2>
+                  <p class="promote_title">主讲人：{{item2.real_name}}</p>
+                  <div class="promote_bottom">
+                    ￥：{{item2.price}}元
+                    <span class="promote_number">
+                      {{item2.join_num}}人
+                    </span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
 
             <div class="zhuan" v-for="item2 in item.s " @click="go(item.id)">
 
@@ -171,7 +186,7 @@
           .then((rtnD)=> {
 
             this.type_id = rtnD.data
-            // console.log(this.type_id[1].s)
+            console.log(this.type_id)
 
             })
           
@@ -242,7 +257,7 @@
             this.loading = true
             
             ++this.page
-console.log(this.page)
+            // console.log(this.page)
             this.$http.get("/api/cate/cate_lists",{
               params:{
                 page:this.page,
