@@ -194,7 +194,7 @@
 			<b-row>
 				<b-col>工作证明&nbsp;:</b-col>
 				<b-col cols="8">
-					<img :src="imgUrl" title="点击添加头像">
+					<img :src="imgUrl" title="点击添加证明">
         			<input type="file" class="zhengshu" @change='onUploadImg'>
 				</b-col>
 			</b-row>
@@ -217,6 +217,7 @@
 	
 </template>
 <script type="text/javascript">
+import { Toast } from 'mint-ui' 
 
 export default{
 	data(){
@@ -296,7 +297,9 @@ export default{
 
 				}})
 				.then((rtnD)=>{
-					console.log(rtnD)
+					 Toast({
+           			 message:rtnD.data.msg
+           			})
 					// this.$router.push('/jianli/jianli/'+this.$route.params.id)
 				})
 			}else if(this.type == 'qiuzhi'){
@@ -309,7 +312,9 @@ export default{
 					expected_monthly_income:this.expected_monthly_income,
 				}})
 				.then((rtnD)=>{
-					console.log(rtnD)
+					 Toast({
+           			 message:rtnD.data.msg
+           			})
 				})
 			}else if(this.type == 'jingli'){
 			// 	console.log('jingli')
@@ -345,8 +350,10 @@ export default{
 		      	  data: jianli,
 		      	  processData: false
 		      	})
-		      	.then(()=>{
-		      		console.log(111)
+		      	.then((rtnD)=>{
+		      		 Toast({
+           			 message:rtnD.data.msg
+           			})
 		      	})
 			}
 			this.$router.push('/jianli/jianli/'+this.$route.params.id)
@@ -357,7 +364,7 @@ export default{
 	
 }
 </script>
-<style type="text/css">
+<style type="text/css" scoped>
 	.row{
 		margin-bottom: 3%;
 	}
@@ -370,7 +377,10 @@ export default{
 	.shixi img{
 		position: absolute;
 	    line-height: 8rem;
-    	width: 80%;
+	    width: 88%;
+	    height: 100%;
+	    left: 15px;
+	    right: 15px;
 	}
 	.shixi .zhengshu{
 	    opacity: 0;

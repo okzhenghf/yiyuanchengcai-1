@@ -1,4 +1,4 @@
-import Vue from 'vue'
+﻿import Vue from 'vue'
 import Router from 'vue-router'
 
 import newindex from '@/view/new/newindex'
@@ -498,6 +498,13 @@ const router = new Router({
       component: add_xinxi,
       meta: {
         title: '信息添加'
+      }
+    },
+   {
+      path: '/jianli/jianli/zhongzhuan/:id/:jobid',
+      component: jianli,
+      meta: {
+        title: '简历中转'
       }
     },
     

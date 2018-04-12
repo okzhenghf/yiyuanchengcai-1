@@ -31,7 +31,7 @@
 
 		        	<img :src="imgUrl" title="点击添加头像">
         			<input type="file" @change='onUploadImg'>
-        			<p class='font_small'>只支持3M以内</p>
+        			<!-- <p class='font_small'>只支持3M以内</p> -->
         			<!-- <input type="file" @change='onUploadImg'> -->
         			<b-button class="btn" variant="success" @click='saveImg()'>确定</b-button>
 		        </b-col >
@@ -60,7 +60,7 @@
 		    		</b-row>
 		    		<b-row >
 		    			<b-col cols="12">年龄: <span v-show="!inputIsShow">{{user_xinxi.birth}}</span>
-		    				<b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.birth"></b-form-input>
+		    				<b-form-input type="number" v-show="inputIsShow" v-model="user_xinxi.birth"></b-form-input>
 		    			</b-col>
 		    		</b-row>
 		    		<b-row >
@@ -134,7 +134,7 @@
 		    		</b-row>
 		    		<b-row >
 		    			<b-col cols="12">电话: <span v-show="!inputIsShow">{{user_xinxi.phone}}</span>
-		    				<b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.phone"></b-form-input>
+		    				<b-form-input type="number" v-show="inputIsShow" v-model="user_xinxi.phone"></b-form-input>
 		    			</b-col>
 		    		</b-row>
 		    		<b-row >
@@ -234,6 +234,7 @@
 		    		<div class="btn">
 		    			<span v-show="inputIsShow2 && cur_tr_index == n" @click="update2(n)">确定</span>
 		    			<span v-show="!inputIsShow2" @click="updateInfo2(n)">修改</span>
+		    			<span v-show="!inputIsShow2" @click="deleteInfo2(n)">删除</span>
 		    		</div>	
 		    	</div>
 		    	
@@ -263,9 +264,16 @@
 
 		</div>   -->
 	</div>
+	<div v-if="theme_type == '简历中转'">
+		<button class="btn j_toudi btn-success" @click="toudi()">
+		投递
+		</button>
+		
+	</div>
 </div>
 </template>
 <script type="text/javascript">
+import { Toast } from 'mint-ui' 
 export default {
 	data(){
 		return {
@@ -283,7 +291,8 @@ export default {
 			img:null,
 			imgUrl:'',//头像
 			showImg:true,//头像
-			uptime:''//更新时间
+			uptime:'',//更新时间
+			theme_type:''
 		}
 	
 	},
@@ -299,6 +308,7 @@ export default {
 	},
 	methods:{
 		init(){
+			this.theme_type=this.$route.meta.title
 			this.$http.get(this.$jobApiURL+'/api/jianli/',{
 				params:{uid:this.$route.params.id}
 			})
@@ -333,8 +343,11 @@ export default {
 		},
 		update(){
 			this.inputIsShow = false
+			// }
+
 			this.$http.get(this.$jobApiURL+'/api/jianli/updatenick/',{
 				params:{
+
 					uid:this.$route.params.id,
 					nickname:this.user_xinxi.nickname,
 					sex:this.user_xinxi.sex,
@@ -350,7 +363,11 @@ export default {
 
 				}})
 			.then((rtnD)=>{
-				console.rtnD
+				// console.rtnD
+				 Toast({
+           			 message:rtnD.data.msg
+           			})
+
 			})
 			
 		},
@@ -371,7 +388,9 @@ export default {
 					expected_monthly_income:this.user_xinxi.expected_monthly_income
 				}})
 			.then((rtnD)=>{
-				console.rtnD
+				Toast({
+           			 message:rtnD.data.msg
+           			})
 			})
 		},
 		updateInfo2(n){
@@ -421,8 +440,10 @@ export default {
 	      	  data: zhengming,
 	      	  processData: false
 	      	})
-	      	.then(()=>{
-	      		console.log(111)
+	      	.then((rtnD)=>{
+	      		Toast({
+           			 message:rtnD.data.msg
+           			})
 	      		this.init()
 	      	})
 	      	// this.init()
@@ -479,11 +500,41 @@ export default {
 	      	  data: jianli,
 	      	  processData: false
 	      	})
-	      	.then(()=>{
-	      		console.log(111)
+	      	.then((rtnD)=>{
+	      		Toast({
+           			 message:rtnD.data.msg
+           			})
 	      		
 	      	})
 	      	// this.$router.push('/jianli/jianli/'+this.$route.params.id)
+      	},
+      	deleteInfo2(n){
+      		this.$http.get(this.$jobApiURL+'/api/jianli/deletejingli/',{
+      			params:{
+      				uid:this.$route.params.id,
+					experience_id:this.jingli[n].experience_id
+      			}
+      		})
+      		.then((rtnD)=>{
+      			Toast({
+           			 message:rtnD.data.msg
+           			})
+      			this.init()
+      		})
+
+      	},
+      	toudi(){
+      		this.$http.get(this.$jobApiURL+'/api/jianli/jianlitoudi/',{
+      			params:{
+      				uid:this.$route.params.id,
+      				job_id:this.$route.params.jobid
+      			}
+      		})
+      		.then((rtnD)=>{
+      			Toast({
+           			 message:rtnD.data.msg
+           			})
+      		})
       	}
 	},
 	directives:{
@@ -497,10 +548,10 @@ export default {
 	
 	
 </script>
-<style type="text/css">
-img{
-	width: 100%;
-}
+<style type="text/css" scoped>
+	img{
+		width: 100%;
+	}
 	p{
 		margin: 0;
 		white-space: nowrap;
@@ -522,7 +573,10 @@ img{
 	hr{
 		width: 100%;
 	}
-	.red{
+	.job_jianli .A1 .container{
+		padding: 0;
+	}
+	.job_jianli .gray.red{
 		color: red;
 	}
 	.form-control{
@@ -532,7 +586,7 @@ img{
 		padding: 0.1rem;
 	}
 	.job_jianli{
-		margin-bottom:5rem;
+		margin-bottom:6rem;
 	}
 	.figure.col{
 		padding: 0px;
@@ -558,17 +612,22 @@ img{
 	.row.c2_2{
 		width: 100%;
 	}
-	.A1{
+	.job_jianli .A1{
 		width: 100%;
 		padding: 2%;
 		box-shadow: 0 0 10px rgba(0,0,0,1);
-		background: #40ffe5;
+		background: #5dd5c8;
+		color: #fff;
 	}
 	.row.A1_1{
 		margin:0;
 	}
+	.job_jianli .c1 img{
+		border-radius: 0%;
+	}
 	.c1{
 		margin-top: 3%;
+		background-color: #eefbf9;
 	}
 	.qian{
 		margin: auto;
@@ -587,8 +646,13 @@ img{
 	.container button{
 		margin-top: 0;
 	}
-	.row{
+	.job_jianli .row{
 		align-items: center;
+		/*margin-left:0;*/
+	}
+	.job_jianli .c1 .c2_2 .gray{
+		width: auto;
+		font-size: 14px;
 	}
 	h5.jl_content{
 		font-size: 16px;
@@ -599,8 +663,11 @@ img{
 	.text_tt .j_content h5 a{
 		float: right;
 	}
+	.job_jianli .btn{
+		padding: 0.3rem;
+	}
 	.btn span{
-		float: right;
+		/*float: right;*/
 		color: #007bff;
 	}
 /*	.j_content+.j_content{
@@ -616,5 +683,12 @@ img{
 	.job_jianli select{
 		width: 60%;
 		margin-bottom: 3%;
+	}
+	.j_toudi{
+		position: fixed;
+		width: 100%;
+		left: 0;
+		margin:0;
+		bottom: 3.3rem;
 	}
 </style>

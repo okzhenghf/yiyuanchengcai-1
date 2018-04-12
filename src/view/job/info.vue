@@ -10,15 +10,13 @@
 		</div>
 		<div class="b1">
 			<b-row class='text-center b1_1'>
-				<b-col cols = “6”  class='qian'>{{job_info.job_name}}</b-col >
-				<b-col ></b-col >
+				<b-col cols = "6"  class='qian'>{{job_info.job_name}}</b-col >
 				<b-col >{{job_info.salary_low}}-{{job_info.salary_hig}}</b-col >
 			</b-row>
 			<b-row class='text-center b2_1'>
-				<b-col cols = “6”  class='qian'>
+				<b-col cols = "6"  class='qian'>
 					{{job_info.city}}|{{job_info.work_time}}|{{job_info.education}}|
 				</b-col >
-				<b-col ></b-col >
 				<b-col >
 					发布于
 					<timeago :since="parseInt(job_info.add_time)*1000" class="fr"></timeago>
@@ -31,9 +29,13 @@
 				<b-col class="figure">
 					<img :src="$jobApiURL+'/Public/'+job_info.photo" alt="" />
 				</b-col >
-				<b-col cols ="5" class='qian'>{{job_info.cname}}</b-col >
-				<b-col >
-					<router-link :to="'/job/company/'+job_info.enterprise_id" class="btn btn-chat">公司详情</router-link>
+				<b-col cols ="8" class='qian'>{{job_info.company_name}}
+					<div>
+						<router-link :to="'/job/company/'+job_info.enterprise_id" class="btn btn-chat">公司详情</router-link>
+						<button class="btn btn-chat" @click="toudi">简历投递
+					</button>
+					</div>
+					
 				</b-col >
 			</b-row>
 		</div>
@@ -62,7 +64,7 @@
 	</div>
 </template>
 <script type="es6">
-
+ import {mapState,mapMutations} from 'vuex'
     export default{
     	data(){
     		return{
@@ -70,6 +72,9 @@
     			company_id:this.$route.params.id
     		}
     	},
+		computed:{
+		  ...mapState(['info','todaymoney'])
+		},
     	created(){
 		    this.init()
 		},
@@ -85,6 +90,10 @@
 				.then( (rtnD)=>{
 					this.job_info = rtnD.data
 				})
+			},
+			toudi(){
+				this.$router.push('/jianli/jianli/zhongzhuan/'+this.info.user_id+"/"+this.$route.params.id)
+
 			}
 		}		
     }
