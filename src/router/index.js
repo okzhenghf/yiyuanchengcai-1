@@ -55,6 +55,10 @@ const job_index = resolve=>require(['@/view/job/index'],resolve)
 const job_lists = resolve=>require(['@/view/job/lists'],resolve)
 const job_info =resolve=>require(['@/view/job/info'],resolve)
 const job_company =resolve=>require(['@/view/job/company'],resolve)
+const homework_add = resolve => require(['@/view/homework_add'], resolve)
+const homework_addedit = resolve => require(['@/view/homework_addedit'], resolve)
+const homework_rel = resolve => require(['@/view/homework_rel'], resolve)
+const homework_tcinfo = resolve => require(['@/view/homework_tcinfo'], resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -432,6 +436,38 @@ const router = new Router({
         title: '公司详情',
         oldfooter:true,
         // vip:true
+      }
+    },
+    {
+      path: '/homework_rel',
+      component: homework_rel,
+      meta: {
+        title: '发布作业',
+     
+      }
+    },
+    {
+      path: '/homework_add',
+      component: homework_add,
+      meta: {
+        title: '新建作业',
+     
+      }
+    },
+    {
+      path: '/homework_addedit',
+      component: homework_addedit,
+      meta: {
+        title: '修改作业',
+     
+      }
+    },
+    {
+      path: '/homework_tcinfo',
+      component: homework_tcinfo,
+      meta: {
+        title: '作业颁布详情',
+     
       }
     },
   ]

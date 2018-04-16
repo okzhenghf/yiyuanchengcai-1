@@ -34,9 +34,9 @@ if (process.env.NODE_ENV === 'development') {
   // development本地测试环境
   // npm run dev
  
-  gretUrl=Axios.defaults.baseURL = 'http://localhost/yiyuanchengcai/fenda/public'
-  captUrl = 'http://localhost/yiyuanchengcai/fenda/public/api/capt/setCaptcha'
-  sourceUrl = 'http://localhost/yiyuanchengcai/fenda/public/static/api'
+  gretUrl=Axios.defaults.baseURL = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public'
+  captUrl = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public/api/capt/setCaptcha'
+  sourceUrl = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public/static/api'
   jobApiURL = 'http://localhost/20180305/zhixin/'   
 } else {
   // npm run build

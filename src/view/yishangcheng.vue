@@ -254,18 +254,6 @@ export default {
       shangpin:[],
       chanpin:[],
       cread_id:null,
-      // chanpin:[
-      // {title:'计算',img1:"jisuan1",img2:"jisuan2"},
-      // {title:'数据库',img1:"shujuku1",img2:"shujuku2"},
-      // {title:'网络',img1:"wangluo1",img2:"wangluo2"},
-      // {title:'互联网中间件',img1:"zhong1",img2:"zhong2"},
-      // {title:'大数据库',img1:"shuju1",img2:"shuju2"},
-      // {title:'域名于网',img1:"yuming1",img2:"yuming2"},
-      // {title:'视频',img1:"shipin1",img2:"shipin2"},
-      // {title:'开发工具',img1:"kaifa1",img2:"kaifa2"},
-      // {title:'企业应用',img1:"qiye1",img2:"qiye2"},
-      // {title:'数据处理',img1:"chuli1",img2:"chuli2"},
-      // ],
       fuwu:[
       {title:"镜像服务",img:"jingxiang"},
       {title:"运维服务",img:"yunwei"},
@@ -313,16 +301,15 @@ export default {
             // console.log(this.ber)
       },
       shangpin_click(n){
-         this.isActive = this.cur_index != n ? true: false
-         this.cur_index = n
 
-        // if(this.ber != 1){
-        //   this.isActive=true
-        //   this.ber = 1;
-        // }else{
-        //   this.ber = 2;
-        //   this.isActive=false
-        // }
+        if(this.ber != 1){
+           this.isActive = this.cur_index != n ? true: false
+          this.ber = 1;
+        }else{
+          this.ber = 2;
+           this.isActive = this.cur_index = n ? true: false
+        }
+        this.cur_index = n
 
       },
       go_add(shop_cate_id){
