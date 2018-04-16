@@ -8,29 +8,23 @@
 					<input type="text" v-model="keyword"></p>
 				<button @click="search()">搜索</button>
 			</div>
-			<div class="menu">
 
-				<van-tabs :active="active" sticky>
-					<van-tab v-for="index in 4" :title="'选项 ' + index">内容 {{ index }}</van-tab>
-				</van-tabs>
-
-			</div>
 		</div>
 		<div class="loading" ref="job_list_box">
 
 			<ul class="loading_list" v-infinite-scroll="loadMore"  		infinite-scroll-disabled="loading" infinite-scroll-distance="10"	 	infinite-scroll-immediate-check="true">
 				<li v-for="info in job_list" >
-					<router-link :to="'/job/info/'+info_id">
+					<router-link :to="'/job/info/'+info.id">
 
-						<img src="https://www.zhipin.com/v2/chat_v2/images/	v2/defaultlogov2.jpg" alt="">
+						<img :src="$jobApiURL+'/Public/'+info.photo" alt="">
 						<div class="text" >
 							<div class="title">
 								<h4>{{info.job_name}}</h4>
-								<span>6K-8K</span>
+								<span>{{info.salary_low}}-{{info.salary_hig}}</span>
 							</div>
 							<div class="name">{{info.company_name}}</div>
-							<div class="msg"> <em>广州</em> <em>1年以内</em>
-								<em>本科</em>
+							<div class="msg"> <em>{{info.city}}</em> <em>{{info.work_time}}</em>
+								<em>{{info.education}}</em>
 							</div>
 						</div>
 					</router-link>
@@ -58,7 +52,13 @@
 			}
 		},
 		created(){
+			if (this.$route.params.keyword) {
+				this.keyword = this.$route.params.keyword
+				this.search()
+			}else{
     		this.init()
+				
+			}
     	},
     	 
     	methods:{

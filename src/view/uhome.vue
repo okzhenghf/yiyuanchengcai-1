@@ -76,7 +76,7 @@ t<template>
             </li>
              <li class="uhome_nav" @click="uhomehelp()">
               <span class="uhomebg bgpic_2"></span>
-              <span class="uhome_text">帮助</span>
+              <span class="uhome_text">我的作业</span>
               <span class="rignt_sub"></span>
             </li>
              <li class="uhome_nav" @click="uhomeset()">
@@ -87,6 +87,11 @@ t<template>
             <li class="uhome_nav" @click="uhomedaka()">
               <span class="uhomebg bgpic_4"></span>
               <span class="uhome_text">打卡</span>
+              <span class="rignt_sub"></span>
+            </li>
+             <li class="uhome_nav" @click="ujianli()">
+              <span class="uhomebg bgpic_5"></span>
+              <span class="uhome_text">简历</span>
               <span class="rignt_sub"></span>
             </li>
           </ul>
@@ -184,13 +189,16 @@ export default {
       console.log(1)
     },
     uhomehelp:function(){
-      //this.$router.push('/help')
+      this.$router.push('/homework/homework')
     },
     uhomeset:function(){
       this.$router.push('/set')
     },
     uhomedaka:function() {
        this.$router.push('/daka/daka')
+    },
+    ujianli(){
+      this.$router.push('/jianli/jianli/'+this.info.user_id)
     },
     go_money(){
 

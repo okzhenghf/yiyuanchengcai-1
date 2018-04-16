@@ -7,10 +7,15 @@
       >
 
       <div class="neirong" >
+<<<<<<< HEAD
 
         <div class="bg"  @click="close()"></div>
         <div class="close"  @click="close()" ></div>
 
+=======
+        <div class="bg"  @click="close()" ></div>
+        <div class="close"  @click="close()" v-show="isclose"></div>
+>>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
         <div class="popup">
           <div class="po_top"
             v-bind:class="{ hide: isActive}"
@@ -72,14 +77,34 @@
             {{item.cate_type}}
           </p>
 
+<<<<<<< HEAD
 
           <div class="swiper">
+=======
+          <div class="swiper" >
+            <div class="promote_bigbox" >
+              <div class="small_box" v-for="item2 in item.s " @click="go(item.id)">
+                <a>
+                  <h2>{{item2.title}}</h2>
+                  <p class="promote_title">主讲人：{{item2.real_name}}</p>
+                  <div class="promote_bottom">
+                    ￥：{{item2.price}}元
+                    <span class="promote_number">
+                      {{item2.join_num}}人
+                    </span>
+                  </div>
+                </a>
+              </div>
+            </div>
+>>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
 
 
             <div class="zhuan" v-for="item2 in item.s " @click="go(item.id)">
 
               <a href="#">
-                <img v-if="item2.smalltalk_img" :src="$gretUrl+item2.smalltalk_img" alt="">
+                <div class="img">
+                  <img v-if="item2.smalltalk_img" :src="$gretUrl+item2.smalltalk_img" alt="">
+                </div>
                 <div class="txt">
                   <p class="name">{{item2.title}}</p>
                   <p>主讲人：{{item2.real_name}}</p>
@@ -98,13 +123,19 @@
 
   </div>
   <div v-show="is_cate">
+<<<<<<< HEAD
 
     <div class="swiper" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10" infinite-scroll-immediate-check="true">
 
+=======
+    <div class="swiper" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10" infinite-scroll-immediate-check="true">
+>>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
       <div class="zhuan" v-for="item2 in change_cate_data " @click="go(item2.id)">
 
         <a href="#">
-          <img v-if="item2.smalltalk_img" :src="$gretUrl+item2.smalltalk_img" alt="">
+          <div class="img">
+            <img v-if="item2.smalltalk_img" :src="$gretUrl+item2.smalltalk_img" alt="">
+          </div>
           <div class="txt">
             <p class="name">{{item2.title}}</p>
             <p>主讲人：{{item2.real_name}}</p>
@@ -114,10 +145,15 @@
           </div>
         </a>
       </div>
+<<<<<<< HEAD
 
       <p v-if="loading" style="text-align: center;">加载中...</p>
       <p v-if="!has_more" style="text-align: center;">无更多内容了...</p>
 
+=======
+      <p v-if="loading" style="text-align: center;">加载中...</p>
+      <p v-if="!has_more" style="text-align: center;">无更多内容了...</p>
+>>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
     </div>
   </div>
   <div class="zuixia"></div>
@@ -149,12 +185,18 @@
         ke_cheng_cate:[],
         is_cate:false,//默认显示首页
         change_cate_data:[],//切换的分类数据
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
         loading:false,
         has_more:true,
         page:1,
         cateID:1,
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
     }
   },
   components:{
@@ -177,7 +219,7 @@
           .then((rtnD)=> {
 
             this.type_id = rtnD.data
-            // console.log(this.type_id[1].s)
+            console.log(this.type_id)
 
             })
           
@@ -233,7 +275,10 @@
         change_ke_cheng_cate(index,cateID){
           this.cur_kc_cate_index = index
           this.is_cate = true
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
           this.page = 1 
           this.has_more = true 
           // console.log(cateID)
@@ -241,7 +286,10 @@
             .then((rtnD)=> {
               this.change_cate_data = rtnD.data
               // console.log(rtnD.data)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
               })
         },
        
@@ -250,7 +298,7 @@
             this.loading = true
             
             ++this.page
-console.log(this.page)
+            // console.log(this.page)
             this.$http.get("/api/cate/cate_lists",{
               params:{
                 page:this.page,

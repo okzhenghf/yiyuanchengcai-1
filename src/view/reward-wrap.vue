@@ -8,7 +8,7 @@
           
         </div>
         <div class="wrap-main">
-          <textarea class="content" placeholder="请详细描述您的情感状态、背景信息以及具体问题。匿名提问后如需要进一步咨询，请告知前次咨询内容以便对应。48小时内无人抢答，将按支付路径全额退款。" maxlength="300"  @input="descInput" v-model="textContent">
+          <textarea class="content" placeholder="请详细描述您的信息以及具体问题。匿名提问后如需要进一步咨询，请告知前次咨询内容以便对应。48小时内无人抢答，将按支付路径全额退款。" maxlength="300"  @input="descInput" v-model="textContent">
           </textarea>
           <span class="counter">
             <i class="num">{{textNum}}</i>
@@ -18,7 +18,7 @@
         </div>
         <div class="image-wrap">
           <img src="../assets/img/reward_wrap1.jpg" alt="">
-          <span class="price">￥10</span>
+          <span class="price">￥1</span>
         </div>
         <div class="input-wrap">
           <span class="user">匿名</span>
@@ -60,7 +60,7 @@
         textContent:'',  //文本内容
         title:[],
         imgUrl:"",
-        price:10,
+        price:1,
         is_anonymous:true,
         show:false,
         tip:''

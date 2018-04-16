@@ -1,5 +1,10 @@
 <template>
+<<<<<<< HEAD
 	<div class="homework">
+=======
+	<div class="container">
+		
+>>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
 		<div class="content">
 		    <mt-header title="一元教学">
 			  <router-link to="/" slot="left">

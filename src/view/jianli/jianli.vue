@@ -3,15 +3,16 @@
 	<div class="A1">
 		 <b-container>
 		    <b-row class='A1_1'> 
-		        <b-col  cols = "6"  class='zhi'>boss直播</b-col > 
+		        <b-col  cols = "4"  class='zhi'>一元招聘</b-col > 
 		        
-		        <b-col class='wei'>更新时间10-10-10 </b-col > 
+		        <b-col class='wei' v-if="uptime">更新时间{{uptime}}</b-col > 
 		    </b-row > 
 		 </b-container >			 
 	</div>
 	<div class="c1">
         <b-row class='c2_2' > 
-		        <b-col cols = "8" class='qian' v-show="user_xinxi.uid">
+        	<b-col cols = "8" v-if="!user_xinxi.nickname"></b-col>
+		        <b-col cols = "8" class='qian' v-if="user_xinxi.nickname">
 		        	<p class="uname"><strong>
 		        		{{user_xinxi.nickname}}
 		        	</strong></p>   
@@ -24,10 +25,14 @@
 		        </b-col > 
 		        
 		        <b-col class="figure">
-		        	<!-- <img src="https://img2.bosszhipin.com/boss/avatar/avatar_2.png" alt="" />
-		        	<b-button class="btn" variant="success">编辑</b-button> -->
-		        	<img :src="imgUrl" title="＋点击请添加导图">
+		        	<img src="https://img2.bosszhipin.com/boss/avatar/avatar_2.png" alt="" />
+		        	<!-- <b-button class="btn" variant="success">编辑</b-button> -->
+		        	<!-- <img v-if="showImg" :src="user_xinxi.nick_img"> v-if="!user_xinxi.nick_img || !showImg"v-if="!user_xinxi.nick_img" -->
+
+		        	<img :src="imgUrl" title="点击添加头像">
         			<input type="file" @change='onUploadImg'>
+        			<!-- <p class='font_small'>只支持3M以内</p> -->
+        			<!-- <input type="file" @change='onUploadImg'> -->
         			<b-button class="btn" variant="success" @click='saveImg()'>确定</b-button>
 		        </b-col >
 		    </b-row>
@@ -38,10 +43,10 @@
 		    <b-row > 
 		    	<b-col cols='8'><h5>基本信息</h5></b-col >
 		    	<b-col class='tianjia' >
-		    		<b-button class="btn" variant="success" @click='jibenadd()' v-if="!user_xinxi.uid">添加</b-button>
+		    		<b-button class="btn" variant="success" @click='jibenadd()' v-if="!user_xinxi.nickname">添加</b-button>
 		    	</b-col >	
 		    </b-row > 
-		    <div class='text_tt' v-if="user_xinxi.uid">
+		    <div class='text_tt' v-if="user_xinxi.nickname">
 		    	<div class="j_content">
 		    		<b-row >
 		    			<b-col cols="12">姓名: <span v-show="!inputIsShow">{{user_xinxi.nickname}}</span>
@@ -55,7 +60,7 @@
 		    		</b-row>
 		    		<b-row >
 		    			<b-col cols="12">年龄: <span v-show="!inputIsShow">{{user_xinxi.birth}}</span>
-		    				<b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.birth"></b-form-input>
+		    				<b-form-input type="number" v-show="inputIsShow" v-model="user_xinxi.birth"></b-form-input>
 		    			</b-col>
 		    		</b-row>
 		    		<b-row >
@@ -129,7 +134,7 @@
 		    		</b-row>
 		    		<b-row >
 		    			<b-col cols="12">电话: <span v-show="!inputIsShow">{{user_xinxi.phone}}</span>
-		    				<b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.phone"></b-form-input>
+		    				<b-form-input type="number" v-show="inputIsShow" v-model="user_xinxi.phone"></b-form-input>
 		    			</b-col>
 		    		</b-row>
 		    		<b-row >
@@ -152,11 +157,11 @@
 		    		<h5>求职意向</h5>
 		    	</b-col >
 		    	<b-col class='tianjia' >
-		    		<b-button class="btn" variant="success" @click="qiuzhiadd()" v-if="!user_xinxi.uid">添加
+		    		<b-button class="btn" variant="success" @click="qiuzhiadd()" v-if="!user_xinxi.expected_position">添加
 		    		</b-button>
 		    	</b-col >	
 		    </b-row > 
-		    <div class='text_tt' v-if="user_xinxi.uid">
+		    <div class='text_tt' v-if="user_xinxi.expected_position">
 		    	<div class="j_content">
 		    		<b-row>
 		    			<b-col cols="12">工作性质：<span v-show="!inputIsShow1">{{user_xinxi.job_type}}</span>
@@ -184,13 +189,13 @@
 		<div class="text_a">
 			<hr/>
 		    <b-row > 
-		    	<b-col cols='8' ><h5>实习经历</h5></b-col >
+		    	<b-col cols='8' ><h5>工作经历</h5></b-col >
 		    	<b-col class='tianjia' >
 		    		<b-button class="btn" variant="success" @click="shixiadd()" >添加
 		    		</b-button>
 		    	</b-col >		
 		    </b-row >
-		    <div class='text_tt' v-if="user_xinxi.uid">
+		    <div class='text_tt' v-if="jingli">
 		    	<div class="j_content" v-for="(item,n) in jingli">
 		    		<b-row >
 		    			<b-col cols="12">时间：<span v-show="!inputIsShow2 || cur_tr_index != n">{{item.working_time}}</span>
@@ -212,10 +217,24 @@
 		    				<b-form-input type="text" v-show="inputIsShow2 && cur_tr_index == n" v-model="item.job_description"></b-form-input>
 		    			</b-col>
 		    		</b-row>
+
+					<b-row >
+		    			<b-col cols="5">工作证明：</b-col>
+		    			<b-col>
+		    				<img :src="$jobApiURL+item.work_know" v-if="!inputIsShow2 || cur_tr_index != n">
+		    				<img :src="imgUrl2 || $jobApiURL+item.work_know" v-if="inputIsShow2 && cur_tr_index == n" alt="">
+							<input type="file" v-if="inputIsShow2 && cur_tr_index == n" @change='onUploadImg2'>
+		    			</b-col>
+	    				
+		    			
+		    		</b-row>
+
+		    		
 		    		<input type="hidden" v-model='item.experience_id'>
 		    		<div class="btn">
 		    			<span v-show="inputIsShow2 && cur_tr_index == n" @click="update2(n)">确定</span>
 		    			<span v-show="!inputIsShow2" @click="updateInfo2(n)">修改</span>
+		    			<span v-show="!inputIsShow2" @click="deleteInfo2(n)">删除</span>
 		    		</div>	
 		    	</div>
 		    	
@@ -230,7 +249,7 @@
 		    		</b-button>
 		    	</b-col >	
 		    </b-row > 
-		    <div class='text_tt' v-if="user_xinxi.uid">
+		    <div class='text_tt' v-if="has">
 		    	<div class="j_content">
 		    		<b-row>
 		    			<b-col cols="12">优势：<span v-show="!inputIsShow3">{{user_xinxi.peculiarity}}</span>
@@ -245,39 +264,64 @@
 
 		</div>   -->
 	</div>
+	<div v-if="theme_type == '简历中转'">
+		<button class="btn j_toudi btn-success" @click="toudi()">
+		投递
+		</button>
+		
+	</div>
 </div>
 </template>
 <script type="text/javascript">
+import { Toast } from 'mint-ui' 
 export default {
 	data(){
 		return {
+			has:false,
 			modalShow:true,
 			inputIsShow:false,
 			inputIsShow1:false,
 			inputIsShow2:false,
 			inputIsShow3:false,
 			cur_tr_index:null,
-
+			img2:null,
+			imgUrl2:'',//证明
 			user_xinxi:[],
 			jingli:[],
 			img:null,
-			imgUrl:'',
+			imgUrl:'',//头像
+			showImg:true,//头像
+			uptime:'',//更新时间
+			theme_type:''
 		}
 	
 	},
+	// filters:{
+	// 	getDate:function() {
+	// 		// body...
+	// 		let 
+	// 		return 
+	// 	}
+	// },
 	mounted(){
-
-		this.$http.get(this.$jobUrl+'/api/job/user',{
-			params:{uid:this.$route.params.id}
-		})
-		.then((rtnD)=>{
-			// console.log(rtnD.data.user_xinxi)
-			this.user_xinxi=rtnD.data.user_xinxi
-			this.jingli = rtnD.data.nick_jingli
-
-		})
+		this.init()
 	},
 	methods:{
+		init(){
+			this.theme_type=this.$route.meta.title
+			this.$http.get(this.$jobApiURL+'/api/jianli/',{
+				params:{uid:this.$route.params.id}
+			})
+			.then((rtnD)=>{
+				// console.log(rtnD.data.user_xinxi)
+				this.user_xinxi=rtnD.data.user_xinxi
+				this.jingli = rtnD.data.nick_jingli
+				this.imgUrl = this.$jobApiURL+this.user_xinxi.nick_img ;
+				this.has=true
+				this.uptime= rtnD.data.uptime
+
+			})
+		},
 		jibenadd(){
  			this.$router.push('/jianli/add/jiben/'+this.$route.params.id)
 		},
@@ -299,8 +343,11 @@ export default {
 		},
 		update(){
 			this.inputIsShow = false
-			this.$http.get(this.$jobUrl+'/api/job/updatenick/',{
+			// }
+
+			this.$http.get(this.$jobApiURL+'/api/jianli/updatenick/',{
 				params:{
+
 					uid:this.$route.params.id,
 					nickname:this.user_xinxi.nickname,
 					sex:this.user_xinxi.sex,
@@ -311,11 +358,16 @@ export default {
 					phone:this.user_xinxi.phone,
 					e_mail:this.user_xinxi.e_mail,
 					birth:this.user_xinxi.birth,
-					work_years:this.user_xinxi.work_years
+					work_years:this.user_xinxi.work_years,
+					graduated:this.user_xinxi.graduated
 
 				}})
 			.then((rtnD)=>{
-				console.rtnD
+				// console.rtnD
+				 Toast({
+           			 message:rtnD.data.msg
+           			})
+
 			})
 			
 		},
@@ -327,7 +379,7 @@ export default {
 		},
 		update1(){
 			this.inputIsShow1 = false
-			this.$http.get(this.$jobUrl+'/api/job/updateqiuzhi/',{
+			this.$http.get(this.$jobApiURL+'/api/jianli/updateqiuzhi/',{
 				params:{
 					uid:this.$route.params.id,
 					job_type:this.user_xinxi.job_type,
@@ -336,7 +388,9 @@ export default {
 					expected_monthly_income:this.user_xinxi.expected_monthly_income
 				}})
 			.then((rtnD)=>{
-				console.rtnD
+				Toast({
+           			 message:rtnD.data.msg
+           			})
 			})
 		},
 		updateInfo2(n){
@@ -351,20 +405,49 @@ export default {
 			// this.cur_tr_index=n
 			this.inputIsShow2 = false
 			// console.log(n)
-			this.$http.get(this.$jobUrl+'/api/job/updatejingli/',{
-				params:{
-					uid:this.$route.params.id,
-					experience_id:this.jingli[n].experience_id,
+			// this.$http.get(this.$jobApiURL+'/api/job/updatejingli/',{
+			// 	params:{
+			// 		uid:this.$route.params.id,
+			// 		experience_id:this.jingli[n].experience_id,
 					
-					working_time:this.jingli[n].working_time,
-					re_company_name:this.jingli[n].re_company_name,
-					job_title:this.jingli[n].job_title,
-					job_description:this.jingli[n].job_description,
-				}
-			})
-			.then((rtnD)=>{
-				console.log(rtnD)
-			})
+			// 		working_time:this.jingli[n].working_time,
+			// 		re_company_name:this.jingli[n].re_company_name,
+			// 		job_title:this.jingli[n].job_title,
+			// 		job_description:this.jingli[n].job_description,
+			// 	}
+			// })
+			// .then((rtnD)=>{
+			// 	console.log(rtnD)
+			// })
+
+
+
+			this.$http.interceptors.request.eject(this.$myInterceptor)
+			let zhengming = new FormData(); 
+	      	if(this.img2){
+	      	  	zhengming.append('file', this.img2);
+	      	}else{
+	      		zhengming.append('file', this.jingli[n].work_know);
+	      	}
+	      	// console.log(zhengming.get('file'))
+	      	zhengming.append('jingli', JSON.stringify(this.jingli[n]));
+	      	zhengming.append('id', this.$route.params.id);
+
+	      	// console.log(zhengming.get('jingli'))
+	      	this.$http({
+	      	  method: "post",
+	      	  url:this.$jobApiURL+'/api/jianli/updatejingli/',
+	      	  data: zhengming,
+	      	  processData: false
+	      	})
+	      	.then((rtnD)=>{
+	      		Toast({
+           			 message:rtnD.data.msg
+           			})
+	      		this.init()
+	      	})
+	      	// this.init()
+	      	// this.imgUrl2 = window.URL.createObjectURL(this.img2)
 
 		},
 		updateInfo3(){
@@ -377,17 +460,80 @@ export default {
 			this.inputIsShow3 = false
 		},
 		onUploadImg(e){
+			// this.showImg=false
 	        this.img = e.target.files[0];
 	        this.imgUrl = window.URL.createObjectURL(this.img);
+	        // console.log(window.URL.createObjectURL(this.img))
+      	},
+      	onUploadImg2(e){
+			// this.showImg=false
+	        this.img2 = e.target.files[0];
+	        this.imgUrl2 = window.URL.createObjectURL(this.img2);
+	        // console.log(window.URL.createObjectURL(this.img))
       	},
       	saveImg(){
-      		this.$http.get(this.$jobUrl+'/api/job/saveimg/',{
+      		// if(this.imgUrl == ''){
+      		// 	this.imgUrl = this.user_xinxi.nick_img
+      		// }
+      		// this.$http.get(this.$jobApiURL+'/api/job/saveimg/',{
+      		// 	params:{
+      		// 		uid:this.$route.params.id,
+      		// 	}
+      		// }).then((rtnD)=>{
+      		// 	console.log(rtnD)
+      		// })
+
+
+
+      		this.$http.interceptors.request.eject(this.$myInterceptor);
+      		let jianli = new FormData(); 
+	      	if(this.img){
+	      	  jianli.append('file', this.img);
+	      	}
+	      	// jianli.append('type', 'edit');
+	      	jianli.append('info', this.$route.params.id);
+
+	      	// console.log(jianli.get('info'))
+	      	this.$http({
+	      	  method: "post",
+	      	  url:this.$jobApiURL+'/api/jianli/saveimg/',
+	      	  data: jianli,
+	      	  processData: false
+	      	})
+	      	.then((rtnD)=>{
+	      		Toast({
+           			 message:rtnD.data.msg
+           			})
+	      		
+	      	})
+	      	// this.$router.push('/jianli/jianli/'+this.$route.params.id)
+      	},
+      	deleteInfo2(n){
+      		this.$http.get(this.$jobApiURL+'/api/jianli/deletejingli/',{
       			params:{
       				uid:this.$route.params.id,
-      				nick_img:this.imgUrl
+					experience_id:this.jingli[n].experience_id
       			}
-      		}).then((rtnD)=>{
-      			console.log(rtnD)
+      		})
+      		.then((rtnD)=>{
+      			Toast({
+           			 message:rtnD.data.msg
+           			})
+      			this.init()
+      		})
+
+      	},
+      	toudi(){
+      		this.$http.get(this.$jobApiURL+'/api/jianli/jianlitoudi/',{
+      			params:{
+      				uid:this.$route.params.id,
+      				job_id:this.$route.params.jobid
+      			}
+      		})
+      		.then((rtnD)=>{
+      			Toast({
+           			 message:rtnD.data.msg
+           			})
       		})
       	}
 	},
@@ -402,7 +548,10 @@ export default {
 	
 	
 </script>
-<style type="text/css">
+<style type="text/css" scoped>
+	img{
+		width: 100%;
+	}
 	p{
 		margin: 0;
 		white-space: nowrap;
@@ -424,7 +573,10 @@ export default {
 	hr{
 		width: 100%;
 	}
-	.red{
+	.job_jianli .A1 .container{
+		padding: 0;
+	}
+	.job_jianli .gray.red{
 		color: red;
 	}
 	.form-control{
@@ -434,7 +586,7 @@ export default {
 		padding: 0.1rem;
 	}
 	.job_jianli{
-		margin:0 1% 5rem;
+		margin-bottom:6rem;
 	}
 	.figure.col{
 		padding: 0px;
@@ -444,6 +596,11 @@ export default {
 		opacity: 0;
 	    height: 8rem;
 	    width: 100%;
+	}
+	.figure.col input+input{
+		opacity: 1;
+		height: 2rem;
+		width: 75%;
 	}
 	.figure.col img{
 		 position: absolute; 
@@ -455,12 +612,22 @@ export default {
 	.row.c2_2{
 		width: 100%;
 	}
-	.A1{
+	.job_jianli .A1{
+		width: 100%;
 		padding: 2%;
-		box-shadow: 0 0 10px #ccc;
+		box-shadow: 0 0 10px rgba(0,0,0,1);
+		background: #5dd5c8;
+		color: #fff;
+	}
+	.row.A1_1{
+		margin:0;
+	}
+	.job_jianli .c1 img{
+		border-radius: 0%;
 	}
 	.c1{
 		margin-top: 3%;
+		background-color: #eefbf9;
 	}
 	.qian{
 		margin: auto;
@@ -479,8 +646,13 @@ export default {
 	.container button{
 		margin-top: 0;
 	}
-	.row{
+	.job_jianli .row{
 		align-items: center;
+		/*margin-left:0;*/
+	}
+	.job_jianli .c1 .c2_2 .gray{
+		width: auto;
+		font-size: 14px;
 	}
 	h5.jl_content{
 		font-size: 16px;
@@ -491,18 +663,32 @@ export default {
 	.text_tt .j_content h5 a{
 		float: right;
 	}
+	.job_jianli .btn{
+		padding: 0.3rem;
+	}
 	.btn span{
-		float: right;
+		/*float: right;*/
 		color: #007bff;
 	}
 /*	.j_content+.j_content{
 		margin-top:2rem;
 	}*/
+	.font_small{
+		font-size: 0.3rem;
+		color: #999;
+	}
 	span{
 		display: inline-block;
 	}
-	select{
+	.job_jianli select{
 		width: 60%;
 		margin-bottom: 3%;
+	}
+	.j_toudi{
+		position: fixed;
+		width: 100%;
+		left: 0;
+		margin:0;
+		bottom: 3.3rem;
 	}
 </style>
