@@ -97,10 +97,14 @@
                 <span class="time"><timeago :since="parseInt(item.create_time)*1000"></timeago></span>
                 <div class="footer-count" v-if="item.listen_ask">
                   <span class="count">
-                    <span>听过</span>
+                    <span @click="toget_tags(item.vip_id)">赠与答主标签</span>
+                  </span>
+                  <span class="count">
+                    <span><i class="el-icon-service">听过</i></span>
                     <span>{{item.listen_num}}</span>
                   </span>
                   <span class="count" @click="toLike(index)">
+
                     <i class="like-icon" v-show="!item.like"></i>
                     <i class="like-icon-zan" v-show="item.like"></i>
                     <span>{{item.like_num}}</span>
@@ -116,6 +120,15 @@
         </mt-cell>
       </mt-tab-container-item>
       <!-- 快问 -->
+       <b-modal v-model="tags_modal" :hide-footer="true" :hide-header="true" class="tags_box">
+         <el-input v-model="tags_input" placeholder="请输入不超过20个字的标签"></el-input>
+
+          <div class="footer">
+
+            <b-button variant="success" :block="true" @click="get_tags()">赠与</b-button>
+          </div>
+          
+        </b-modal>
       <mt-tab-container-item id="purchase-quickask" class="purchase-quickask">
         <div class="myask">
           <span class="ask-num">共{{qa_list.length}}个问题</span>
@@ -204,6 +217,7 @@
                   </span>
                   <span class="count" @click="toLikeListen(index)">
                     <i class="like-icon" v-show="!sb_like[index]"></i>
+                    <!-- {{sb_like[index]}} -->
                     <i class="like-icon-zan" v-show="sb_like[index]"></i>
                     <span>{{item.like_num}}</span>
                   </span>
@@ -264,6 +278,10 @@ import { Indicator } from 'mint-ui'
         newDay:3,//规定发表几天内的提升是新的
         isplay:-1,                    //-1：音频暂停
         yuyinSrc:'../../static/audio/8310.mp3',//语音路径
+        tags_modal:false,//标签
+        tags_input:'',//输入标签
+        vip_id:'',//
+        vid:'',//vip_id
       }
     },
     created(){
@@ -347,6 +365,7 @@ import { Indicator } from 'mint-ui'
           // Toast("请先登录");
         }
       },
+      //获取我问
       get_ask:function() {
         if(this.isLogin){
           Indicator.open();
@@ -407,6 +426,31 @@ import { Indicator } from 'mint-ui'
         }else{
           //Toast("请先登录");
         }        
+      },
+            //答主标签
+      toget_tags(value){
+        this.tags_modal=true
+        this.vid=value
+      },
+      get_tags(){
+        console.log(this.vid)
+        this.tags_modal=false
+        // console.log(this.vip_id)
+        if(this.tags_input == ''){
+
+          console.log('请输入标签')
+        }else{
+          this.$http.get('api/purchaseask/getTags/',{params:{
+            vid:this.vid,
+            tags:this.tags_input,
+            uid:this.info.user_id,
+          }})
+          .then((rtnD)=>{
+            console.log(rtnD)
+            this.tags_input=''
+          })
+        }
+        
       },
       get_qa:function() {
         if(this.isLogin){
@@ -605,7 +649,9 @@ import { Indicator } from 'mint-ui'
       toLikeListen:function(index){
         if(this.sb_like[index]){
           return ;
+
         }
+        console.log(this.sb_list[index])
         this.sb_list[index].like_num +=1;
         this.$set(this.sb_like,index,true);
         this.$http
@@ -628,6 +674,8 @@ import { Indicator } from 'mint-ui'
 
 
   @import '../assets/css/purchase.css';
-
+  .tags_box .footer{
+    margin-top: .5rem;
+  }
 
   </style>

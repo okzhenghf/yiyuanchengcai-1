@@ -276,7 +276,8 @@ export default {
           
           change_kecheng_cate(index,cateId){
             this.cur_kc_cate_index = index
-             this.$http.post("/api/kecheng",{'cateId':cateId}).then( (rtnD)=> {
+             this.$http.post("/api/kecheng",{'cateId':cateId})
+             .then( (rtnD)=> {
               this.kecheng_a = rtnD.data.data
 
             })

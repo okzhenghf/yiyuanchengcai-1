@@ -1,5 +1,15 @@
 <template>
       <div class="tutorDetails">
+
+        <b-modal v-model="tags_modal" :hide-footer="true" :hide-header="true" class="tutorDetails_tags_box">
+         <el-input v-model="tags_input" placeholder="请输入不超过20个字的标签"></el-input>
+
+          <div class="footer">
+
+            <b-button variant="success" :block="true" @click="get_tags()">赠与</b-button>
+          </div>
+          
+        </b-modal>
         <div class="tutorDetails-top">
           <div class="tutorDetails-top-header">
             <div class="tutorDetails-avatar">
@@ -10,8 +20,7 @@
               <div class="tutorDetails-wrap-nickname">{{vip_details.real_name}}</div>
               <div class="tutorDetails-wrap-followers-count">
                 <span>{{vip_details.listen_num}}</span>
-                <span>人关注</span>
-                <span>加入时长：{{vip_details.become_time|getDate}} 天</span>
+                <span>人收听</span>
               </div>
             </div>
             <div v-if="info.vip_id!=id">
@@ -22,7 +31,9 @@
           <div class="tutorDetails-top-title">
             <p class="title">{{vip_details.identity}}</p>
             <p class="introduction">{{vip_details.introduce}}</p>
-            <div class="answer-probability"><span>暂无回答概率</span></div>
+            <div class="answer-probability">
+              <span>暂无回答概率</span>
+            </div>
           </div>
           <div class="tutorDetails-tags">
             <router-link :to="'/category/'+vip_details.vip_cate_id">{{vip_details.cate_name}}</router-link>
@@ -30,7 +41,7 @@
           <div  v-if="info.vip_id!=id" class="tutorDetails-question" @click="toAsk()">¥ {{vip_details.price}}提问</div>
         </div>
         <ul class="tutorDetails-speeches" v-show="vip_smalltalk.length != 0">
-          <li class="tutorDetails-speeches-title">教学</li>
+          <li class="tutorDetails-speeches-title">提升</li>
           <li class="tutorDetails-smalltalk" v-for="item in vip_smalltalk">
              <router-link :to="'/stalkteacher/'+item.id">
               <div class="speech-title">{{item.title}}</div>
@@ -40,6 +51,45 @@
               </div>
             </router-link>
           </li>
+        </ul>
+
+        <ul class="mytags">
+          <li class="mytags_titles">
+            <span>我的标签</span>
+            <!-- {{vid}} -->
+            <div class="mytags_guanli" v-if="vip_id != vid" @click="tags_get">赠与标签</div>
+              <div class="mytags_guanli" v-if="vip_id == vid" @click="tags_do">管理</div>
+          <!--   <div class="mytags_guanli"  v-if="tags_dome_show" @click="tags_isShow">管理</div> -->
+            <!-- <div class="mytags_guanli" v-if="!tags_dome_show">
+              <span @click="tags_dome" v-if="!click_delete">管理</span>
+              <span @click="tags_dome2" v-if="click_delete">关闭管理</span>
+              <span @click="tags_isShow2">关闭查看</span>
+            </div> -->
+          </li>
+          <li class="tags">
+            <div v-for="(i,index) in tags_list" @click="dianzan(index)">
+         <!--      <span class="glyphicon glyphicon-search" aria-hidden="true"></span> -->
+              <span>{{i.tags}}</span>
+             <span v-if="i.vid != vid">
+              <i class="like-icon" v-if="!tags_like[index]"></i>
+              <i class="like-icon-zan" v-if="tags_like[index]"></i>
+              <span>{{i.zan}}</span>
+             </span>
+             
+              
+            </div>
+          </li>
+         <!--  <li class="tags" v-for="i in 3" v-if="!tags_dome_show">
+            <span>大神大神大神大神大神大神大神大神大神大神大神大神大神大神</span>
+            <div class="tags_dome">
+              <span>被赞</span>
+              <span>1111</span>
+              <div class="delete"v-if="click_delete">删除</div>
+            </div>
+            
+          </li> -->
+          
+
         </ul>
         <ul class="tutorDetails-questions">
           <li class="tutorDetails-questions-title">
@@ -81,7 +131,7 @@
             <div class="question-footer">
               <span><timeago :since="parseInt(vip_headline.create_time)*1000"></timeago></span>
               <span @click="toHeadline()">
-                Ta的资讯
+                Ta的头条
                 <i class="icon-arrow"></i>
               </span>
             </div>
@@ -215,7 +265,17 @@ export default {
       likeUp:false, //弹窗
       id:'',
       //listen_num:0,
-      flag:[]
+      flag:[],
+      vid:'',
+      dian_cur:false,//点赞
+      cur_zan:null,//被点击
+      tags_modal:false,//赠与标签
+      tags_input:'',//输入标签
+      // click_delete:false,
+      // tags_dome_show:true,
+      tags_list:[],//标签列表
+      tags_like:[],//有点赞
+      uid:''
     }
   },
   created(){
@@ -247,6 +307,8 @@ export default {
     init:function(){
       Indicator.open();
       this.id = this.$route.params.id;
+      this.vid= this.info.vip_id
+      this.uid = this.info.user_id
       this.$http
       .get('/vip/'+this.$route.params.id,{params:{user_id:this.info.user_id}})
       .then(rtnData=>{
@@ -312,12 +374,41 @@ export default {
                 this.$set(this.like,index,true)
               }
             });
+
           }
         }
         this.ask_listen_num = num;
         Indicator.close();
       });
+      // //获取标签
+      // this.$http.get('api/tags/',{params:{
+      //   vid:this.$route.params.id
+      // }})
+      // .then((rtnD)=>{
+      //   this.tags_list = rtnD.data
+      //   //是否赞过
+      //   for (var i = 0; i < rtnD.data.length; i++) {
+      //     let index = i;
+      //     this.$http.get('api/tags/haszan',{params:{
+      //       uid:this.info.user_id,
+      //       tagsid:rtnD.data[i].id
+      //     }})
+      //     .then((rtnD)=>{
+      //       if(rtnD.data == null){
+      //           this.$set(this.tags_like,index,false)
+      //         }else{
+      //           this.$set(this.tags_like,index,true)
+      //         }
+      //         // console.log(rtnD.data)
+      //     })
+      //   }
+      // })
+      
+      this.has_tags()
+
+
     },
+
     showIt:function(){
       //console.log(this.$route.params.id)
       if(this.isLogin){
@@ -379,6 +470,7 @@ export default {
     toHeadline:function(){
       this.$router.push('/headline/'+this.vip_id);
     },
+
     toAsk(){
       if(this.isLogin){
         this.cancel = true;
@@ -404,7 +496,102 @@ export default {
       }else{
         this.$router.push('/login');
       }
+    },
+    tags_do(){{
+       this.$router.push('/geren/index/'+this.vip_id);
+    }},
+
+    //添加标签
+    tags_get(){
+      this.tags_modal=true
+      // console.log(this.$route.params.id)
+      // console.log(this.info.user_id)
+
+    },
+    dianzan(val){
+      // this.dian_cur = true
+      // this.cur_zan = val
+      // console.log(val)
+      if(this.tags_like[val]){
+        return;
+      }
+      this.$set(this.tags_like,val,true);
+      this.tags_list[val].zan +=1;
+      this.$http.get('api/tags/addzan/',{params:{
+        id:this.tags_list[val].id,
+        zan:this.tags_list[val].zan
+      }})
+      .then((rtnD)=>{
+        console.log(rtnD)
+      })
+      this.$http.get('api/tags/zan/',{
+        params:{
+          uid:this.info.user_id,
+          tagid:this.tags_list[val].id
+        }
+      })
+      .then((rtnD)=>{
+        console.log(rtnD)
+      })
+    },
+    //赠与标签
+    get_tags(){
+      this.tags_modal=false
+      if(this.tags_input == ''){
+        console.log("请输入标签")
+      }else{
+        // this.tags_list.unshift(this.tags_input)
+        // console.log(this.tags_list)
+        this.$http.get('api/purchaseask/getTags/',{params:{
+          vid:this.$route.params.id,
+          tags:this.tags_input,
+          uid:this.info.user_id,
+        }})
+        .then((rtnD)=>{
+          console.log(rtnD)
+          this.has_tags()
+          this.tags_input=''
+        })
+      }
+      
+    },
+    has_tags(){
+      //获取标签
+      this.$http.get('api/tags/',{params:{
+        vid:this.$route.params.id
+      }})
+      .then((rtnD)=>{
+        this.tags_list = rtnD.data
+        //是否赞过
+        for (var i = 0; i < rtnD.data.length; i++) {
+          let index = i;
+          this.$http.get('api/tags/haszan',{params:{
+            uid:this.info.user_id,
+            tagsid:rtnD.data[i].id
+          }})
+          .then((rtnD)=>{
+            if(rtnD.data == null){
+                this.$set(this.tags_like,index,false)
+              }else{
+                this.$set(this.tags_like,index,true)
+              }
+              // console.log(rtnD.data)
+          })
+        }
+      })
     }
+    // tags_isShow(){
+    //   this.tags_dome_show=false
+    // },
+    // tags_isShow2(){
+    //   this.tags_dome_show=true
+    // },
+    // tags_dome(){
+    //   this.click_delete=true
+    // },
+    // tags_dome2(){
+    //   this.click_delete=false
+    // }
   }
 }
 </script>
@@ -412,6 +599,77 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
   @import '../assets/css/tutorDetails.css';
+  .mytags{
+    margin-top: 0.5rem;
+  }
+  .mytags li.mytags_titles{
+    display: flex;
+    padding: .8rem 1rem .475rem;
+    font-size: .95rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    line-height: 1.3rem;
+    background-color: #fff;
+    justify-content: space-between;
+    align-items: center;
 
+  }
+  .mytags .mytags_guanli{
+      position: relative;
+      font-weight: normal;
+      font-size: 0.83333333rem;  
+  }
+  .mytags .tags{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+    /*justify-content: space-between;*/
+    padding: .475rem 1rem;
+    align-items: center;
+    /*text-align: left;*/
+    background-color: #fff;
+    margin-bottom: 0;
+    /*border-top: 1px solid #ccc;*/
+
+  }
+  .mytags .tags div{
+    /*float: left;*/
+    /*display: flex;*/
+    border: 1px solid #ccc;
+    border-radius: 100px;
+    padding: .2rem .5rem;
+    font-size: .8rem;
+    margin-bottom: .3rem;
+    margin-right:.3rem;
+  }
+  /*.mytags .tags .tags_dome{
+    flex: 0 0 25%;
+  }
+  .mytags .tags .tags_dome .delete{
+    color: red;
+  }*/
+.like-icon {
+      width: 0.8rem;
+      height: 0.8rem;
+      color: #999;
+      display: inline-block;
+      background-repeat: no-repeat;
+      background-size: contain;
+      vertical-align: -10%;
+      background-image: url("../assets/img/tutorDetails-good.png");
+  }
+  .like-icon-zan {
+      width: 0.8rem;
+      height: 0.8rem;
+      color: #999;
+      display: inline-block;
+      background-repeat: no-repeat;
+      background-size: contain;
+      vertical-align: -10%;
+      background-image: url("../assets/img/dianzan.png");
+  }
+  .tutorDetails_tags_box .footer{
+    margin-top: .5rem;
+  }
 
 </style>

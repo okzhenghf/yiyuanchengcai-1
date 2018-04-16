@@ -7,6 +7,7 @@
       >
 
       <div class="neirong" >
+ 
         <div class="bg"  @click="close()" ></div>
         <div class="close"  @click="close()" v-show="isclose"></div>
         <div class="popup">
@@ -70,6 +71,7 @@
             {{item.cate_type}}
           </p>
 
+ 
           <div class="swiper" >
             <div class="promote_bigbox" >
               <div class="small_box" v-for="item2 in item.s " @click="go(item.id)">
@@ -111,6 +113,7 @@
 
   </div>
   <div v-show="is_cate">
+ 
     <div class="swiper" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10" infinite-scroll-immediate-check="true">
       <div class="zhuan" v-for="item2 in change_cate_data " @click="go(item2.id)">
 
@@ -127,6 +130,7 @@
           </div>
         </a>
       </div>
+ 
       <p v-if="loading" style="text-align: center;">加载中...</p>
       <p v-if="!has_more" style="text-align: center;">无更多内容了...</p>
     </div>
@@ -159,11 +163,12 @@
         cate:[],
         ke_cheng_cate:[],
         is_cate:false,//默认显示首页
-        change_cate_data:[],//切换的分类数据
+        change_cate_data:[],//切换的分类数据 
         loading:false,
         has_more:true,
         page:1,
         cateID:1,
+ 
     }
   },
   components:{
@@ -241,14 +246,14 @@
         },
         change_ke_cheng_cate(index,cateID){
           this.cur_kc_cate_index = index
-          this.is_cate = true
+          this.is_cate = true 
           this.page = 1 
           this.has_more = true 
           // console.log(cateID)
           this.$http.get("/api/Cate/cate_lists",{params:{cateId:cateID,page:this.page}})
             .then((rtnD)=> {
               this.change_cate_data = rtnD.data
-              // console.log(rtnD.data)
+              // console.log(rtnD.data) 
               })
         },
        
