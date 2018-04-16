@@ -59,7 +59,6 @@ const homework_homework =resolve=>require(['@/view/homework/homework'],resolve)
 const homework_index =resolve=>require(['@/view/homework/index'],resolve)
 const homework_lists = resolve=>require(['@/view/homework/lists'],resolve)
 const homework_info = resolve=>require(['@/view/homework/info'],resolve)
-const homework_index = resolve=>require(['@/view/homework/index'],resolve)
 const new_lx = resolve=>require(['@/view/new/lx'],resolve)
 
 const jianli = resolve => require(['@/view/jianli/jianli'], resolve)
@@ -467,11 +466,7 @@ const router = new Router({
       component: homework_index,
       children:[
           {
-<<<<<<< HEAD
-            path: 'homework',
-=======
             path:'homework',
->>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
             component: homework_homework,
             meta: {
               title: '我的作业',
@@ -480,11 +475,7 @@ const router = new Router({
             }
           },
           {
-<<<<<<< HEAD
             path: 'lists/:id',
-=======
-            path: 'lists',
->>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
             component: homework_lists,
             meta: {
               title: '作业排行榜',
@@ -493,11 +484,7 @@ const router = new Router({
             }
           },
           {
-<<<<<<< HEAD
             path: 'info/:id',
-=======
-            path: 'info',
->>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
             component: homework_info,
             meta: {
               title: '作业统计',
@@ -505,10 +492,6 @@ const router = new Router({
               // vip:true
             }
           },
-<<<<<<< HEAD
-      ]
-    }, 
-=======
 
       ]
       
@@ -542,7 +525,6 @@ const router = new Router({
       }
     },
     
->>>>>>> 6b36de3993367dab08ca93eeb9af121c437759c1
   ]
 })
 
