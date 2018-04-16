@@ -63,6 +63,7 @@ const homework_info = resolve=>require(['@/view/homework/info'],resolve)
 const jianli = resolve => require(['@/view/jianli/jianli'], resolve)
 const add_xinxi = resolve => require(['@/view/jianli/add'], resolve)
 
+const geren_index = resolve => require(['@/view/geren/index'], resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -505,6 +506,13 @@ const router = new Router({
       component: jianli,
       meta: {
         title: '简历中转'
+      }
+    },
+   {
+      path: '/geren/index/:id',
+      component: geren_index,
+      meta: {
+        title: '我的标签管理'
       }
     },
     
