@@ -22,7 +22,7 @@
 								<h4>{{info.job_name}}</h4>
 								<span>{{info.salary_low}}-{{info.salary_hig}}</span>
 							</div>
-							<div class="name">{{info.company_name}}</div>
+							<div class="name">{{info.cname}}</div>
 							<div class="msg"> <em>{{info.city}}</em> <em>{{info.work_time}}</em>
 								<em>{{info.education}}</em>
 							</div>

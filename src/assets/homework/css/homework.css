@@ -1,6 +1,7 @@
 li{
 		display: block;
 	}
+ 
 	.homework{
 		
 		width: 100%;
@@ -8,7 +9,7 @@ li{
 	.homework .content{
         width: 100%;
 	}
-	.homework .content ul{
+	.homework .content ul{ 
 		margin-top: 10px;
 		margin-bottom: 30%;
 		margin-left: 5%;
@@ -16,14 +17,16 @@ li{
         width: 90%;
         
 	}
+ 
 	.homework .content ul li{
         width: 100%;
 	}
-	.homework .content ul li .box{
+	.homework .content ul li .box{ 
 		
 		width: 90%;
 		border: 1px solid #53b9fd;
 	}
+ 
 	.homework .content ul li .box .ON{
 		width: 100%;
 		color: #fff;
@@ -43,6 +46,7 @@ li{
 	    border-right: 10px solid #53b9fd;
 	    border-bottom: 10px solid transparent;
 	} 
+
 	.homework .content ul li .box .ON p{
 		font-size: 16px;
 		padding-left: 12px;
@@ -59,9 +63,10 @@ li{
 		font-size: .6rem;
 		text-align: left;
 		margin-left: 10px;
-		line-height: 1.5rem;
+		line-height: 1.5rem;margin-bottom: 0;
 		width: 80%;
 	}
+
 	.homework .content ul li .box .Under .data_time{
 		color: #53b9fd;
 	}
@@ -70,12 +75,14 @@ li{
 		margin-top: -4rem;
 		
 	}
+
 	.homework .content ul li{
 		display: flex;
 		justify-content: space-around;
 	}
 
 	
+
 	.homework .content ul li .left{
 		width: 10%;
 	}
@@ -87,6 +94,7 @@ li{
 		background: #53b9fd;
 		border-radius: 100%;
 	}
+
 	.homework .content ul li .left .line{
 		margin-top: -1.5rem;
 		margin-left: .6rem;

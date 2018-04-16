@@ -29,17 +29,17 @@ if (process.env.NODE_ENV === 'development') {
 
   // development本地测试环境
   // npm run dev
- 
-  gretUrl=Axios.defaults.baseURL = 'http://localhost/fenda/public/'
-  captUrl = 'http://localhost/fenda/public/api/capt/setCaptcha'
-  sourceUrl = 'http://localhost/fenda/public/static/api'
+  gretUrl=Axios.defaults.baseURL = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public'
+  captUrl = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public/api/capt/setCaptcha'
+  sourceUrl = 'http://localhost/20180305/fan_da/yiyuan/yycc_api/public/static/api'
+
   jobApiURL = 'http://localhost/20180305/zhixin/'   
 } else {
   // npm run build
-  gretUrl=Axios.defaults.baseURL = 'http://www.aoyuankj.com/fenda/public/'
-  captUrl = 'http://www.aoyuankj.com/fenda/public/api/capt/setCaptcha/'
-  sourceUrl = 'http://www.aoyuankj.com/fenda/public/static/api/'
-  jobApiURL = 'http://www.aoyuankj.com/zhixin/'   
+  gretUrl=Axios.defaults.baseURL = 'https://www.aoyuankj.com/fenda/public/'
+  captUrl = 'https://www.aoyuankj.com/fenda/public/api/capt/setCaptcha/'
+  sourceUrl = 'https://www.aoyuankj.com/fenda/public/static/api/'
+  jobApiURL = 'https://www.aoyuankj.com/zhixin/'   
   
 }
 

@@ -1,7 +1,5 @@
 <template>
-
 	<div class="homework">
-
 		<div class="content">
 		    <mt-header title="一元教学">
 			  <router-link to="/" slot="left">
