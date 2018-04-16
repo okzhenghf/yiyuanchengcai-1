@@ -4,14 +4,13 @@
       <div class="container">
         <h4 class="subject">
           直播课堂
-          <router-link to='/allspeech'><span class="allsub">全部专题</span></router-link>
+          
         </h4>
-        <ul class="sub_pic">
-          <!-- <li class="pichild" v-for="index in subimg"></li> -->
-          <li v-for="(item,key) in speechimg" @click="toStalkcon(item.id)">
-            <img :src="$sourceUrl+'/img/'+item.special_img" class="speechimg">
-          </li>
-        </ul>
+         <a href="https://ke.qq.com/course/291145?tuin=5721b347">
+            <img style="width:100%" src="../assets/img/keqq.jpg" class="speechimg">
+           
+         </a>
+           
         <div class="smallTalk-content">
           <mt-navbar v-model="selected" class="smallTalk-cate">
             <mt-tab-item :id="'tab_'+key" v-for="(item,key) in cat_list">{{item.cate_name}}</mt-tab-item>

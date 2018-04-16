@@ -526,7 +526,7 @@ const router = new Router({
               // vip:true
             }
           },
-      ]      
+      ]
     },
     {
       path: '/jianli/jianli/:id',
