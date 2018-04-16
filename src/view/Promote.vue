@@ -7,13 +7,10 @@
       >
 
       <div class="neirong" >
-<<<<<<< HEAD
-        <div class="bg"  @click="close()" ></div>
-        <div class="close"  @click="close()" v-show="isclose"></div>
-=======
+
         <div class="bg"  @click="close()"></div>
         <div class="close"  @click="close()" ></div>
->>>>>>> 92af3805d891f107ee10d8e7ed3a69a81ff2f66d
+
         <div class="popup">
           <div class="po_top"
             v-bind:class="{ hide: isActive}"
@@ -75,11 +72,9 @@
             {{item.cate_type}}
           </p>
 
-<<<<<<< HEAD
-          <div class="swiper" >
-=======
+
           <div class="swiper">
->>>>>>> 92af3805d891f107ee10d8e7ed3a69a81ff2f66d
+
 
             <div class="zhuan" v-for="item2 in item.s " @click="go(item.id)">
 
@@ -103,11 +98,9 @@
 
   </div>
   <div v-show="is_cate">
-<<<<<<< HEAD
+
     <div class="swiper" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10" infinite-scroll-immediate-check="true">
-=======
-    <div class="swiper">
->>>>>>> 92af3805d891f107ee10d8e7ed3a69a81ff2f66d
+
       <div class="zhuan" v-for="item2 in change_cate_data " @click="go(item2.id)">
 
         <a href="#">
@@ -121,11 +114,10 @@
           </div>
         </a>
       </div>
-<<<<<<< HEAD
+
       <p v-if="loading" style="text-align: center;">加载中...</p>
       <p v-if="!has_more" style="text-align: center;">无更多内容了...</p>
-=======
->>>>>>> 92af3805d891f107ee10d8e7ed3a69a81ff2f66d
+
     </div>
   </div>
   <div class="zuixia"></div>
@@ -157,13 +149,12 @@
         ke_cheng_cate:[],
         is_cate:false,//默认显示首页
         change_cate_data:[],//切换的分类数据
-<<<<<<< HEAD
+
         loading:false,
         has_more:true,
         page:1,
         cateID:1,
-=======
->>>>>>> 92af3805d891f107ee10d8e7ed3a69a81ff2f66d
+
     }
   },
   components:{
@@ -242,7 +233,7 @@
         change_ke_cheng_cate(index,cateID){
           this.cur_kc_cate_index = index
           this.is_cate = true
-<<<<<<< HEAD
+
           this.page = 1 
           this.has_more = true 
           // console.log(cateID)
@@ -250,13 +241,7 @@
             .then((rtnD)=> {
               this.change_cate_data = rtnD.data
               // console.log(rtnD.data)
-=======
-          console.log(cateID)
-          this.$http.get("/api/Cate/cate_lists",{params:{cateId:cateID}})
-            .then((rtnD)=> {
-              this.change_cate_data = rtnD.data.data
-              console.log(rtnD)
->>>>>>> 92af3805d891f107ee10d8e7ed3a69a81ff2f66d
+
               })
         },
        

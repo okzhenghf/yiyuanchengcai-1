@@ -1,9 +1,9 @@
 <template>
-	<div class="container">
+	<div class="info">
 	    <div class="bg">
 			<mt-header title="7.6 14:26 作业报告">
-		  <router-link to="/" slot="left">
-		    <mt-button icon="back"></mt-button>
+		  <router-link to="/homework/lists" slot="left">
+		    <mt-button icon="back">返回</mt-button>
 		  </router-link>
 			</mt-header>
 			<div class="box">
@@ -59,14 +59,32 @@
 					
 				</div>
 			</div>
-			<div class="box_three">
-				<p>错题解析</p>
-				<p>全部解析</p>
-				<p>排行榜</p>
-			</div>
+		
 		</div>
 	</div>
 </template>
 <style>
 	@import url('../../assets/homework/css/info.css');
 </style>
+<script>
+	import mockjs from 'mockjs'
+	export default{
+		data(){
+			return{
+				info_list:[],
+			}
+		},
+		created(){
+			this.init()
+		},
+		methods:{
+			init(){
+				var rtn = mockjs.mock({
+
+					'num|+1':1,
+				})
+				this.info_list = rtn.data
+			}
+		}
+	}
+</script>
