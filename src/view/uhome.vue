@@ -35,8 +35,8 @@ t<template>
             <span class="rignt_sub"></span>
           </div>
           <p class="uhome_price">
-            总收入￥{{user_info.total_income}}
-            ，总收益￥{{user_info.total_profit}}
+           助学激励金￥{{user_info.total_income}}
+            ，平台收入￥{{user_info.total_profit}}
           </p>
            
         </div>
@@ -59,7 +59,11 @@ t<template>
               <span class="uhome_text">我的问答</span>
               <span class="rignt_sub"></span>
             </li>
-          
+             <li class="uhome_nav" onclick="alert('研发中')" >
+              <span class="uhomebg bgpic_4"></span>
+              <span class="uhome_text">我的积分</span>
+              <span class="rignt_sub"></span>
+            </li>
             <li class="uhome_nav" @click="openvip()" v-if="user_info.status<3">
               <span class="uhomebg bgpic_1"></span>
               <span class="uhome_text">开通一元</span>
@@ -96,6 +100,7 @@ t<template>
               <span class="uhome_text">设置</span>
               <span class="rignt_sub"></span>
             </li>
+             
           </ul>
         </div>
         
@@ -291,4 +296,5 @@ export default {
   .hongbao_box .cur_day li .hg_data{
     color: #fff;
   }
+  .uhome .uhome_two{margin-bottom: 50px;}
 </style>

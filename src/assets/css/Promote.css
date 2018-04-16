@@ -176,7 +176,7 @@
 .swiper .promote_bigbox .small_box a{
     display: block;
     border: none;
-    color: inherit;
+    color: #fff;
 }
 .swiper .promote_bigbox .small_box h2{
   font-size: 20px;
@@ -244,14 +244,14 @@
 .modal-body{
   padding: 0 !important;
 }
-.box{
+.promote_box .box{
 	position: fixed;
 	width: 100%;
 	height: 100%;
 	background: #333333;
 	z-index: 99;
 }
-.neirong{
+.promote_box .neirong{
 	top:6rem;
 	position: absolute;
 	width: 16rem;
@@ -260,7 +260,7 @@
 	transform: translateX(-50%);
 	transition: top .5s;
 }
-.bg{
+.promote_box .bg{
 	width: 24rem;
 	height: 24rem;
 	background: url(../img/light.png);
