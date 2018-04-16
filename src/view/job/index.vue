@@ -1,12 +1,12 @@
 <template>
-<div class="box">
+<div class="job_box box">
 	<!-- 头部 -->
 	<div class="head">
 		<h1>一元招聘</h1>
 		
 		<div class="search">
-			<input type="text" placeholder="搜索职位/公司" class="search-input">
-			<a href="www.baidu.com">搜索</a>
+			<input type="text" v-model="kd" placeholder="搜索职位/公司" class="search-input">
+			<a @click="search">搜索</a>
 		</div>
 	</div>
 
@@ -34,7 +34,8 @@
 export default {
     data(){
       	return {
-      		job_cate:[]
+      		job_cate:[],
+      		kd:''
       	}
     },
     created(){
@@ -52,6 +53,9 @@ export default {
 				console.log(rtnD)
 				this.job_cate = rtnD.data
 			})
+		},
+		search(){
+			this.$router.push('/job/lists/kd/'+this.kd)
 		}
 	}
 }

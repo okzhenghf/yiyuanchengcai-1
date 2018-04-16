@@ -236,7 +236,7 @@
 		overflow: hidden;
 	}
 	.kc_list_second .kc_list{
-		width: 100%;
+		width: 100%;margin: 0;
 		overflow: hidden;
 	}
 	.kc_list_second .kc_list .img_title {
@@ -262,14 +262,11 @@
 	.kc_list_second .list_right {
 		overflow: hidden;
 		width: 30%;
-		height: 65px;
+		height: auto;
 		margin: 5px 0px;
 	}
 	.kc_list_second .list_right img {
-		width: 100%;
-		margin-left: -25px;
-		margin-bottom: 5px;
-		/*height: 100%;*/
+		width: 100%; 
 	}
 	.kc_list_second .list_left {
 		float: left;

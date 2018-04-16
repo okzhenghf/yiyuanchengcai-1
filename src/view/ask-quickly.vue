@@ -79,10 +79,10 @@ import { Indicator } from 'mint-ui'
       }
     },
     created(){
-      // this.$http.get("quickaskCate").then(rtnData=>{
-      //     this.nTime=parseInt(new Date().getTime()/1000);
-      //     this.ask_quickly_cate=rtnData.data;
-      // })
+      this.$http.get("quickaskCate").then(rtnData=>{
+          this.nTime=parseInt(new Date().getTime()/1000);
+          this.ask_quickly_cate=rtnData.data;
+      })
       this.getAskQuickly();
     },
     filters: {

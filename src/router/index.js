@@ -1,4 +1,4 @@
-import Vue from 'vue'
+﻿import Vue from 'vue'
 import Router from 'vue-router'
 
 import newindex from '@/view/new/newindex'
@@ -59,10 +59,26 @@ const homework_add = resolve => require(['@/view/homework_add'], resolve)
 const homework_addedit = resolve => require(['@/view/homework_addedit'], resolve)
 const homework_rel = resolve => require(['@/view/homework_rel'], resolve)
 const homework_tcinfo = resolve => require(['@/view/homework_tcinfo'], resolve)
+const homework_homework =resolve=>require(['@/view/homework/homework'],resolve)
+const homework_lists = resolve=>require(['@/view/homework/lists'],resolve)
+const homework_info = resolve=>require(['@/view/homework/info'],resolve)
+const homework_index = resolve=>require(['@/view/homework/index'],resolve)
+const new_lx = resolve=>require(['@/view/new/lx'],resolve)
+const jianli = resolve => require(['@/view/jianli/jianli'], resolve)
+const add_xinxi = resolve => require(['@/view/jianli/add'], resolve)
+const geren_index = resolve => require(['@/view/geren/index'], resolve)
 Vue.use(Router)
 
 const router = new Router({
   routes: [
+    {
+      path: '/new/lx',
+      component: new_lx,
+      meta: {
+        title: '练习',
+        oldfooter:true,
+      }
+    },
     {
       path: '/',
       component: newindex,
@@ -82,14 +98,14 @@ const router = new Router({
       path: '/headline/:id',
       component: Headline,
       meta: {
-        title: '一元成才头条'
+        title: '一元成才资讯'
       }
     },
     {
       path: '/headline-details/:id',
       component: HeadlineDetails,
       meta: {
-        title: '一元成才头条'
+        title: '一元成才资讯'
       }
     },
     {
@@ -421,6 +437,15 @@ const router = new Router({
       }
     },
     {
+      path: '/job/lists/kd/:keyword',
+      component: job_lists,
+      meta: {
+        title: '招聘列表',
+        oldfooter:true,
+        // vip:true
+      }
+    },
+    {
       path: '/job/info/:id',
       component: job_info,
       meta: {
@@ -468,6 +493,67 @@ const router = new Router({
       meta: {
         title: '作业颁布详情',
      
+      }
+    },
+    {
+      path: '/homework',
+      component: homework_index,
+      children:[
+          {
+            path:'homework',
+            component: homework_homework,
+            meta: {
+              title: '我的作业',
+              oldfooter:true,
+              // vip:true
+            }
+          },
+          {
+            path: 'lists/:id',
+            component: homework_lists,
+            meta: {
+              title: '作业排行榜',
+              oldfooter:true,
+              // vip:true
+            }
+          },
+          {
+            path: 'info/:id',
+            component: homework_info,
+            meta: {
+              title: '作业统计',
+              oldfooter:true,
+              // vip:true
+            }
+          },
+      ]      
+    },
+    {
+      path: '/jianli/jianli/:id',
+      component: jianli,
+      meta: {
+        title: '我的简历'
+      }
+    },
+    {
+      path: '/jianli/add/:type/:id',
+      component: add_xinxi,
+      meta: {
+        title: '信息添加'
+      }
+    },
+   {
+      path: '/jianli/jianli/zhongzhuan/:id/:jobid',
+      component: jianli,
+      meta: {
+        title: '简历中转'
+      }
+    },
+   {
+      path: '/geren/index/:id',
+      component: geren_index,
+      meta: {
+        title: '我的标签管理'
       }
     },
   ]

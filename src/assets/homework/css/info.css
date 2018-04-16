@@ -1,0 +1,106 @@
+ .info{
+ 	width: 100%;
+ }
+.info .bg{
+	width: 100%;
+	background: #f2f2f2;
+	margin-bottom: 5rem;
+} 
+.info .bg .box{
+	margin-top: .5rem;
+	margin-left: 5%;
+	width: 90%;
+	height: 12rem;
+	background: linear-gradient(140deg, transparent 50%,
+	 #8fd1fe 50%,#8fd1fe)
+       no-repeat 0 0 / 2em 2em, 
+       linear-gradient(140deg, transparent 1.5em, #fff 0 );	
+}
+.info .bg .box .content{
+	margin-left: 15%;
+	width: 70%;
+	height: 100%;
+	text-align: center;
+}
+.info .bg .box .content .situation{
+	color: #ff8f1f;
+	line-height: 2rem;
+	border-bottom: 1px solid #ccc;
+}
+.info .bg .box .content .title{
+	font-size: .6rem;
+}
+.info .bg .box .content .jdt{
+	margin-top: 1.2rem;
+}
+.info .bg .box_two{
+	margin-top: 1rem;
+	margin-left: 5%;
+	width: 90%;
+	height: 15rem;
+	background: linear-gradient(140deg, transparent 50%,
+	#8fd1fe 50%,#8fd1fe)
+    no-repeat 0 0 / 2em 2em, 
+    linear-gradient(140deg, transparent 1.5em, #fff 0 );	
+}
+.info .bg .box_two .content{
+	width: 100%;
+}
+.info .bg .box_two .content .situation{
+	margin-left: 15%;
+	width: 70%;
+	color: #ff8f1f;
+	line-height: 2rem;
+	border-bottom: 1px solid #ccc 
+}
+.info .bg .box_two .content .details .T{
+	margin-top: 1rem; 
+	color: #038ae6;
+	display: flex;
+	justify-content: space-around;
+}
+.info .bg .box_two .content .details .F{
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid #ccc;
+}
+.info .bg .box_two .content .sheet{
+	text-align: left;
+	color: #038ae6;
+	padding-left: 1rem;
+}
+.info .bg .box_two .content .sheet_content .sorting{
+    display: flex;
+    justify-content: space-around;
+}
+.info .bg .box_two .content .sheet_content .logo{
+    display: flex;
+    justify-content: space-around;
+}
+.info .bg .box_two .content .sheet_content .logo p{
+	color: #038ae6;
+	font-size: 2rem;
+}
+.info .bg .box_two .content .sheet_content .logo p:nth-child(3){
+	color:  #ff8f1f;
+}
+.info .bg .box_two .content .sheet_content .logo p:nth-child(4){
+	color:red;
+}
+.info .bg .box_three{
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+.info .bg .box_three p{
+	border-right: 1px solid #fff;
+	width: 33.333333%;
+	line-height: 2.5rem;
+	color: #fff;
+	background: #038ae6;
+}
+.info .bg .box_three p:nth-child(3){
+	border-right: none;
+}

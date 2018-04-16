@@ -5,25 +5,25 @@
 		text-decoration: none;
 	}
 	/*头部*/
-		.head{
+		.job_box .head{
 
 			width: 100%;
 			height: 196px;
 			background: #5DD5C8;
 		}
-		h1,h2{
+		.job_box h1,.job_box h2{
 			color: #fff !important;
 			margin: 0 auto !important;
 			text-align: center;
 		}
-		.head h1{
+		.job_box .head h1{
 			padding-top: 30px;
 			color: #fff ;
 			padding-bottom: 10px;
 			font-size: 33px;
 			margin:auto 0;
 		}
-		h2{
+		.job_box h2{
 			padding-top: 5px;
 			padding-bottom: 25px;
 			font-size: 27px;

@@ -28,6 +28,7 @@ t<template>
               <img src="../assets/img/listen-answer-avatar-right.jpg" class="avatar-true" v-if="user_info.is_real==2">
             </div>
             <div class="p">
+
               <p>{{user_info.user_name}}</p>
               <p class="check">查看并编辑个人资料</p> 
             </div>
@@ -65,17 +66,17 @@ t<template>
             </li>
             <li class="uhome_nav" @click="publish()" v-if="user_info.is_real==2">
               <span class="uhomebg bgpic_5"></span>
-              <span class="uhome_text">添加头条</span>
+              <span class="uhome_text">添加资讯</span>
               <span class="rignt_sub"></span>
             </li>
             <li class="uhome_nav" @click="addnovel()" v-if="user_info.is_real==2">
               <span class="uhomebg bgpic_5"></span>
-              <span class="uhome_text">添加提升</span>
+              <span class="uhome_text">添加课程</span>
               <span class="rignt_sub"></span>
             </li>
              <li class="uhome_nav" @click="uhomehelp()">
               <span class="uhomebg bgpic_2"></span>
-              <span class="uhome_text">帮助</span>
+              <span class="uhome_text">我的作业</span>
               <span class="rignt_sub"></span>
             </li>
              <li class="uhome_nav" @click="uhomeset()">
@@ -86,6 +87,11 @@ t<template>
             <li class="uhome_nav" @click="uhomedaka()">
               <span class="uhomebg bgpic_4"></span>
               <span class="uhome_text">打卡</span>
+              <span class="rignt_sub"></span>
+            </li>
+             <li class="uhome_nav" @click="ujianli()">
+              <span class="uhomebg bgpic_5"></span>
+              <span class="uhome_text">简历</span>
               <span class="rignt_sub"></span>
             </li>
           </ul>
@@ -152,6 +158,7 @@ export default {
       
     },
     myhome:function(){
+      this.info.vip_id = this.info.vip_id>0?this.info.vip_id:this.user_info.id
       this.$router.push('/tutorDetails/'+this.info.vip_id);
     },
     myanswer:function(){
@@ -182,13 +189,16 @@ export default {
       console.log(1)
     },
     uhomehelp:function(){
-      //this.$router.push('/help')
+      this.$router.push('/homework/homework')
     },
     uhomeset:function(){
       this.$router.push('/set')
     },
     uhomedaka:function() {
        this.$router.push('/daka/daka')
+    },
+    ujianli(){
+      this.$router.push('/jianli/jianli/'+this.info.user_id)
     },
     go_money(){
 

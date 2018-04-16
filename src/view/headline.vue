@@ -1,7 +1,7 @@
 <template>
 
   <div class="headline" v-infinite-scroll="loadMore"  infinite-scroll-distance="10">
-    <h3 class="headline-title">全部头条</h3>
+    <h3 class="headline-title">全部资讯</h3>
     <div class="everyday-headline" v-for="(item,key) in headline_day">
       <p class="headline-day">{{item}}</p>
       <ul class="headline-list">

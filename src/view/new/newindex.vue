@@ -107,16 +107,19 @@
         <div class="container">
           <div class="kc_main">
             <ul class="kc_list">
+               <li >
+               
+                  <img src="../../assets/job/images/picture.png" class="img_title">
+              </li>
+
               <li v-for="(news,index) in news_lists">
-                <router-link :to="'/headline-details/'+news.id" v-if="index == 0">
-                  <img src="../../assets/job/images/picture.png" class="img_title"></router-link>
-                <router-link :to="'/headline-details/'+news.id" v-if="index >
-                  0">
+                 
+                <router-link :to="'/headline-details/'+news.id">
                   <div class="list_left">
                     <p>{{news.title}}</p>
                   </div>
                   <div class="list_right">
-                    <img src="../../assets/job/images/11.png"></div>
+                    <img :src="$gretUrl+news.heading_img"></div>
                 </router-link>
               </li>
 
@@ -129,67 +132,42 @@
         <div class="container">
           <div class="kc_nav">
             <div class="el-tabs__nav-scroll">
-              <div role="tablist" class="el-tabs__nav" style="transform: translateX(0px);">
+              <div role="tablist" class="el-tabs__nav job_cate_box" >
 
-                <div class="el-tabs__item is-top "   v-for="(cate,cate_index) in vip_cate" :class="{'is-active':cate_index == cur_vip_cate_index}" @click="change_viper_cate(cate_index,cate.id)">{{cate.cate_name}}</div>
+                <div class="el- is-top "   v-for="(cate,cate_index) in vip_cate" :class="{'is-active':cate_index == cur_vip_cate_index}" @click="change_viper_cate(cate_index,cate.id)">{{cate.cate_name}}</div>
 
               </div>
             </div>
           </div>
-         <!--  <div class="kc_main">
-            <ul class="kc_list">
-              <li class="underline" v-for="vip in vip_a">
-                <router-link :to="'tutorDetails/'+vip.id">
-                  <div class="list_left">
-                    <img :src="$sourceUrl+'/img/'+vip.head_img">
-                </div>
-                <div class="list_right">
-                  <ul>
-                    <li class="list_right_top">
-                      <p>{{vip.real_name}}</p>
-                      <span>{{vip_cate[cur_vip_cate_index]['cate_name']}}人才</span>
-                    </li>
-                    <li class="list_right_center">
-                      <p>才能指数：</p>
-                      <span>{{vip.listen_num}}</span>
-                    </li>
-                    <li class="list_right_bottom">
-                      <p>{{vip_cate[cur_vip_cate_index]['cate_name']}}</p>
-                      <span>加入时长：{{vip.become_time|getDate}} 天</span>
-
-                    </li>
-
-                  </ul>
-                </div>
-              </router-link>
-            </li>
-          </ul>
-        </div> -->
+        
         <div class="loading">
           <ul class="loading_list" >
-          
-            <li>
-            <a href="">
-            <img src="https://www.zhipin.com/v2/chat_v2/images/ v2/defaultlogov2.jpg" alt="">
-            <div class="text" >
-              <div class="title"><h4>fdfdfd</h4><span>6K-8K</span></div>
-              <div class="name">dfdfdfd</div>
-              <div class="msg">
-                <em>广州</em>
-                <em>1年以内</em>
-                <em>本科</em>
-              </div>
-              </div>
-           
-            </a>
+
+            <li v-for="job in vip_a">
+              <router-link :to="'/job/info/'+job.id">
+                <img :src="$jobApiURL+'/Public/'+job.photo" alt="">
+                <div class="text" >
+                  <div class="title">
+                    <h4>{{job.job_name}}</h4>
+                    <span>{{job.salary_low}}-{{job.salary_hig}}</span>
+                  </div>
+                  <div class="name">{{job.cname}}</div>
+                  <div class="msg"> <em>{{job.city}}</em> <em>{{job.work_time}}</em>
+                    <em>{{job.education}}</em>
+                  </div>
+                </div>
+
+              </router-link>
             </li>
-            
+
           </ul>
-      </div>
-        
+        </div>
+
       </div>
     </div>
-    <div style="height: 120px;text-align: center;color: #9f9f9f;line-height: 50px;font-size: 18px;">没 有 更 多 了</div>
+    <div style="height: 120px;text-align: center;color: #9f9f9f;line-height: 50px;font-size: 18px;">
+      <router-link to="/job/index">更 多</router-link>
+    </div>
   </main>
 </div>
 </template>
@@ -208,8 +186,8 @@ export default {
               kecheng_a:[],//课程的数据列表
               kecheng_cate:[],//课程的分类
               cur_kc_cate_index:0,//当前课程分类的下标
-              vip_a:[],//人才的数据列表
-              vip_cate:[],//人才的分类
+              vip_a:[],//招聘的数据列表
+              vip_cate:[],//招聘的分类
               cur_vip_cate_index:0,//当前课程分类的下标
               news_lists:[],//新闻列表
               kc_list:[],//课程列表，大数组的把每一次的ajax分门别类的存放
@@ -248,24 +226,9 @@ export default {
             $('#carousel-example-generic').carousel('prev')
           })
         },
-      filters:{
-        // 组件内的过滤器
-        // getDate(time){
-        //    let date = new Date()
-        //    let nTime = date.getTime()-time*1000
-        //    return Math.floor(nTime/86400000)
-        // }
-      },  
       methods: {
         init(){
         
-
-          // es6 
-          // 三种状态
-          // reslove成功
-          // reject失败
-          // 
-          // 幻灯片
           this.$http.post("/api/Mobilehdp",{'page_cate':'home'}).then( (rtnD)=> {
             this.slide_a = rtnD.data
             console.log(1)
@@ -292,15 +255,15 @@ export default {
             this.news_lists = rtnD.data.data
           })
            
-          // 获取人才
+          // 获取招聘
          
-          this.$http.post("/api/Viper/getVipCate")
+          this.$http.post(this.$jobApiURL+"/api/cate/indexCate")
             .then( (rtnD)=> {
                 this.vip_cate = rtnD.data
                 return this.vip_cate[0]['id']
             })
-            .then((cateId)=>{
-                this.$http.post("/api/Viper/index",{cateId})
+            .then((cateID)=>{
+                this.$http.post(this.$jobApiURL+"/api/job/index_lists",{cateID})
                 .then((rtnD)=> {
                   this.vip_a = rtnD.data
                 })
@@ -313,14 +276,15 @@ export default {
           
           change_kecheng_cate(index,cateId){
             this.cur_kc_cate_index = index
-             this.$http.post("/api/kecheng",{'cateId':cateId}).then( (rtnD)=> {
+             this.$http.post("/api/kecheng",{'cateId':cateId})
+             .then( (rtnD)=> {
               this.kecheng_a = rtnD.data.data
 
             })
           },
-          change_viper_cate(index,cateId){
+          change_viper_cate(index,cateID){
             this.cur_vip_cate_index = index
-              this.$http.post("/api/Viper/index",{cateId}).then((rtnD)=> {
+              this.$http.post(this.$jobApiURL+"/api/job/index_lists",{cateID}).then((rtnD)=> {
                  this.vip_a = rtnD.data
                })
           },
@@ -339,5 +303,16 @@ export default {
 .message a{ color: #fff !important;} 
 .vue_html .h4,.vue_html h4 {
     font-size: 18px !important;
+}
+.job_cate_box {display: -webkit-flex;
+display: -moz-flex;
+display: -ms-flex;
+display: -o-flex;
+display: flex;}
+.el-tabs__item.is-active,.job_cate_box > div.is-active{color: #f70b56;}
+
+.job_cate_box > div{flex: 1; line-height: 50px; font-size: 16px; color: #d4d4d4; letter-spacing: 5px; text-align: center;}
+.job_cate_box > div.is-active {
+    border-bottom: 2px solid #f70b56;
 }
 </style>

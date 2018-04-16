@@ -3,28 +3,28 @@
 		padding: 0px;
 		font-family: 微信软体;
 	}
-	.title{
+	.company_info .title{
 		background: #5dd5c8;
 		width: 100%;
 		z-index: 999;
 		overflow: hidden;
 	}
-	.title img{
+	.company_info .title img{
 	    width: 42px;
 	    height: 42px;
 	    margin-top: 7px;
 	    margin-right: 10px;
 	}
-  .title .el-row {
+ .company_info  .title .el-row {
   	margin: 10px;
   	padding-left: 20px;
   }
-  .title .el-row h3{
+ .company_info  .title .el-row h3{
   	color: #fff;
   	font-size: 25px;
   	padding-top: 10px;
   }
-  .title .right{
+ .company_info  .title .right{
   	font-size: 15px;
   	float: right;
   	margin-right:40px;
@@ -36,14 +36,14 @@
  	font-size: 18px;
 
  }
- .box{
- 	height: 160px;
+  .company_info  .box{
+ 	height: 15rem;
  }
- .box .mint-swipe-item img{
+  .company_info  .box .mint-swipe-item img{
  	width: 100%;
  	height: 100%;
  }
- .box .c_s{
+ .company_info   .box .c_s{
  	position: relative;
  	top:90%;
  	left:90%;
