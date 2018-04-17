@@ -55,16 +55,20 @@ const job_index = resolve=>require(['@/view/job/index'],resolve)
 const job_lists = resolve=>require(['@/view/job/lists'],resolve)
 const job_info =resolve=>require(['@/view/job/info'],resolve)
 const job_company =resolve=>require(['@/view/job/company'],resolve)
+const homework_add = resolve => require(['@/view/homework_add'], resolve)
+const homework_addedit = resolve => require(['@/view/homework_addedit'], resolve)
+const homework_rel = resolve => require(['@/view/homework_rel'], resolve)
+const homework_tcinfo = resolve => require(['@/view/homework_tcinfo'], resolve)
 const homework_homework =resolve=>require(['@/view/homework/homework'],resolve)
-const homework_index =resolve=>require(['@/view/homework/index'],resolve)
 const homework_lists = resolve=>require(['@/view/homework/lists'],resolve)
 const homework_info = resolve=>require(['@/view/homework/info'],resolve)
-const new_lx = resolve=>require(['@/view/new/lx'],resolve)
 
+const homework_index = resolve=>require(['@/view/homework/index'],resolve)
+const new_lx = resolve=>require(['@/view/new/lx'],resolve)
 const jianli = resolve => require(['@/view/jianli/jianli'], resolve)
 const add_xinxi = resolve => require(['@/view/jianli/add'], resolve)
-
 const geren_index = resolve => require(['@/view/geren/index'], resolve)
+ 
 Vue.use(Router)
 
 const router = new Router({
@@ -462,6 +466,38 @@ const router = new Router({
       }
     },
     {
+      path: '/homework_rel',
+      component: homework_rel,
+      meta: {
+        title: '发布作业',
+     
+      }
+    },
+    {
+      path: '/homework_add',
+      component: homework_add,
+      meta: {
+        title: '新建作业',
+     
+      }
+    },
+    {
+      path: '/homework_addedit/:id',
+      component: homework_addedit,
+      meta: {
+        title: '修改作业',
+     
+      }
+    },
+    {
+      path: '/homework_tcinfo',
+      component: homework_tcinfo,
+      meta: {
+        title: '作业颁布详情',
+     
+      }
+    },
+    {
       path: '/homework',
       component: homework_index,
       children:[
@@ -492,10 +528,8 @@ const router = new Router({
               // vip:true
             }
           },
-
       ]
-      
-    },
+    }, 
     {
       path: '/jianli/jianli/:id',
       component: jianli,
@@ -524,7 +558,6 @@ const router = new Router({
         title: '我的标签管理'
       }
     },
-    
   ]
 })
 

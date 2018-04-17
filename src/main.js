@@ -33,6 +33,7 @@ if (process.env.NODE_ENV === 'development') {
   gretUrl=Axios.defaults.baseURL = 'http://localhost/yiyuanchengcai/fenda/public/'
   captUrl = 'http://localhost/yiyuanchengcai/fenda/public/api/capt/setCaptcha'
   sourceUrl = 'http://localhost/yiyuanchengcai/fenda/public/static/api'
+ 
   jobApiURL = 'http://localhost/20180305/zhixin/'   
 } else {
   // npm run build

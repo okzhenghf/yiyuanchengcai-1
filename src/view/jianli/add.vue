@@ -1,13 +1,21 @@
 <template>
 	<div class="container jladd">
 		<h3>信息录入</h3>
+
 		<div class="jb" v-if="type == 'jiben'">
-			<b-row>
-				<b-col>姓名&nbsp;:</b-col>
-				<b-col cols="8">
-					<input type="text" v-model="uname" >
-				</b-col>
-			</b-row>
+			<mt-field label="姓名:" placeholder="请输入" v-model="uname"></mt-field>
+			
+			<mt-field label="出生年月:" placeholder="请输入" v-model="birthdate"></mt-field>
+			<mt-field label="户籍:" placeholder="请输入" v-model="household"></mt-field>
+			<mt-field label="毕业院校:" placeholder="请输入" v-model="school_name"></mt-field>
+			<mt-field label="毕业时间:" placeholder="请输入" v-model="graduated"></mt-field>
+			 <mt-field label="工作年限:" placeholder="请输入" v-model="work_years"></mt-field>
+			 <mt-field label="工作状态:" placeholder="请输入" v-model="status"></mt-field>
+			 <mt-field label="学历:" placeholder="请输入" v-model="educational"></mt-field>
+			<mt-field label="专业:" placeholder="请输入" v-model="major"></mt-field>
+			<mt-field label="电话:" placeholder="请输入" v-model="tel"></mt-field>
+			<mt-field label="邮箱:" placeholder="请输入" v-model="mail"></mt-field>
+			
 			<b-row>
 				<b-col>性别&nbsp;:</b-col>
 				<b-col cols="8">
@@ -15,159 +23,28 @@
 					 <el-radio v-model="radio" label="2"><span>女</span></el-radio>
 				</b-col>
 			</b-row>
-			<b-row>
-				<b-col>出生年月&nbsp;:</b-col>
-				<b-col cols="8">
-					<input type="text" v-model="birthdate">
-				</b-col>
-			</b-row>
-			<!-- <b-row>
-				<b-col>民族&nbsp;:</b-col>
-				<b-col cols="8">
-					<input type="text" v-model="volk">
-				</b-col>
-			</b-row>
-			<b-row>
-				<b-col>政治面貌&nbsp;:</b-col>
-				<b-col cols="8">
-					 <input type="text" v-model="political">
-				</b-col>
-			</b-row> -->
-			<b-row>
-				<b-col>户籍&nbsp;:</b-col>
-				<b-col cols="8">
-					 <input type="text" v-model="household">
-				</b-col>
-			</b-row>
-			<b-row>
-				<b-col>毕业院校&nbsp;:</b-col>
-				<b-col cols="8">
-					 <input type="text"v-model="school_name">
-				</b-col>
-			</b-row>
-			 <b-row>
-				<b-col>毕业时间&nbsp;:</b-col>
-				<b-col cols="8">
-					 <!-- <input type="text" v-model="graduated"> -->
-					 <select v-model="graduated">
-	                    <option value="">请选择</option>
-	                    <option value="2018-6">2018-6</option>
-	                    <option value="2017-6">2017-6</option>
-	                    <option value="2016-6">2016-6</option>
-	                    <option value="2015-6">2015-6</option>
-	                    <option value="2014-6">2014-6</option>
-	                    <option value="2013-6">2013-6</option>
-	                    <option value="2012-6">2012-6</option>
-	                    <option value="2011-6">2011-6</option>
-	                    <option value="2010-6">2010-6</option>
-	                    <option value="2009-6">2009-6</option>
-	                    <option value="2008-6">2008-6</option>
-	                </select>
-				</b-col>
-			</b-row> 
-
-			<b-row>
-				<b-col>学历&nbsp;:</b-col>
-				<b-col cols="8">
-					<!-- <input type="text" v-model="educational"> -->
-					<select v-model="educational">
-	                    <option value="">请选择</option>
-	                    <option value="小学">小学</option>
-	                    <option value="初中">初中</option>
-	                    <option value="高中">高中</option>
-	                    <option value="中专">中专</option>
-	                    <option value="大专">大专</option>
-	                    <option value="高职">高职</option>
-	                    <option value="本科">本科</option>
-	                    <option value="研究生">研究生</option>
-	                    <option value="博士">博士</option>
-	                    <option value="教授">教授</option>
-	                </select>
-				</b-col>
-			</b-row>
-
-			<b-row>
-				<b-col>工作年限&nbsp;:</b-col>
-				<b-col cols="8">
-					<!-- <input type="text" v-model="educational"> -->
-					<select v-model="work_years">
-	                    <option value="">请选择</option>
-	                    <option value="应届生">应届生</option>
-	                    <option value="往届生">往届生</option>
-	                    <option value="1年内">1年内</option>
-	                    <option value="2年内">2年内</option>
-	                    <option value="3年内">3年内</option>
-	                    <option value="4年内">4年内</option>
-	                    <option value="5年内">5年内</option>
-	                    <option value="5年以上">5年以上</option>
-	                    <option value="10年以上">10年以上</option>
-	                </select>
-				</b-col>
-			</b-row>
-			<b-row>
-				<b-col>专业&nbsp;:</b-col>
-				<b-col cols="8">
-					<input type="text" v-model="major">
-				</b-col>
-			</b-row>
-			<b-row>
-				<b-col>电话&nbsp;:</b-col>
-				<b-col cols="8">
-					<input type="text" v-model="tel">
-				</b-col>
-			</b-row>
-			<b-row>
-				<b-col>邮箱&nbsp;:</b-col>
-				<b-col cols="8">
-					<input type="text" v-model="mail">
-				</b-col>
-			</b-row>
-			<b-row>
-				<b-col>工作状态&nbsp;:</b-col>
-				<b-col cols="8">
-					<select v-model="status">
-	                    <option value="">请选择</option>
-	                    <option value="就业">就业</option>
-	                    <option value="目前正在找工作">目前正在找工作</option>
-	                    <option value="待业">待业</option>
-	                </select>
-				</b-col>
-			</b-row>
+			
+			
 			<b-row>
 				<b-col>自我推荐:</b-col>
 				<b-col cols="8">
-					<textarea v-model="peculiarity" cols="20" rows="4"></textarea>
+					<textarea v-model="peculiarity" placeholder="请输入"cols="20" rows="4"></textarea>
 				</b-col>
 			</b-row>
 		</div>
 		<div class="qiuzhi" v-if="type == 'qiuzhi' " >
-			<b-row>
-				<b-col>期望工作性质&nbsp;:</b-col>
-				<b-col cols="8">
-					<input type="text" v-model="job_type" >
-				</b-col>
-			</b-row>
-			<b-row>
-				<b-col>期望工作地点(市)&nbsp;:</b-col>
-				<b-col cols="8">
-					<input type="text" v-model="expected_location" >
-				</b-col>
-			</b-row>
-			<b-row>
-				<b-col>期望从事职业&nbsp;:</b-col>
-				<b-col cols="8">
-					<input type="text" v-model="expected_position" >
-				</b-col>
-			</b-row>
-			<b-row>
-				<b-col>期望月薪&nbsp;:</b-col>
-				<b-col cols="8">
-					<input type="text" v-model="expected_monthly_income" >
-				</b-col>
-			</b-row>
+		         <mt-field label="期望工作性质:" placeholder="请输入" v-model="job_type"></mt-field>
+		         <mt-field label="期望工作地点:" placeholder="请输入" v-model="expected_location"></mt-field>
+		         <mt-field label="期望从事职业:" placeholder="请输入" v-model="expected_position"></mt-field>
+		         <mt-field label="期望月薪:" placeholder="请输入" v-model="expected_monthly_income"></mt-field>
 		</div>
 		<div class="shixi" v-if="type == 'jingli' " >
-			<b-row>
+		    <mt-field label="工作时间:" placeholder="请输入" v-model="working_time"></mt-field>
+		    <mt-field label="工作公司:" placeholder="请输入" v-model="company_name"></mt-field>
+		    <mt-field label="工作行业:" placeholder="请输入" v-model="job_description"></mt-field>
+		    <mt-field label="工作岗位:" placeholder="请输入" v-model="job_title"></mt-field>
+		    
+		<!-- 	<b-row>
 				<b-col>工作时间&nbsp;:</b-col>
 				<b-col cols="8">
 					<input type="text" v-model="working_time" >
@@ -190,7 +67,7 @@
 				<b-col cols="8">
 					<input type="text" v-model="job_title" >
 				</b-col>
-			</b-row>
+			</b-row> -->
 			<b-row>
 				<b-col>工作证明&nbsp;:</b-col>
 				<b-col cols="8">
@@ -210,7 +87,12 @@
 		</div>
 
 		<div class="btn">
-			<b-button class="btn" variant="success" @click='add()'>确认</b-button>
+			<b-button class="btn" 
+			variant="success"
+			style="width:200%;
+			background: #409eff;
+			border:none"
+			 @click='add()'>确认</b-button>
 		</div>
 	</div>
 	
@@ -367,11 +249,13 @@ export default{
 <style type="text/css" scoped>
 	.row{
 		margin-bottom: 3%;
+
 	}
 	select{
 		width: 100%;
 	}
 	.jladd{
+		margin-top: 2rem;
 		margin-bottom: 6rem;
 	}
 	.shixi img{
@@ -386,5 +270,6 @@ export default{
 	    opacity: 0;
 	    height: 8rem;
 	    width: 100%;
+
 	}
 </style>
