@@ -98,10 +98,10 @@
          </el-tabs>
       </div>
       <div class="tijiao">
-         <div class="left" ><router-link to="/homework_add"></router-link>继续添加</div>
+         <div class="left" @click="click_add">继续添加</div>
          <div class="light" @click="click_submit">保存预览</div>
       </div>
-      <el-button type="success" round style="margin-top:10px;">立即发布</el-button>
+      <el-button type="success" round style="margin-top:10px;" @click="click_fabu">立即发布</el-button>
    </div>
 </template>
 
@@ -264,6 +264,7 @@ export default {
       ],
       input:'', 
       info_id:33,
+      homerwork_id:null,//homerwork表id
     }
 
   },
@@ -295,8 +296,9 @@ export default {
   },
   methods: {
       init(){
+        this.homerwork_id = this.$route.params.id
         this.$http.get('api/homework/addedit',{params:{
-          "id":this.info_id,
+          "id":this.homerwork_id,
         }})
         .then((rntD)=>{
             this.content_1 = rntD.data.tc_content1
@@ -342,9 +344,13 @@ export default {
          })
 
       },
-      // click_add(){
-      //    this.$router.push('/homework_add')
-      // }
+      click_fabu(){
+        this.$router.push('/homework_rel')
+      },
+      click_add(){
+        console.log(11)
+        this.$router.push('/homework_add')
+      }
     }
 }
 

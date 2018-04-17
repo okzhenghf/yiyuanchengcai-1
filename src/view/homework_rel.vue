@@ -40,15 +40,7 @@
             <hr/>
             <div class="duanxuan">
               <ul>
-               <!--  <el-checkbox-group v-model="checkList">
-                     <el-checkbox label="A"></el-checkbox>
-                     <el-checkbox label="B"></el-checkbox>
-                     <el-checkbox label="C"></el-checkbox>
-                     <el-checkbox label="D"></el-checkbox>
-                  </el-checkbox-group> -->
-                <li><el-checkbox v-model="checked1">A</el-checkbox></li>
-                <li><el-checkbox v-model="checked2">A</el-checkbox></li>
-                <li><el-checkbox v-model="checked3">A</el-checkbox></li>
+                <li v-for="n in banji"><el-radio v-model="banji_id" :label="n.id">{{n.banji_name}}</el-radio></li>
               </ul>
             </div>
           </div>
@@ -73,6 +65,7 @@
 
 <script type="es6">
 import 'font-awesome/css/font-awesome.css'
+import {mapMutations,mapState} from 'vuex'
 export default {
   data () {
     return {
@@ -82,22 +75,32 @@ export default {
       liji:"", //时间颁布
       time_star:"", //时间颁布
       time_end:"", //时间颁布
-      checked1:false,
-      checked2:false,
-      checked3:false,
+      banji_id:null,
       time_date:new Date(),//获取当前时间
-      checkList:[],//作业创建id 存在这
+      checkList:[],//作业创建id 
       info_list:[],//获取hw_rel_find返回的信息
+      banji:null,
+
     }
 
   },
   created(){
     this.init()
-  }
-  ,
+  },
+  computed:{
+    ...mapState(['info'])
+  },
   methods: {
     init(){
-      this.$http.get('api/homework/hw_rel_find')
+      this.$http.get('api/homework/rel_banji')
+      .then((rntD)=>{
+        this.banji = rntD.data
+      })
+
+
+      this.$http.get('api/homework/hw_rel_find',{params:{
+        "tc_id":this.info.user_id
+      }})
         .then((rntD)=>{
           this.info_list = rntD.data
         })
@@ -105,6 +108,8 @@ export default {
     ,
     click_liji(){
       this.$http.post('api/homework/rel_save',{
+        "banji":this.banji_id,
+        "tc_id":this.info.user_id,
         "tc_title":this.title,
         "now_time":this.radio.valueOf()/1000,
         "s_time":this.time_star.valueOf()/1000,
@@ -114,7 +119,7 @@ export default {
       .then((rntD)=>{
         if(rntD.data.status){
           console.log(rntD.data.msg)
-
+          this.$router.push('/homework_tcinfo')
         }
       })
     }
@@ -198,11 +203,12 @@ export default {
   margin-left:10px; 
 }
 .homework .title_3 .duanxuan ul{
+  margin-left: 8px;
   display: flex;
   flex-direction:row;
   flex-wrap: wrap;
   align-items:center;
-  text-align: center;
+  text-align: left;
 }
 .homework .title_3 .duanxuan ul li{
   width: 45%;

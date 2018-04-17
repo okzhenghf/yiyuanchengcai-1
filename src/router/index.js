@@ -480,7 +480,7 @@ const router = new Router({
       }
     },
     {
-      path: '/homework_addedit',
+      path: '/homework_addedit/:id',
       component: homework_addedit,
       meta: {
         title: '修改作业',

@@ -98,10 +98,10 @@
          </el-tabs>
       </div>
       <div class="tijiao">
-         <div class="left" ><router-link to="/homework_add"></router-link>继续添加</div>
+         <div class="left" @click="click_add">继续添加</div>
          <div class="light" @click="click_submit">保存预览</div>
       </div>
-      <el-button type="success" round style="margin-top:10px;">立即发布</el-button>
+      <el-button type="success" round style="margin-top:10px;" @click="click_fabu">立即发布</el-button>
    </div>
 </template>
 
@@ -109,6 +109,7 @@
 import Vue from 'vue'
 import VueHtml5Editor from 'vue-html5-editor'
 import 'font-awesome/css/font-awesome.css'
+ import {mapMutations,mapState} from 'vuex'
 
 
 Vue.use(VueHtml5Editor, {
@@ -267,6 +268,10 @@ export default {
     }
 
   },
+
+  computed:{
+    ...mapState(['info'])
+  },
   watch:{
     //监听num1的状态进行判断
    num1 (val) {
@@ -313,6 +318,7 @@ export default {
       //资料上传保存
       click_submit(){
          this.$http.post('api/homework/save',{
+            'tc_id':this.info.user_id,
             'tc_content1':this.content_1,
             'tc_content2':this.content_2,
             'tc_danxuan':this.radio,
@@ -321,17 +327,17 @@ export default {
             'tc_tiankong':JSON.stringify(this.tiankong_list)
          })
          .then((rtnD)=>{
-            if(rtnD.data.status == 1)
-            {
-               console.log(rtnD.data.msg)
-               this.$router.push("/homework_rel")
-            }
+            this.$router.push('/homework_addedit/'+rtnD.data)
          })
 
       },
-      // click_add(){
-      //    this.$router.push('/homework_add')
-      // }
+      click_fabu(){
+        this.$router.push('/homework_rel')
+      },
+      click_add(){
+        console.log(11)
+        this.$router.push('/homework_add')
+      }
     }
 }
 

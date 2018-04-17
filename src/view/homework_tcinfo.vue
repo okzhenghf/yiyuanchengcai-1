@@ -8,17 +8,20 @@
       </div>
       <div class="info_list">
         
-        <el-collapse v-model="activeNames" @change="handleChange(i.homework_add_id)" v-for="(i,n) in info_list">
-          <el-collapse-item  :name="n" >
+        <el-collapse v-model="activeNames" @change="handleChange()" >
+          <el-collapse-item  v-for="(i,n) in info_list">
             <template slot="title">
               {{i.tc_title}}  <span>{{i.now_time|date_time}}</span>
             </template>
             <div class="content_info">
               <el-collapse  @change="handleChange_list">
-                <el-collapse-item  :name="n" v-for="(i,n) in info_list">
+                <el-collapse-item  :name="i.banji">
                   <template slot="title">
-                    课程解读  <span>几班几号</span>
+                    {{i.banji_name}}  <span>几班几号</span>
                   </template>
+                  <div class="content_info" v-for="neirong_list in i.hwk_list">
+                    {{neirong_list.tc_content1.substr(0, 8)}}
+                  </div>
                   </el-collapse-item>
               </el-collapse>
             </div>
@@ -32,6 +35,8 @@
 
 <script type="es6">
 import 'font-awesome/css/font-awesome.css'
+ import {mapMutations,mapState} from 'vuex'
+
 export default {
   data() {
       return {
@@ -51,19 +56,24 @@ export default {
   created(){
       this.init();
   },
+  computed:{
+    ...mapState(['info'])
+  },
   methods: {
       init(){
-        this.$http.get('api/homework/tcinfo_index')
+        this.$http.get('api/homework/tcinfo_index',{params:{
+          "tc_id":this.info.user_id
+        }})
           .then((rntD)=>{
             console.log(rntD.data)
             this.info_list =  rntD.data
           })
       },
      handleChange(val) {
-      console.log(val)
-        // this.$http.post('api/homework/tcin_list',{
-        //   'homework_add_id':val
-        // })
+      // console.log(val)
+      //   this.$http.post('api/homework/tcin_list',{
+      //     'homework_add_id':val
+      //   })
       },
       handleChange_list(val){
 
