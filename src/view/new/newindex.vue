@@ -10,10 +10,7 @@
           </div>
         </transition>
 
-        <div class="container">
-          <div class="search">
-            <input type="text" name="search_input" class="search_input" placeholder="搜索答主和相关问题"></div>
-        </div>
+        
         <div class="bs-example" data-example-id="simple-carousel">
           <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -22,8 +19,8 @@
             </ol>
             <div class="carousel-inner" role="listbox">
               <div class="item" v-for="(slide,index) in slide_a" :class="{'active':index==0}">
-                <a :href="slide.link_url">
-                  <img  :src="$gretUrl+slide.pic_path" data-holder-rendered="true"></a>
+                <router-link :to="slide.link_url">
+                  <img  :src="$gretUrl+slide.pic_path" data-holder-rendered="true"></router-link>
               </div>
 
             </div>
