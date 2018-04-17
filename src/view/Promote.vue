@@ -127,8 +127,10 @@
           </div>
         </a>
       </div>
+
       <p v-if="loading" style="text-align: center;">加载中...</p>
       <p v-if="!has_more" style="text-align: center;">无更多内容了...</p>
+
     </div>
   </div>
   <div class="zuixia"></div>

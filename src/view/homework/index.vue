@@ -1,13 +1,11 @@
 <template>
-	<div class="container">
-		 <router-view></router-view>
-	</div>
-</template>
 
+	<router-view></router-view>
+</template>
+ 
 
 <style>
 	@import url('../../assets/homework/css/homework.css');
 
 	
 </style>
-

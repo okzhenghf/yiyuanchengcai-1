@@ -46,27 +46,40 @@
 		    		<b-button class="btn" variant="success" @click='jibenadd()' v-if="!user_xinxi.nickname">添加</b-button>
 		    	</b-col >	
 		    </b-row > 
+
 		    <div class='text_tt' v-if="user_xinxi.nickname">
 		    	<div class="j_content">
-		    		<b-row >
-		    			<b-col cols="12">姓名: <span v-show="!inputIsShow">{{user_xinxi.nickname}}</span>
+		    	    <mt-field label="姓名:" 
+		    	    placeholder="user_xinxi.nickname" 
+		    	    v-model="user_xinxi.nickname"></mt-field>
+		    		<!-- <b-row >
+		    			<b-col cols="12">姓名: <span v-show="!inputIsShow">{{}}</span>
 		    				<b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.nickname"></b-form-input>
 		    			</b-col>
-		    		</b-row>
-		    		<b-row >
+		    		</b-row> -->
+		    		<mt-field label="性别:" 
+		    	    placeholder="user_xinxi.sex" 
+		    	    v-model="user_xinxi.sex"></mt-field>
+		    		<!-- <b-row >
 		    			<b-col cols="12">性别: <span v-show="!inputIsShow">{{user_xinxi.sex}}</span>
 		    				<b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.sex"></b-form-input>
 		    			</b-col>
-		    		</b-row>
-		    		<b-row >
+		    		</b-row> -->
+		    		<mt-field label="年龄:" 
+		    	    placeholder="user_xinxi.birth" 
+		    	    v-model="user_xinxi.birth"></mt-field>
+		    		<!-- <b-row >
 		    			<b-col cols="12">年龄: <span v-show="!inputIsShow">{{user_xinxi.birth}}</span>
 		    				<b-form-input type="number" v-show="inputIsShow" v-model="user_xinxi.birth"></b-form-input>
 		    			</b-col>
-		    		</b-row>
-		    		<b-row >
+		    		</b-row> -->
+		    		<mt-field label="工作经验:" 
+		    	    placeholder="user_xinxi.work_years" 
+		    	    v-model="user_xinxi.work_years"></mt-field>
+		    		<!-- <b-row >
 		    			<b-col cols="12">工作经验: <span v-show="!inputIsShow">{{user_xinxi.work_years}}</span>
 		    				<!-- <b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.work_years"></b-form-input> -->
-		    				<select v-show="inputIsShow" v-model="user_xinxi.work_years">
+		    				<!-- <select v-show="inputIsShow" v-model="user_xinxi.work_years">
 			                    <option value="">请选择</option>
 			                    <option value="应届生">应届生</option>
 			                    <option value="往届生">往届生</option>
@@ -77,13 +90,16 @@
 			                    <option value="5年内">5年内</option>
 			                    <option value="5年以上">5年以上</option>
 			                    <option value="10年以上">10年以上</option>
-			                </select>
-		    			</b-col>
-		    		</b-row>
-		    		<b-row >
-		    			<b-col cols="12">毕业时间: <span v-show="!inputIsShow">{{user_xinxi.graduated}}</span>
+			                </select> -->
+		    			<!-- </b-col>
+		    		</b-row> -->
+		    		<mt-field label="毕业时间:" 
+		    	    placeholder="user_xinxi.graduated" 
+		    	    v-model="user_xinxi.graduated"></mt-field>
+		    		<!-- <b-row >
+		    			<!-- <b-col cols="12">毕业时间: <span v-show="!inputIsShow">{{user_xinxi.graduated}}</span>
 		    				<!-- <b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.graduated"></b-form-input> -->
-		    				<select v-show="inputIsShow" v-model="user_xinxi.graduated">
+		    				<!-- <select v-show="inputIsShow" v-model="user_xinxi.graduated">
 			                    <option value="">请选择</option>
 			                    <option value="2018-6">2018-6</option>
 			                    <option value="2017-6">2017-6</option>
@@ -97,17 +113,23 @@
 			                    <option value="2009-6">2009-6</option>
 			                    <option value="2008-6">2008-6</option>
 			                </select>
-		    			</b-col>
-		    		</b-row>
-		    		<b-row >
+		    			</b-col> --> 
+		    		<!-- </b-row> --> 
+		    		<mt-field label="毕业院校:" 
+		    	    placeholder="user_xinxi.school_name" 
+		    	    v-model="user_xinxi.school_name"></mt-field>
+		    		<!-- <b-row >
 		    			<b-col cols="12">毕业院校: <span v-show="!inputIsShow">{{user_xinxi.school_name}}</span>
 		    				<b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.school_name"></b-form-input>
 		    			</b-col>
-		    		</b-row>
-		    		<b-row >
+		    		</b-row> -->
+		    		<mt-field label="学历:" 
+		    	    placeholder="user_xinxi.top_edu" 
+		    	    v-model="user_xinxi.top_edu"></mt-field>
+		    		<!-- <b-row >
 		    			<b-col cols="12">学历: <span v-show="!inputIsShow">{{user_xinxi.top_edu}}</span>
 		    				<!-- <b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.top_edu"></b-form-input> -->
-		    				<select v-show="inputIsShow" v-model="user_xinxi.top_edu">
+		    				<!-- <select v-show="inputIsShow" v-model="user_xinxi.top_edu">
 			                    <option value="">请选择</option>
 			                    <option value="小学">小学</option>
 			                    <option value="初中">初中</option>
@@ -119,29 +141,41 @@
 			                    <option value="研究生">研究生</option>
 			                    <option value="博士">博士</option>
 			                    <option value="教授">教授</option>
-			                </select>
-		    			</b-col>
-		    		</b-row>
-		    		<b-row >
+			                </select> -->
+		    			<!-- </b-col>
+		    		</b-row> --> 
+		    		<mt-field label="专业:" 
+		    	    placeholder="user_xinxi.major" 
+		    	    v-model="user_xinxi.major"></mt-field>
+		    		<!-- <b-row >
 		    			<b-col cols="12">专业: <span v-show="!inputIsShow">{{user_xinxi.major}}</span>
 		    				<b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.major"></b-form-input>
 		    			</b-col>
-		    		</b-row>
-		    		<b-row >
+		    		</b-row> -->
+		    		<mt-field label="地址:" 
+		    	    placeholder="user_xinxi.current_city" 
+		    	    v-model="user_xinxi.current_city"></mt-field>
+		    		<!-- <b-row >
 		    			<b-col cols="12">地址: <span v-show="!inputIsShow">{{user_xinxi.current_city}}</span>
 		    				<b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.current_city"></b-form-input>
 		    			</b-col>
-		    		</b-row>
-		    		<b-row >
+		    		</b-row> -->
+		    		<mt-field label="电话:" 
+		    	    placeholder="user_xinxi.phone" 
+		    	    v-model="user_xinxi.phone"></mt-field>
+		    		<!-- <b-row >
 		    			<b-col cols="12">电话: <span v-show="!inputIsShow">{{user_xinxi.phone}}</span>
 		    				<b-form-input type="number" v-show="inputIsShow" v-model="user_xinxi.phone"></b-form-input>
 		    			</b-col>
-		    		</b-row>
-		    		<b-row >
+		    		</b-row> -->
+		    		<mt-field label="邮箱:" 
+		    	    placeholder="user_xinxi.e_mail" 
+		    	    v-model="user_xinxi.e_mail"></mt-field>
+		    		<!-- <b-row >
 		    			<b-col cols="12">邮箱: <span v-show="!inputIsShow">{{user_xinxi.e_mail}}</span>
 		    				<b-form-input type="text" v-show="inputIsShow" v-model="user_xinxi.e_mail"></b-form-input>
 		    			</b-col>
-		    		</b-row>
+		    		</b-row> -->
 		    		<div class="btn">
 		    			<span v-show="inputIsShow" @click="update()">确定</span>
 		    			<span v-show="!inputIsShow" @click="updateInfo()">修改</span>
@@ -163,7 +197,11 @@
 		    </b-row > 
 		    <div class='text_tt' v-if="user_xinxi.expected_position">
 		    	<div class="j_content">
-		    		<b-row>
+		    	    <mt-field label="期望工作性质:" placeholder="user_xinxi.job_type" v-model="user_xinxi.job_type"></mt-field>
+		            <mt-field label="期望工作地点:" placeholder="user_xinxi.expected_location" v-model="user_xinxi.expected_location"></mt-field>
+		            <mt-field label="期望从事职业:" placeholder="user_xinxi.expected_position" v-model="user_xinxi.expected_position"></mt-field>
+		            <mt-field label="期望月薪:" placeholder="user_xinxi.expected_monthly_income" v-model="user_xinxi.expected_monthly_income"></mt-field>
+		    	<!-- 	<b-row>
 		    			<b-col cols="12">工作性质：<span v-show="!inputIsShow1">{{user_xinxi.job_type}}</span>
 		    				<b-form-input type="text" v-show="inputIsShow1" v-model="user_xinxi.job_type"></b-form-input></b-col>
 		    		</b-row>
@@ -178,7 +216,7 @@
 		    		<b-row>
 		    			<b-col cols="12">期望月薪：<span v-show="!inputIsShow1">{{user_xinxi.expected_monthly_income}}</span>
 		    				<b-form-input type="text" v-show="inputIsShow1" v-model="user_xinxi.expected_monthly_income"></b-form-input></b-col>
-		    		</b-row>
+		    		</b-row> -->
 		    		<div class="btn">
 		    			<span v-show="inputIsShow1" @click="update1()">确定</span>
 		    			<span v-show="!inputIsShow1" @click="updateInfo1()">修改</span>
@@ -197,7 +235,11 @@
 		    </b-row >
 		    <div class='text_tt' v-if="jingli">
 		    	<div class="j_content" v-for="(item,n) in jingli">
-		    		<b-row >
+		    	<mt-field label="工作时间:" placeholder="item.working_time" v-model="item.working_time"></mt-field>
+		        <mt-field label="工作公司:" placeholder="item.re_company_name" v-model="item.re_company_name"></mt-field>
+		        <mt-field label="工作行业:" placeholder="item.job_title" v-model="item.job_title"></mt-field>
+		        <mt-field label="工作岗位:" placeholder="item.job_description" v-model="item.job_description"></mt-field> 
+		    		<!-- <b-row >
 		    			<b-col cols="12">时间：<span v-show="!inputIsShow2 || cur_tr_index != n">{{item.working_time}}</span>
 		    				<b-form-input type="text" v-show="inputIsShow2 && cur_tr_index == n" v-model="item.working_time"></b-form-input>
 		    			</b-col>
@@ -216,7 +258,7 @@
 		    			<b-col cols="12">行业：<span v-show="!inputIsShow2 || cur_tr_index != n">{{item.job_description}}</span>
 		    				<b-form-input type="text" v-show="inputIsShow2 && cur_tr_index == n" v-model="item.job_description"></b-form-input>
 		    			</b-col>
-		    		</b-row>
+		    		</b-row> -->
 
 					<b-row >
 		    			<b-col cols="5">工作证明：</b-col>
@@ -240,29 +282,7 @@
 		    	
 		    </div>
 		</div>
-<!-- 		<div class="text_a">
-			<hr/>
-		    <b-row > 
-		    	<b-col cols='8' ><h5>我的优势</h5></b-col >
-		    	<b-col class='tianjia' >
-		    		<b-button class="btn" variant="success" @click="youshiadd()">添加
-		    		</b-button>
-		    	</b-col >	
-		    </b-row > 
-		    <div class='text_tt' v-if="has">
-		    	<div class="j_content">
-		    		<b-row>
-		    			<b-col cols="12">优势：<span v-show="!inputIsShow3">{{user_xinxi.peculiarity}}</span>
-		    				<b-form-input type="text" v-show="inputIsShow3" v-model="user_xinxi.peculiarity"></b-form-input></b-col>
-		    		</b-row>
-		    		<div class="btn">
-		    			<span v-show="inputIsShow3" @click="update3()">确定</span>
-		    			<span v-show="!inputIsShow3" @click="updateInfo3()">修改</span>
-		    		</div>	
-		    	</div>
-		    </div>
 
-		</div>   -->
 	</div>
 	<div v-if="theme_type == '简历中转'">
 		<button class="btn j_toudi btn-success" @click="toudi()">
@@ -296,13 +316,6 @@ export default {
 		}
 	
 	},
-	// filters:{
-	// 	getDate:function() {
-	// 		// body...
-	// 		let 
-	// 		return 
-	// 	}
-	// },
 	mounted(){
 		this.init()
 	},
@@ -549,7 +562,7 @@ export default {
 	
 </script>
 <style type="text/css" scoped>
-	img{
+	.job_jianli .c1 .c2_2 .figure img{
 		width: 100%;
 	}
 	p{
@@ -565,10 +578,14 @@ export default {
 	h5{
 		font-size: 18px;
 		font-weight:700;
+		margin-left: -6rem;
 	}
 	button{
 		margin: 10%;
 		padding:0;
+		background: #409eff;
+		border:none;
+		width: 90%;
 	}
 	hr{
 		width: 100%;
@@ -604,8 +621,10 @@ export default {
 	}
 	.figure.col img{
 		 position: absolute; 
+		 left: 5%;
+		 top: 4%;
 	     width: 100%; 
-	     height: 8rem; 
+	     height: 7rem; 
 	     line-height: 8rem; 
 	     font-size: 0.94444444rem;
 	}

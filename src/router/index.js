@@ -62,11 +62,13 @@ const homework_tcinfo = resolve => require(['@/view/homework_tcinfo'], resolve)
 const homework_homework =resolve=>require(['@/view/homework/homework'],resolve)
 const homework_lists = resolve=>require(['@/view/homework/lists'],resolve)
 const homework_info = resolve=>require(['@/view/homework/info'],resolve)
+
 const homework_index = resolve=>require(['@/view/homework/index'],resolve)
 const new_lx = resolve=>require(['@/view/new/lx'],resolve)
 const jianli = resolve => require(['@/view/jianli/jianli'], resolve)
 const add_xinxi = resolve => require(['@/view/jianli/add'], resolve)
 const geren_index = resolve => require(['@/view/geren/index'], resolve)
+ 
 Vue.use(Router)
 
 const router = new Router({
@@ -527,7 +529,7 @@ const router = new Router({
             }
           },
       ]
-    },
+    }, 
     {
       path: '/jianli/jianli/:id',
       component: jianli,
