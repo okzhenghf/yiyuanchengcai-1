@@ -563,12 +563,25 @@ const router = new Router({
 
 // 钩子函数、守卫
 router.beforeEach((to,from,next)=>{
-  // if (to.meta.vip) {
-  //   // 判断用户有没有登录、是不是会员
-  // }
-    // 每一步都会执行这段代码
-    router.app.$options.store.commit("setFooterStatus",!to.meta.oldfooter)
+  let store = router.app.$options.store
+  // 每一步都会执行这段代码
+
+  if (to.params.id>0) {
+    // 权限判断有没有登录
+    if(store.state.info.user_id == undefined){
+      store.commit("setAccess",false)
+    }else{
+      // 已经登录了
+     store.commit("setFooterStatus",!to.meta.oldfooter)
+      next()
+    }
+  }else{
+    store.commit("setAccess",true)
+    store.commit("setFooterStatus",!to.meta.oldfooter)
     next()
+
+  }
+  
 })
 
 export default router

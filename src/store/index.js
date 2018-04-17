@@ -6,6 +6,7 @@ Vue.use(Vuex)
 const Store = new Vuex.Store({
   state: {
     isLogin: false,
+    no_access: true,
     info: JSON.parse(localStorage.getItem('info')) || {},
     todaymoney:false,
     askContent: '',
@@ -18,6 +19,9 @@ const Store = new Vuex.Store({
     },
     setFooterStatus: function (state, status) {
       state.nFooter = status
+    },
+    setAccess:function (state,status) {
+      state.no_access = status
     },
     setTodaymoney: function (state, status) {
       state.todaymoney = status
@@ -44,6 +48,13 @@ const Store = new Vuex.Store({
     },
     isFooter: state => {
       if (state.nFooter) {
+        return true
+      } else {
+        return false
+      }
+    },
+    is_access: state => {
+      if (state.no_access) {
         return true
       } else {
         return false

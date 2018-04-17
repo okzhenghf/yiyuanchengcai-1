@@ -58,29 +58,39 @@
              <router-link to="/job/index">
                <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_two.png"></router-link>
              <router-link to="/yishangcheng">
-               <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_four.png"></router-link></div>
-             <div class="footer_user">
-               <div>
-                 <router-link to="/uhome" v-if="isLogin==true">
-                   <img src="../assets/job/images/user.png"> 
-                   <p>我的</p>
-                 </router-link>
-                 <router-link to="/login" v-if="isLogin==false">
-                   <img src="../assets/job/images/user.png"> 
-                   <p>登录</p>
-                 </router-link>
-                  
-               </div>
+               <img @click.stop="toggle" class="clear" src="../assets/job/images/icon_four.png"></router-link>
+           </div>
+           <div class="footer_user">
+             <div>
+               <router-link to="/uhome" v-if="isLogin==true">
+                 <img src="../assets/job/images/user.png"> 
+                 <p>我的</p>
+               </router-link>
+               <router-link to="/login" v-if="isLogin==false">
+                 <img src="../assets/job/images/user.png"> 
+                 <p>登录</p>
+               </router-link>
+
              </div>
            </div>
-         </footer>
-       </div>
+         </div>
+       </footer>
      </div>
 
-   </template>
+     <div  class="yy_content_box" v-if="!is_access" >
+      <p><img src="../assets/img/no_access.png" alt=""></p>
+       <p class="tips">需要登录后，才可以访问此页面！</p>
+       <el-button type='primary' @click="go_login">登录</el-button>
+       <el-button @click='back'>返回</el-button>
 
-   <script type="es6">
- import {mapState,mapGetters} from 'vuex'
+     </div>
+     <div class="yyyy_box" @click="back" v-if="!is_access"></div>
+   </div>
+
+ </template>
+
+ <script type="es6">
+ import {mapState,mapGetters,mapMutations} from 'vuex'
 export default {
   data(){
     return {
@@ -92,9 +102,18 @@ export default {
    
   },
   computed:{
-    ...mapGetters(['isLogin','isFooter']) 
+    ...mapGetters(['isLogin','isFooter','is_access']),  
   },
   methods:{
+    ...mapMutations(['setAccess']),
+    back(){
+        this.setAccess(true)
+    },
+
+
+    go_login(){
+      this.$router.push('/login')
+    },
      toggle() {
             let footerMain = this.$refs.footerMain;
             if (footerMain.classList.contains('test')) {
@@ -114,7 +133,7 @@ export default {
   }
 }
 </script>
-   <style>@import '../assets/css/footer.css';
+ <style>@import '../assets/css/footer.css';
 
   
 /*footer*/
@@ -231,6 +250,9 @@ export default {
   .footer_user a{
     color: #2c3e50;
   }
+  .yyyy_box{ background-color: rgba(0, 0, 0, 0.8); position: fixed; top: 0;z-index:88888; height: 100rem; width: 100%; } 
+  .yy_content_box{width: 100%; position: fixed; top: 0; z-index: 99999; color: #fff; text-align: center; margin-top: 5rem;}
+    .yy_box .tips{padding-bottom: 1rem;}
   /*footer*/
 
  </style>
